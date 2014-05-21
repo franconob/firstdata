@@ -5,14 +5,140 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-//Request::setTrustedProxies(array('127.0.0.1'));
+use GuzzleHttp\Client;
+use League\Csv\Reader;
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html', array());
+    return $app['twig']->render('index.html');
+});
+
+$app->get('/reportes', function (Request $request) use ($app) {
+
+    $url = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
+    $username = 'spiralti637';
+    $password = 'apology83';
+
+    $enabledHeaders = [
+        1 => "Cardholder Name",
+        4 => "Card Type",
+        5 => "Amount",
+        2 => "Card Number",
+        3 => "Expiry",
+        6 => "Transaction Type",
+        7 => ["friendly" => "Status", "format" => function($value) {
+                if($value == "Approved") {
+                    return '<div class="bg-success">{0}</div>';
+                } else {
+                    return '<div>{0}</div>';
+                }
+            }],
+        9 => ["friendly" => "Time", "type" => "date", "callback" => function($value) {
+                $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
+                return $dt->getTimestamp()*1000;
+            }],
+        8 => "Auth No",
+        10 => "Ref Num",
+        11 => "Cust. Ref Num"
+    ];
+
+    $now = new \DateTime();
+    $last6Months = $now->sub(new \DateInterval('P6M'));
+
+    $client = new Client();
+    $response = $client->get($url, [
+        "query" => ["search" => "Awwa Suite Hotel", "start_date" => $last6Months->format('Y-m-d')],
+        "headers" => [
+            ["Acecpt", "text/search-v3+csv"]
+        ],
+        "auth" => [$username, $password],
+        "config" => [
+            "curl" => [
+                CURLOPT_SSLVERSION => 3,
+                CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
+            ]
+        ]
+    ]);
+
+    $csv_header = $response->getHeader('Search-CSV');
+    $reader = Reader::createFromString($csv_header);
+
+    // Response header. Info sobre cantidad de filas, el total y el offset
+    /*
+    $parseHeader = function ($headers) {
+        $parsedHeaders = [];
+        foreach ($headers as $header) {
+            $name = array_map("trim", explode(':', $header, 2));
+            $parsedHeaders[$name[0]] = $name[1];
+        }
+
+        return $parsedHeaders;
+    };
+
+    $parsedHeaders = $parseHeader($reader->fetchOne());
+    */
+    // End response header
+
+    $response_string = (string)$response->getBody();
+
+    $reader_body = Reader::createFromString($response_string);
+    $reader_header = $reader_body->fetchOne();
+
+    $tableHeader = [];
+
+    $searchInEnabledHeaders = function ($header, $enabledHeaders) {
+        foreach ($enabledHeaders as $_header) {
+            if (is_array($_header)) {
+                $enabledHeader = $_header["friendly"];
+            } else {
+                $enabledHeader = $_header;
+            }
+            if ($header == $enabledHeader) {
+                return $_header;
+            }
+        }
+        return false;
+    };
+
+    foreach ($reader_header as $k => $header) {
+        if ($_header = $searchInEnabledHeaders($header, $enabledHeaders)) {
+            if (is_array($_header)) {
+                $tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function($header) {
+                    return $header !== "format";
+                }));
+            } else {
+                $tableHeader[$_header] = ["index" => $k, "type" => "string"];
+            }
+        }
+    };
+
+    $data = $reader_body->setOffset(1)->fetchAll();
+    unset($data[count($data) - 1]);
+
+    $cleanData = [];
+    foreach ($data as $k_row => $row) {
+        $cleanRow = array_values(array_intersect_key($row, $enabledHeaders));
+        $formattedRow = [];
+        foreach ($cleanRow as $k => &$col) {
+            if(isset($enabledHeaders[$k+1]["callback"])) {
+                $col = $enabledHeaders[$k+1]["callback"]($col);
+            }
+            if(isset($enabledHeaders[$k+1]["format"])) {
+                $colName = $enabledHeaders[$k+1]["friendly"]."Format";
+                $formattedRow[$colName] = $enabledHeaders[$k+1]["format"]($col);
+            }
+            $formattedRow[is_array($enabledHeaders[$k + 1]) ? $enabledHeaders[$k + 1]["friendly"] : $enabledHeaders[$k + 1]] = $col;
+        }
+        $cleanData[$k_row] = $formattedRow;
+    }
+    $vars = [
+        "cols" => $tableHeader,
+        "rows" => $cleanData
+    ];
+
+    return $app->json($vars);
+
 })
-->bind('homepage')
-;
+    ->bind('reportes');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
@@ -21,9 +147,9 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
     // 404.html, or 40x.html, or 4xx.html, or error.html
     $templates = array(
-        'errors/'.$code.'.html',
-        'errors/'.substr($code, 0, 2).'x.html',
-        'errors/'.substr($code, 0, 1).'xx.html',
+        'errors/' . $code . '.html',
+        'errors/' . substr($code, 0, 2) . 'x.html',
+        'errors/' . substr($code, 0, 1) . 'xx.html',
         'errors/default.html',
     );
 

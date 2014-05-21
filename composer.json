@@ -20,7 +20,9 @@
         "symfony/security": "~2.3",
         "symfony/translation": "~2.3",
         "symfony/twig-bridge": "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "guzzlehttp/guzzle": "4.*",
+        "league/csv": "5.*"
     },
     "autoload": {
         "psr-0": { "": "src/" }
