@@ -16,10 +16,10 @@ $(function () {
         url: '/reportes',
         filter: true,
         pageSize: [10],
-        debug: true,
         columnPicker: true,
         checkboxes: true,
         checkAllToggle: true,
+        transition: 'fade',
         types: {
             string: {
                 placeHolder: "Filtro..."
@@ -39,6 +39,15 @@ $(function () {
     $('body').on('click', '#action-refund', function (e) {
         e.preventDefault();
         var transactions = waT.getData({checked: true});
+        if(transactions.rows.length == 0) {
+            notify({
+                title: "Aviso",
+                message: "No se seleccionaron transacciones",
+                type: "warning",
+                hide: true
+            });
+            return;
+        }
         $.ajax({
             url: '/reportes/refund',
             method: 'POST',
@@ -69,7 +78,7 @@ $(function () {
             text: options.message,
             icon: options.icon || "",
             type: options.type || "info",
-            hide: false
+            hide: options.hide || false
         })
     }
 });
