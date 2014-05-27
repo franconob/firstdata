@@ -2,38 +2,24 @@
  * Created by fherrero on 5/20/14.
  */
 $(function () {
-    var opts = {
-            lines: 13, // The number of lines to draw
-            length: 20, // The length of each line
-            width: 10, // The line thickness
-            radius: 30, // The radius of the inner circle
-            corners: 1, // Corner roundness (0..1)
-            rotate: 0, // The rotation offset
-            direction: 1, // 1: clockwise, -1: counterclockwise
-            color: '#6087B3', // #rgb or #rrggbb or array of colors
-            speed: 1, // Rounds per second
-            trail: 60, // Afterglow percentage
-            shadow: true, // Whether to render a shadow
-            hwaccel: false, // Whether to use hardware acceleration
-            className: 'spinner', // The CSS class to assign to the spinner
-            zIndex: 2e9, // The z-index (defaults to 2000000000)
-            top: '50%', // Top position relative to parent
-            left: '50%' // Left position relative to parent
-        };
-        var target = document.getElementById('transactions');
-        var spinner = new Spinner();
-    $(document).ajaxStart(function() {
-        spinner.spin(target);
+    PNotify.prototype.options.styling = "fontawesome";
+    $(document).ajaxStart(function () {
+        pnotify = notify({
+            message: "Cargando transacciones",
+            icon: "fa fa-refresh fa-spin"
+        })
     });
-    $(document).ajaxStop(function() {
-        spinner.stop();
+    $(document).ajaxStop(function () {
+        pnotify.remove();
     });
-    $('#transactions').WATable({
+    var waT = $('#transactions').WATable({
         url: '/reportes',
         filter: true,
         pageSize: [10],
         debug: true,
         columnPicker: true,
+        checkboxes: true,
+        checkAllToggle: true,
         types: {
             string: {
                 placeHolder: "Filtro..."
@@ -42,8 +28,50 @@ $(function () {
                 datePicker: true,
                 format: 'd/M/yyyy H:m:s'
             }
+        },
+        actions: {
+            custom: [
+                $('<a href="/reportes/refund" id="action-refund"><span class="glyphicon glyphicon-usd"></span>&nbsp; Refund</a>'),
+            ]
         }
+    }).data('WATable');
+
+    $('body').on('click', '#action-refund', function (e) {
+        e.preventDefault();
+        var transactions = waT.getData({checked: true});
+        $.ajax({
+            url: '/reportes/refund',
+            method: 'POST',
+            data: { transactions: transactions.rows },
+            success: function (resp) {
+                notify({
+                    title: "Refound realizado",
+                    message: "Refound realizado correctamente",
+                    type: "success",
+                    icon: "fa fa-check"
+                });
+            },
+            error: function (err) {
+                notify({
+                    title: "Error",
+                    message: "Ocurrio un error procesando la transacción",
+                    type: "error",
+                    icon: "fa fa-bomb"
+                })
+            },
+            dataType: 'json'
+        })
     });
+
+    function notify(options) {
+        return new PNotify({
+            title: options.title || "Ejecutando...",
+            text: options.message,
+            icon: options.icon || "",
+            type: options.type || "info",
+            hide: false
+        })
+    }
 });
 
 

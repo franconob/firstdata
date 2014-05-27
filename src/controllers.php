@@ -19,6 +19,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
     $password = 'apology83';
 
     $enabledHeaders = [
+        0 => "Tag",
         1 => "Cardholder Name",
         4 => "Card Type",
         5 => "Amount",
@@ -106,10 +107,12 @@ $app->get('/reportes', function (Request $request) use ($app) {
                     return $header !== "format";
                 }));
             } else {
-                $tableHeader[$_header] = ["index" => $k, "type" => "string"];
+                $tableHeader[$_header] = ["index" => $k+1, "type" => "string"];
             }
         }
     };
+
+    $tableHeader["id"] = ["hidden" => true, "unique" => true];
 
     $data = $reader_body->setOffset(1)->fetchAll();
     unset($data[count($data) - 1]);
@@ -117,16 +120,16 @@ $app->get('/reportes', function (Request $request) use ($app) {
     $cleanData = [];
     foreach ($data as $k_row => $row) {
         $cleanRow = array_values(array_intersect_key($row, $enabledHeaders));
-        $formattedRow = [];
+        $formattedRow = ["id" => $k_row];
         foreach ($cleanRow as $k => &$col) {
-            if(isset($enabledHeaders[$k+1]["callback"])) {
-                $col = $enabledHeaders[$k+1]["callback"]($col);
+            if(isset($enabledHeaders[$k]["callback"])) {
+                $col = $enabledHeaders[$k]["callback"]($col);
             }
-            if(isset($enabledHeaders[$k+1]["format"])) {
-                $colName = $enabledHeaders[$k+1]["friendly"]."Format";
-                $formattedRow[$colName] = $enabledHeaders[$k+1]["format"]($col);
+            if(isset($enabledHeaders[$k]["format"])) {
+                $colName = $enabledHeaders[$k]["friendly"]."Format";
+                $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col);
             }
-            $formattedRow[is_array($enabledHeaders[$k + 1]) ? $enabledHeaders[$k + 1]["friendly"] : $enabledHeaders[$k + 1]] = $col;
+            $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
         }
         $cleanData[$k_row] = $formattedRow;
     }
@@ -139,6 +142,19 @@ $app->get('/reportes', function (Request $request) use ($app) {
 
 })
     ->bind('reportes');
+
+$app->post('/reportes/{transaction_type}', function($transaction_type) use($app) {
+    $data = $app['request']->request->get('transactions');
+    $transaction = $app['firstdata.transactions'];
+    $vars = [];
+    try {
+        $transaction->execute($transaction_type, $data[0]);
+        $vars['success'] = true;
+    } catch (\GuzzleHttp\Exception\ClientException $e) {
+        $vars['success'] = false;
+    }
+    return $app->json($vars);
+})->bind('reportes_refund');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
