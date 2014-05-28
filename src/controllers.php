@@ -151,7 +151,10 @@ $app->post('/reportes/{transaction_type}', function($transaction_type) use($app)
         $transaction->execute($transaction_type, $data[0]);
         $vars['success'] = true;
     } catch (\GuzzleHttp\Exception\ClientException $e) {
+        $response = $e->getResponse();
         $vars['success'] = false;
+        $vars['reason'] = $response->getReasonPhrase();
+        $vars['debug'] = (string)$response->getBody();
     }
     return $app->json($vars);
 })->bind('reportes_refund');

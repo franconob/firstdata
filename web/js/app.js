@@ -39,7 +39,7 @@ $(function () {
     $('body').on('click', '#action-refund', function (e) {
         e.preventDefault();
         var transactions = waT.getData({checked: true});
-        if(transactions.rows.length == 0) {
+        if (transactions.rows.length == 0) {
             notify({
                 title: "Aviso",
                 message: "No se seleccionaron transacciones",
@@ -53,12 +53,25 @@ $(function () {
             method: 'POST',
             data: { transactions: transactions.rows },
             success: function (resp) {
-                notify({
-                    title: "Refound realizado",
-                    message: "Refound realizado correctamente",
-                    type: "success",
-                    icon: "fa fa-check"
-                });
+                if (resp.success) {
+                    notify({
+                        title: "Refound realizado",
+                        message: "Refound realizado correctamente",
+                        type: "success",
+                        icon: "fa fa-check",
+                        hide: true
+                    });
+                    waT.update();
+                } else {
+                    notify({
+                        title: "Refund error",
+                        message: "La operación no pudo realizarse. Motivo: " + resp.reason + ' ' + resp.debug,
+                        type: 'error',
+                        icon: 'fa fa-bomb',
+                        hide: true
+                    });
+                }
+
             },
             error: function (err) {
                 notify({
