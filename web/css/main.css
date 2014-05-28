@@ -1,5 +1,9 @@
-.gridStyle {
-    border: 1px solid rgb(212,212,212);
-    width: 400px;
-    height: 300px
+#table-info.panel-body {
+    min-height: 60px;
+    padding: 20px 0 0 0;
+}
+
+.table-header-info > span {
+    padding: 20px;
+    border-right: 1px solid;
 }

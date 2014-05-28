@@ -118,6 +118,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
     unset($data[count($data) - 1]);
 
     $cleanData = [];
+    $totalAmount = 0;
     foreach ($data as $k_row => $row) {
         $cleanRow = array_values(array_intersect_key($row, $enabledHeaders));
         $formattedRow = ["id" => $k_row];
@@ -130,12 +131,17 @@ $app->get('/reportes', function (Request $request) use ($app) {
                 $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col);
             }
             $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
+            if($enabledHeaders[$k] == "Amount") {
+                $filter_amount = floatval(filter_var($col, FILTER_SANITIZE_NUMBER_FLOAT));
+                $totalAmount += sprintf("%.2f", ($filter_amount)/100);
+            }
         }
         $cleanData[$k_row] = $formattedRow;
     }
     $vars = [
         "cols" => $tableHeader,
-        "rows" => $cleanData
+        "rows" => $cleanData,
+        "totalAmount" => $totalAmount
     ];
 
     return $app->json($vars);

@@ -33,6 +33,10 @@ $(function () {
             custom: [
                 $('<a href="/reportes/refund" id="action-refund"><span class="glyphicon glyphicon-usd"></span>&nbsp; Refund</a>'),
             ]
+        },
+        tableCreated: function(e) {
+            $('#total-transactions').html(waT.getData().rows.length);
+            $('#total-amout').html(waT.getData().totalAmount);
         }
     }).data('WATable');
 
