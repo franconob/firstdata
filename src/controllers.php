@@ -38,7 +38,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
                 return $dt->getTimestamp()*1000;
             }],
         8 => "Auth No",
-        10 => "Ref Num",
+        10 => ["friendly" => "Ref Num", "hidden" => true],
         11 => "Cust. Ref Num"
     ];
 
