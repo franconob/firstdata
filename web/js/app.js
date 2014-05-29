@@ -31,7 +31,8 @@ $(function () {
         },
         actions: {
             custom: [
-                $('<a href="/reportes/refund" id="action-refund"><span class="glyphicon glyphicon-usd"></span>&nbsp; Refund</a>'),
+                $('<a href="/reportes/refund" id="action-refund"><i class="fa fa-usd"></i>&nbsp;Refund</a>'),
+                $('<a href="/transactions-export" id="action-export"><i class="fa fa-file-text"></i>&nbsp;Exportar CSV</a>'),
             ]
         },
         tableCreated: function(e) {
@@ -88,6 +89,11 @@ $(function () {
             dataType: 'json'
         })
     });
+
+    $('#action-export').click(function(e) {
+        e.preventDefault();
+        window.location.assign('/transactions-export');
+    })
 
     function notify(options) {
         return new PNotify({

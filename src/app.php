@@ -13,6 +13,7 @@ $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new TwigServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     // add custom globals, filters, tags, ...
 

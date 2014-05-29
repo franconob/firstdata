@@ -81,6 +81,9 @@ $app->get('/reportes', function (Request $request) use ($app) {
 
     $response_string = (string)$response->getBody();
 
+    // Guaramos el $data en sesion para poder bajar el CSV mas tarde
+    $app['session']->set('csv_data', $response_string);
+
     $reader_body = Reader::createFromString($response_string);
     $reader_header = $reader_body->fetchOne();
 
@@ -115,6 +118,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
     $tableHeader["id"] = ["hidden" => true, "unique" => true];
 
     $data = $reader_body->setOffset(1)->fetchAll();
+
     unset($data[count($data) - 1]);
 
     $cleanData = [];
@@ -149,7 +153,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
 })
     ->bind('reportes');
 
-$app->post('/reportes/{transaction_type}', function($transaction_type) use($app) {
+$app->post('/transactions/{transaction_type}', function($transaction_type) use($app) {
     $data = $app['request']->request->get('transactions');
     $transaction = $app['firstdata.transactions'];
     $vars = [];
@@ -164,6 +168,18 @@ $app->post('/reportes/{transaction_type}', function($transaction_type) use($app)
     }
     return $app->json($vars);
 })->bind('reportes_refund');
+
+$app->get('/transactions-export', function() use ($app) {
+    $data = $app['session']->get('csv_data');
+    $response = new Response();
+    $response->setContent($data);
+    $response->headers->add([
+        'Content-Disposition' => 'attachment; filename="transactions.csv"',
+        'Content-Length' => mb_strlen($data),
+        'Content-Type'   => 'text/csv; charsert="utf-8"'
+    ]);
+    return $response->sendContent();
+})->bind('transactions-export');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
