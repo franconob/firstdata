@@ -24,7 +24,7 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
 $app->register(new HttpClientServiceProvider());
 $app->register(new TransactionsServiceProvider(), array(
     'firstdata.transactions.key_id' => '131774',
-    'firstdata.transactions.hmac_key' => 'RJ8O7H9wvYqaxPUcMqYDkMCwAq26rMHA',
+    'firstdata.transactions.hmac_key' => 'FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84',
     'firstdata.transactions.url' => 'https://api.demo.globalgatewaye4.firstdata.com',
     'firstdata.transactions.endpoint' => '/transaction/v13'
 ));

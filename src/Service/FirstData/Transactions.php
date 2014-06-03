@@ -75,16 +75,93 @@ class Transactions
      * @return \GuzzleHttp\Message\ResponseInterface
      * @throws ClientException
      */
-    private function refund(array $transaction)
+    private function taggedRefund(array $transaction)
     {
         $requestBody = [
             'gateway_id' => 'AE8689-05',
-            'password' => 'p7zjnamt',
+            'password' => '8h5i7dud',
             'transaction_type' => '34',
             'amount' => substr($transaction['Amount'], 1),
             'transaction_tag' => $transaction['Tag'],
             'authorization_num' => $transaction['Auth No'],
         ];
+
+        $body = json_encode($requestBody);
+
+        $headers = $this->calcHMAC($body);
+        return $this->httpClient->post($this->endpoint, [
+            "headers" => $headers,
+            "body" => $body,
+            "config" => [
+                "curl" => [
+                    CURLOPT_SSLVERSION => 3,
+                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
+                ]
+            ]
+        ]);
+    }
+
+    public function newTransaction(array $transaction)
+    {
+        $requestBody = array_merge([
+            'gateway_id' => 'AE8689-05',
+            'password' => '8h5i7dud',
+            'transaction_type' => '00',
+            'customer_ref' => 'Awwa Suite Hotel'
+        ], $transaction);
+
+        $body = json_encode($requestBody);
+
+        $headers = $this->calcHMAC($body);
+        return $this->httpClient->post($this->endpoint, [
+            "headers" => $headers,
+            "body" => $body,
+            "config" => [
+                "curl" => [
+                    CURLOPT_SSLVERSION => 3,
+                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
+                ]
+            ]
+        ]);
+    }
+
+    public function preAuth(array $transaction)
+    {
+        $requestBody = array_merge([
+            'gateway_id' => 'AE8689-05',
+            'password' => '8h5i7dud',
+            'transaction_type' => '01',
+            'customer_ref' => 'Awwa Suite Hotel'
+        ], $transaction);
+
+        $body = json_encode($requestBody);
+
+        $headers = $this->calcHMAC($body);
+        return $this->httpClient->post($this->endpoint, [
+            "headers" => $headers,
+            "body" => $body,
+            "config" => [
+                "curl" => [
+                    CURLOPT_SSLVERSION => 3,
+                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
+                ]
+            ]
+        ]);
+    }
+
+    /**
+     * @param array $transaction
+     * @return \GuzzleHttp\Message\ResponseInterface
+     * @throws ClientException
+     */
+    private function refund(array $transaction)
+    {
+        $requestBody = array_merge([
+            'gateway_id' => 'AE8689-05',
+            'password' => '8h5i7dud',
+            'transaction_type' => '04',
+            'customer_ref' => 'Awwa Suite Hotel'
+        ], $transaction);
 
         $body = json_encode($requestBody);
 

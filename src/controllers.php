@@ -155,10 +155,13 @@ $app->get('/reportes', function (Request $request) use ($app) {
 
 $app->post('/transactions/{transaction_type}', function($transaction_type) use($app) {
     $data = $app['request']->request->get('transactions');
+
+    /** @var \Service\FirstData\Transactions $transaction */
     $transaction = $app['firstdata.transactions'];
     $vars = [];
+
     try {
-        $transaction->execute($transaction_type, $data[0]);
+        $transaction->execute($transaction_type, isset($data[0]) ? $data[0] : $data);
         $vars['success'] = true;
     } catch (\GuzzleHttp\Exception\ClientException $e) {
         $response = $e->getResponse();
@@ -195,4 +198,11 @@ $app->error(function (\Exception $e, $code) use ($app) {
     );
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+});
+
+$app->before(function (Request $request) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
 });
