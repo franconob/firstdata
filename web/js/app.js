@@ -61,10 +61,8 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
             });
 
             scope.$on('gridCreated', function (event, args) {
-                if (args.initial) {
-                    $compile(args.grid.contents())(scope);
-                    initial = false;
-                }
+                $compile(args.grid.contents())(scope);
+                initial = false;
                 scope.grid = args.gridObj;
                 updateTotalRecords(args.initial);
                 updateTotalAmount(args.initial);
