@@ -70,6 +70,16 @@ class Transactions
         return call_user_func(array($this, $transaction_type), $transaction_data);
     }
 
+    public function taggedVoid(array $transaction)
+    {
+        return $this->taggedRefund($transaction);
+    }
+
+    public function taggedPreAuthComp(array $transaction)
+    {
+        return $this->taggedRefund($transaction);
+    }
+
     /**
      * @param array $transaction
      * @return \GuzzleHttp\Message\ResponseInterface
@@ -77,15 +87,12 @@ class Transactions
      */
     private function taggedRefund(array $transaction)
     {
-        $requestBody = [
+        $requestBody = array_merge([
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
             'transaction_type' => '34',
-            'amount' => substr($transaction['Amount'], 1),
-            'transaction_tag' => $transaction['Tag'],
-            'authorization_num' => $transaction['Auth No'],
-            'reference_3' => $transaction['Tag']
-        ];
+            'reference_3' => $transaction['transaction_tag']
+        ], $transaction);
 
         $body = json_encode($requestBody);
 

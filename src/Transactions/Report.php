@@ -34,8 +34,8 @@ class Report
         'Tagged Void'                         => [
             "label"     => "Tagged Void",
             "action"    => "taggedVoid",
-            "template"  => false,
-            "openModal" => false
+            "template"  => "confirm.html",
+            "openModal" => true
         ],
         'Tagged Refund'                       => [
             "label"     => "Tagged Refund",

@@ -20,7 +20,7 @@ app.factory('notify', function () {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, notify, $modal) {
+app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $http) {
     return {
         restrict: 'E',
         scope: {
@@ -28,7 +28,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal) {
             totalAmount: '='
         },
         link: function (scope, element, attrs) {
-            scope.totalRecords = 10;
+            scope.totalRecords = 0;
             var initial = true;
 
             var currentNotify = notify({
@@ -110,7 +110,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal) {
                             return transaction;
                         }
                     },
-                    controller: function ($scope, $modalInstance, _config, transaction) {
+                    controller: function ($scope, $modalInstance, _config, transaction, $http) {
                         $scope._config = _config;
                         $scope.transaction = transaction;
                         $scope.maxAmount = transaction.Amount;
@@ -129,7 +129,28 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal) {
                         };
 
                         $scope.submit = function () {
-                            console.log('submit!!');
+                            $http.post('/transactions/' + _config.action, {transactions: {
+                                transaction_tag: $scope.transaction['Tag'],
+                                amount: $scope.transaction.amount,
+                                authorization_num: $scope.transaction['Auth No']
+                            }}).success(function (data, status) {
+                                if (data.success) {
+                                    notify({
+                                        title: "Operación realizada con éxito",
+                                        type: 'success',
+                                        hide: true,
+                                        icon: 'fa fa-check'
+                                    })
+                                }
+                                $modalInstance.dismiss('ok');
+                                scope.grid.update();
+                                notify({
+                                    title: "Ejecutando..",
+                                    message: "Cargando transacciones",
+                                    icon: "fa fa-refresh fa-spin",
+                                    hide: true
+                                });
+                            })
                         };
 
                         $scope.cancel = function () {
