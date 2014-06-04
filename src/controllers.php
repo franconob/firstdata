@@ -2,11 +2,9 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use GuzzleHttp\Client;
 use League\Csv\Reader;
+use Transactions\Report;
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -14,54 +12,55 @@ $app->get('/', function () use ($app) {
 
 $app->get('/reportes', function (Request $request) use ($app) {
 
-    $url = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
+    $url      = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
     $username = 'spiralti637';
     $password = 'apology83';
 
     $enabledHeaders = [
-        0 => "Tag",
-        1 => "Cardholder Name",
-        4 => "Card Type",
-        5 => "Amount",
-        2 => "Card Number",
-        3 => "Expiry",
-        6 => "Transaction Type",
-        7 => ["friendly" => "Status", "format" => function($value) {
-                if($value == "Approved") {
+        0  => "Tag",
+        1  => "Cardholder Name",
+        4  => "Card Type",
+        5  => "Amount",
+        2  => "Card Number",
+        3  => "Expiry",
+        6  => "Transaction Type",
+        7  => ["friendly" => "Status", "format" => function ($value) {
+                if ($value == "Approved") {
                     return '<div class="bg-success">{0}</div>';
                 } else {
                     return '<div>{0}</div>';
                 }
             }],
-        9 => ["friendly" => "Time", "type" => "date", "callback" => function($value) {
+        9  => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
                 $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
-                return $dt->getTimestamp()*1000;
+
+                return $dt->getTimestamp() * 1000;
             }],
-        8 => "Auth No",
+        8  => "Auth No",
         10 => ["friendly" => "Ref Num", "hidden" => true],
         11 => "Cust. Ref Num"
     ];
 
-    $now = new \DateTime();
+    $now         = new \DateTime();
     $last6Months = $now->sub(new \DateInterval('P6M'));
 
-    $client = new Client();
+    $client   = new Client();
     $response = $client->get($url, [
-        "query" => ["search" => "Awwa Suite Hotel", "start_date" => $last6Months->format('Y-m-d')],
+        "query"   => ["search" => "Awwa Suite Hotel", "start_date" => $last6Months->format('Y-m-d')],
         "headers" => [
             ["Acecpt", "text/search-v3+csv"]
         ],
-        "auth" => [$username, $password],
-        "config" => [
+        "auth"    => [$username, $password],
+        "config"  => [
             "curl" => [
-                CURLOPT_SSLVERSION => 3,
+                CURLOPT_SSLVERSION      => 3,
                 CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
             ]
         ]
     ]);
 
     $csv_header = $response->getHeader('Search-CSV');
-    $reader = Reader::createFromString($csv_header);
+    $reader     = Reader::createFromString($csv_header);
 
     // Response header. Info sobre cantidad de filas, el total y el offset
     /*
@@ -84,7 +83,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
     // Guaramos el $data en sesion para poder bajar el CSV mas tarde
     $app['session']->set('csv_data', $response_string);
 
-    $reader_body = Reader::createFromString($response_string);
+    $reader_body   = Reader::createFromString($response_string);
     $reader_header = $reader_body->fetchOne();
 
     $tableHeader = [];
@@ -100,51 +99,57 @@ $app->get('/reportes', function (Request $request) use ($app) {
                 return $_header;
             }
         }
+
         return false;
     };
 
     foreach ($reader_header as $k => $header) {
         if ($_header = $searchInEnabledHeaders($header, $enabledHeaders)) {
             if (is_array($_header)) {
-                $tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function($header) {
+                $tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function ($header) {
                     return $header !== "format";
                 }));
             } else {
-                $tableHeader[$_header] = ["index" => $k+1, "type" => "string"];
+                $tableHeader[$_header] = ["index" => $k + 2, "type" => "string"];
             }
         }
     };
 
-    $tableHeader["id"] = ["hidden" => true, "unique" => true];
+    $tableHeader["id"]      = ["hidden" => true, "unique" => true];
+    $tableHeader["actions"] = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
 
     $data = $reader_body->setOffset(1)->fetchAll();
 
     unset($data[count($data) - 1]);
 
-    $cleanData = [];
+    $reportHandler = Report::getInstance();
+
+    $cleanData   = [];
     $totalAmount = 0;
     foreach ($data as $k_row => $row) {
-        $cleanRow = array_values(array_intersect_key($row, $enabledHeaders));
+        $cleanRow     = array_values(array_intersect_key($row, $enabledHeaders));
         $formattedRow = ["id" => $k_row];
         foreach ($cleanRow as $k => &$col) {
-            if(isset($enabledHeaders[$k]["callback"])) {
+            if (isset($enabledHeaders[$k]["callback"])) {
                 $col = $enabledHeaders[$k]["callback"]($col);
             }
-            if(isset($enabledHeaders[$k]["format"])) {
-                $colName = $enabledHeaders[$k]["friendly"]."Format";
+            if (isset($enabledHeaders[$k]["format"])) {
+                $colName                = $enabledHeaders[$k]["friendly"] . "Format";
                 $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col);
             }
             $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
-            if($enabledHeaders[$k] == "Amount") {
+            $formattedRow['actions']                                                                             = $k_row;
+            if ($enabledHeaders[$k] == "Amount") {
                 $filter_amount = floatval(filter_var($col, FILTER_SANITIZE_NUMBER_FLOAT));
-                $totalAmount += sprintf("%.2f", ($filter_amount)/100);
+                $totalAmount += sprintf("%.2f", ($filter_amount) / 100);
             }
         }
-        $cleanData[$k_row] = $formattedRow;
+        $formattedRow['actionsFormat'] = $reportHandler->getActionFor($formattedRow['Transaction Type']);
+        $cleanData[$k_row]             = $formattedRow;
     }
     $vars = [
-        "cols" => $tableHeader,
-        "rows" => $cleanData,
+        "cols"        => $tableHeader,
+        "rows"        => $cleanData,
         "totalAmount" => $totalAmount
     ];
 
@@ -153,35 +158,37 @@ $app->get('/reportes', function (Request $request) use ($app) {
 })
     ->bind('reportes');
 
-$app->post('/transactions/{transaction_type}', function($transaction_type) use($app) {
+$app->post('/transactions/{transaction_type}', function ($transaction_type) use ($app) {
     $data = $app['request']->request->get('transactions');
 
     /** @var \Service\FirstData\Transactions $transaction */
     $transaction = $app['firstdata.transactions'];
-    $vars = [];
+    $vars        = [];
 
     try {
         $transaction->execute($transaction_type, isset($data[0]) ? $data[0] : $data);
         $vars['success'] = true;
     } catch (\GuzzleHttp\Exception\ClientException $e) {
-        $response = $e->getResponse();
+        $response        = $e->getResponse();
         $vars['success'] = false;
-        $vars['reason'] = $response->getReasonPhrase();
-        $vars['debug'] = (string)$response->getBody();
+        $vars['reason']  = $response->getReasonPhrase();
+        $vars['debug']   = (string)$response->getBody();
     }
+
     return $app->json($vars);
 })->bind('reportes_refund');
 
-$app->get('/transactions-export', function() use ($app) {
-    $data = $app['session']->get('csv_data');
+$app->get('/transactions-export', function () use ($app) {
+    $data     = $app['session']->get('csv_data');
     $response = new Response();
     $response->setContent($data);
     $response->headers->add([
         'Content-Disposition' => 'attachment; filename="transactions.csv"',
-        'Content-Length' => mb_strlen($data),
-        'Content-Type'   => 'text/csv; charsert="utf-8"'
+        'Content-Length'      => mb_strlen($data),
+        'Content-Type'        => 'text/csv; charsert="utf-8"'
     ]);
-    return $response->sendContent();
+
+    return $response->send();
 })->bind('transactions-export');
 
 $app->error(function (\Exception $e, $code) use ($app) {

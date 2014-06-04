@@ -84,6 +84,7 @@ class Transactions
             'amount' => substr($transaction['Amount'], 1),
             'transaction_tag' => $transaction['Tag'],
             'authorization_num' => $transaction['Auth No'],
+            'reference_3' => $transaction['Tag']
         ];
 
         $body = json_encode($requestBody);
