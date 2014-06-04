@@ -91,7 +91,9 @@ class Transactions
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
             'transaction_type' => '34',
-            'reference_3' => $transaction['transaction_tag']
+            'reference_3' => $transaction['transaction_tag'],
+            'customer_ref' => 'Awwa Suite Hotel'
+
         ], $transaction);
 
         $body = json_encode($requestBody);
