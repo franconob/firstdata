@@ -72,11 +72,13 @@ class Transactions
 
     public function taggedVoid(array $transaction)
     {
+        $transaction['transaction_type'] = '33';
         return $this->taggedRefund($transaction);
     }
 
     public function taggedPreAuthComp(array $transaction)
     {
+        $transaction['transaction_type'] = '32';
         return $this->taggedRefund($transaction);
     }
 

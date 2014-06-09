@@ -7,7 +7,11 @@
         <div class="alert alert-danger"><h4>Confirma realizar esta operación?</h4></div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">Confirmar</button>
+        <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">
+            <i class="fa fa-spinner fa-spin" ng-show="isLoading"></i>
+            <i class="fa fa-check" ng-show="form.$valid"></i>
+            Confirmar
+        </button>
         <button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
     </div>
 </script>

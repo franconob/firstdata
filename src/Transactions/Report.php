@@ -112,7 +112,7 @@ EOF;
                 self::$tagged_transactions['Tagged Void']
             ]
             ],
-            'Tagged Pre-Authorization Completion' => ["allows" => [
+            'Tagged Completion' => ["allows" => [
                 self::$tagged_transactions['Tagged Void'],
                 self::$tagged_transactions['Tagged Refund']
             ]

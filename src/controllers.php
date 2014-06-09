@@ -38,7 +38,8 @@ $app->get('/reportes', function (Request $request) use ($app) {
             }],
         8  => "Auth No",
         10 => ["friendly" => "Ref Num", "hidden" => true],
-        11 => "Cust. Ref Num"
+        11 => "Cust. Ref Num",
+        12 => ["friendly" => "Reference 3"]
     ];
 
     $now         = new \DateTime();
@@ -118,18 +119,85 @@ $app->get('/reportes', function (Request $request) use ($app) {
     $tableHeader["id"]      = ["hidden" => true, "unique" => true];
     $tableHeader["actions"] = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
 
-    $data = $reader_body->setOffset(1)->fetchAll();
+    $data  = $reader_body->setOffset(1)->fetchAll();
+    $data2 = $data;
 
     unset($data[count($data) - 1]);
 
     $reportHandler = Report::getInstance();
 
-    $cleanData   = [];
-    $totalAmount = 0;
-    foreach ($data as $k_row => $row) {
-        $cleanRow     = array_values(array_intersect_key($row, $enabledHeaders));
+    $cleanData    = [];
+    $totalAmount  = 0;
+    $debo_aplicar = true;
+
+    foreach ($data as $k_row => &$row) {
         $formattedRow = ["id" => $k_row];
-        foreach ($cleanRow as $k => &$col) {
+
+        // indice 12 => "Reference 3"
+        if ("" !== $row[12]) {
+            $reference_tag = $row[12];
+
+            foreach ($data2 as $k_row2 => $row2) {
+                // indice 0 => "Transaction Tag"
+                if ($reference_tag == $row2[0]) {
+                    if ($debo_aplicar) {
+                        $estado_padre = "";
+                        switch ($row2[6]) {
+                            case "Purchase":
+                                switch ($row[6]) {
+                                    case "Tagged Refund":
+                                        $estado_padre = "Refunded Transaction";
+                                        break;
+                                    case "Tagged Void":
+                                        $estado_padre = "Voided Transaction";
+                                        break;
+                                };
+                                break;
+                            case "Pre-Authorization":
+                                switch ($row[6]) {
+                                    case "Tagged Void":
+                                        $estado_padre = "Voided Transaction";
+                                        break;
+                                    case "Tagged Completion":
+                                        $estado_padre = "Completed Transaction";
+                                        break;
+                                };
+                                break;
+                            case "Refund":
+                                switch ($row[6]) {
+                                    case "Tagged Void":
+                                        $estado_padre = "Voided Transaction";
+                                        break;
+                                };
+                                break;
+                            case "Tagged Refund":
+                                switch ($row[6]) {
+                                    case "Tagged Void":
+                                        $estado_padre = "Voided Transaction";
+                                        break;
+                                };
+                                break;
+                            case "Tagged Completion":
+                                switch ($row[6]) {
+                                    case "Tagged Void":
+                                        $estado_padre = "Voided Transaction";
+                                        break;
+                                };
+                                break;
+                        }
+
+                        $data[$k_row2][7] = $estado_padre;
+                    }
+
+                    //si es void el estado del padre, tengo que ignorar este estado en el proximo hijo
+                    $debo_aplicar = ($data[$k_row2][6] == "Tagged Void");
+                }
+            }
+        }
+
+        $cleanRow = array_values(array_intersect_key($row, $enabledHeaders));
+
+        foreach ($cleanRow as $k => $col) {
             if (isset($enabledHeaders[$k]["callback"])) {
                 $col = $enabledHeaders[$k]["callback"]($col);
             }
@@ -141,7 +209,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
             $formattedRow['actions']                                                                             = $k_row;
             if ($enabledHeaders[$k] == "Amount") {
                 $filter_amount = floatval(filter_var($col, FILTER_SANITIZE_NUMBER_FLOAT));
-                $totalAmount += sprintf("%.2f", ($filter_amount) / 100);
+                $totalAmount += sprintf("%.2f", ($filter_amount / 100));
             }
         }
         $formattedRow['actionsFormat'] = $reportHandler->getActionFor($formattedRow['Transaction Type']);

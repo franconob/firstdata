@@ -3,10 +3,56 @@
  */
 PNotify.prototype.options.styling = "fontawesome";
 
+
+function __notify(options) {
+    return new PNotify({
+        title: options.title || "Ejecutando...",
+        text: options.message || "",
+        icon: options.icon || "",
+        type: options.type || "info",
+        hide: options.hide || false
+    });
+}
+
+$(document).ajaxStart(function () {
+    globalNotify = __notify({
+        title: "Ejecutando..",
+        message: "Cargando transacciones",
+        icon: "fa fa-refresh fa-spin"
+    });
+});
+
+$(document).ajaxStop(function () {
+    globalNotify.remove();
+});
 var waT;
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils']);
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner']);
 
 app.value('numeral', numeral);
+
+app.factory('firstDataInterceptor', ["$q", "$rootScope", function ($q, $rootScope) {
+    return {
+        request: function (config) {
+            var deferred = $q.defer();
+            $rootScope.isLoading = true;
+            deferred.resolve(config);
+
+            return deferred.promise;
+        },
+        response: function (response) {
+            var deferred = $q.defer();
+            $rootScope.isLoading = false;
+
+            deferred.resolve(response);
+
+            return deferred.promise;
+        }
+    };
+}]);
+
+app.config(["$httpProvider", function ($httpProvider) {
+    $httpProvider.interceptors.push('firstDataInterceptor');
+}]);
 
 app.factory('notify', function () {
     return function (options) {
@@ -25,17 +71,12 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
         restrict: 'E',
         scope: {
             totalRecords: '=total',
-            totalAmount: '='
+            totalAmount: '=',
+            grid: '='
         },
         link: function (scope, element, attrs) {
             scope.totalRecords = 0;
             var initial = true;
-
-            var currentNotify = notify({
-                title: "Ejecutando..",
-                message: "Cargando transacciones",
-                icon: "fa fa-refresh fa-spin"
-            });
 
             var grid = element.WATable({
                 url: '/reportes',
@@ -56,7 +97,6 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                 },
                 tableCreated: function () {
                     scope.$emit('gridCreated', {grid: grid, gridObj: grid.data('WATable'), initial: initial});
-                    currentNotify.remove();
                 }
             });
 
@@ -127,9 +167,20 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                         };
 
                         $scope.submit = function () {
+
+                            // Chequel el amonut para saber si fue ingresado o si debo usar el original (para una transaccion
+                            // sin formulario
+
+                            var amount = 0;
+                            if (!$scope.transaction['amount']) {
+                                amount = numeral().unformat($scope.transaction['Amount']);
+                            } else {
+                                amount = $scope.transaction['amount'];
+                            }
+
                             $http.post('/transactions/' + _config.action, {transactions: {
                                 transaction_tag: $scope.transaction['Tag'],
-                                amount: $scope.transaction.amount,
+                                amount: amount,
                                 authorization_num: $scope.transaction['Auth No']
                             }}).success(function (data, status) {
                                 if (data.success) {
@@ -142,12 +193,6 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                                 }
                                 $modalInstance.dismiss('ok');
                                 scope.grid.update();
-                                notify({
-                                    title: "Ejecutando..",
-                                    message: "Cargando transacciones",
-                                    icon: "fa fa-refresh fa-spin",
-                                    hide: true
-                                });
                             })
                         };
 
@@ -170,6 +215,9 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($sco
             resolve: {
                 transaction_type: function () {
                     return transaction_type;
+                },
+                grid: function () {
+                    return $scope.grid;
                 }
             }
         });
@@ -181,9 +229,8 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($sco
     }
 }]);
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', function ($scope, $modalInstance, $http, transaction_type, notify) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', function ($scope, $modalInstance, $http, transaction_type, notify, grid) {
     $scope.transaction = {};
-
     $scope.submit = function () {
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
         promise.success(function (data, status) {
@@ -195,7 +242,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transacti
                     hide: true,
                     icon: 'fa fa-check'
                 });
-                angular.element('#transactions').data('WATable').update();
+                grid.update();
             } else {
                 notify({
                     title: "Ocurrió un error procesando la transacción",
@@ -213,70 +260,11 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transacti
                 hide: true,
                 icon: 'fa fa-bomb'
             });
-        })
+        });
     };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     }
 }]);
-
-
-$(function () {
-    $('body').on('click', '.multi-action', function (e) {
-        e.preventDefault();
-        var transactions = waT.getData({checked: true});
-        if (transactions.rows.length == 0) {
-            notify({
-                title: "Aviso",
-                message: "No se seleccionaron transacciones",
-                type: "warning",
-                hide: true
-            });
-            return;
-        }
-        var transaction_type = $(this).data('transaction');
-        $.ajax({
-            url: '/transactions/' + transaction_type,
-            method: 'POST',
-            data: { transactions: transactions.rows },
-            success: function (resp) {
-                if (resp.success) {
-                    notify({
-                        title: "Refound realizado",
-                        message: "Refound realizado correctamente",
-                        type: "success",
-                        icon: "fa fa-check",
-                        hide: true
-                    });
-                    waT.update();
-                } else {
-                    notify({
-                        title: "Refund error",
-                        message: "La operación no pudo realizarse. Motivo: " + resp.reason + ' ' + resp.debug,
-                        type: 'error',
-                        icon: 'fa fa-bomb',
-                        hide: true
-                    });
-                }
-
-            },
-            error: function (err) {
-                notify({
-                    title: "Error",
-                    message: "Ocurrio un error procesando la transacción",
-                    type: "error",
-                    icon: "fa fa-bomb"
-                })
-            },
-            dataType: 'json'
-        })
-    });
-
-    $('#action-export').click(function (e) {
-        e.preventDefault();
-        window.location.assign('/transactions-export');
-    });
-});
-
 

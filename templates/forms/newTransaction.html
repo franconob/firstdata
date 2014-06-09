@@ -59,9 +59,10 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">
+            <i class="fa fa-spinner fa-spin" ng-show="isLoading"></i>
             <i class="fa fa-check" ng-show="form.$valid"></i>
             Enviar datos
         </button>
-        <button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
+        <button class="btn btn-danger" ng-click="cancel()" ng-disabled="isLoading">Cancelar</button>
     </div>
 </script>
