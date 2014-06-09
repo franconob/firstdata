@@ -10,6 +10,13 @@ $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
 });
 
+$app->get('/login', function (Request $request) use ($app) {
+    return $app['twig']->render('login.html', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+})->bind('login');
+
 $app->get('/reportes', function (Request $request) use ($app) {
 
     $url      = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";

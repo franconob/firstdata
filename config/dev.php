@@ -9,6 +9,14 @@ require __DIR__.'/prod.php';
 // enable the debug mode
 $app['debug'] = true;
 
+$app['db.options'] = array(
+    'driver' => 'pdo_mysql',
+    'dbname' => 'crm_winpax_finderit_local',
+    'user'   => 'root',
+    'password' => 'echesortufc',
+    'charset' => 'utf8'
+);
+
 $app->register(new MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../var/logs/silex_dev.log',
 ));

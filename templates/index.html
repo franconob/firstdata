@@ -1,6 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="{{ app.request.basepath}}/img/firstdata-logo.png">
+        </div>
+        <nav class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <p class="navbar-text">{{ app.security.token.user.name }}</p>
+                </li>
+                <li>
+                    <a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
 <div ng-controller="TransactionCtrl">
     <div class="panel panel-info" id="transactions" ng-controller="TransactionCtrl">
         <div class="panel-heading">

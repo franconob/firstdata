@@ -17,12 +17,13 @@
         "symfony/form": "~2.3",
         "symfony/monolog-bridge": "~2.3",
         "symfony/process": "~2.3",
-        "symfony/security": "~2.3",
+        "symfony/security": " ~2.3",
         "symfony/translation": "~2.3",
         "symfony/twig-bridge": "~2.3",
         "symfony/validator": "~2.3",
         "guzzlehttp/guzzle": "4.*",
-        "league/csv": "5.*"
+        "league/csv": "5.*",
+        "doctrine/dbal": " 2.2.*"
     },
     "autoload": {
         "psr-0": { "": "src/" }
