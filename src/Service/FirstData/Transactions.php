@@ -40,19 +40,26 @@ class Transactions
     private $endpoint;
 
     /**
+     * @var string
+     */
+    private $account;
+
+    /**
      * @param string $key
      * @param string $hmac_key
      * @param string $url
-     * @param $endpoint
+     * @param string $endpoint
      * @param Client $httpClient
+     * @param string $account
      */
-    public function __construct($key, $hmac_key, $url, $endpoint, $httpClient)
+    public function __construct($key, $hmac_key, $url, $endpoint, $httpClient, $account)
     {
         $this->key_id = $key;
         $this->hmac_key = $hmac_key;
         $this->url = $url;
         $this->endpoint = $endpoint;
         $this->httpClient = $httpClient;
+        $this->account = $account;
     }
 
     /**
@@ -94,7 +101,7 @@ class Transactions
             'password' => '8h5i7dud',
             'transaction_type' => '34',
             'reference_3' => $transaction['transaction_tag'],
-            'customer_ref' => 'Awwa Suite Hotel'
+            'customer_ref' => $this->account
 
         ], $transaction);
 
@@ -119,7 +126,7 @@ class Transactions
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
             'transaction_type' => '00',
-            'customer_ref' => 'Awwa Suite Hotel'
+            'customer_ref' => $this->account
         ], $transaction);
 
         $body = json_encode($requestBody);
@@ -143,7 +150,7 @@ class Transactions
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
             'transaction_type' => '01',
-            'customer_ref' => 'Awwa Suite Hotel'
+            'customer_ref' => $this->account
         ], $transaction);
 
         $body = json_encode($requestBody);
@@ -172,7 +179,7 @@ class Transactions
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
             'transaction_type' => '04',
-            'customer_ref' => 'Awwa Suite Hotel'
+            'customer_ref' => $this->account
         ], $transaction);
 
         $body = json_encode($requestBody);

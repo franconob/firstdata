@@ -22,6 +22,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
     $url      = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
     $username = 'spiralti637';
     $password = 'apology83';
+    $account  = $app['security']->getToken()->getUser()->getName();
 
     $enabledHeaders = [
         0  => "Tag",
@@ -46,7 +47,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
         8  => "Auth No",
         10 => ["friendly" => "Ref Num", "hidden" => true],
         11 => "Cust. Ref Num",
-        12 => ["friendly" => "Reference 3"]
+        12 => ["friendly" => "Reference 3", "hidden" => true]
     ];
 
     $now         = new \DateTime();
@@ -54,7 +55,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
 
     $client   = new Client();
     $response = $client->get($url, [
-        "query"   => ["search" => "Awwa Suite Hotel", "start_date" => $last6Months->format('Y-m-d')],
+        "query"   => ["search" => $account, "start_date" => $last6Months->format('Y-m-d')],
         "headers" => [
             ["Acecpt", "text/search-v3+csv"]
         ],

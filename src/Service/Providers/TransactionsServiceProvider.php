@@ -28,13 +28,14 @@ class TransactionsServiceProvider implements ServiceProviderInterface
     {
         $app['firstdata.transactions'] = $app->share(function () use ($app) {
 
-            $hmac_key = $app['firstdata.transactions.hmac_key'];
-            $key_id = $app['firstdata.transactions.key_id'];
-            $url = $app['firstdata.transactions.url'];
-            $endpoint = $app['firstdata.transactions.endpoint'];
+            $hmac_key   = $app['firstdata.transactions.hmac_key'];
+            $key_id     = $app['firstdata.transactions.key_id'];
+            $url        = $app['firstdata.transactions.url'];
+            $endpoint   = $app['firstdata.transactions.endpoint'];
             $httpClient = $app['firstdata.http'];
+            $account    = $app['security']->getToken()->getUser()->getName();
 
-            return new Transactions($key_id, $hmac_key, $url, $endpoint, $httpClient);
+            return new Transactions($key_id, $hmac_key, $url, $endpoint, $httpClient, $account);
         });
 
     }
