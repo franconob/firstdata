@@ -25,7 +25,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
         'main'  => [
             'pattern' => '^.*$',
-            'form'    => array('login_path' => '/login', 'check_path' => '/login_check', 'target_path' => '/'),
+            'form'    => array('login_path' => '/login', 'check_path' => '/login_check', 'default_target_path' => '/'),
             'logout' => array('logout_path' => '/logout'),
             'users'   => $app->share(function () use ($app) {
                     return new UserProvider($app['db']);

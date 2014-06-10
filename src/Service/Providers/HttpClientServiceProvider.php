@@ -16,8 +16,6 @@ use Silex\ServiceProviderInterface;
 class HttpClientServiceProvider implements ServiceProviderInterface
 {
 
-    private $url;
-
     /**
      * @inheritdoc
      */
