@@ -92,7 +92,11 @@ EOF;
         $loader          = new \Twig_Loader_String();
         $twig            = new \Twig_Environment($loader);
         $allowed_actions = self::$transactions_workflow[$transaction_type]["allows"];
-        $template        = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
+
+        if (empty($allowed_actions)) {
+            return "";
+        }
+        $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
 
         return $template;
     }
@@ -100,15 +104,15 @@ EOF;
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
-            'Purchase'                            => ["allows" => [self::$tagged_transactions['Tagged Refund']]
+            'Purchase'          => ["allows" => [self::$tagged_transactions['Tagged Refund']]
             ],
-            'Pre-Authorization'                   => ["allows" => [
+            'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
                 self::$tagged_transactions['Tagged Void'],
                 self::$tagged_transactions['Tagged Refund']
             ]
             ],
-            'Refund'                              => ["allows" => [
+            'Refund'            => ["allows" => [
                 self::$tagged_transactions['Tagged Void']
             ]
             ],
@@ -117,8 +121,8 @@ EOF;
                 self::$tagged_transactions['Tagged Refund']
             ]
             ],
-            'Tagged Void'                         => ["allows" => []],
-            'Tagged Refund'                       => ["allows" => [
+            'Tagged Void'       => ["allows" => []],
+            'Tagged Refund'     => ["allows" => [
                 self::$tagged_transactions['Tagged Void']
             ]
             ]
