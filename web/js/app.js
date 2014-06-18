@@ -222,7 +222,8 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                             $http.post('/transactions/' + _config.action, {transactions: {
                                 transaction_tag: $scope.transaction['Tag'],
                                 amount: amount,
-                                authorization_num: $scope.transaction['Auth No']
+                                authorization_num: $scope.transaction['Auth No'],
+                                reference_no: $scope.transaction['Ref Num']
                             }}).success(function (data, status) {
                                 if (data.success) {
                                     notify({
