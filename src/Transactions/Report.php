@@ -94,7 +94,7 @@ EOF;
         $allowed_actions = self::$transactions_workflow[$transaction_type]["allows"];
 
         if (empty($allowed_actions)) {
-            return "";
+            return '<div class="text-center">&times</div>';
         }
         $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
 
