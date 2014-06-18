@@ -26,7 +26,7 @@ $(document).ajaxStop(function () {
     globalNotify.remove();
 });
 var waT;
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner']);
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment']);
 
 app.value('numeral', numeral);
 
@@ -63,6 +63,46 @@ app.factory('notify', function () {
             type: options.type || "info",
             hide: options.hide || false
         });
+    }
+});
+
+app.directive('expiryDate', function (moment) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elm, attr, ctrl) {
+
+            var REG_EX = /^[0-9]{2}[/]{1}[0-9]{2}$/g;
+
+            ctrl.$parsers.push(function (viewValue) {
+                if (!REG_EX.test(viewValue)) {
+                    ctrl.$setValidity('expiry_date_invalid', false);
+                    return undefined;
+                }
+                if (viewValue && viewValue.length < 5) {
+                    ctrl.$setValidity('expiry_date_invalid', false);
+                    return viewValue;
+                }
+                var expiry_date = moment(viewValue, 'MM/YY');
+                if (!expiry_date.isValid()) {
+                    console.log('aca');
+                    ctrl.$setValidity('expiry_date_invalid', false);
+                    return viewValue;
+                }
+
+                var now = moment(new Date());
+
+                if (!expiry_date.isAfter(now)) {
+                    console.log('fecha anterior')
+                    ctrl.$setValidity('expiry_date_before', false);
+                    return undefined;
+                }
+
+                ctrl.$setValidity('expiry_date_before', true);
+                ctrl.$setValidity('expiry_date_invalid', true);
+                return viewValue;
+            });
+        }
     }
 });
 
@@ -166,6 +206,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                             }
                         };
 
+
                         $scope.submit = function () {
 
                             // Chequel el amonut para saber si fue ingresado o si debo usar el original (para una transaccion
@@ -229,8 +270,13 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($sco
     }
 }]);
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', function ($scope, $modalInstance, $http, transaction_type, notify, grid) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'moment', function ($scope, $modalInstance, $http, transaction_type, notify, grid, moment) {
     $scope.transaction = {};
+
+    $scope.checkExpiryDate = function (input) {
+
+    };
+
     $scope.submit = function () {
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
         promise.success(function (data, status) {

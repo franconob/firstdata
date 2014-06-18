@@ -41,9 +41,10 @@
                 <label for="expirydate" class="control-label col-sm-4">Expiry Date</label>
 
                 <div class="col-sm-7">
-                    <input type="text" ui-mask="99/99" class="form-control" ng-model="transaction.cc_expiry" name="cc_expiry" required>
+                    <input type="text" class="form-control" expiry-date ng-model="transaction.cc_expiry" name="cc_expiry" required>
                     <span class="fa fa-check form-control-feedback" ng-show="form.cc_expiry.$valid"></span>
-                    <span class="help-block">The credit card expiry date in the format mmyy.</span>
+                    <span class="help-block">The credit card expiry date in the format MM/YY.</span>
+                    <span class="help-block" ng-show="form.cc_expiry.$error.expiry_date_before">La fecha no puede ser inferior a la actual</span>
                 </div>
             </div>
             <div class="form-group"
