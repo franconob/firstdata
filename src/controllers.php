@@ -20,8 +20,8 @@ $app->get('/login', function (Request $request) use ($app) {
 $app->get('/reportes', function (Request $request) use ($app) {
 
     $url      = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
-    $username = 'spiralti637';
-    $password = 'apology83';
+    $username = 'vherrero';
+    $password = 'claudita1234';
     $account  = $app['security']->getToken()->getUser()->getName();
 
     $enabledHeaders = [
