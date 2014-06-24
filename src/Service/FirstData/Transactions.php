@@ -122,6 +122,7 @@ class Transactions
 
     public function newTransaction(array $transaction)
     {
+        $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
         $requestBody = array_merge([
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
@@ -146,6 +147,7 @@ class Transactions
 
     public function preAuth(array $transaction)
     {
+        $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
         $requestBody = array_merge([
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
@@ -175,6 +177,7 @@ class Transactions
      */
     private function refund(array $transaction)
     {
+        $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
         $requestBody = array_merge([
             'gateway_id' => 'AE8689-05',
             'password' => '8h5i7dud',
@@ -195,6 +198,11 @@ class Transactions
                 ]
             ]
         ]);
+    }
+
+    private function formatExpiryDate($expiryDate)
+    {
+        return str_replace('/', '', $expiryDate);
     }
 
     private function calcHMAC($requestBody)
