@@ -55,7 +55,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
 
     $client   = new Client();
     $response = $client->get($url, [
-        "query"   => ["search" => $account, "start_date" => $last6Months->format('Y-m-d')],
+        "query"   => ["search_field" => "custref", "search" => $account, "start_date" => $last6Months->format('Y-m-d')],
         "headers" => [
             ["Acecpt", "text/search-v3+csv"]
         ],
