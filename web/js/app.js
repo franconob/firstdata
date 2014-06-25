@@ -26,7 +26,7 @@ $(document).ajaxStop(function () {
     globalNotify.remove();
 });
 var waT;
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment']);
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters/findWhere']);
 
 app.value('numeral', numeral);
 
@@ -85,7 +85,6 @@ app.directive('expiryDate', function (moment) {
                 }
                 var expiry_date = moment(viewValue, 'MM/YY');
                 if (!expiry_date.isValid()) {
-                    console.log('aca');
                     ctrl.$setValidity('expiry_date_invalid', false);
                     return viewValue;
                 }
@@ -93,7 +92,6 @@ app.directive('expiryDate', function (moment) {
                 var now = moment(new Date());
 
                 if (!expiry_date.isAfter(now)) {
-                    console.log('fecha anterior')
                     ctrl.$setValidity('expiry_date_before', false);
                     return undefined;
                 }
@@ -106,7 +104,7 @@ app.directive('expiryDate', function (moment) {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $http) {
+app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter) {
     return {
         restrict: 'E',
         scope: {
@@ -161,16 +159,59 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
             var updateTotalAmount = function (initial) {
                 scope.$apply(function () {
                     if (initial) {
-                        scope.totalAmount = scope.grid.getData().totalAmount;
+                        scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
                     } else {
-                        var filteredRows = scope.grid.getData(false, true).rows;
-                        var total = 0;
-                        angular.forEach(filteredRows, function (row) {
-                            total += numeral().unformat(row.Amount);
-                        });
-                        scope.totalAmount = total;
+                        scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
                     }
                 });
+            };
+
+            /**
+             var _calculateLimitAmount = function (current_transaction, transactions) {
+                var limit = current_transaction['Amount'];
+                if ("Purchase" == current_transaction['Transaction Type']) {
+                    var tagged_transactions = $filter('where')(transactions, {'Reference 3': current_transaction['Tag']});
+                    if(tagged_transactions) {
+                        angular.forEach(tagged_transactions, function(t_t) {
+                            if("Tagged Refund" == t_t['Transaction Type']) {
+                                limit -= numeral().unformat(t_t['Amount']);
+                            }
+                            if("Tagged Void" == t_t['Transaction Type']) {
+                                limit;
+                            }
+                        })
+                    }
+                }
+
+            };
+             **/
+
+            var _calculateTotalAmount = function (transactions) {
+                var total = 0;
+                angular.forEach(transactions, function (row) {
+                    switch (row['Transaction Type']) {
+                        case "Purchase":
+                            total += numeral().unformat(row.Amount);
+                            break;
+                        case "Tagged Refund":
+                            total -= numeral().unformat(row.Amount);
+                            break;
+                        case "Refund":
+                            total -= numeral().unformat(row.Amount);
+                            break;
+                        case "Tagged Completion":
+                            total += numeral().unformat(row.Amount);
+                            break;
+                        case "Tagged Void":
+                            var parent_transaction = $filter('findWhere')(transactions, {'Tag': row['Reference 3']});
+                            if (parent_transaction && (("Tagged Refund" == parent_transaction['Transaction Type']) || ("Refund" == parent_transaction['Transaction Type']))) {
+                                total += numeral().unformat(row.Amount);
+                                break;
+                            }
+                    }
+                });
+
+                return total;
             };
 
             scope.processTransaction = function (id, config) {
@@ -188,7 +229,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $htt
                             return transaction;
                         }
                     },
-                    controller: function ($scope, $modalInstance, _config, transaction, $http) {
+                    controller: function ($scope, $modalInstance, _config, transaction, $http, $filter) {
                         $scope._config = _config;
                         $scope.transaction = transaction;
                         $scope.maxAmount = transaction.Amount;
