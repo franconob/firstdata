@@ -66,6 +66,34 @@ app.factory('notify', function () {
     }
 });
 
+app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
+    return function (CTR, bank_message) {
+        $modal.open({
+            templateUrl: 'printCTR.html',
+            resolve: {
+                CTR: function () {
+                    return CTR;
+                },
+                bank_message: function() {
+                    return bank_message;
+                }
+            },
+            controller: function($modalInstance, $scope, CTR, bank_message) {
+                $scope.CTR = CTR;
+                $scope.bank_message = bank_message;
+
+                $scope.cancel = function() {
+                    $modalInstance.dismiss('cancel');
+                };
+
+                $scope.print = function() {
+                    $window.print();
+                }
+            }
+        })
+    }
+}]);
+
 app.directive('expiryDate', function (moment) {
     return {
         restrict: 'A',
@@ -104,7 +132,7 @@ app.directive('expiryDate', function (moment) {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter) {
+app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter, printCTR) {
     return {
         restrict: 'E',
         scope: {
@@ -227,9 +255,12 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                         },
                         transaction: function () {
                             return transaction;
+                        },
+                        printCTR: function() {
+                            return printCTR;
                         }
                     },
-                    controller: function ($scope, $modalInstance, _config, transaction, $http, $filter) {
+                    controller: function ($scope, $modalInstance, _config, transaction, $http, printCTR) {
                         $scope._config = _config;
                         $scope.transaction = transaction;
                         $scope.maxAmount = transaction.Amount;
@@ -272,7 +303,8 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                         type: 'success',
                                         hide: true,
                                         icon: 'fa fa-check'
-                                    })
+                                    });
+                                    printCTR(data.CTR, data.bank_message);
                                 }
                                 $modalInstance.dismiss('ok');
                                 scope.grid.update();
@@ -312,12 +344,8 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($sco
     }
 }]);
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'moment', function ($scope, $modalInstance, $http, transaction_type, notify, grid, moment) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'printCTR',  function ($scope, $modalInstance, $http, transaction_type, notify, grid, printCTR) {
     $scope.transaction = {};
-
-    $scope.checkExpiryDate = function (input) {
-
-    };
 
     $scope.submit = function () {
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
@@ -331,6 +359,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transacti
                     icon: 'fa fa-check'
                 });
                 grid.update();
+                printCTR(data.CTR, data.bank_message);
             } else {
                 notify({
                     title: "Ocurrió un error procesando la transacción",

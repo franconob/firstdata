@@ -6,7 +6,7 @@
  * Time: 4:54 PM
  */
 
-namespace Service\FirstData;
+namespace Service\FirstData\Transactions;
 
 
 class Exception extends \Exception

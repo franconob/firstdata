@@ -9,7 +9,7 @@
 namespace Service\Providers;
 
 
-use Service\FirstData\Transactions;
+use Service\FirstData\Transactions\Transactions;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -22,7 +22,7 @@ class TransactionsServiceProvider implements ServiceProviderInterface
      * It should not get services.
      *
      * @param Application $app An Application instance
-     * @return \Service\FirstData\Transactions
+     * @return \Service\FirstData\Transactions\Transactions
      */
     public function register(Application $app)
     {

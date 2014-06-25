@@ -1,3 +1,13 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    div.printable, div.printable > * {
+        visibility: visible;
+    }
+}
+
 #table-info.panel-body {
     min-height: 60px;
     padding: 20px 0 0 0;
@@ -13,4 +23,10 @@
 }
 .watable.table {
     width: 100%;
+}
+
+.print_ctr {
+    margin: 10px;
+    border: 1px solid;
+    padding: 10px;
 }

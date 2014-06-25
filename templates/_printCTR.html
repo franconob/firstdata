@@ -1,0 +1,18 @@
+{% verbatim %}
+<script type="text/ng-template" id="printCTR.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Customer Transaction Record</h3>
+    </div>
+    <div class="modal-body print_ctr printable">
+        <h4>{{ bank_message }}</h4>
+        <pre>{{ CTR }}</pre>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="print()">
+            <i class="fa fa-print"></i>
+            Imprimir
+        </button>
+        <button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
+    </div>
+</script>
+{% endverbatim %}

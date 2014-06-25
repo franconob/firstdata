@@ -6,11 +6,11 @@
  * Time: 12:01 PM
  */
 
-namespace Service\FirstData;
+namespace Service\FirstData\Transactions;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Message\ResponseInterface;
 
 class Transactions
 {
@@ -45,6 +45,11 @@ class Transactions
     private $account;
 
     /**
+     * @var Response
+     */
+    private $response;
+
+    /**
      * @param string $key
      * @param string $hmac_key
      * @param string $url
@@ -54,12 +59,12 @@ class Transactions
      */
     public function __construct($key, $hmac_key, $url, $endpoint, $httpClient, $account)
     {
-        $this->key_id = $key;
-        $this->hmac_key = $hmac_key;
-        $this->url = $url;
-        $this->endpoint = $endpoint;
+        $this->key_id     = $key;
+        $this->hmac_key   = $hmac_key;
+        $this->url        = $url;
+        $this->endpoint   = $endpoint;
         $this->httpClient = $httpClient;
-        $this->account = $account;
+        $this->account    = $account;
     }
 
     /**
@@ -80,12 +85,14 @@ class Transactions
     public function taggedVoid(array $transaction)
     {
         $transaction['transaction_type'] = '33';
+
         return $this->taggedRefund($transaction);
     }
 
     public function taggedPreAuthComp(array $transaction)
     {
         $transaction['transaction_type'] = '32';
+
         return $this->taggedRefund($transaction);
     }
 
@@ -97,77 +104,49 @@ class Transactions
     private function taggedRefund(array $transaction)
     {
         $requestBody = array_merge([
-            'gateway_id' => 'AE8689-05',
-            'password' => '8h5i7dud',
+            'gateway_id'       => 'AE8689-05',
+            'password'         => '8h5i7dud',
             'transaction_type' => '34',
-            'reference_3' => $transaction['transaction_tag'],
-            'customer_ref' => $this->account
+            'reference_3'      => $transaction['transaction_tag'],
+            'customer_ref'     => $this->account
 
         ], $transaction);
 
-        $body = json_encode($requestBody);
-
-        $headers = $this->calcHMAC($body);
-        return $this->httpClient->post($this->endpoint, [
-            "headers" => $headers,
-            "body" => $body,
-            "config" => [
-                "curl" => [
-                    CURLOPT_SSLVERSION => 3,
-                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
-                ]
-            ]
-        ]);
+        $this->runTransaction($requestBody);
     }
 
     public function newTransaction(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody = array_merge([
-            'gateway_id' => 'AE8689-05',
-            'password' => '8h5i7dud',
+        $requestBody              = array_merge([
+            'gateway_id'       => 'AE8689-05',
+            'password'         => '8h5i7dud',
             'transaction_type' => '00',
-            'customer_ref' => $this->account
+            'customer_ref'     => $this->account
         ], $transaction);
 
-        $body = json_encode($requestBody);
-
-        $headers = $this->calcHMAC($body);
-        return $this->httpClient->post($this->endpoint, [
-            "headers" => $headers,
-            "body" => $body,
-            "config" => [
-                "curl" => [
-                    CURLOPT_SSLVERSION => 3,
-                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
-                ]
-            ]
-        ]);
+        $this->runTransaction($requestBody);
     }
 
     public function preAuth(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody = array_merge([
-            'gateway_id' => 'AE8689-05',
-            'password' => '8h5i7dud',
+        $requestBody              = array_merge([
+            'gateway_id'       => 'AE8689-05',
+            'password'         => '8h5i7dud',
             'transaction_type' => '01',
-            'customer_ref' => $this->account
+            'customer_ref'     => $this->account
         ], $transaction);
 
-        $body = json_encode($requestBody);
+        $this->runTransaction($requestBody);
+    }
 
-        $headers = $this->calcHMAC($body);
-        return $this->httpClient->post($this->endpoint, [
-            "headers" => $headers,
-            "body" => $body,
-            "config" => [
-                "curl" => [
-                    CURLOPT_SSLVERSION => 3,
-                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
-                ]
-            ]
-        ]);
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**
@@ -178,26 +157,14 @@ class Transactions
     private function refund(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody = array_merge([
-            'gateway_id' => 'AE8689-05',
-            'password' => '8h5i7dud',
+        $requestBody              = array_merge([
+            'gateway_id'       => 'AE8689-05',
+            'password'         => '8h5i7dud',
             'transaction_type' => '04',
-            'customer_ref' => $this->account
+            'customer_ref'     => $this->account
         ], $transaction);
 
-        $body = json_encode($requestBody);
-
-        $headers = $this->calcHMAC($body);
-        return $this->httpClient->post($this->endpoint, [
-            "headers" => $headers,
-            "body" => $body,
-            "config" => [
-                "curl" => [
-                    CURLOPT_SSLVERSION => 3,
-                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
-                ]
-            ]
-        ]);
+        $this->runTransaction($requestBody);
     }
 
     private function formatExpiryDate($expiryDate)
@@ -207,21 +174,47 @@ class Transactions
 
     private function calcHMAC($requestBody)
     {
-        $gge4_date = gmdate('Y-m-d\TH:i:s') . 'Z';
-        $method = 'POST';
+        $gge4_date      = gmdate('Y-m-d\TH:i:s') . 'Z';
+        $method         = 'POST';
         $content_digest = sha1($requestBody);
-        $content_type = 'application/json';
+        $content_type   = 'application/json';
 
         $hmac_data = $method . "\n" . $content_type . "\n" . $content_digest . "\n" . $gge4_date . "\n" . $this->endpoint;
 
         $headers = [
-            'Accept' => 'application/json',
-            'Content-Type' => $content_type,
+            'Accept'              => 'application/json',
+            'Content-Type'        => $content_type,
             'X-GGe4-Content-SHA1' => $content_digest,
-            'X-GGe4-Date' => $gge4_date,
-            'Authorization' => 'GGE4_API ' . $this->key_id . ':' . base64_encode(hash_hmac('sha1', $hmac_data, $this->hmac_key, true))
+            'X-GGe4-Date'         => $gge4_date,
+            'Authorization'       => 'GGE4_API ' . $this->key_id . ':' . base64_encode(hash_hmac('sha1', $hmac_data, $this->hmac_key, true))
         ];
 
         return $headers;
+    }
+
+    /**
+     * @param string $body Body SIN ENCODEAR A JSON
+     */
+    private function runTransaction($body)
+    {
+        $body = json_encode($body);
+
+        $headers = $this->calcHMAC($body);
+
+        $this->setResponse($this->httpClient->post($this->endpoint, [
+            "headers" => $headers,
+            "body"    => $body,
+            "config"  => [
+                "curl" => [
+                    CURLOPT_SSLVERSION      => 3,
+                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
+                ]
+            ]
+        ]));
+    }
+
+    private function setResponse(ResponseInterface $response)
+    {
+        $this->response = new Response($response);
     }
 }

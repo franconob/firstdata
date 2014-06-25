@@ -237,13 +237,15 @@ $app->get('/reportes', function (Request $request) use ($app) {
 $app->post('/transactions/{transaction_type}', function ($transaction_type) use ($app) {
     $data = $app['request']->request->get('transactions');
 
-    /** @var \Service\FirstData\Transactions $transaction */
+    /** @var \Service\FirstData\Transactions\Transactions $transaction */
     $transaction = $app['firstdata.transactions'];
     $vars        = [];
 
     try {
         $transaction->execute($transaction_type, isset($data[0]) ? $data[0] : $data);
         $vars['success'] = true;
+        $vars['CTR'] = $transaction->getResponse()->getCTR();
+        $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
     } catch (\GuzzleHttp\Exception\ClientException $e) {
         $response        = $e->getResponse();
         $vars['success'] = false;
