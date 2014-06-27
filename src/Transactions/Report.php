@@ -64,6 +64,11 @@ class Report
 EOF;
 
     /**
+     * @var array
+     */
+    private $enabledHeaders;
+
+    /**
      * @return Report
      */
     public static function  getInstance()
@@ -77,7 +82,41 @@ EOF;
 
     private function __construct()
     {
+        $this->setupHeaders();
         $this->generateWorkflow();
+    }
+
+    public function searchInEnabledHeaders($header)
+    {
+        foreach ($this->enabledHeaders as $_header) {
+            if (is_array($_header)) {
+                $enabledHeader = $_header["friendly"];
+            } else {
+                $enabledHeader = $_header;
+            }
+            if ($header == $enabledHeader) {
+                return $_header;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Limpia el array de datos dejando solo los headers habilitados
+     * @param array $data
+     * @return array
+     */
+    public function cleanData($data)
+    {
+        $cleanData = [];
+        foreach($data as $key => $row) {
+            $row['Time'] = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
+            $row['Expiry'] = substr($row['Expiry'], 0, 2).'/'.substr($row['Expiry'], 2);
+            $cleanData[] = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders())));
+        }
+
+        return $cleanData;
     }
 
     /**
@@ -99,6 +138,11 @@ EOF;
         $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
 
         return $template;
+    }
+
+    public function getEnabledHeaders()
+    {
+        return $this->enabledHeaders;
     }
 
     private function generateWorkflow()
@@ -127,4 +171,47 @@ EOF;
             ]
         ];
     }
-} 
+
+    private function setupHeaders()
+    {
+        $this->enabledHeaders = [
+            0  => "Tag",
+            1  => "Cardholder Name",
+            4  => "Card Type",
+            5  => "Amount",
+            2  => "Card Number",
+            3  => "Expiry",
+            6  => "Transaction Type",
+            7  => ["friendly" => "Status", "format" => function ($value) {
+                    if ($value == "Approved") {
+                        return '<div class="bg-success">{0}</div>';
+                    } else {
+                        return '<div>{0}</div>';
+                    }
+                }],
+            9  => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
+                    $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
+
+                    return $dt->getTimestamp() * 1000;
+                }],
+            8  => "Auth No",
+            10 => ["friendly" => "Ref Num", "hidden" => true],
+            11 => "Cust. Ref Num",
+            12 => ["friendly" => "Reference 3", "hidden" => true]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getFlatHeaders()
+    {
+        $flatHeaders = [];
+
+        foreach($this->enabledHeaders as $header) {
+            $flatHeaders[] = is_array($header) ? $header['friendly'] : $header;
+        }
+
+        return $flatHeaders;
+    }
+}

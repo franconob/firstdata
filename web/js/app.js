@@ -74,19 +74,19 @@ app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
                 CTR: function () {
                     return CTR;
                 },
-                bank_message: function() {
+                bank_message: function () {
                     return bank_message;
                 }
             },
-            controller: function($modalInstance, $scope, CTR, bank_message) {
+            controller: function ($modalInstance, $scope, CTR, bank_message) {
                 $scope.CTR = CTR;
                 $scope.bank_message = bank_message;
 
-                $scope.cancel = function() {
+                $scope.cancel = function () {
                     $modalInstance.dismiss('cancel');
                 };
 
-                $scope.print = function() {
+                $scope.print = function () {
                     $window.print();
                 }
             }
@@ -256,7 +256,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                         transaction: function () {
                             return transaction;
                         },
-                        printCTR: function() {
+                        printCTR: function () {
                             return printCTR;
                         }
                     },
@@ -321,7 +321,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
     }
 });
 
-app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($scope, $modal, $window) {
+app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', function ($scope, $modal, $window, $http) {
     $scope.nbTransactions = 0;
     $scope.openForm = function (transaction_type) {
         var modalInstance = $modal.open({
@@ -339,12 +339,15 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', function ($sco
     };
 
     $scope.exportCSV = function () {
-        $window.location.assign('/transactions-export');
+        var transactions = $scope.grid.getData(false, true).rows || $scope.gird.getData().rows;
+        $http.post('/transactions-export', {transactions: transactions, cols: $scope.grid.getData().cols}).success(function (data) {
+            $window.location.assign('/transactions-export');
+        });
         return false;
     }
 }]);
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'printCTR',  function ($scope, $modalInstance, $http, transaction_type, notify, grid, printCTR) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'printCTR', function ($scope, $modalInstance, $http, transaction_type, notify, grid, printCTR) {
     $scope.transaction = {};
 
     $scope.submit = function () {
