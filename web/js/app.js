@@ -26,7 +26,7 @@ $(document).ajaxStop(function () {
     globalNotify.remove();
 });
 var waT;
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters/findWhere', 'angular-underscore/filters/where']);
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters']);
 
 app.value('numeral', numeral);
 
@@ -197,12 +197,15 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
             var _calculateLimitAmount = function (current_transaction, transactions) {
                 var limit = numeral().unformat(current_transaction['Amount']);
                 if ("Purchase" == current_transaction['Transaction Type']) {
-                    var tagged_transactions = $filter('where')(transactions, {'Reference 3': current_transaction['Tag']});
+                    var tagged_transactions = $filter('filter')(transactions, function (transaction) {
+                        return transaction['Reference 3'] == current_transaction['Tag']
+                            && 'Error' !== transaction['Status']
+                    });
                     if (tagged_transactions) {
                         angular.forEach(tagged_transactions, function (t_t) {
                             if ("Tagged Refund" == t_t['Transaction Type']) {
                                 var void_transaction = $filter('findWhere')(transactions, {'Reference 3': t_t['Tag']});
-                                if ("Tagged Void" !== void_transaction['Transaction Type']) {
+                                if (!void_transaction || (void_transaction && "Tagged Void" !== void_transaction['Transaction Type'])) {
                                     limit -= numeral().unformat(t_t['Amount']);
                                 }
                             }

@@ -32,9 +32,37 @@ class Response
         $this->responseJSON = json_decode((string)$this->response->getBody(), true);
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->response;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getClientResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFailed()
+    {
+        return $this->responseJSON['transaction_error'];
+    }
+
+    /**
+     * @param string $field
+     * @return null|string
+     */
+    public function get($field)
+    {
+        return isset($this->responseJSON[$field]) ? $this->responseJSON[$field] : null;
     }
 
     /**

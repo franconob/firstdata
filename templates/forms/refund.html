@@ -26,6 +26,18 @@
                     <span class="help-block">The customer’s credit card number.</span>
                 </div>
             </div>
+            <div class="form-group"
+                 ng-class="{'has-success': form.cvd_code.$valid, 'has-error': form.cvd_code.$invalid, 'has-feedback': form.cvd_code.$valid}">
+                <label for="cvd_code" class="control-label col-sm-4">CVD Code</label>
+
+                <div class="col-sm-7">
+                    <input ui-mask="999" ng-model="transaction.cvd_code" id="cvd_code" type="text"
+                           name="cvd_code"
+                           class="form-control" required>
+                    <span class="fa fa-check form-control-feedback" ng-show="form.cvd_code.$valid"></span>
+                    <span class="help-block">Como testear CVD CODE <a href="https://firstdata.zendesk.com/entries/407655-How-to-test-CVD-CVV-CVV2-functionality" target="_blank">aquí</a> </span>
+                </div>
+            </div>
             <div class="form-group" ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid, 'has-feedback': form.amount.$valid}">
                 <label for="dollaramount" class="control-label col-sm-4">Dollar Amount</label>
 

@@ -70,16 +70,28 @@ class Transactions
     /**
      * @param string $transaction_type
      * @param array $transaction_data
+     * @throws \Exception Cuando la accion no esta programada
      * @return mixed
-     * @throws Exception Cuando la accion no esta programada
      */
     public function execute($transaction_type, array $transaction_data)
     {
         if (!method_exists($this, $transaction_type)) {
-            throw new Exception;
+            throw new \Exception;
         }
 
-        return call_user_func(array($this, $transaction_type), $transaction_data);
+        try {
+            $response = call_user_func(array($this, $transaction_type), $transaction_data);
+            $this->setResponse($response);
+            if ($this->getResponse()->hasFailed()) {
+                $ex = new Exception();
+                $ex->setResponse($this->getResponse());
+                throw $ex;
+            }
+        } catch (ClientException $e) {
+            $ex = new Exception();
+            $ex->setHttpException($e);
+            throw $ex;
+        }
     }
 
     public function taggedVoid(array $transaction)
@@ -107,12 +119,13 @@ class Transactions
             'gateway_id'       => 'AE8689-05',
             'password'         => '8h5i7dud',
             'transaction_type' => '34',
+            'cvd_presence_ind' => '0',
             'reference_3'      => $transaction['transaction_tag'],
             'customer_ref'     => $this->account
 
         ], $transaction);
 
-        $this->runTransaction($requestBody);
+        return $this->runTransaction($requestBody);
     }
 
     public function newTransaction(array $transaction)
@@ -122,10 +135,11 @@ class Transactions
             'gateway_id'       => 'AE8689-05',
             'password'         => '8h5i7dud',
             'transaction_type' => '00',
+            'cvd_presence_ind' => '1',
             'customer_ref'     => $this->account
         ], $transaction);
 
-        $this->runTransaction($requestBody);
+        return $this->runTransaction($requestBody);
     }
 
     public function preAuth(array $transaction)
@@ -135,18 +149,11 @@ class Transactions
             'gateway_id'       => 'AE8689-05',
             'password'         => '8h5i7dud',
             'transaction_type' => '01',
+            'cvd_presence_ind' => '1',
             'customer_ref'     => $this->account
         ], $transaction);
 
-        $this->runTransaction($requestBody);
-    }
-
-    /**
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
+        return $this->runTransaction($requestBody);
     }
 
     /**
@@ -161,11 +168,22 @@ class Transactions
             'gateway_id'       => 'AE8689-05',
             'password'         => '8h5i7dud',
             'transaction_type' => '04',
+            'cvd_presence_ind' => '1',
             'customer_ref'     => $this->account
         ], $transaction);
 
-        $this->runTransaction($requestBody);
+        return $this->runTransaction($requestBody);
     }
+
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+
 
     private function formatExpiryDate($expiryDate)
     {
@@ -194,6 +212,8 @@ class Transactions
 
     /**
      * @param string $body Body SIN ENCODEAR A JSON
+     * @return \GuzzleHttp\Message\ResponseInterface
+     * @throws ClientException|null
      */
     private function runTransaction($body)
     {
@@ -201,7 +221,7 @@ class Transactions
 
         $headers = $this->calcHMAC($body);
 
-        $this->setResponse($this->httpClient->post($this->endpoint, [
+        return $this->httpClient->post($this->endpoint, [
             "headers" => $headers,
             "body"    => $body,
             "config"  => [
@@ -210,9 +230,12 @@ class Transactions
                     CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
                 ]
             ]
-        ]));
+        ]);
     }
 
+    /**
+     * @param ResponseInterface $response
+     */
     private function setResponse(ResponseInterface $response)
     {
         $this->response = new Response($response);

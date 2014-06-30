@@ -179,7 +179,7 @@ $app->get('/reportes', function (Request $request) use ($app) {
                 $totalAmount += sprintf("%.2f", ($filter_amount / 100));
             }
         }
-        $formattedRow['actionsFormat'] = $reportHandler->getActionFor($formattedRow['Transaction Type']);
+        $formattedRow['actionsFormat'] = $reportHandler->getActionFor($formattedRow);
         $cleanData[$k_row]             = $formattedRow;
     }
     $vars = [
@@ -205,11 +205,9 @@ $app->post('/transactions/{transaction_type}', function ($transaction_type) use 
         $vars['success']      = true;
         $vars['CTR']          = $transaction->getResponse()->getCTR();
         $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
-    } catch (\GuzzleHttp\Exception\ClientException $e) {
-        $response        = $e->getResponse();
-        $vars['success'] = false;
-        $vars['reason']  = $response->getReasonPhrase();
-        $vars['debug']   = (string)$response->getBody();
+        $vars['response']     = $transaction->getResponse()->getBody();
+    } catch (\Service\FirstData\Transactions\Exception $e) {
+        $vars = $e->getDebugVars();
     }
 
     return $app->json($vars);

@@ -110,27 +110,31 @@ EOF;
     public function cleanData($data)
     {
         $cleanData = [];
-        foreach($data as $key => $row) {
-            $row['Time'] = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
-            $row['Expiry'] = substr($row['Expiry'], 0, 2).'/'.substr($row['Expiry'], 2);
-            $cleanData[] = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders())));
+        foreach ($data as $key => $row) {
+            $row['Time']   = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
+            $row['Expiry'] = substr($row['Expiry'], 0, 2) . '/' . substr($row['Expiry'], 2);
+            $cleanData[]   = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders())));
         }
 
         return $cleanData;
     }
 
     /**
-     * @param string $transaction_type
+     * @param string $transaction
      * @return string
      */
-    public function getActionFor($transaction_type)
+    public function getActionFor($transaction)
     {
-        if (!isset(self::$transactions_workflow[$transaction_type])) {
-            return "";
+        if(
+            !isset(self::$transactions_workflow[$transaction['Transaction Type']])
+            ||
+            "Error" == $transaction['Status']
+        ) {
+            return '<div class="text-center">&times</div>';
         }
         $loader          = new \Twig_Loader_String();
         $twig            = new \Twig_Environment($loader);
-        $allowed_actions = self::$transactions_workflow[$transaction_type]["allows"];
+        $allowed_actions = self::$transactions_workflow[$transaction['Transaction Type']]["allows"];
 
         if (empty($allowed_actions)) {
             return '<div class="text-center">&times</div>';
@@ -185,6 +189,8 @@ EOF;
             7  => ["friendly" => "Status", "format" => function ($value) {
                     if ($value == "Approved") {
                         return '<div class="bg-success">{0}</div>';
+                    } else if($value == "Error") {
+                        return '<div class="bg-danger">{0}</div>';
                     } else {
                         return '<div>{0}</div>';
                     }
@@ -208,7 +214,7 @@ EOF;
     {
         $flatHeaders = [];
 
-        foreach($this->enabledHeaders as $header) {
+        foreach ($this->enabledHeaders as $header) {
             $flatHeaders[] = is_array($header) ? $header['friendly'] : $header;
         }
 
