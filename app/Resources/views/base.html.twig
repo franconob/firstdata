@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="firstdata">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}FirstData - Transactions Grid{% endblock %}</title>
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/vendor/watable.css">
+    <link rel="stylesheet" href="/css/vendor/animate.min.css">
+    <link rel="stylesheet" href="/css/vendor/datepicker.css">
+    <link rel="stylesheet" href="/css/vendor/pnotify.custom.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body style="padding-top: 70px">
+{% block body %}{% endblock %}
+{% block javascripts %}
+
+    <script type="text/javascript" src="/js/vendor/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/jquery.watable.js"></script>
+    <script type="text/javascript" src="/js/vendor/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/js/vendor/pnotify.custom.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/angular.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/ui-bootstrap-0.11.0.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/ui-utils.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/numeral.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/lazy.js"></script>
+    <script type="text/javascript" src="/js/vendor/angular-spinner.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/moment.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="/js/vendor/angular-moment.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/angular-underscore.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>{% endblock %}
+</body>
+</html>

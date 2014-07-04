@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="f_data_transactions.http_client.class">GuzzleHttp\Client</parameter>
+        <parameter key="f_data_transactions.http_client.factory.class">
+            FData\TransactionsBundle\HttpClient\HttpClientFactory
+        </parameter>
+        <parameter key="f_data_transactions.api.transaction.class">FData\TransactionsBundle\Transaction\Transaction</parameter>
+        <parameter key="f_data_transactions.api.url">https://api.demo.globalgatewaye4.firstdata.com</parameter>
+        <parameter key="f_data_transactions.api.endpoint">/transaction/v14</parameter>
+        <parameter key="f_data_transactions.api.key_id">131774</parameter>
+        <parameter key="f_data_transactions.api.hmac_key">FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84</parameter>
+        <parameter key="f_data_transactions.api.gateway_id">AE8689-05</parameter>
+        <parameter key="f_data_transactions.api.password">8h5i7dud</parameter>
+    </parameters>
+
+    <services>
+        <service id="f_data_transactions.http_client" class="%f_data_transactions.http_client.class%"
+                 factory-class="%f_data_transactions.http_client.factory.class%" factory-method="get">
+            <argument>%f_data_transactions.api.url%</argument>
+        </service>
+
+        <service id="f_data_transactions.api.transaction" class="%f_data_transactions.api.transaction.class%">
+            <argument type="service" id="f_data_transactions.http_client"/>
+            <argument>%f_data_transactions.api.endpoint%</argument>
+            <argument>%f_data_transactions.api.key_id%</argument>
+            <argument>%f_data_transactions.api.hmac_key%</argument>
+            <argument>%f_data_transactions.api.gateway_id%</argument>
+            <argument>%f_data_transactions.api.password%</argument>
+            <argument type="expression">service('security.context').getToken().getUser().getName()</argument>
+        </service>
+    </services>
+</container>
