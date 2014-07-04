@@ -34,7 +34,7 @@ class Grid
         'Tagged Void'                         => [
             "label"     => "Tagged Void",
             "action"    => "taggedVoid",
-            "template"  => "confirm.html.twig",
+            "template"  => "confirm.html",
             "openModal" => true
         ],
         'Tagged Refund'                       => [
