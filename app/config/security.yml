@@ -4,7 +4,12 @@ security:
           id: f_data_security.user_provider
 
     encoders:
-        FData\SecurityBundle\User\User: plaintext
+        crypt:
+            algorithm: md5
+            iterations: 0
+            encode_as_base64: false
+        plaintext:
+            algorithm: plaintext
 
     firewalls:
         dev:

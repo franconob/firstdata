@@ -9,10 +9,11 @@
 namespace FData\SecurityBundle\User;
 
 
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, EncoderAwareInterface
 {
 
     /**
@@ -44,10 +45,11 @@ class User implements UserInterface, \Serializable
      * @param int $id
      * @param string $username
      * @param string $password
+     * @param string $salt
      * @param string $name
      * @param array $roles
      */
-    public function __construct($id, $username, $password, $name, array $roles)
+    public function __construct($id, $username, $password, $salt, $name, array $roles)
     {
         $this->id       = $id;
         $this->username = $username;
@@ -161,5 +163,18 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->name
             ) = unserialize($serialized);
+    }
+
+    /**
+     * Gets the name of the encoder used to encode the password.
+     *
+     * If the method returns null, the standard way to retrieve the encoder
+     * will be used instead.
+     *
+     * @return string
+     */
+    public function getEncoderName()
+    {
+        return in_array("ROLE_ADMIN", $this->roles) ? "crypt" : "plaintext";
     }
 }

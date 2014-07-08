@@ -9,6 +9,8 @@
 namespace FData\SecurityBundle\User;
 
 
+use Doctrine\DBAL\Connection;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,12 +25,20 @@ class UserProvider implements UserProviderInterface
     private $connection;
 
     /**
-     * @param \Doctrine\DBAL\Connection $connection
+     * @var Router
      */
-    public function __construct($connection)
+    private $router;
+
+    /**
+     * @param \Doctrine\DBAL\Connection $connection
+     * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
+     */
+    public function __construct(Connection $connection, Router $router)
     {
         $this->connection = $connection;
+        $this->router     = $router;
     }
+
     /**
      * Loads the user for the given username.
      *
@@ -46,16 +56,28 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->connection->fetchAssoc(
-            "SELECT va.*, vacf.cf_721 as password from vtiger_account va INNER JOIN vtiger_accountscf vacf ON (va.accountid = vacf.accountid)
-             WHERE va.email1 = ?
-            "
-            , array($username));
-        if (!$user) {
-            throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
+        if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
+
+            $user = $this->connection->fetchAssoc(
+                "SELECT va.*, vacf.cf_721 as password from vtiger_account va INNER JOIN vtiger_accountscf vacf ON (va.accountid = vacf.accountid)
+                 WHERE va.email1 = ?
+                "
+                , array($username));
+            if (!$user) {
+                throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
+            }
+
+            return new User($user['accountid'], $username, $user['password'], "", $user['accountname'], array('ROLE_USER'));
+        } else {
+            $user = $this->connection->fetchAssoc(
+                "SELECT * from vtiger_users WHERE user_name = ?"
+                , array($username));
+            if (!$user) {
+                throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
+            }
+            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'], array('ROLE_ADMIN'));
         }
 
-        return new User($user['accountid'], $username, $user['password'], $user['accountname'], array('ROLE_USER'));
     }
 
     /**

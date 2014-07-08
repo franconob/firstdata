@@ -11,6 +11,7 @@
     <services>
         <service id="f_data_security.user_provider" class="%user_provider.class%">
             <argument type="service" id="doctrine.dbal.crm_connection" />
+            <argument type="service" id="router" />
         </service>
     </services>
 </container>
