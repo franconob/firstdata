@@ -6,32 +6,66 @@
 
     <parameters>
         <parameter key="f_data_transactions.http_client.class">GuzzleHttp\Client</parameter>
-        <parameter key="f_data_transactions.http_client.factory.class">
-            FData\TransactionsBundle\HttpClient\HttpClientFactory
-        </parameter>
+        <parameter key="f_data_transactions.http_client.transaction.class">FData\TransactionsBundle\HttpClient\Clients\TransactionClient</parameter>
         <parameter key="f_data_transactions.api.transaction.class">FData\TransactionsBundle\Transaction\Transaction</parameter>
-        <parameter key="f_data_transactions.api.url">https://api.demo.globalgatewaye4.firstdata.com</parameter>
+        <parameter key="f_data_transactions.api.url" type="string">https://api.demo.globalgatewaye4.firstdata.com</parameter>
         <parameter key="f_data_transactions.api.endpoint">/transaction/v14</parameter>
         <parameter key="f_data_transactions.api.key_id">131774</parameter>
         <parameter key="f_data_transactions.api.hmac_key">FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84</parameter>
         <parameter key="f_data_transactions.api.gateway_id">AE8689-05</parameter>
         <parameter key="f_data_transactions.api.password">8h5i7dud</parameter>
+
+        <!-- Grid parameters -->
+        <parameter key="f_data_transactions.http_client.search.class">FData\TransactionsBundle\HttpClient\Clients\GridClient</parameter>
+        <parameter key="f_data_transactions.api.search.endpoint">/transaction/search</parameter>
+        <parameter key="f_data_transactions.api.search.username" type="string">vherrero</parameter>
+        <parameter key="f_data_transactions.api.search.password" type="string">claudita1234</parameter>
+        <!-- end Grid parameters -->
+
     </parameters>
 
     <services>
-        <service id="f_data_transactions.http_client" class="%f_data_transactions.http_client.class%"
-                 factory-class="%f_data_transactions.http_client.factory.class%" factory-method="get">
-            <argument>%f_data_transactions.api.url%</argument>
+        <!-- Http Client Classes -->
+        <service id="f_data_transactions.http_client" class="%f_data_transactions.http_client.class%" abstract="true">
         </service>
 
+        <service id="f_data_transactions.http_client.search" class="%f_data_transactions.http_client.search.class%"
+                 parent="f_data_transactions.http_client">
+            <argument type="string">%f_data_transactions.api.url%</argument>
+            <argument type="string">%f_data_transactions.api.search.endpoint%</argument>
+            <argument type="string">GET</argument>
+            <call method="setAccount">
+               <argument type="expression">service('security.context').getToken().getUser().getName()</argument>
+            </call>
+            <call method="setUsername">
+                <argument type="string">%f_data_transactions.api.search.username%</argument>
+            </call>
+            <call method="setPassword">
+                <argument type="string">%f_data_transactions.api.search.password%</argument>
+            </call>
+        </service>
+
+        <service id="f_data_transactions.http_client.transaction"
+                 class="%f_data_transactions.http_client.transaction.class%"
+                 parent="f_data_transactions.http_client">
+            <argument type="string">%f_data_transactions.api.url%</argument>
+            <argument type="string">%f_data_transactions.api.endpoint%</argument>
+            <argument type="string">POST</argument>
+        </service>
+
+        <!-- end Http Client Classess -->
+
         <service id="f_data_transactions.api.transaction" class="%f_data_transactions.api.transaction.class%">
-            <argument type="service" id="f_data_transactions.http_client"/>
-            <argument>%f_data_transactions.api.endpoint%</argument>
+            <argument type="service" id="f_data_transactions.http_client.transaction"/>
             <argument>%f_data_transactions.api.key_id%</argument>
             <argument>%f_data_transactions.api.hmac_key%</argument>
             <argument>%f_data_transactions.api.gateway_id%</argument>
             <argument>%f_data_transactions.api.password%</argument>
             <argument type="expression">service('security.context').getToken().getUser().getName()</argument>
+        </service>
+
+        <service id="f_data_transactions.api.search.grid" class="FData\TransactionsBundle\Grid\Grid">
+            <argument type="service" id="f_data_transactions.http_client.search"/>
         </service>
     </services>
 </container>

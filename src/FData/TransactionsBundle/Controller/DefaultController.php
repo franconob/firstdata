@@ -4,7 +4,6 @@ namespace FData\TransactionsBundle\Controller;
 
 use FData\TransactionsBundle\Grid\Grid;
 use FData\TransactionsBundle\Transaction\Exception;
-use GuzzleHttp\Client;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
@@ -22,6 +21,8 @@ class DefaultController extends Controller
 
     public function transactionsAction()
     {
+        /** @var Grid $grid */
+        $grid = new Grid($this->get('f_data_transactions.http_client.search'));
         $url         = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
         $username    = 'vherrero';
         $password    = 'claudita1234';
@@ -29,32 +30,15 @@ class DefaultController extends Controller
         $now         = new \DateTime();
         $last6Months = $now->sub(new \DateInterval('P6M'));
 
-        $client   = new Client();
-        $response = $client->get($url, [
-            "query"   => ["search_field" => "custref", "search" => $account, "start_date" => $last6Months->format('Y-m-d')],
-            "headers" => [
-                ["Acecpt", "text/search-v3+csv"]
-            ],
-            "auth"    => [$username, $password],
-            "config"  => [
-                "curl" => [
-                    CURLOPT_SSLVERSION      => 3,
-                    CURLOPT_SSL_CIPHER_LIST => 'SSLv3'
-                ]
-            ]
-        ]);
-
-        $response_string = (string)$response->getBody();
+        $response_string = (string)$grid->query()->getBody();
 
         $reader_body   = Reader::createFromString($response_string);
         $reader_header = $reader_body->fetchOne();
 
         $tableHeader = [];
 
-        $reportHandler = Grid::getInstance();
-
         foreach ($reader_header as $k => $header) {
-            if ($_header = $reportHandler->searchInEnabledHeaders($header)) {
+            if ($_header = $grid->searchInEnabledHeaders($header)) {
                 if (is_array($_header)) {
                     $tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function ($header) {
                         return $header !== "format";
@@ -143,8 +127,8 @@ class DefaultController extends Controller
                 }
             }
 
-            $cleanRow       = array_values(array_intersect_key($row, $reportHandler->getEnabledHeaders()));
-            $enabledHeaders = $reportHandler->getEnabledHeaders();
+            $cleanRow       = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+            $enabledHeaders = $grid->getEnabledHeaders();
 
             foreach ($cleanRow as $k => $col) {
                 if (isset($enabledHeaders[$k]["callback"])) {
@@ -161,7 +145,7 @@ class DefaultController extends Controller
                     $totalAmount += sprintf("%.2f", ($filter_amount / 100));
                 }
             }
-            $formattedRow['actionsFormat'] = $reportHandler->getActionFor($formattedRow);
+            $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [

@@ -8,18 +8,15 @@
 
 namespace FData\TransactionsBundle\Transaction;
 
-use GuzzleHttp\Client;
+use FData\TransactionsBundle\HttpClient\Clients\TransactionClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\ResponseInterface;
 
 class Transaction
 {
 
-    /** @var  Client */
+    /** @var  TransactionClient */
     private $http_client;
-
-    /** @var  string */
-    private $endpoint;
 
     /** @var  string */
     private $key_id;
@@ -39,15 +36,14 @@ class Transaction
     /** @var  Response */
     private $response;
 
-    public function __construct($http_client, $endpoint, $key_id, $hmac_key, $gatewat_id, $password, $account)
+    public function __construct($http_client, $key_id, $hmac_key, $gatewat_id, $password, $account)
     {
         $this->http_client = $http_client;
-        $this->endpoint = $endpoint;
-        $this->key_id = $key_id;
-        $this->hmac_key = $hmac_key;
-        $this->gateway_id = $gatewat_id;
-        $this->password = $password;
-        $this->account = $account;
+        $this->key_id      = $key_id;
+        $this->hmac_key    = $hmac_key;
+        $this->gateway_id  = $gatewat_id;
+        $this->password    = $password;
+        $this->account     = $account;
     }
 
     /**
@@ -169,7 +165,6 @@ class Transaction
     }
 
 
-
     private function formatExpiryDate($expiryDate)
     {
         return str_replace('/', '', $expiryDate);
@@ -182,7 +177,7 @@ class Transaction
         $content_digest = sha1($requestBody);
         $content_type   = 'application/json';
 
-        $hmac_data = $method . "\n" . $content_type . "\n" . $content_digest . "\n" . $gge4_date . "\n" . $this->endpoint;
+        $hmac_data = $method . "\n" . $content_type . "\n" . $content_digest . "\n" . $gge4_date . "\n" . $this->http_client->getEndpoint();
 
         $headers = [
             'Accept'              => 'application/json',
@@ -206,10 +201,7 @@ class Transaction
 
         $headers = $this->calcHMAC($body);
 
-        return $this->http_client->post($this->endpoint, [
-            "headers" => $headers,
-            "body"    => $body,
-        ]);
+        return $this->http_client->createRequest($body, ["headers" => $headers])->send();
     }
 
     /**

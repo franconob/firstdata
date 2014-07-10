@@ -9,13 +9,10 @@
 namespace FData\TransactionsBundle\Grid;
 
 
+use FData\TransactionsBundle\HttpClient\Clients\GridClient;
+
 class Grid
 {
-    /**
-     * @var null|Grid
-     */
-    private static $instance = null;
-
     /**
      * @var array
      */
@@ -69,23 +66,29 @@ EOF;
     private $enabledHeaders;
 
     /**
-     * @return Grid
+     * @var \FData\TransactionsBundle\HttpClient\Clients\GridClient
      */
-    public static function  getInstance()
-    {
-        if (null === self::$instance) {
-            self::$instance = new static();
-        }
+    private $http_client;
 
-        return self::$instance;
-    }
-
-    private function __construct()
+    public function __construct(GridClient $http_client)
     {
+        $this->http_client = $http_client;
         $this->setupHeaders();
         $this->generateWorkflow();
     }
 
+    /**
+     * @return \GuzzleHttp\Message\ResponseInterface
+     */
+    public function query()
+    {
+        return $this->http_client->createRequest()->send();
+    }
+
+    /**
+     * @param array $header
+     * @return bool
+     */
     public function searchInEnabledHeaders($header)
     {
         foreach ($this->enabledHeaders as $_header) {
@@ -144,11 +147,17 @@ EOF;
         return $template;
     }
 
+    /**
+     * @return array
+     */
     public function getEnabledHeaders()
     {
         return $this->enabledHeaders;
     }
 
+    /**
+     * Construye el workflow de dependencia de acciones
+     */
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
@@ -176,6 +185,9 @@ EOF;
         ];
     }
 
+    /**
+     *  Headers y formateos
+     */
     private function setupHeaders()
     {
         $this->enabledHeaders = [
