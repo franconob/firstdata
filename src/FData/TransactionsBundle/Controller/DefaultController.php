@@ -23,12 +23,6 @@ class DefaultController extends Controller
     {
         /** @var Grid $grid */
         $grid = new Grid($this->get('f_data_transactions.http_client.search'));
-        $url         = "https://api.demo.globalgatewaye4.firstdata.com/transaction/search";
-        $username    = 'vherrero';
-        $password    = 'claudita1234';
-        $account     = $this->get('security.context')->getToken()->getUser()->getName();
-        $now         = new \DateTime();
-        $last6Months = $now->sub(new \DateInterval('P6M'));
 
         $response_string = (string)$grid->query()->getBody();
 
@@ -180,7 +174,7 @@ class DefaultController extends Controller
     public function exportAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $reportHandler = Grid::getInstance();
+            $reportHandler = new Grid($this->get('f_data_transactions.http_client.search'));
             $body          = json_decode($request->getContent(), true);
             $data          = $body['transactions'];
             $cols          = $body['cols'];
