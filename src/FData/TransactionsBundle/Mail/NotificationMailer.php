@@ -9,6 +9,7 @@
 namespace FData\TransactionsBundle\Mail;
 
 
+use FData\SecurityBundle\User\User;
 use FData\SecurityBundle\User\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
@@ -52,10 +53,10 @@ class NotificationMailer
 
     /**
      * @param array $mail_data
-     * @param string $to
+     * @param User $user
      * @return int
      */
-    public function createAndSend($mail_data, $to)
+    public function createAndSend($mail_data, User $user)
     {
         $ctr = $mail_data['ctr'];
         unset($mail_data['ctr']);
@@ -65,7 +66,7 @@ class NotificationMailer
         ]);
         $message = new \Swift_Message($this->subject, $body, 'text/html', 'utf-8');
         $message->setFrom($this->from);
-        $message->setTo($to);
+        $message->setTo($user->getUsername());
 
         $copies = $this->user_repository->getComunicaciones();
 

@@ -167,7 +167,7 @@ class DefaultController extends Controller
             $vars['response']     = $transaction->getResponse()->getBody();
 
             $data['ctr'] = $vars['CTR'];
-            $this->get('f_data_transactions.mailer')->createAndSend($data, 'fherrero@spiralti.com', ['franconob.pr@gmail.com']);
+            $this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
         } catch (Exception $e) {
             $vars = $e->getDebugVars();
         }
