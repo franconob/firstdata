@@ -57,7 +57,6 @@ class UserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
-
             $user = $this->connection->fetchAssoc(
                 "SELECT va.*, vacf.cf_721 as password from vtiger_account va INNER JOIN vtiger_accountscf vacf ON (va.accountid = vacf.accountid)
                  WHERE va.email1 = ?
@@ -75,7 +74,7 @@ class UserProvider implements UserProviderInterface
             if (!$user) {
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
-            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'], array('ROLE_ADMIN'));
+            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name']. ' '.$user['last_name'], array('ROLE_ADMIN'));
         }
 
     }

@@ -26,4 +26,23 @@ class DefaultController extends Controller
             "error" => $error
         ]);
     }
+
+    public function loginExtranetAction(Request $request)
+    {
+        $session = $request->getSession();
+
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(
+                SecurityContextInterface::AUTHENTICATION_ERROR
+            );
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+        return $this->render('FDataSecurityBundle:Default:login_extranet.html.twig', [
+            "error" => $error
+        ]);
+    }
 }

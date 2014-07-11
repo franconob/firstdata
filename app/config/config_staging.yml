@@ -1,0 +1,7 @@
+imports:
+    - { resource: config_prod.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_staging.yml"
+        strict_requirements: true
