@@ -67,5 +67,16 @@
         <service id="f_data_transactions.api.search.grid" class="FData\TransactionsBundle\Grid\Grid">
             <argument type="service" id="f_data_transactions.http_client.search"/>
         </service>
+
+        <service id="f_data_transactions.repository.user" class="FData\SecurityBundle\User\UserRepository">
+            <argument type="service" id="doctrine.dbal.crm_connection" />
+            <argument type="service" id="security.context" />
+        </service>
+
+        <service id="f_data_transactions.mailer" class="FData\TransactionsBundle\Mail\NotificationMailer">
+            <argument type="service" id="swiftmailer.mailer.default" />
+            <argument type="service" id="templating" />
+            <argument type="service" id="f_data_transactions.repository.user" />
+        </service>
     </services>
 </container>

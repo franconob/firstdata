@@ -1,0 +1,13 @@
+<h1>Transacción realizada</h1>
+<h2>Datos:</h2>
+
+<ul>
+    {% for k,v in transaction %}
+        <li>{{k}}: {{ v }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Respuesta</h2>
+<pre>{{ ctr }}</pre>
+
+

@@ -159,11 +159,15 @@ class DefaultController extends Controller
         $vars        = [];
 
         try {
-            $transaction->execute($transactionType, isset($data[0]) ? $data[0] : $data);
+            $data = isset($data[0]) ? $data[0] : $data;
+            $transaction->execute($transactionType, $data);
             $vars['success']      = true;
             $vars['CTR']          = $transaction->getResponse()->getCTR();
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
             $vars['response']     = $transaction->getResponse()->getBody();
+
+            $data['ctr'] = $vars['CTR'];
+            $this->get('f_data_transactions.mailer')->createAndSend($data, 'fherrero@spiralti.com', ['franconob.pr@gmail.com']);
         } catch (Exception $e) {
             $vars = $e->getDebugVars();
         }

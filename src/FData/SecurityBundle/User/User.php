@@ -64,6 +64,14 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Returns the roles granted to the user.
      *
      * <code>
