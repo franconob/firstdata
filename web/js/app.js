@@ -170,6 +170,13 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                 $compile(args.grid.contents())(scope);
                 initial = false;
                 scope.grid = args.gridObj;
+                var td_conciliada = angular.element('.conciliada').parent();
+                td_conciliada.addClass('text-center');
+                if(td_conciliada.hasClass('fa-check')) {
+                    td_conciliada.addClass('success');
+                } else {
+                    td_conciliada.addClass('danger');
+                }
                 updateTotalRecords(args.initial);
                 updateTotalAmount(args.initial);
             });
@@ -296,7 +303,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                 amount = $scope.transaction['amount'];
                             }
 
-                            $http.post('/transactions/' + _config.action, {transactions: {
+                            $http.post(_config.url, {transactions: {
                                 transaction_tag: $scope.transaction['Tag'],
                                 amount: amount,
                                 authorization_num: $scope.transaction['Auth No'],

@@ -9,6 +9,8 @@
 namespace FData\TransactionsBundle\Grid;
 
 
+use Doctrine\ORM\EntityManager;
+use FData\TransactionsBundle\Entity\Transaction;
 use FData\TransactionsBundle\HttpClient\Clients\GridClient;
 
 class Grid
@@ -26,19 +28,29 @@ class Grid
             "label"     => "Tagged Pre-Authorization Completion",
             "action"    => "taggedPreAuthComp",
             "openModal" => true,
-            "template"  => false
+            "template"  => false,
+            "url"       => "/transactions/taggedPreAuthComp"
         ],
         'Tagged Void'                         => [
             "label"     => "Tagged Void",
             "action"    => "taggedVoid",
             "template"  => "confirm.html",
-            "openModal" => true
+            "openModal" => true,
+            "url"       => "/transactions/taggedVoid"
         ],
         'Tagged Refund'                       => [
             "label"     => "Tagged Refund",
             "action"    => "taggedRefund",
             "openModal" => true,
-            "template"  => false
+            "template"  => false,
+            "url"       => "/transactions/taggedRefund"
+        ],
+        'Conciliar'                           => [
+            "label"     => "Conciliar",
+            "action"    => "conciliar",
+            "openModal" => true,
+            "template"  => "confirm.html",
+            "url"       => "/transactions-conciliar"
         ]
     ];
 
@@ -70,9 +82,15 @@ EOF;
      */
     private $http_client;
 
-    public function __construct(GridClient $http_client)
+    /**
+     * @var EntityManager
+     */
+    private $entity_manager;
+
+    public function __construct(GridClient $http_client, EntityManager $entity_manager)
     {
-        $this->http_client = $http_client;
+        $this->entity_manager = $entity_manager;
+        $this->http_client    = $http_client;
         $this->setupHeaders();
         $this->generateWorkflow();
     }
@@ -142,9 +160,28 @@ EOF;
         if (empty($allowed_actions)) {
             return '<div class="text-center">&times</div>';
         }
+
+        foreach($allowed_actions as $k => $action) {
+            if($action['label'] == 'Conciliar' && $transaction['conciliado']) {
+                unset($allowed_actions[$k]);
+                break;
+            }
+        }
+
         $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
 
         return $template;
+    }
+
+    public function isConciliada($transaction_tag)
+    {
+        /** @var Transaction $transaction */
+        $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->find($transaction_tag);
+        if ($transaction && $transaction->isConciliada()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -161,7 +198,7 @@ EOF;
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
-            'Purchase'          => ["allows" => [self::$tagged_transactions['Tagged Refund']]
+            'Purchase'          => ["allows" => [self::$tagged_transactions['Tagged Refund'], self::$tagged_transactions['Conciliar']]
             ],
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
@@ -181,7 +218,8 @@ EOF;
             'Tagged Refund'     => ["allows" => [
                 self::$tagged_transactions['Tagged Void']
             ]
-            ]
+            ],
+            'Conciliar'         => ["allows" => []]
         ];
     }
 
@@ -191,7 +229,7 @@ EOF;
     private function setupHeaders()
     {
         $this->enabledHeaders = [
-            0  => "Tag",
+            0  => ["friendly" => "Tag"],
             1  => "Cardholder Name",
             4  => "Card Type",
             5  => "Amount",
@@ -214,7 +252,7 @@ EOF;
                 }],
             8  => "Auth No",
             10 => ["friendly" => "Ref Num", "hidden" => true],
-            11 => "Cust. Ref Num",
+            11 => ["friendly" => "Cust. Ref Num", "hidden" => true],
             12 => ["friendly" => "Reference 3", "hidden" => true]
         ];
     }

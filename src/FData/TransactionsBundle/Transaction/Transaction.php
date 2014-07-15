@@ -8,12 +8,17 @@
 
 namespace FData\TransactionsBundle\Transaction;
 
+use Doctrine\ORM\EntityManager;
 use FData\TransactionsBundle\HttpClient\Clients\TransactionClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\ResponseInterface;
+use FData\TransactionsBundle\Entity\Transaction as TransactionEntity;
 
 class Transaction
 {
+
+    /** @var  EntityManager */
+    private $entity_manager;
 
     /** @var  TransactionClient */
     private $http_client;
@@ -36,8 +41,9 @@ class Transaction
     /** @var  Response */
     private $response;
 
-    public function __construct($http_client, $key_id, $hmac_key, $gatewat_id, $password, $account)
+    public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, $account)
     {
+        $this->entity_manager = $entity_manager;
         $this->http_client = $http_client;
         $this->key_id      = $key_id;
         $this->hmac_key    = $hmac_key;
@@ -73,6 +79,16 @@ class Transaction
             $ex->setHttpException($e);
             throw $ex;
         }
+    }
+
+    public function conciliar(array $transaction_data)
+    {
+        $transaction = new TransactionEntity();
+        $transaction
+            ->setId($transaction_data['transaction_tag'])
+            ->setConciliada(true);
+        $this->entity_manager->persist($transaction);
+        $this->entity_manager->flush();
     }
 
     public function taggedVoid(array $transaction)

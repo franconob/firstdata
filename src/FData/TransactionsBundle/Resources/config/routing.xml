@@ -16,4 +16,7 @@
     <route id="f_data_transactions_export" path="/transactions-export" methods="POST GET">
         <default key="_controller">FDataTransactionsBundle:Default:export</default>
     </route>
+    <route id="f_data_transactions_conciliar" path="/transactions-conciliar" methods="POST">
+        <default key="_controller">FDataTransactionsBundle:Default:conciliar</default>
+    </route>
 </routes>

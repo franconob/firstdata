@@ -62,11 +62,12 @@ class UserProvider implements UserProviderInterface
                  WHERE va.email1 = ?
                 "
                 , array($username));
+
             if (!$user) {
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
 
-            return new User($user['accountid'], $username, $user['password'], "", $user['accountname'], array('ROLE_USER'));
+            return new User($user['accountid'], $username, $user['password'], "", $user['accountname'], array('ROLE_CUENTA'));
         } else {
             $user = $this->connection->fetchAssoc(
                 "SELECT * from vtiger_users WHERE user_name = ?"
@@ -74,7 +75,8 @@ class UserProvider implements UserProviderInterface
             if (!$user) {
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
-            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name']. ' '.$user['last_name'], array('ROLE_ADMIN'));
+
+            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], array('ROLE_ADMIN'));
         }
 
     }

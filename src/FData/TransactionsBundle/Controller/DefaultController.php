@@ -22,7 +22,7 @@ class DefaultController extends Controller
     public function transactionsAction()
     {
         /** @var Grid $grid */
-        $grid = new Grid($this->get('f_data_transactions.http_client.search'));
+        $grid = new Grid($this->get('f_data_transactions.http_client.search'), $this->get('doctrine.orm.default_entity_manager'));
 
         $response_string = (string)$grid->query()->getBody();
 
@@ -43,8 +43,9 @@ class DefaultController extends Controller
             }
         };
 
-        $tableHeader["id"]      = ["hidden" => true, "unique" => true];
-        $tableHeader["actions"] = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
+        $tableHeader["id"]         = ["hidden" => true, "unique" => true];
+        $tableHeader["actions"]    = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
+        $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "bool"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
         $data2 = $data;
@@ -139,6 +140,7 @@ class DefaultController extends Controller
                     $totalAmount += sprintf("%.2f", ($filter_amount / 100));
                 }
             }
+            $formattedRow['conciliado']    = $grid->isConciliada($formattedRow['Tag']);
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
             $cleanData[$k_row]             = $formattedRow;
         }
@@ -151,6 +153,11 @@ class DefaultController extends Controller
         return JsonResponse::create($vars);
     }
 
+    /**
+     * @param Request $request
+     * @param string $transactionType
+     * @return Response|static
+     */
     public function executeAction(Request $request, $transactionType)
     {
         $data = json_decode($request->getContent(), true)['transactions'];
@@ -175,10 +182,26 @@ class DefaultController extends Controller
         return JsonResponse::create($vars);
     }
 
+    public function conciliarAction(Request $request)
+    {
+        $data        = json_decode($request->getContent(), true)['transactions'];
+        $transaction = $this->get('f_data_transactions.api.transaction');
+        $transaction->conciliar($data);
+        $vars = [
+            "status" => "success"
+        ];
+
+        return JsonResponse::create($vars);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function exportAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $reportHandler = new Grid($this->get('f_data_transactions.http_client.search'));
+            $reportHandler = new Grid($this->get('f_data_transactions.http_client.search'), $this->get('doctrine.orm.default_entity_manager'));
             $body          = json_decode($request->getContent(), true);
             $data          = $body['transactions'];
             $cols          = $body['cols'];

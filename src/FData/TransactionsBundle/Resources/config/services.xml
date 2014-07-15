@@ -56,6 +56,7 @@
         <!-- end Http Client Classess -->
 
         <service id="f_data_transactions.api.transaction" class="%f_data_transactions.api.transaction.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="f_data_transactions.http_client.transaction"/>
             <argument>%f_data_transactions.api.key_id%</argument>
             <argument>%f_data_transactions.api.hmac_key%</argument>
