@@ -37,7 +37,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $password;
 
     /**
-     * @var string
+     * @var string|array
      */
     private $hotel;
 
@@ -52,7 +52,7 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @param string $password
      * @param string $salt
      * @param string $name
-     * @param string $hotel
+     * @param string|array $hotel
      * @param array $roles
      */
     public function __construct($id, $username, $password, $salt, $name, $hotel, array $roles)
@@ -65,9 +65,16 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
         $this->roles    = $roles;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->hotel ? $this->name . ' - '. $this->hotel : $this->name;
+        if($this->hasRole('ROLE_USUARIO')) {
+            return $this->name;
+        } else {
+            return $this->name . ' - '. $this->hotel;
+        }
     }
 
     /**
@@ -132,6 +139,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getHotel()
+    {
+        return $this->hotel;
     }
 
     /**
@@ -207,6 +219,6 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     public function getSearchString()
     {
-        return $this->hasRole('ROLE_ADMIN') ? "" : $this->hotel;
+        return $this->hasRole('ROLE_USUARIO') ? "" : $this->hotel;
     }
 }

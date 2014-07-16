@@ -116,11 +116,13 @@ EOF;
         if($this->securityContext->isGranted('ROLE_CONTACTO')) {
             return $results;
         } else {
-            foreach($results as $result) {
-                if($result[11]) {
-
+            foreach($results as $k => $result) {
+                if(!isset($result[11]) || !in_array($result[11], $this->securityContext->getToken()->getUser()->getHotel())) {
+                    unset($results[$k]);
                 };
             }
+
+            return $results;
         }
     }
 

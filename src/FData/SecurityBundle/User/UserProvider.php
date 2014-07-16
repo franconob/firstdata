@@ -109,7 +109,18 @@ where vtiger_crmentity.deleted<>1 and email= ?
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
 
-            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], "", array('ROLE_USUARIO', 'ROLE_CONCILIAR'));
+            $_hoteles = $this->connection->fetchAll("
+Select accountname as HOTEL from vtiger_account inner join vtiger_crmentity
+on vtiger_crmentity.crmid=vtiger_account.accountid
+where vtiger_crmentity.deleted<>1 and smownerid= ?", array($user['id']));
+
+            $hoteles = [];
+            foreach($_hoteles as $hotel) {
+               $hoteles[] = $hotel['HOTEL'];
+            }
+
+
+            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], $hoteles, array('ROLE_USUARIO', 'ROLE_CONCILIAR'));
         }
 
     }

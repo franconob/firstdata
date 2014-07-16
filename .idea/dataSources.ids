@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="MySQL - @localhost" uuid="d26aafd0-b772-47eb-a2b7-1ff928760b6f">
+  <data-source source="LOCAL" name="MySQL - crm_winpax_finderit_local@localhost" uuid="d26aafd0-b772-47eb-a2b7-1ff928760b6f">
     <database-info product="MySQL" version="5.5.37-MariaDB-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.29 ( Revision: alexander.soklakov@oracle.com-20140120140810-s44574olh90i6i4l )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="911_transactions"/>
     <schema name="" catalog="crm_winpax_finderit_local"/>
     <schema name="" catalog="finderCMS"/>
     <schema name="" catalog="finderCRM"/>
@@ -24,6 +25,11 @@
     <schema name="" catalog="upplus4_connector"/>
     <schema name="" catalog="upplus4_crm"/>
     <schema name="" catalog="upplus4_www"/>
+    <table name="Transaction" schema="" catalog="911_transactions" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="conciliada" sqlType="TINYINT" length="3" precision="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="com_vtiger_workflow_activatedonce" schema="" catalog="crm_winpax_finderit_local" type="TABLE">
       <column name="workflow_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="entity_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
@@ -1876,6 +1882,14 @@
       <column name="cf_1062" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="cf_1063" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="cf_1187" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cf_1224" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="cf_1225" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="cf_1226" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1227" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1228" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1229" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1230" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1231" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
       <primary-key name="PRIMARY" columns="accountid"/>
       <foreign-key name="fk_1_vtiger_accountscf" columns="accountid" ref-table="vtiger_account" ref-schema="" ref-catalog="crm_winpax_finderit_local" ref-columns="accountid" update-rule="3" delete-rule="0" deferrability="2"/>
     </table>
@@ -3456,6 +3470,14 @@
       <column name="cf_1203" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="cf_1204" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="cf_1205" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="cf_1217" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1218" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1219" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1220" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1221" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1222" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1223" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="cf_1232" sqlType="VARCHAR" length="3" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
       <primary-key name="PRIMARY" columns="contactid"/>
       <foreign-key name="fk_1_vtiger_contactscf" columns="contactid" ref-table="vtiger_contactdetails" ref-schema="" ref-catalog="crm_winpax_finderit_local" ref-columns="contactid" update-rule="3" delete-rule="0" deferrability="2"/>
     </table>

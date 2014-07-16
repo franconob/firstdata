@@ -48,7 +48,7 @@ class DefaultController extends Controller
         $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "bool"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
-        //var_dump($grid->filterResults($data));die;
+        $data  = array_values($grid->filterResults($data));
         $data2 = $data;
 
         unset($data[count($data) - 1]);
