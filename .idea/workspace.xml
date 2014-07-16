@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="Tarea #1577. Se envia el correo al propietario del hotel tambien">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig" />
     </list>
     <ignored path="firstdata.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,19 +43,25 @@
       <file leaf-file-name="login_extranet.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="53" selection-start="827" selection-end="827" vertical-scroll-proportion="-5.3333335" vertical-offset="162" max-vertical-offset="756">
-              <folding>
-                <element signature="e#12#28#0" expanded="false" />
-                <element signature="e#546#573#0" expanded="false" />
-              </folding>
+            <state line="10" column="56" selection-start="444" selection-end="444" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="756">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing_dev.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
+      <file leaf-file-name="login.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="675" selection-end="675" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+            <state line="10" column="68" selection-start="456" selection-end="456" vertical-scroll-proportion="0.3272727" vertical-offset="0" max-vertical-offset="756">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BadCredentialsException.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="504">
               <folding />
             </state>
           </provider>
@@ -92,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserProvider.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="UserProvider.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="0" selection-start="3763" selection-end="3763" vertical-scroll-proportion="0.83798885" vertical-offset="1728" max-vertical-offset="3060">
+            <state line="121" column="0" selection-start="3763" selection-end="3763" vertical-scroll-proportion="-16.666666" vertical-offset="1728" max-vertical-offset="3060">
               <folding>
                 <element signature="e#6#88#0" expanded="true" />
                 <element signature="e#129#158#0" expanded="true" />
@@ -129,11 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Service/Providers/HttpClientServiceProvider.php" />
-        <option value="$PROJECT_DIR$/src/Service/FirstData/Transactions.php" />
-        <option value="$PROJECT_DIR$/src/Service/Providers/TransactionsServiceProvider.php" />
-        <option value="$PROJECT_DIR$/web/css/main.css" />
-        <option value="$PROJECT_DIR$/templates/_printCTR.html" />
         <option value="$PROJECT_DIR$/vendor/league/csv/src/Writer.php" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/src/app.php" />
@@ -162,8 +164,6 @@
         <option value="$PROJECT_DIR$/web/app_staging.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_staging.xml" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
         <option value="$PROJECT_DIR$/bin/doctrine.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
@@ -180,6 +180,13 @@
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
       </list>
     </option>
   </component>
@@ -279,6 +286,142 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mails" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -732,46 +875,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/routing_staging.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="215" selection-end="215" vertical-scroll-proportion="0.20930232" vertical-offset="0" max-vertical-offset="602" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="35" selection-start="834" selection-end="834" vertical-scroll-proportion="0.56347823" vertical-offset="0" max-vertical-offset="738" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleMessage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="421" column="32" selection-start="10822" selection-end="10822" vertical-scroll-proportion="0.76512456" vertical-offset="7040" max-vertical-offset="11808" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/TwigEngine.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="20" selection-start="1955" selection-end="1955" vertical-scroll-proportion="0.3500931" vertical-offset="856" max-vertical-offset="1746" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Debug/TimedTwigEngine.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="20" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.52700186" vertical-offset="347" max-vertical-offset="936" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Templating/TemplateReference.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="20" selection-start="545" selection-end="545" vertical-scroll-proportion="0.2188612" vertical-offset="147" max-vertical-offset="1008" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="17" selection-start="2401" selection-end="2401" vertical-scroll-proportion="0.7009967" vertical-offset="982" max-vertical-offset="1584" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="172" selection-end="172" vertical-scroll-proportion="0.31304348" vertical-offset="0" max-vertical-offset="575" />
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core_c.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="6" selection-start="151" selection-end="151" vertical-scroll-proportion="0.26815644" vertical-offset="0" max-vertical-offset="6264" />
@@ -807,11 +910,6 @@
         <state line="235" column="20" selection-start="7742" selection-end="7742" vertical-scroll-proportion="0.3500931" vertical-offset="3700" max-vertical-offset="4734">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="51" selection-start="825" selection-end="825" vertical-scroll-proportion="0.19928825" vertical-offset="194" max-vertical-offset="756" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Role/RoleHierarchyInterface.php">
@@ -954,16 +1052,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="53" selection-start="827" selection-end="827" vertical-scroll-proportion="-5.3333335" vertical-offset="162" max-vertical-offset="756">
-          <folding>
-            <element signature="e#12#28#0" expanded="false" />
-            <element signature="e#546#573#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="675" selection-end="675" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
@@ -1041,7 +1129,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="0" selection-start="3763" selection-end="3763" vertical-scroll-proportion="0.83798885" vertical-offset="1728" max-vertical-offset="3060">
+        <state line="121" column="0" selection-start="3763" selection-end="3763" vertical-scroll-proportion="-16.666666" vertical-offset="1728" max-vertical-offset="3060">
           <folding>
             <element signature="e#6#88#0" expanded="true" />
             <element signature="e#129#158#0" expanded="true" />
@@ -1049,6 +1137,165 @@
             <marker date="1405533674269" expanded="true" signature="3151:3197" placeholder="SELECT * fro..vtiger_users..." />
             <marker date="1405533674269" expanded="true" signature="3431:3608" placeholder="Select accou..vtiger_account..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="577">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="56" selection-start="444" selection-end="444" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="17" selection-start="4526" selection-end="4526" vertical-scroll-proportion="0.140625" vertical-offset="1134" max-vertical-offset="1710">
+          <folding>
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="4650" selection-end="4650" vertical-scroll-proportion="0.24609375" vertical-offset="1026" max-vertical-offset="1548">
+          <folding>
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911279" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="63" selection-start="532" selection-end="532" vertical-scroll-proportion="0.48" vertical-offset="0" max-vertical-offset="525">
+          <folding>
+            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="63" selection-start="5357" selection-end="5357" vertical-scroll-proportion="0.7043121" vertical-offset="1061" max-vertical-offset="1548">
+          <folding>
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911278" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="63" selection-start="1595" selection-end="1595" vertical-scroll-proportion="0.6673511" vertical-offset="161" max-vertical-offset="648">
+          <folding>
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534911276" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="552">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirm.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="52" selection-start="149" selection-end="149" vertical-scroll-proportion="0.09818182" vertical-offset="0" max-vertical-offset="550">
+          <folding>
+            <marker date="1404515551830" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1404515551830" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1404515551830" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1404515551830" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="68" selection-start="456" selection-end="456" vertical-scroll-proportion="0.3272727" vertical-offset="0" max-vertical-offset="756">
+          <folding />
         </state>
       </provider>
     </entry>

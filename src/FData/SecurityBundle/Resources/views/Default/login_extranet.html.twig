@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     {% if error %}
                         <div class="alert alert-error">
-                            {{ error }}
+                           Email o contraseña incorrecta.
                         </div>
                     {% endif %}
                     <form role="form" action="{{ path('f_data_security_login_check') }}" method="post">
