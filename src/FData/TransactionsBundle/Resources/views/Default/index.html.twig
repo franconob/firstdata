@@ -9,7 +9,7 @@
             <nav class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <p class="navbar-text">{{ app.security.token.user.name }}</p>
+                        <p class="navbar-text">{{ app.security.token.user }}</p>
                     </li>
                     <li>
                         <a href="{{ path('f_data_security_logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
@@ -20,12 +20,12 @@
     </header>
 
     <div ng-controller="TransactionCtrl">
-        <div class="panel panel-info" id="transactions" ng-controller="TransactionCtrl">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-database"></i> TRANSACCIONES</h3>
-            </div>
-            <div class="panel-body" id="table-info">
-                <div class="table-header-info">
+    <div class="panel panel-info" id="transactions" ng-controller="TransactionCtrl">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-database"></i> TRANSACCIONES</h3>
+        </div>
+        <div class="panel-body" id="table-info">
+            <div class="table-header-info">
             <span class="bg-primary information">
                    <i class="fa fa-th"></i> Total transactions: <span
                         id="total-transactionss">{% verbatim %} {{ total }} {% endverbatim %}</span>
@@ -34,25 +34,36 @@
                    <i class="fa fa-th"></i> Total amount: $<span
                         id="total-amouts">{% verbatim %} {{ totalAmount }} {% endverbatim %}</span>
             </span>
-            <span class="bg-primary pull-right action">
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group">
-                        <button class="btn btn-default" ng-click="openForm('newTransaction')"><i
-                                    class="fa fa-plus-square"></i> New transaction
-                        </button>
-                        <button class="btn btn-default" ng-click="openForm('preAuth')"><i class="fa fa-key"></i>
-                            Pre-Auth
-                        </button>
-                        <button class="btn btn-default" ng-click="openForm('refund')"><i class="fa fa-mail-reply"></i>
-                            Refund
-                        </button>
+                {% if is_granted(expression("'ROLE_NEW_TRANSACTION' in roles or 'ROLE_PRE_AUTH' in roles or 'ROLE_REFUND' in roles or 'ROLE_EXPORT_CSV' in roles")) %}
+                    <span class="bg-primary pull-right action">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group">
+                            {% if is_granted('ROLE_NEW_TRANSACTION') %}
+                                <button class="btn btn-default" ng-click="openForm('newTransaction')"><i
+                                            class="fa fa-plus-square"></i> New transaction
+                                </button>
+                            {% endif %}
+                            {% if is_granted('ROLE_PRE_AUTH') %}
+                                <button class="btn btn-default" ng-click="openForm('preAuth')"><i class="fa fa-key"></i>
+                                    Pre-Auth
+                                </button>
+                            {% endif %}
+                            {% if is_granted('ROLE_REFUND') %}
+                                <button class="btn btn-default" ng-click="openForm('refund')"><i
+                                            class="fa fa-mail-reply"></i>
+                                    Refund
+                                </button>
+                            {% endif %}
+                        </div>
+                        {% if is_granted('ROLE_EXPORT_CSV') %}
+                            <div class="btn-group">
+                                <a class="btn btn-default" ng-click="exportCSV()"><i class="fa fa-file-text"></i> Export
+                                    CSV</a>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="btn-group">
-                        <a class="btn btn-default" ng-click="exportCSV()"><i class="fa fa-file-text"></i> Export CSV</a>
-                    </div>
-                </div>
-            </span>
-                </div>
+                </span>
+                {% endif %}
             </div>
         </div>
         <firstdata-grid total="total" total-amount="totalAmount" grid="grid"></firstdata-grid>

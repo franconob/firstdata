@@ -37,6 +37,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $password;
 
     /**
+     * @var string
+     */
+    private $hotel;
+
+    /**
      * @var array
      */
     private $roles;
@@ -47,20 +52,22 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @param string $password
      * @param string $salt
      * @param string $name
+     * @param string $hotel
      * @param array $roles
      */
-    public function __construct($id, $username, $password, $salt, $name, array $roles)
+    public function __construct($id, $username, $password, $salt, $name, $hotel, array $roles)
     {
         $this->id       = $id;
         $this->username = $username;
         $this->password = $password;
         $this->name     = $name;
+        $this->hotel = $hotel;
         $this->roles    = $roles;
     }
 
     public function __toString()
     {
-        return $this->name;
+        return $this->hotel ? $this->name . ' - '. $this->hotel : $this->name;
     }
 
     /**
@@ -183,6 +190,23 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     public function getEncoderName()
     {
-        return in_array("ROLE_ADMIN", $this->roles) ? "crypt" : "plaintext";
+        return in_array("ROLE_USUARIO", $this->roles) ? "crypt" : "plaintext";
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return in_array($role, $this->roles);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSearchString()
+    {
+        return $this->hasRole('ROLE_ADMIN') ? "" : $this->hotel;
     }
 }

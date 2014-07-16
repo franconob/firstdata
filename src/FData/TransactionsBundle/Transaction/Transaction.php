@@ -9,6 +9,7 @@
 namespace FData\TransactionsBundle\Transaction;
 
 use Doctrine\ORM\EntityManager;
+use FData\SecurityBundle\User\User;
 use FData\TransactionsBundle\HttpClient\Clients\TransactionClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\ResponseInterface;
@@ -32,8 +33,8 @@ class Transaction
     /** @var  string */
     private $gateway_id;
 
-    /** @var  string */
-    private $account;
+    /** @var  User */
+    private $user;
 
     /** @var  string */
     private $password;
@@ -41,7 +42,7 @@ class Transaction
     /** @var  Response */
     private $response;
 
-    public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, $account)
+    public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, User $user)
     {
         $this->entity_manager = $entity_manager;
         $this->http_client = $http_client;
@@ -49,7 +50,7 @@ class Transaction
         $this->hmac_key    = $hmac_key;
         $this->gateway_id  = $gatewat_id;
         $this->password    = $password;
-        $this->account     = $account;
+        $this->user     = $user;
     }
 
     /**
@@ -118,7 +119,7 @@ class Transaction
             'transaction_type' => '34',
             'cvd_presence_ind' => '0',
             'reference_3'      => $transaction['transaction_tag'],
-            'customer_ref'     => $this->account
+            'customer_ref'     => $this->user->getSearchString()
 
         ], $transaction);
 
@@ -133,7 +134,7 @@ class Transaction
             'password'         => $this->password,
             'transaction_type' => '00',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->account
+            'customer_ref'     => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);
@@ -147,7 +148,7 @@ class Transaction
             'password'         => $this->password,
             'transaction_type' => '01',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->account
+            'customer_ref'     => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);
@@ -166,7 +167,7 @@ class Transaction
             'password'         => $this->password,
             'transaction_type' => '04',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->account
+            'customer_ref'     => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);

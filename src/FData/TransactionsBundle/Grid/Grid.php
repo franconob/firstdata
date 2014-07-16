@@ -12,6 +12,7 @@ namespace FData\TransactionsBundle\Grid;
 use Doctrine\ORM\EntityManager;
 use FData\TransactionsBundle\Entity\Transaction;
 use FData\TransactionsBundle\HttpClient\Clients\GridClient;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class Grid
 {
@@ -25,6 +26,7 @@ class Grid
      */
     private static $tagged_transactions = [
         'Tagged Pre-Authorization Completion' => [
+            "role"       => "TAGGED_PRE_AUTH_COMP",
             "label"     => "Tagged Pre-Authorization Completion",
             "action"    => "taggedPreAuthComp",
             "openModal" => true,
@@ -32,6 +34,7 @@ class Grid
             "url"       => "/transactions/taggedPreAuthComp"
         ],
         'Tagged Void'                         => [
+            "role"      => "TAGGED_VOID",
             "label"     => "Tagged Void",
             "action"    => "taggedVoid",
             "template"  => "confirm.html",
@@ -39,6 +42,7 @@ class Grid
             "url"       => "/transactions/taggedVoid"
         ],
         'Tagged Refund'                       => [
+            "role"      => "TAGGED_REFUND",
             "label"     => "Tagged Refund",
             "action"    => "taggedRefund",
             "openModal" => true,
@@ -46,6 +50,7 @@ class Grid
             "url"       => "/transactions/taggedRefund"
         ],
         'Conciliar'                           => [
+            "role"      => "CONCILIAR",
             "label"     => "Conciliar",
             "action"    => "conciliar",
             "openModal" => true,
@@ -87,10 +92,13 @@ EOF;
      */
     private $entity_manager;
 
-    public function __construct(GridClient $http_client, EntityManager $entity_manager)
+    private $securityContext;
+
+    public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext)
     {
         $this->entity_manager = $entity_manager;
         $this->http_client    = $http_client;
+        $this->securityContext = $securityContext;
         $this->setupHeaders();
         $this->generateWorkflow();
     }
@@ -101,6 +109,19 @@ EOF;
     public function query()
     {
         return $this->http_client->createRequest()->send();
+    }
+
+    public function filterResults($results)
+    {
+        if($this->securityContext->isGranted('ROLE_CONTACTO')) {
+            return $results;
+        } else {
+            foreach($results as $result) {
+                if($result[11]) {
+
+                };
+            }
+        }
     }
 
     /**
@@ -157,15 +178,17 @@ EOF;
         $twig            = new \Twig_Environment($loader);
         $allowed_actions = self::$transactions_workflow[$transaction['Transaction Type']]["allows"];
 
-        if (empty($allowed_actions)) {
-            return '<div class="text-center">&times</div>';
-        }
-
         foreach($allowed_actions as $k => $action) {
             if($action['label'] == 'Conciliar' && $transaction['conciliado']) {
                 unset($allowed_actions[$k]);
-                break;
             }
+            if(!$this->securityContext->isGranted('ROLE_'.$action['role'])) {
+                unset($allowed_actions[$k]);
+            }
+        }
+
+        if (empty($allowed_actions)) {
+            return '<div class="text-center">&times</div>';
         }
 
         $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
@@ -203,20 +226,24 @@ EOF;
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
                 self::$tagged_transactions['Tagged Void'],
+                self::$tagged_transactions['Conciliar']
             ]
             ],
             'Refund'            => ["allows" => [
-                self::$tagged_transactions['Tagged Void']
+                self::$tagged_transactions['Tagged Void'],
+                self::$tagged_transactions['Conciliar']
             ]
             ],
             'Tagged Completion' => ["allows" => [
                 self::$tagged_transactions['Tagged Void'],
-                self::$tagged_transactions['Tagged Refund']
+                self::$tagged_transactions['Tagged Refund'],
+                self::$tagged_transactions['Conciliar']
             ]
             ],
             'Tagged Void'       => ["allows" => []],
             'Tagged Refund'     => ["allows" => [
-                self::$tagged_transactions['Tagged Void']
+                self::$tagged_transactions['Tagged Void'],
+                self::$tagged_transactions['Conciliar']
             ]
             ],
             'Conciliar'         => ["allows" => []]

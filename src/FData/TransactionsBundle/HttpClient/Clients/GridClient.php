@@ -9,14 +9,15 @@
 namespace FData\TransactionsBundle\HttpClient\Clients;
 
 
+use FData\SecurityBundle\User\User;
 use FData\TransactionsBundle\HttpClient\HttpClient;
 
 class GridClient extends HttpClient
 {
     /**
-     * @var string
+     * @var User
      */
-    public $account;
+    private $user;
 
     /**
      * @var string
@@ -38,9 +39,9 @@ class GridClient extends HttpClient
         $this->password = $password;
     }
 
-    public function setAccount($account)
+    public function setUser(User $user)
     {
-        $this->account = $account;
+        $this->user = $user;
     }
 
     /**
@@ -60,7 +61,7 @@ class GridClient extends HttpClient
         $now         = new \DateTime();
         $last6Months = $now->sub(new \DateInterval('P6M'));
 
-        $this->request->setQuery(["search_field" => "custref", "search" => $this->account, "start_date" => $last6Months->format('Y-m-d')]);
+        $this->request->setQuery(["search_field" => "custref", "search" => $this->user->getSearchString(), "start_date" => $last6Months->format('Y-m-d')]);
 
         return $this;
     }

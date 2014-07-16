@@ -22,7 +22,7 @@ class DefaultController extends Controller
     public function transactionsAction()
     {
         /** @var Grid $grid */
-        $grid = new Grid($this->get('f_data_transactions.http_client.search'), $this->get('doctrine.orm.default_entity_manager'));
+        $grid = $this->get('f_data_transactions.api.search.grid');
 
         $response_string = (string)$grid->query()->getBody();
 
@@ -48,6 +48,7 @@ class DefaultController extends Controller
         $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "bool"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
+        //var_dump($grid->filterResults($data));die;
         $data2 = $data;
 
         unset($data[count($data) - 1]);
@@ -201,7 +202,7 @@ class DefaultController extends Controller
     public function exportAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $reportHandler = new Grid($this->get('f_data_transactions.http_client.search'), $this->get('doctrine.orm.default_entity_manager'));
+            $reportHandler = $this->get('f_data_transactions.api.search.grid');
             $body          = json_decode($request->getContent(), true);
             $data          = $body['transactions'];
             $cols          = $body['cols'];

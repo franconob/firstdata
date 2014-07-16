@@ -11,6 +11,9 @@ security:
         plaintext:
             algorithm: plaintext
 
+    role_hierarchy:
+        ROLE_USUARIO:       ROLE_CONCILIAR
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -30,5 +33,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: [ROLE_ADMIN, ROLE_CUENTA] }
+        - { path: ^/, roles: [ROLE_USUARIO, ROLE_CONTACTO] }
 

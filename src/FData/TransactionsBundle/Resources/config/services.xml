@@ -34,8 +34,8 @@
             <argument type="string">%f_data_transactions.api.url%</argument>
             <argument type="string">%f_data_transactions.api.search.endpoint%</argument>
             <argument type="string">GET</argument>
-            <call method="setAccount">
-               <argument type="expression">service('security.context').getToken().getUser().getName()</argument>
+            <call method="setUser">
+               <argument type="expression">service('security.context').getToken().getUser()</argument>
             </call>
             <call method="setUsername">
                 <argument type="string">%f_data_transactions.api.search.username%</argument>
@@ -62,11 +62,13 @@
             <argument>%f_data_transactions.api.hmac_key%</argument>
             <argument>%f_data_transactions.api.gateway_id%</argument>
             <argument>%f_data_transactions.api.password%</argument>
-            <argument type="expression">service('security.context').getToken().getUser().getName()</argument>
+            <argument type="expression">service('security.context').getToken().getUser()</argument>
         </service>
 
         <service id="f_data_transactions.api.search.grid" class="FData\TransactionsBundle\Grid\Grid">
             <argument type="service" id="f_data_transactions.http_client.search"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="security.context"/>
         </service>
 
         <service id="f_data_transactions.repository.user" class="FData\SecurityBundle\User\UserRepository">

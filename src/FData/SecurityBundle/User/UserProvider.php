@@ -29,6 +29,17 @@ class UserProvider implements UserProviderInterface
      */
     private $router;
 
+    private static $roles = [
+        "NEW_TRANSACTION",
+        "REFUND",
+        "TAGGED_VOID",
+        "RECIBIR_MAIL",
+        "PRE_AUTH",
+        "EXPORT_CSV",
+        "TAGGED_REFUND",
+        "TAGGED_PRE_AUTH_COMP"
+    ];
+
     /**
      * @param \Doctrine\DBAL\Connection $connection
      * @param \Symfony\Bundle\FrameworkBundle\Routing\Router $router
@@ -58,8 +69,23 @@ class UserProvider implements UserProviderInterface
     {
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
             $user = $this->connection->fetchAssoc(
-                "SELECT va.*, vacf.cf_721 as password from vtiger_account va INNER JOIN vtiger_accountscf vacf ON (va.accountid = vacf.accountid)
-                 WHERE va.email1 = ?
+                "Select vtiger_contactdetails.contactid as contactid ,accountname as HOTEL ,
+                CONCAT_WS(' ',vtiger_contactdetails.firstname, vtiger_contactdetails.lastname) as nombre,
+cf_1217 as 'NEW_TRANSACTION',
+cf_1219 as 'REFUND',
+cf_1221 as 'TAGGED_VOID',
+cf_1223 as 'RECIBIR_MAIL',
+cf_1218 as 'PRE_AUTH',
+cf_1220 as 'EXPORT_CSV',
+cf_1222 as 'TAGGED_REFUND',
+cf_1232 as 'TAGGED_PRE_AUTH_COMP',
+cf_851 as password
+from vtiger_contactdetails
+inner join vtiger_crmentity
+on vtiger_crmentity.crmid=vtiger_contactdetails.contactid
+Inner join vtiger_contactscf on  vtiger_contactdetails.contactid= vtiger_contactscf.contactid
+inner join vtiger_account on vtiger_contactdetails.accountid=vtiger_account.accountid
+where vtiger_crmentity.deleted<>1 and email= ?
                 "
                 , array($username));
 
@@ -67,7 +93,14 @@ class UserProvider implements UserProviderInterface
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
 
-            return new User($user['accountid'], $username, $user['password'], "", $user['accountname'], array('ROLE_CUENTA'));
+            $roles = ['ROLE_CONTACTO'];
+            foreach (self::$roles as $role) {
+                if (isset($user[$role]) && $user[$role] !== '0')
+                    $roles[] = 'ROLE_' . $role;
+            }
+
+            return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles);
+
         } else {
             $user = $this->connection->fetchAssoc(
                 "SELECT * from vtiger_users WHERE user_name = ?"
@@ -76,7 +109,7 @@ class UserProvider implements UserProviderInterface
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
 
-            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], array('ROLE_ADMIN'));
+            return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], "", array('ROLE_USUARIO', 'ROLE_CONCILIAR'));
         }
 
     }
@@ -94,7 +127,8 @@ class UserProvider implements UserProviderInterface
      *
      * @throws UnsupportedUserException if the account is not supported
      */
-    public function refreshUser(UserInterface $user)
+    public
+    function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(
@@ -112,7 +146,8 @@ class UserProvider implements UserProviderInterface
      *
      * @return bool
      */
-    public function supportsClass($class)
+    public
+    function supportsClass($class)
     {
         return $class === "FData\SecurityBundle\User\User";
     }
