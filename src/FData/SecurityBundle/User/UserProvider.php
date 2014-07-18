@@ -69,7 +69,7 @@ class UserProvider implements UserProviderInterface
     {
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
             $user = $this->connection->fetchAssoc(
-                "Select vtiger_contactdetails.contactid as contactid ,accountname as HOTEL ,
+                "Select vtiger_contactdetails.contactid as contactid , vtiger_accountscf.cf_1233 as HOTEL ,
                 CONCAT_WS(' ',vtiger_contactdetails.firstname, vtiger_contactdetails.lastname) as nombre,
 cf_1217 as 'NEW_TRANSACTION',
 cf_1219 as 'REFUND',
@@ -85,6 +85,7 @@ inner join vtiger_crmentity
 on vtiger_crmentity.crmid=vtiger_contactdetails.contactid
 Inner join vtiger_contactscf on  vtiger_contactdetails.contactid= vtiger_contactscf.contactid
 inner join vtiger_account on vtiger_contactdetails.accountid=vtiger_account.accountid
+INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
 where vtiger_crmentity.deleted<>1 and email= ?
                 "
                 , array($username));
@@ -110,8 +111,9 @@ where vtiger_crmentity.deleted<>1 and email= ?
             }
 
             $_hoteles = $this->connection->fetchAll("
-Select accountname as HOTEL from vtiger_account inner join vtiger_crmentity
+Select vtiger_accountscf.cf_1233 as HOTEL from vtiger_account inner join vtiger_crmentity
 on vtiger_crmentity.crmid=vtiger_account.accountid
+INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
 where vtiger_crmentity.deleted<>1 and smownerid= ?", array($user['id']));
 
             $hoteles = [];
