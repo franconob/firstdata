@@ -226,6 +226,9 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
             var _calculateTotalAmount = function (transactions) {
                 var total = 0;
                 angular.forEach(transactions, function (row) {
+                    if('Error' == row['Status']) {
+                        return;
+                    }
                     switch (row['Transaction Type']) {
                         case "Purchase":
                             total += numeral().unformat(row.Amount);

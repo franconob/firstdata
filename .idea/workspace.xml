@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="Tarea #1577. Se envia el correo al propietario del hotel tambien">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,10 +36,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefaultController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="0" selection-start="6394" selection-end="6394" vertical-scroll-proportion="-8.666667" vertical-offset="2214" max-vertical-offset="4158">
+            <state line="148" column="39" selection-start="6504" selection-end="6504" vertical-scroll-proportion="1.1127273" vertical-offset="1908" max-vertical-offset="4086">
               <folding />
             </state>
           </provider>
@@ -78,10 +77,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="160" column="48" selection-start="4778" selection-end="4778" vertical-scroll-proportion="0.67021275" vertical-offset="2502" max-vertical-offset="7452">
+            <state line="229" column="30" selection-start="7957" selection-end="7957" vertical-scroll-proportion="0.0" vertical-offset="3970" max-vertical-offset="7506">
               <folding />
             </state>
           </provider>
@@ -90,7 +89,7 @@
       <file leaf-file-name="Grid.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="210" column="63" selection-start="6455" selection-end="6455" vertical-scroll-proportion="-9.333333" vertical-offset="3384" max-vertical-offset="5544">
+            <state line="210" column="63" selection-start="6455" selection-end="6455" vertical-scroll-proportion="-35.333332" vertical-offset="2682" max-vertical-offset="5544">
               <folding />
             </state>
           </provider>
@@ -214,11 +213,11 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
         <option value="$PROJECT_DIR$/web/js/vendor/jquery.watable.js" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/web/js/app.js" />
       </list>
     </option>
@@ -1134,13 +1133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="0" selection-start="6394" selection-end="6394" vertical-scroll-proportion="-8.666667" vertical-offset="2214" max-vertical-offset="4158">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="558">
@@ -1186,14 +1178,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="63" selection-start="6455" selection-end="6455" vertical-scroll-proportion="-9.333333" vertical-offset="3384" max-vertical-offset="5544">
+        <state line="210" column="63" selection-start="6455" selection-end="6455" vertical-scroll-proportion="-35.333332" vertical-offset="2682" max-vertical-offset="5544">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="48" selection-start="4778" selection-end="4778" vertical-scroll-proportion="0.67021275" vertical-offset="2502" max-vertical-offset="7452">
+        <state line="229" column="30" selection-start="7957" selection-end="7957" vertical-scroll-proportion="0.0" vertical-offset="3970" max-vertical-offset="7506">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="39" selection-start="6504" selection-end="6504" vertical-scroll-proportion="1.1127273" vertical-offset="1908" max-vertical-offset="4086">
           <folding />
         </state>
       </provider>

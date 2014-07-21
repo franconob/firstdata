@@ -136,21 +136,17 @@ class DefaultController extends Controller
                 }
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
                 $formattedRow['actions']                                                                             = $k_row;
-                if ($enabledHeaders[$k] == "Amount") {
-                    $filter_amount = floatval(filter_var($col, FILTER_SANITIZE_NUMBER_FLOAT));
-                    $totalAmount += sprintf("%.2f", ($filter_amount / 100));
-                }
             }
             if ($fecha = $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
             }
+
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [
             "cols"        => $tableHeader,
             "rows"        => $cleanData,
-            "totalAmount" => $totalAmount
         ];
 
         return JsonResponse::create($vars);
