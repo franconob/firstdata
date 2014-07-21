@@ -1,0 +1,26 @@
+{% verbatim %}
+<script type="text/ng-template" id="conciliar.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Conciliación</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-inline" name="form" role="form">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar" ng-click="opened = true"></i>
+                </span>
+                <input type="text" placeholder="Fecha de conciliación" class="form-control" datepicker-popup="dd/MMMM/yyyy"
+                       ng-model="transaction.fecha" ng-click="opened=true" ng-required="true" is-open="opened"/>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">
+            <i class="fa fa-spinner fa-spin" ng-show="isLoading"></i>
+            <i class="fa fa-check" ng-show="form.$valid"></i>
+            Enviar datos
+        </button>
+        <button class="btn btn-danger" ng-click="cancel()" ng-disabled="isLoading">Salir</button>
+    </div>
+</script>
+{% endverbatim %}

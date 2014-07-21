@@ -45,7 +45,7 @@ class DefaultController extends Controller
 
         $tableHeader["id"]         = ["hidden" => true, "unique" => true];
         $tableHeader["actions"]    = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
-        $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "bool"];
+        $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
         $data  = array_values($grid->filterResults($data));
@@ -141,7 +141,9 @@ class DefaultController extends Controller
                     $totalAmount += sprintf("%.2f", ($filter_amount / 100));
                 }
             }
-            $formattedRow['conciliado']    = $grid->isConciliada($formattedRow['Tag']);
+            if ($fecha = $grid->isConciliada($formattedRow['Tag'])) {
+                $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
+            }
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
             $cleanData[$k_row]             = $formattedRow;
         }

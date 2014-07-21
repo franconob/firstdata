@@ -272,7 +272,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                             return rows;
                         }
                     },
-                    controller: function ($scope, $modalInstance, _config, transaction, $http, printCTR, transactions) {
+                    controller: function ($scope, $modalInstance, _config, transaction, $http, printCTR, transactions, moment) {
                         $scope._config = _config;
                         $scope.transaction = transaction;
                         $scope.maxAmount = numeral(_calculateLimitAmount($scope.transaction, transactions)).format('$0,0.00');
@@ -303,12 +303,18 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                 amount = $scope.transaction['amount'];
                             }
 
-                            $http.post(_config.url, {transactions: {
+                            var data = {
                                 transaction_tag: $scope.transaction['Tag'],
                                 amount: amount,
                                 authorization_num: $scope.transaction['Auth No'],
                                 reference_no: $scope.transaction['Ref Num']
-                            }}).success(function (data, status) {
+                            };
+
+                            if($scope.transaction['fecha']) {
+                                data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD');
+                            }
+
+                            $http.post(_config.url, { transactions: data }).success(function (data, status) {
                                 if (data.success) {
                                     notify({
                                         title: "Operación realizada con éxito",

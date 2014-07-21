@@ -55,7 +55,7 @@ class Grid
             "label"     => "Conciliar",
             "action"    => "conciliar",
             "openModal" => true,
-            "template"  => "confirm.html",
+            "template"  => "conciliar.html",
             "url"       => "/transactions-conciliar"
         ]
     ];
@@ -186,7 +186,7 @@ EOF;
         }
 
         foreach ($allowed_actions as $k => $action) {
-            if ($action['label'] == 'Conciliar' && $transaction['conciliado']) {
+            if ($action['label'] == 'Conciliar' && isset($transaction['conciliado'])) {
                 unset($allowed_actions[$k]);
             }
             if (!$this->securityContext->isGranted('ROLE_' . $action['role'])) {
@@ -207,11 +207,11 @@ EOF;
     {
         /** @var Transaction $transaction */
         $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->find($transaction_tag);
-        if ($transaction && $transaction->isConciliada()) {
-            return true;
+        if ($transaction) {
+            return $transaction->getFecha()->format('Y-m-d');
         }
 
-        return false;
+        return null;
     }
 
     /**

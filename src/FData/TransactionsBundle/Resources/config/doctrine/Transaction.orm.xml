@@ -4,6 +4,6 @@
     <id name="id" type="integer" column="id">
       <generator strategy="NONE"/>
     </id>
-    <field name="conciliada" type="boolean" column="conciliada"/>
+    <field name="fecha" type="date" column="fecha"/>
   </entity>
 </doctrine-mapping>

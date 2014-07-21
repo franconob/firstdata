@@ -84,10 +84,11 @@ class Transaction
 
     public function conciliar(array $transaction_data)
     {
+        $fecha = \DateTime::createFromFormat('Y-m-d', $transaction_data['fecha']);
         $transaction = new TransactionEntity();
         $transaction
             ->setId($transaction_data['transaction_tag'])
-            ->setConciliada(true);
+            ->setFecha($fecha);
         $this->entity_manager->persist($transaction);
         $this->entity_manager->flush();
     }

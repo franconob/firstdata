@@ -15,9 +15,9 @@ class Transaction
     private $id;
 
     /**
-     * @var boolean
+     * @var \DateTime
      */
-    private $conciliada;
+    private $fecha;
 
     public function setId($id)
     {
@@ -37,16 +37,26 @@ class Transaction
     }
 
     /**
-     * Set conciliada
+     * Set fecha
      *
-     * @param boolean $conciliada
+     * @param \DateTime
      * @return Transaction
      */
-    public function setConciliada($conciliada)
+    public function setFecha($fecha)
     {
-        $this->conciliada = $conciliada;
+        $this->fecha = $fecha;
 
         return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
     }
 
     /**
@@ -56,6 +66,6 @@ class Transaction
      */
     public function isConciliada()
     {
-        return $this->conciliada;
+        return (bool) $this->fecha;
     }
 }
