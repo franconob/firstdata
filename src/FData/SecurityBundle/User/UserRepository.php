@@ -39,7 +39,7 @@ class UserRepository
      */
     public function getComunicaciones()
     {
-        $mails = $this->conn->executeQuery("SELECT cf_1224, cf_1225 FROM vtiger_accountscf WHERE accountid = ?", [
+        $mails = $this->conn->executeQuery("SELECT cf_1234, cf_1235 FROM vtiger_contactscf WHERE contactid = ?", [
             $this->security_context->getToken()->getUser()->getId()
         ])->fetchAll();
 
@@ -53,7 +53,5 @@ class UserRepository
         } else {
             return [];
         }
-
-
     }
 } 
