@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class Grid
 {
+    private static $transactions_workflow_status = [];
     /**
      * @var array
      */
@@ -26,7 +27,7 @@ class Grid
      */
     private static $tagged_transactions = [
         'Tagged Pre-Authorization Completion' => [
-            "role"       => "TAGGED_PRE_AUTH_COMP",
+            "role"      => "TAGGED_PRE_AUTH_COMP",
             "label"     => "Tagged Pre-Authorization Completion",
             "action"    => "taggedPreAuthComp",
             "openModal" => true,
@@ -96,8 +97,8 @@ EOF;
 
     public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext)
     {
-        $this->entity_manager = $entity_manager;
-        $this->http_client    = $http_client;
+        $this->entity_manager  = $entity_manager;
+        $this->http_client     = $http_client;
         $this->securityContext = $securityContext;
         $this->setupHeaders();
         $this->generateWorkflow();
@@ -113,11 +114,11 @@ EOF;
 
     public function filterResults($results)
     {
-        if($this->securityContext->isGranted('ROLE_CONTACTO')) {
+        if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
             return $results;
         } else {
-            foreach($results as $k => $result) {
-                if(!isset($result[11]) || !in_array($result[11], $this->securityContext->getToken()->getUser()->getHotel())) {
+            foreach ($results as $k => $result) {
+                if (!isset($result[11]) || !in_array($result[11], $this->securityContext->getToken()->getUser()->getHotel())) {
                     unset($results[$k]);
                 };
             }
@@ -178,13 +179,17 @@ EOF;
         }
         $loader          = new \Twig_Loader_String();
         $twig            = new \Twig_Environment($loader);
-        $allowed_actions = self::$transactions_workflow[$transaction['Transaction Type']]["allows"];
+        if (isset(self::$transactions_workflow_status[$transaction['Status']])) {
+            $allowed_actions = self::$transactions_workflow_status[$transaction['Status']]['allows'];
+        } else {
+            $allowed_actions = self::$transactions_workflow[$transaction['Transaction Type']]['allows'];
+        }
 
-        foreach($allowed_actions as $k => $action) {
-            if($action['label'] == 'Conciliar' && $transaction['conciliado']) {
+        foreach ($allowed_actions as $k => $action) {
+            if ($action['label'] == 'Conciliar' && $transaction['conciliado']) {
                 unset($allowed_actions[$k]);
             }
-            if(!$this->securityContext->isGranted('ROLE_'.$action['role'])) {
+            if (!$this->securityContext->isGranted('ROLE_' . $action['role'])) {
                 unset($allowed_actions[$k]);
             }
         }
@@ -248,7 +253,11 @@ EOF;
                 self::$tagged_transactions['Conciliar']
             ]
             ],
-            'Conciliar'         => ["allows" => []]
+            'Conciliar'         => ["allows" => []],
+        ];
+
+        self::$transactions_workflow_status = [
+            'Voided Transaction' => ["allows" => []]
         ];
     }
 
