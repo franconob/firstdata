@@ -35,23 +35,25 @@ class UserRepository
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getComunicaciones()
     {
-        $mails = $this->conn->executeQuery("SELECT cf_1234, cf_1235 FROM vtiger_contactscf WHERE contactid = ?", [
+        $mails = $this->conn->executeQuery("SELECT CONCAT_WS(',', cf_1234, cf_1235) as mails FROM vtiger_contactscf WHERE contactid = ?", [
             $this->security_context->getToken()->getUser()->getId()
         ])->fetchAll();
 
-        if ($mails) {
-            $mails     = implode(',', array_values($mails[0]));
-            $addresses = explode(',', $mails);
+        if (isset($mails[0]) && !empty($mails[0]['mails'])) {
+            $addresses = explode(',', $mails['0']['mails']);
             $addresses = array_map('trim', $addresses);
             $addresses = array_map('strtolower', $addresses);
+            $addresses = array_filter($addresses, function($address) {
+                return $address !== "";
+            });
 
             return $addresses;
         } else {
-            return [];
+            return null;
         }
     }
 } 

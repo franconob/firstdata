@@ -69,7 +69,6 @@ class NotificationMailer
         $message->setTo($user->getUsername());
 
         $copies = $this->user_repository->getComunicaciones();
-
         if ($copies)
             $message->setBcc($copies);
 
