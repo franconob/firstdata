@@ -80,6 +80,7 @@
             <argument type="service" id="swiftmailer.mailer.default" />
             <argument type="service" id="templating" />
             <argument type="service" id="f_data_transactions.repository.user" />
+            <argument>%mailer_from%</argument>
         </service>
     </services>
 </container>

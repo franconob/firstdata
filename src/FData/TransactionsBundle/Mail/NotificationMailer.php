@@ -20,7 +20,7 @@ class NotificationMailer
     /**
      * @var string
      */
-    private $from = "info@911booking.com";
+    private $from;
 
     private $subject = "";
 
@@ -43,13 +43,14 @@ class NotificationMailer
      * @param \Swift_Mailer $mailer
      * @param \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine $templating
      * @param \FData\SecurityBundle\User\UserRepository $userRepository
+     * @param string $from
      */
-    public function __construct(\Swift_Mailer $mailer, TimedTwigEngine $templating, UserRepository $userRepository)
+    public function __construct(\Swift_Mailer $mailer, TimedTwigEngine $templating, UserRepository $userRepository, $from)
     {
         $this->mailer          = $mailer;
         $this->templating      = $templating;
         $this->user_repository = $userRepository;
-
+        $this->from = $from;
     }
 
     /**
