@@ -84,7 +84,7 @@ class Transaction
 
     public function conciliar(array $transaction_data)
     {
-        $fecha = \DateTime::createFromFormat('Y-m-d', $transaction_data['fecha']);
+        $fecha = \DateTime::createFromFormat('Y-m-d H:i:s', $transaction_data['fecha']);
         $transaction = new TransactionEntity();
         $transaction
             ->setId($transaction_data['transaction_tag'])

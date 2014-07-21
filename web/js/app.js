@@ -158,7 +158,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                     },
                     date: {
                         datePicker: true,
-                        format: 'd/M/yyyy H:m:s'
+                        format: 'd/M/yyyy H:mm:ss'
                     }
                 },
                 tableCreated: function () {
@@ -311,7 +311,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                             };
 
                             if($scope.transaction['fecha']) {
-                                data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD');
+                                data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
                             }
 
                             $http.post(_config.url, { transactions: data }).success(function (data, status) {

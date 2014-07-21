@@ -208,7 +208,7 @@ EOF;
         /** @var Transaction $transaction */
         $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->find($transaction_tag);
         if ($transaction) {
-            return $transaction->getFecha()->format('Y-m-d');
+            return $transaction->getFecha()->format('Y-m-d H:i:s');
         }
 
         return null;

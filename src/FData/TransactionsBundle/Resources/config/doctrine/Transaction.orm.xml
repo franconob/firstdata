@@ -4,6 +4,6 @@
     <id name="id" type="integer" column="id">
       <generator strategy="NONE"/>
     </id>
-    <field name="fecha" type="date" column="fecha"/>
+    <field name="fecha" type="datetime" column="fecha"/>
   </entity>
 </doctrine-mapping>
