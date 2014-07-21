@@ -49,6 +49,7 @@ class NotificationMailer
         $this->mailer          = $mailer;
         $this->templating      = $templating;
         $this->user_repository = $userRepository;
+
     }
 
     /**
@@ -58,6 +59,7 @@ class NotificationMailer
      */
     public function createAndSend($mail_data, User $user)
     {
+        $this->subject = sprintf("Transacción de cliente: %s", $user->getName());
         $ctr = $mail_data['ctr'];
         unset($mail_data['ctr']);
         $body    = $this->templating->render(new TemplateReference('FDataTransactionsBundle', 'Mails', 'notification', 'html', 'twig'), [
