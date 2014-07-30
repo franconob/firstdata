@@ -53,13 +53,13 @@ class Transaction
     public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, User $user, EventDispatcherInterface $dispatcher)
     {
         $this->entity_manager = $entity_manager;
-        $this->http_client = $http_client;
-        $this->key_id      = $key_id;
-        $this->hmac_key    = $hmac_key;
-        $this->gateway_id  = $gatewat_id;
-        $this->password    = $password;
-        $this->user     = $user;
-        $this->dispatcher = $dispatcher;
+        $this->http_client    = $http_client;
+        $this->key_id         = $key_id;
+        $this->hmac_key       = $hmac_key;
+        $this->gateway_id     = $gatewat_id;
+        $this->password       = $password;
+        $this->user           = $user;
+        $this->dispatcher     = $dispatcher;
     }
 
     /**
@@ -101,10 +101,12 @@ class Transaction
     public function conciliar(array $transaction_data)
     {
         $fecha = \DateTime::createFromFormat('Y-m-d H:i:s', $transaction_data['fecha']);
-        $transaction = new TransactionEntity();
-        $transaction
-            ->setId($transaction_data['transaction_tag'])
-            ->setFecha($fecha);
+
+        /** @var TransactionEntity $transaction */
+        $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->getOrCreate($transaction_data['transaction_tag']);
+
+        $transaction->setFecha($fecha);
+
         $this->entity_manager->persist($transaction);
         $this->entity_manager->flush();
     }

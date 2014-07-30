@@ -14,6 +14,7 @@ use FData\TransactionsBundle\Entity\TransactionRepository;
 use FData\TransactionsBundle\Events\TransactionCompleteEvent;
 use FData\TransactionsBundle\Events\TransactionEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class TransactionSubscriber implements EventSubscriberInterface
 {
@@ -24,11 +25,18 @@ class TransactionSubscriber implements EventSubscriberInterface
     private $manager;
 
     /**
-     * @param EntityManager $manager
+     * @var SecurityContext
      */
-    public function __construct(EntityManager $manager)
+    private $securityContext;
+
+    /**
+     * @param EntityManager $manager
+     * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
+     */
+    public function __construct(EntityManager $manager, SecurityContext $securityContext)
     {
-        $this->manager = $manager;
+        $this->manager         = $manager;
+        $this->securityContext = $securityContext;
     }
 
     /**
@@ -58,12 +66,25 @@ class TransactionSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param TransactionCompleteEvent $event
+     */
     public function onTransactionComplete(TransactionCompleteEvent $event)
+    {
+        if($this->securityContext->isGranted('ROLE_CONTACTO')) {
+            $this->setUsuario($event);
+        }
+    }
+
+    /**
+     * @param TransactionCompleteEvent $event
+     */
+    private function setUsuario(TransactionCompleteEvent $event)
     {
         $id = $event->getTransaction()['transaction_tag'];
 
         /** @var TransactionRepository $repository */
-        $repository = $this->manager->getRepository('FDataTransactionsBundle:Transaction');
+        $repository  = $this->manager->getRepository('FDataTransactionsBundle:Transaction');
         $transaction = $repository->getOrCreate($id);
 
         $transaction->setUsuario($event->getUser()->getUsername());

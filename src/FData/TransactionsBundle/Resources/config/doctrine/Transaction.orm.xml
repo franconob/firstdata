@@ -8,6 +8,6 @@
             <generator strategy="NONE"/>
         </id>
         <field name="fecha" type="datetime" column="fecha"/>
-        <field name="usuario" type="string" column="usuario"/>
+        <field name="usuario" type="string" column="usuario" nullable="true"/>
     </entity>
 </doctrine-mapping>

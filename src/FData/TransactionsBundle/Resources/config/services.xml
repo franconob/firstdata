@@ -86,6 +86,7 @@
 
         <service id="f_data_transactions.transction_subscriber" class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="security.context" />
            <tag name="kernel.event_subscriber" />
         </service>
     </services>

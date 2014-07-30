@@ -22,7 +22,7 @@ class TransactionRepository extends EntityRepository
         if($transaction = $this->find($id)) {
             return $transaction;
         } else {
-            return new Transaction();
+            return (new Transaction())->setId($id);
         }
     }
 } 
