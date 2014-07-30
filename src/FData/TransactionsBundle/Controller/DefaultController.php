@@ -46,6 +46,7 @@ class DefaultController extends Controller
         $tableHeader["id"]         = ["hidden" => true, "unique" => true];
         $tableHeader["actions"]    = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
         $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
+        $tableHeader["usuario"] = ["friendly" => "Usuario"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
         $data  = array_values($grid->filterResults($data));
@@ -139,6 +140,9 @@ class DefaultController extends Controller
             }
             if ($fecha = $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
+            }
+            if($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->find($formattedRow['Tag'])) {
+                $formattedRow['usuario'] = $transaction->getUsuario();
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);

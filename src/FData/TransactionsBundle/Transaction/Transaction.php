@@ -10,10 +10,13 @@ namespace FData\TransactionsBundle\Transaction;
 
 use Doctrine\ORM\EntityManager;
 use FData\SecurityBundle\User\User;
+use FData\TransactionsBundle\Events\TransactionCompleteEvent;
+use FData\TransactionsBundle\Events\TransactionEvents;
 use FData\TransactionsBundle\HttpClient\Clients\TransactionClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\ResponseInterface;
 use FData\TransactionsBundle\Entity\Transaction as TransactionEntity;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Transaction
 {
@@ -42,7 +45,12 @@ class Transaction
     /** @var  Response */
     private $response;
 
-    public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, User $user)
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
+    public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, User $user, EventDispatcherInterface $dispatcher)
     {
         $this->entity_manager = $entity_manager;
         $this->http_client = $http_client;
@@ -51,6 +59,7 @@ class Transaction
         $this->gateway_id  = $gatewat_id;
         $this->password    = $password;
         $this->user     = $user;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -74,6 +83,13 @@ class Transaction
                 $ex->setResponse($this->getResponse());
                 throw $ex;
             }
+
+            $this->dispatcher->dispatch(TransactionEvents::TRANSACTION_SUCCESS, new TransactionCompleteEvent(
+                $transaction_data,
+                $this->response,
+                $this->user
+            ));
+
         } catch (ClientException $e) {
             $ex = new Exception();
             $ex->setResponse(new Response($e->getResponse()));
@@ -209,7 +225,7 @@ class Transaction
     }
 
     /**
-     * @param string $body Body SIN ENCODEAR A JSON
+     * @param array $body Body SIN ENCODEAR A JSON
      * @return \GuzzleHttp\Message\ResponseInterface
      * @throws ClientException|null
      */

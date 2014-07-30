@@ -63,6 +63,7 @@
             <argument>%f_data_transactions.api.gateway_id%</argument>
             <argument>%f_data_transactions.api.password%</argument>
             <argument type="expression">service('security.context').getToken().getUser()</argument>
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="f_data_transactions.api.search.grid" class="FData\TransactionsBundle\Grid\Grid">
@@ -81,6 +82,11 @@
             <argument type="service" id="templating" />
             <argument type="service" id="f_data_transactions.repository.user" />
             <argument>%mailer_from%</argument>
+        </service>
+
+        <service id="f_data_transactions.transction_subscriber" class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+           <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>
