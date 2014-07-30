@@ -293,6 +293,9 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                             }
                         };
 
+                        // Se usa cuando se concilia
+                        $scope.maxDate = new Date();
+
 
                         $scope.submit = function () {
 

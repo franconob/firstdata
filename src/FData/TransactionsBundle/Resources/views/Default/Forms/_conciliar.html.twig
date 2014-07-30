@@ -10,7 +10,7 @@
                     <i class="fa fa-calendar" ng-click="opened = true"></i>
                 </span>
                 <input type="text" placeholder="Fecha de conciliación" class="form-control" datepicker-popup="dd/MMMM/yyyy"
-                       ng-model="transaction.fecha" ng-click="opened=true" ng-required="true" is-open="opened"/>
+                       ng-model="transaction.fecha" max-date="maxDate" ng-click="opened=true" ng-required="true" is-open="opened"/>
             </div>
         </form>
     </div>
