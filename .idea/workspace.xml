@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -27,19 +26,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="23" selection-start="4307" selection-end="4307" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="7974">
+            <state line="275" column="0" selection-start="9838" selection-end="9838" vertical-scroll-proportion="0.5125628" vertical-offset="4644" max-vertical-offset="7956">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_tagged.html.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_tagged.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="648">
+            <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="648">
               <folding>
                 <marker date="1406736779376" expanded="true" signature="94:162" placeholder="..." />
                 <marker date="1406736779376" expanded="true" signature="191:1215" placeholder="..." />
@@ -596,7 +595,11 @@
       <created>1406735114846</created>
       <updated>1406735114846</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Tarea #1611. Corregido el problema cuando el amount supera el limite">
+      <created>1406744414686</created>
+      <updated>1406744414686</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -659,7 +662,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Correccion cuando se filtra o se refresca la grilla. Se vuelve a compilar para angular" />
     <MESSAGE value="Finalizado el workflow de estados de las transaccions cuando se hacen operaciones tagged" />
     <MESSAGE value="Formulario de login. Barra de navegacion." />
     <MESSAGE value="Correccion de dependencias" />
@@ -684,7 +686,8 @@
     <MESSAGE value="Tarea #1577. Corregido el asunto del mensaje" />
     <MESSAGE value="Tarea #1577. Correccion parametros del smtp" />
     <MESSAGE value="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia" />
+    <MESSAGE value="Tarea #1611. Corregido el problema cuando el amount supera el limite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1611. Corregido el problema cuando el amount supera el limite" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -988,16 +991,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="23" selection-start="4307" selection-end="4307" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="7974">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="648">
+        <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="648">
           <folding>
             <marker date="1406736779376" expanded="true" signature="94:162" placeholder="..." />
             <marker date="1406736779376" expanded="true" signature="191:1215" placeholder="..." />
@@ -1008,6 +1004,13 @@
             <marker date="1406736779376" expanded="true" signature="1246:1595" placeholder="..." />
             <marker date="1406736779376" expanded="true" signature="1335:1510" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="275" column="0" selection-start="9838" selection-end="9838" vertical-scroll-proportion="0.5125628" vertical-offset="4644" max-vertical-offset="7956">
+          <folding />
         </state>
       </provider>
     </entry>

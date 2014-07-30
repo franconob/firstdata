@@ -273,8 +273,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                             }
                     }
                 });
-
-                return total;
+                return numeral(total).format('0,0.00');
             };
 
             scope.processTransaction = function (id, config) {
