@@ -9,12 +9,12 @@
                  ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid, 'has-feedback': form.amount.$valid}">
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input ng-model="transaction.amount" name="amount" id="dollaramount" type="text" ng-change="checkLimitAmount(transaction.amount, maxAmount, form)"
+                    <input ng-model="transaction.amount" check-limit limit="{{ maxAmount }}" name="amount" id="dollaramount" type="text"
                            class="form-control" placeholder="Formato: 10,000.00" ng-pattern="/^[0-9]+([,]?[0-9]{3})?([.]?[0-9]{2})?$/" required>
                     <span class="fa fa-check form-control-feedback" ng-show="form.amount.$valid"></span>
                 </div>
                 <span class="help-block">El importe no puede superar los {{ maxAmount }}</span>
-                <span class="help-block" ng-show="form.amount.$error.max">El importe ingresado supera a {{ maxAmount }}</span>
+                <span class="help-block" ng-show="form.amount.$error.limit_reached">El importe ingresado supera a {{ maxAmount }}</span>
 
             </div>
         </form>

@@ -132,6 +132,29 @@ app.directive('expiryDate', function (moment) {
     }
 });
 
+app.directive('checkLimit', function(numeral) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            limit: '@'
+        },
+        link: function checkLimitCtrl(scope, elm, attr, ctrl) {
+            ctrl.$parsers.push(function(viewValue) {
+                var limit = numeral().unformat(scope.limit);
+                var value = numeral(viewValue).format('0.00');
+                if(value > limit) {
+                    ctrl.$setValidity('limit_reached', false);
+                    return undefined;
+                }
+
+                ctrl.$setValidity('limit_reached', true);
+                return viewValue;
+            });
+        }
+    }
+});
+
 app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter, printCTR) {
     return {
         restrict: 'E',

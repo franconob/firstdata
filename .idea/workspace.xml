@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -27,28 +27,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="296" column="51" selection-start="11285" selection-end="11285" vertical-scroll-proportion="0.81407034" vertical-offset="4842" max-vertical-offset="7560">
+            <state line="145" column="23" selection-start="4307" selection-end="4307" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="7974">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_conciliar.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig">
+      <file leaf-file-name="_tagged.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="65" selection-start="624" selection-end="624" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="558">
+            <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="648">
               <folding>
-                <marker date="1406734986497" expanded="true" signature="97:158" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="187:735" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="246:724" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="284:708" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="333:433" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="558:689" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="766:1139" placeholder="..." />
-                <marker date="1406734986497" expanded="true" signature="855:1030" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="94:162" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="191:1215" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="250:1204" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="287:1188" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="464:935" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="663:807" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="1246:1595" placeholder="..." />
+                <marker date="1406736779376" expanded="true" signature="1335:1510" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -97,7 +97,6 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
@@ -116,8 +115,9 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
-        <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
+        <option value="$PROJECT_DIR$/web/js/app.js" />
       </list>
     </option>
   </component>
@@ -592,13 +592,18 @@
       <created>1405982497175</created>
       <updated>1405982497175</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia">
+      <created>1406735114846</created>
+      <updated>1406735114846</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1372" height="735" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -616,7 +621,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -655,7 +659,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Faltaba enviar el customer_ref = &quot;Awwa Suite Hotel&quot;" />
     <MESSAGE value="Correccion cuando se filtra o se refresca la grilla. Se vuelve a compilar para angular" />
     <MESSAGE value="Finalizado el workflow de estados de las transaccions cuando se hacen operaciones tagged" />
     <MESSAGE value="Formulario de login. Barra de navegacion." />
@@ -680,7 +683,8 @@
     <MESSAGE value="Tarea #1604. Cambio en el campo que almacena el nombre del hotel" />
     <MESSAGE value="Tarea #1577. Corregido el asunto del mensaje" />
     <MESSAGE value="Tarea #1577. Correccion parametros del smtp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1577. Correccion parametros del smtp" />
+    <MESSAGE value="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -766,11 +770,6 @@
         <state line="78" column="63" selection-start="5357" selection-end="5357" vertical-scroll-proportion="0.7043121" vertical-offset="1061" max-vertical-offset="1548" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="63" selection-start="1595" selection-end="1595" vertical-scroll-proportion="0.6673511" vertical-offset="161" max-vertical-offset="648" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="56" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="756" />
@@ -794,11 +793,6 @@
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirm.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="0" selection-start="194" selection-end="194" vertical-scroll-proportion="0.19636364" vertical-offset="0" max-vertical-offset="550" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1710" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig">
@@ -949,22 +943,71 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="65" selection-start="624" selection-end="624" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="558">
           <folding>
-            <marker date="1406734986497" expanded="true" signature="97:158" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="187:735" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="246:724" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="284:708" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="333:433" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="558:689" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="766:1139" placeholder="..." />
-            <marker date="1406734986497" expanded="true" signature="855:1030" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406734986497" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3263158" vertical-offset="756" max-vertical-offset="1710">
+          <folding>
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1405534866097" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="296" column="51" selection-start="11285" selection-end="11285" vertical-scroll-proportion="0.81407034" vertical-offset="4842" max-vertical-offset="7560">
+        <state line="145" column="23" selection-start="4307" selection-end="4307" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="7974">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="648">
+          <folding>
+            <marker date="1406736779376" expanded="true" signature="94:162" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="191:1215" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="250:1204" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="287:1188" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="464:935" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="663:807" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="1246:1595" placeholder="..." />
+            <marker date="1406736779376" expanded="true" signature="1335:1510" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
