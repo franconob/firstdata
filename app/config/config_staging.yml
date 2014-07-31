@@ -23,6 +23,3 @@ monolog:
         #chromephp:
         #    type:   chromephp
         #    level:  info
-
-swiftmailer:
-    delivery_address: vherrero@spiralti.com
