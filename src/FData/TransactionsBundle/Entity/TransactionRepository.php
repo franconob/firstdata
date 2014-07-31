@@ -14,15 +14,20 @@ use Doctrine\ORM\EntityRepository;
 class TransactionRepository extends EntityRepository
 {
     /**
-     * @param $id
+     * @param $transactionTag
      * @return Transaction
      */
-    public function getOrCreate($id)
+    public function getOrCreate($transactionTag)
     {
-        if($transaction = $this->find($id)) {
+        if($transaction = $this->findByTransactionTag($transactionTag)) {
             return $transaction;
         } else {
-            return (new Transaction())->setId($id);
+            return (new Transaction())->setTransactionTag($transactionTag);
         }
+    }
+
+    public function findByTransactionTag($transactionTag)
+    {
+        return $this->findOneBy(array('transactionTag' => $transactionTag));
     }
 } 

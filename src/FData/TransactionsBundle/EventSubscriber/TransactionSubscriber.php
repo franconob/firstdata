@@ -10,6 +10,7 @@ namespace FData\TransactionsBundle\EventSubscriber;
 
 
 use Doctrine\ORM\EntityManager;
+use FData\TransactionsBundle\Entity\Transaction;
 use FData\TransactionsBundle\Entity\TransactionRepository;
 use FData\TransactionsBundle\Events\TransactionCompleteEvent;
 use FData\TransactionsBundle\Events\TransactionEvents;
@@ -71,7 +72,7 @@ class TransactionSubscriber implements EventSubscriberInterface
      */
     public function onTransactionComplete(TransactionCompleteEvent $event)
     {
-        if($this->securityContext->isGranted('ROLE_CONTACTO')) {
+        if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
             $this->setUsuario($event);
         }
     }
@@ -81,11 +82,14 @@ class TransactionSubscriber implements EventSubscriberInterface
      */
     private function setUsuario(TransactionCompleteEvent $event)
     {
-        $id = $event->getTransaction()['transaction_tag'];
-
         /** @var TransactionRepository $repository */
-        $repository  = $this->manager->getRepository('FDataTransactionsBundle:Transaction');
-        $transaction = $repository->getOrCreate($id);
+        $repository      = $this->manager->getRepository('FDataTransactionsBundle:Transaction');
+
+        $transactionTag = $event->getResponse()->get('transaction_tag');
+        $transaction    = $repository->findByTransactionTag($transactionTag);
+        if (!$transaction) {
+            $transaction = (new Transaction())->setTransactionTag($transactionTag);
+        }
 
         $transaction->setUsuario($event->getUser()->getUsername());
         $this->manager->persist($transaction);

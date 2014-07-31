@@ -19,13 +19,6 @@ class Transaction
      */
     private $fecha;
 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     /**
      * Get id
      *
@@ -95,5 +88,33 @@ class Transaction
     public function getUsuario()
     {
         return $this->usuario;
+    }
+    /**
+     * @var string
+     */
+    private $transactionTag;
+
+
+    /**
+     * Set transactionTag
+     *
+     * @param string $transactionTag
+     * @return Transaction
+     */
+    public function setTransactionTag($transactionTag)
+    {
+        $this->transactionTag = $transactionTag;
+
+        return $this;
+    }
+
+    /**
+     * Get transactionTag
+     *
+     * @return string 
+     */
+    public function getTransactionTag()
+    {
+        return $this->transactionTag;
     }
 }

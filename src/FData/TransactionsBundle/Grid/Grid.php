@@ -206,8 +206,8 @@ EOF;
     public function isConciliada($transaction_tag)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->find($transaction_tag);
-        if ($transaction) {
+        $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($transaction_tag);
+        if ($transaction && $transaction->getFecha()) {
             return $transaction->getFecha()->format('Y-m-d H:i:s');
         }
 

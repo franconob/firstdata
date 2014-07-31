@@ -5,9 +5,10 @@
     <entity name="FData\TransactionsBundle\Entity\Transaction"
             repository-class="FData\TransactionsBundle\Entity\TransactionRepository">
         <id name="id" type="integer" column="id">
-            <generator strategy="NONE"/>
+            <generator strategy="AUTO"/>
         </id>
-        <field name="fecha" type="datetime" column="fecha"/>
+        <field name="transactionTag" column="transaction_tag" nullable="true" />
+        <field name="fecha" type="datetime" column="fecha" nullable="true"/>
         <field name="usuario" type="string" column="usuario" nullable="true"/>
     </entity>
 </doctrine-mapping>

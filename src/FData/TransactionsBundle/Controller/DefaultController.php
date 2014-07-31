@@ -141,7 +141,7 @@ class DefaultController extends Controller
             if ($fecha = $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
             }
-            if($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->find($formattedRow['Tag'])) {
+            if($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
                 $formattedRow['usuario'] = $transaction->getUsuario() ?: "" ;
             }
 
