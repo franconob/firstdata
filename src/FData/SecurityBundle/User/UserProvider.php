@@ -10,6 +10,7 @@ namespace FData\SecurityBundle\User;
 
 
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\Query;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -69,7 +70,7 @@ class UserProvider implements UserProviderInterface
     {
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
             $user = $this->connection->fetchAssoc(
-                "Select vtiger_contactdetails.contactid as contactid , vtiger_accountscf.cf_1233 as HOTEL ,
+                "Select vtiger_contactdetails.contactid as contactid , vtiger_account.accountname as HOTEL ,
                 CONCAT_WS(' ',vtiger_contactdetails.firstname, vtiger_contactdetails.lastname) as nombre,
 cf_1217 as 'NEW_TRANSACTION',
 cf_1219 as 'REFUND',
@@ -110,17 +111,67 @@ where vtiger_crmentity.deleted<>1 and email= ?
                 throw new UsernameNotFoundException(sprintf("El usuario %s no existe", $username));
             }
 
-            $_hoteles = $this->connection->fetchAll("
-Select vtiger_accountscf.cf_1233 as HOTEL from vtiger_account inner join vtiger_crmentity
-on vtiger_crmentity.crmid=vtiger_account.accountid
-INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
-where vtiger_crmentity.deleted<>1 and smownerid= ?", array($user['id']));
+            $vrol = $this->connection->fetchAll("select r.* from vtiger_role r
+inner join vtiger_user2role ur on (r.roleid = ur.roleid) where
+ur.userid = ?;", array($user['id']));
 
-            $hoteles = [];
-            foreach($_hoteles as $hotel) {
-               $hoteles[] = $hotel['HOTEL'];
+            if (!isset($vrol[0])) {
+
+            } else {
+                $roleid = $vrol[0]['roleid'];
+                // Traigo los hijos del rol para poder ver sus cuentas
+                $stmt = $this->connection->prepare('select * from vtiger_role r where r.parentrole like :rolel and r.roleid <> :role;');
+                $stmt->bindValue(":rolel", "%" . $roleid . "%");
+                $stmt->bindValue(":role", $roleid);
+
+                $stmt->execute();
+                $parentRoles = $stmt->fetchAll();
+
+                $child_roles = [];
+
+                foreach ($parentRoles as $parentRole) {
+                    $_roles        = explode('::', $parentRole['parentrole']);
+                    $pos           = array_search($roleid, $_roles);
+                    $child_roles[] = array_slice($_roles, $pos + 1);
+                }
+
+                $childRoles = [];
+                foreach ($child_roles as $cr) {
+                    foreach ($cr as $r) {
+                        if (!in_array($r, $childRoles)) {
+                            $childRoles[] = $r;
+                        }
+                    }
+
+                }
+
+
+                $userids = [$user['id']];
+                if (!empty($childRoles)) {
+                    $stmt = $this->connection->executeQuery('
+                    select id from vtiger_users u inner join vtiger_user2role ur on (u.id = ur.userid)
+where ur.roleid IN (?)', array($childRoles), array(\Doctrine\DBAL\Connection::PARAM_STR_ARRAY));
+
+                    $tmp_users = $stmt->fetchAll();
+                    if($tmp_users) {
+                        foreach($tmp_users as $user) {
+                            $userids[] = $user['id'];
+                        }
+                    }
+                }
+
             }
 
+            $_hoteles = $this->connection->executeQuery("
+Select vtiger_account.accountname as HOTEL from vtiger_account inner join vtiger_crmentity
+on vtiger_crmentity.crmid=vtiger_account.accountid
+INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
+where vtiger_crmentity.deleted<>1 and smownerid IN (?)", array($userids), array(\Doctrine\DBAL\Connection::PARAM_STR_ARRAY));
+
+            $hoteles = [];
+            foreach ($_hoteles as $hotel) {
+                $hoteles[] = $hotel['HOTEL'];
+            }
 
             return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], $hoteles, array('ROLE_USUARIO', 'ROLE_CONCILIAR'));
         }
