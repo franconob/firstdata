@@ -154,8 +154,8 @@ where ur.roleid IN (?)', array($childRoles), array(\Doctrine\DBAL\Connection::PA
 
                     $tmp_users = $stmt->fetchAll();
                     if($tmp_users) {
-                        foreach($tmp_users as $user) {
-                            $userids[] = $user['id'];
+                        foreach($tmp_users as $_user) {
+                            $userids[] = $_user['id'];
                         }
                     }
                 }
@@ -172,6 +172,7 @@ where vtiger_crmentity.deleted<>1 and smownerid IN (?)", array($userids), array(
             foreach ($_hoteles as $hotel) {
                 $hoteles[] = $hotel['HOTEL'];
             }
+
 
             return new User($user['id'], $username, $user['user_hash'], "", $user['first_name'] . ' ' . $user['last_name'], $hoteles, array('ROLE_USUARIO', 'ROLE_CONCILIAR'));
         }
