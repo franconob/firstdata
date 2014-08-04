@@ -153,8 +153,8 @@ ur.userid = ?;", array($user['id']));
 where ur.roleid IN (?)', array($childRoles), array(\Doctrine\DBAL\Connection::PARAM_STR_ARRAY));
 
                     $tmp_users = $stmt->fetchAll();
-                    if($tmp_users) {
-                        foreach($tmp_users as $_user) {
+                    if ($tmp_users) {
+                        foreach ($tmp_users as $_user) {
                             $userids[] = $_user['id'];
                         }
                     }
@@ -192,8 +192,7 @@ where vtiger_crmentity.deleted<>1 and smownerid IN (?)", array($userids), array(
      *
      * @throws UnsupportedUserException if the account is not supported
      */
-    public
-    function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(
@@ -211,9 +210,15 @@ where vtiger_crmentity.deleted<>1 and smownerid IN (?)", array($userids), array(
      *
      * @return bool
      */
-    public
-    function supportsClass($class)
+    public function supportsClass($class)
     {
         return $class === "FData\SecurityBundle\User\User";
+    }
+
+    public function getUsernameForApiKey($apiKey)
+    {
+        return $this->connection->executeQuery("SELECT user_name from vtiger_users where accesskey = ?", array(
+            $apiKey
+        ))->fetchColumn(0);
     }
 }

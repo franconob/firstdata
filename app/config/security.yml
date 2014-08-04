@@ -23,6 +23,8 @@ security:
             anonymous: true
             pattern: ^/
             provider: crm
+            simple_preauth:
+              authenticator: f_data_security.authentication.apikey_authenticator
             form_login:
                 check_path: /login_check
                 login_path: /login

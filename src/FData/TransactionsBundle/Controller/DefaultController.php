@@ -53,10 +53,10 @@ class DefaultController extends Controller
         $data2 = $data;
 
         unset($data[count($data) - 1]);
+        unset($data2[count($data2) - 1]);
 
 
         $cleanData    = [];
-        $totalAmount  = 0;
         $debo_aplicar = true;
 
         foreach ($data as $k_row => &$row) {
