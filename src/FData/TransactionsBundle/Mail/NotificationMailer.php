@@ -13,6 +13,8 @@ use FData\SecurityBundle\User\User;
 use FData\SecurityBundle\User\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class NotificationMailer
 {
@@ -40,17 +42,24 @@ class NotificationMailer
     private $user_repository;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * @param \Swift_Mailer $mailer
      * @param \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine $templating
      * @param \FData\SecurityBundle\User\UserRepository $userRepository
      * @param string $from
+     * @param \Symfony\Component\Validator\ValidatorInterface $validator
      */
-    public function __construct(\Swift_Mailer $mailer, TimedTwigEngine $templating, UserRepository $userRepository, $from)
+    public function __construct(\Swift_Mailer $mailer, TimedTwigEngine $templating, UserRepository $userRepository, $from, ValidatorInterface $validator)
     {
         $this->mailer          = $mailer;
         $this->templating      = $templating;
         $this->user_repository = $userRepository;
-        $this->from = $from;
+        $this->from            = $from;
+        $this->validator       = $validator;
     }
 
     /**
@@ -61,7 +70,7 @@ class NotificationMailer
     public function createAndSend($mail_data, User $user)
     {
         $this->subject = sprintf("Transacción de cliente: %s", $user->getName());
-        $ctr = $mail_data['ctr'];
+        $ctr           = $mail_data['ctr'];
         unset($mail_data['ctr']);
         $body    = $this->templating->render(new TemplateReference('FDataTransactionsBundle', 'Mails', 'notification', 'html', 'twig'), [
             'transaction' => $mail_data,
@@ -72,9 +81,19 @@ class NotificationMailer
         $message->setTo($user->getUsername());
 
         $copies = $this->user_repository->getComunicaciones();
-        if ($copies)
-            $message->setBcc($copies);
+        foreach ($copies as $copy) {
+            $errors = $this->validator->validateValue($copy, new Email());
+            if (count($errors) > 1) {
+                continue;
+            } else {
+                $message->addBcc($copy);
+            }
+        }
 
-        return $this->mailer->send($message);
+        try {
+            return $this->mailer->send($message);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

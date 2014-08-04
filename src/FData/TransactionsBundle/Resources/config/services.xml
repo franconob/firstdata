@@ -82,6 +82,7 @@
             <argument type="service" id="templating" />
             <argument type="service" id="f_data_transactions.repository.user" />
             <argument>%mailer_from%</argument>
+            <argument type="service" id="validator" />
         </service>
 
         <service id="f_data_transactions.transction_subscriber" class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
