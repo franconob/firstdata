@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
 {
@@ -22,7 +23,8 @@ class DefaultController extends Controller
     public function transactionsAction()
     {
         /** @var Grid $grid */
-        $grid = $this->get('f_data_transactions.api.search.grid');
+        $grid            = $this->get('f_data_transactions.api.search.grid');
+        $securityContext = $this->get('security.context');
 
         $response_string = (string)$grid->query()->getBody();
 
@@ -43,9 +45,11 @@ class DefaultController extends Controller
             }
         };
 
-        $tableHeader["id"]         = ["hidden" => true, "unique" => true];
-        $tableHeader["actions"]    = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
-        $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
+        $tableHeader["id"]      = ["hidden" => true, "unique" => true];
+        $tableHeader["actions"] = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
+        if ($securityContext->isGranted('ROLE_USUARIO')) {
+            $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
+        }
         $tableHeader["usuario"] = ["friendly" => "Usuario"];
 
         $data  = $reader_body->setOffset(1)->fetchAll();
@@ -138,19 +142,19 @@ class DefaultController extends Controller
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
                 $formattedRow['actions']                                                                             = $k_row;
             }
-            if ($fecha = $grid->isConciliada($formattedRow['Tag'])) {
+            if ($securityContext->isGranted('ROLE_USUARIO') && $fecha = $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
             }
-            if($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
-                $formattedRow['usuario'] = $transaction->getUsuario() ?: "" ;
+            if ($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
+                $formattedRow['usuario'] = $transaction->getUsuario() ? : "";
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [
-            "cols"        => $tableHeader,
-            "rows"        => $cleanData,
+            "cols" => $tableHeader,
+            "rows" => $cleanData,
         ];
 
         return JsonResponse::create($vars);
@@ -185,8 +189,12 @@ class DefaultController extends Controller
         return JsonResponse::create($vars);
     }
 
+
     public function conciliarAction(Request $request)
     {
+        if(false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
+            throw new AccessDeniedException();
+        }
         $data        = json_decode($request->getContent(), true)['transactions'];
         $transaction = $this->get('f_data_transactions.api.transaction');
         $transaction->conciliar($data);

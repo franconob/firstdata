@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php" />
+    <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -30,65 +26,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserProvider.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="221" column="24" selection-start="7456" selection-end="7456" vertical-scroll-proportion="-14.962963" vertical-offset="3376" max-vertical-offset="3924">
-              <folding>
-                <marker date="1407176217773" expanded="true" signature="1798:2658" placeholder="Select vtige..." />
-                <marker date="1407176217773" expanded="true" signature="3280:3326" placeholder="SELECT * fro..vtiger_users..." />
-                <marker date="1407176217773" expanded="true" signature="3555:3661" placeholder="select r.* f..vtiger_role..." />
-                <marker date="1407176217773" expanded="true" signature="3914:3994" placeholder="select * fro..vtiger_role..." />
-                <marker date="1407176217773" expanded="true" signature="4996:5101" placeholder="select id fr..vtiger_users..." />
-                <marker date="1407176217773" expanded="true" signature="5519:5804" placeholder="Select vtige..vtiger_account..." />
-                <marker date="1407176217773" expanded="true" signature="7348:7402" placeholder="SELECT user_..vtiger_users..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Connection.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="673" column="20" selection-start="19284" selection-end="19284" vertical-scroll-proportion="-11.37037" vertical-offset="11339" max-vertical-offset="25038">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefaultController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="20" selection-start="1767" selection-end="1767" vertical-scroll-proportion="16.0" vertical-offset="1152" max-vertical-offset="4158">
+            <state line="195" column="45" selection-start="8393" selection-end="8393" vertical-scroll-proportion="0.20913884" vertical-offset="3229" max-vertical-offset="4284">
               <folding>
-                <element signature="e#6423#6460#1" expanded="true" />
+                <element signature="e#602#651#1" expanded="true" />
+                <element signature="e#6677#6714#1" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="21" selection-start="671" selection-end="671" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="security.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="security.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="79" selection-start="630" selection-end="630" vertical-scroll-proportion="0.6122449" vertical-offset="108" max-vertical-offset="810">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PreAuthenticatedToken.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/PreAuthenticatedToken.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="47" selection-start="614" selection-end="614" vertical-scroll-proportion="-4.6666665" vertical-offset="216" max-vertical-offset="1566">
+            <state line="26" column="79" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
               <folding />
             </state>
           </provider>
@@ -155,17 +108,18 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3" />
-    <option name="width" value="1372" />
-    <option name="height" value="735" />
+    <option name="x" value="-1" />
+    <option name="y" value="27" />
+    <option name="width" value="1368" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -259,6 +213,36 @@
               <option name="myItemId" value="FData" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -340,7 +324,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1014" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../firstdata.sf/var/cache/dev/appDevUrlGenerator.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -570,11 +554,15 @@
       <created>1406919661794</created>
       <updated>1406919661794</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url">
+      <created>1407176701636</created>
+      <updated>1407176701636</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="1372" height="735" extended-state="6" />
+    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -583,7 +571,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29136163" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29136163" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -633,7 +621,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Tarea #1534. No se permite hacer Tagged Refund a una operacion &quot;Pre-Authorization&quot;" />
     <MESSAGE value="Tarea #1534. Se agrega link &quot;click here&quot; a informacion de firstdata sobre el monto maximo permitido" />
     <MESSAGE value="Cambio de usuario para la API de busqueda" />
     <MESSAGE value="Cuando no hay acciones para mostrar se muestra &quot;x&quot;" />
@@ -658,17 +645,13 @@
     <MESSAGE value="Tarea #1616. Corregido el modelo de datos con clave primaria autoincrement" />
     <MESSAGE value="Se quita el envio de correos a una sola direccion" />
     <MESSAGE value="Correccion variable $user" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correccion variable $user" />
+    <MESSAGE value="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="25" selection-start="533" selection-end="533" vertical-scroll-proportion="0.7346939" vertical-offset="0" max-vertical-offset="588" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="33" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="756" />
@@ -709,11 +692,6 @@
         <state line="8" column="47" selection-start="335" selection-end="335" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="648" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="275" column="0" selection-start="9838" selection-end="9838" vertical-scroll-proportion="0.5125628" vertical-offset="4644" max-vertical-offset="7956" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="181" column="20" selection-start="5469" selection-end="5469" vertical-scroll-proportion="1.7375643" vertical-offset="2011" max-vertical-offset="6426" />
@@ -736,9 +714,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/var/cache/prod/classes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1665" column="6" selection-start="49045" selection-end="49045" vertical-scroll-proportion="0.34854016" vertical-offset="28771" max-vertical-offset="115416">
-          <folding />
-        </state>
+        <state line="1665" column="6" selection-start="49045" selection-end="49045" vertical-scroll-proportion="0.34854016" vertical-offset="28771" max-vertical-offset="115416" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/UsernamePasswordToken.php">
@@ -813,9 +789,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/Statement.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="13" selection-start="3861" selection-end="3861" vertical-scroll-proportion="-0.49399656" vertical-offset="1278" max-vertical-offset="1998">
-          <folding />
-        </state>
+        <state line="71" column="13" selection-start="3861" selection-end="3861" vertical-scroll-proportion="-0.49399656" vertical-offset="1278" max-vertical-offset="1998" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Validator/RecursiveValidator.php">
@@ -830,9 +804,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="589" selection-end="589" vertical-scroll-proportion="0.5510204" vertical-offset="0" max-vertical-offset="588">
-          <folding />
-        </state>
+        <state line="18" column="26" selection-start="589" selection-end="589" vertical-scroll-proportion="0.5510204" vertical-offset="0" max-vertical-offset="588" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/EmailValidator.php">
@@ -847,9 +819,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.1442623" vertical-offset="146" max-vertical-offset="756">
-          <folding />
-        </state>
+        <state line="13" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.1442623" vertical-offset="146" max-vertical-offset="756" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Validator/ValidatorInterface.php">
@@ -859,16 +829,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/ValidatorInterface.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="20" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.3327616" vertical-offset="490" max-vertical-offset="2034">
-          <folding />
-        </state>
+        <state line="45" column="20" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.3327616" vertical-offset="490" max-vertical-offset="2034" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="50" selection-start="5045" selection-end="5045" vertical-scroll-proportion="0.6196721" vertical-offset="1134" max-vertical-offset="1800">
-          <folding />
-        </state>
+        <state line="84" column="50" selection-start="5045" selection-end="5045" vertical-scroll-proportion="0.6196721" vertical-offset="1134" max-vertical-offset="1800" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport.php">
@@ -878,18 +844,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="41" selection-start="2138" selection-end="2138" vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2178">
-          <folding />
-        </state>
+        <state line="85" column="41" selection-start="2138" selection-end="2138" vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2178" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="20" selection-start="817" selection-end="817" vertical-scroll-proportion="0.22813036" vertical-offset="569" max-vertical-offset="1152">
-          <folding>
-            <marker date="1405980745533" expanded="true" signature="-1:-1" placeholder="SELECT CONCA..vtiger_contactscf..." />
-          </folding>
-        </state>
+        <state line="39" column="20" selection-start="817" selection-end="817" vertical-scroll-proportion="0.22813036" vertical-offset="569" max-vertical-offset="1152" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php">
@@ -903,54 +863,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/FDataSecurityBundle.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/PreAuthenticatedToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="47" selection-start="614" selection-end="614" vertical-scroll-proportion="-4.6666665" vertical-offset="216" max-vertical-offset="1566">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="24" selection-start="7456" selection-end="7456" vertical-scroll-proportion="-14.962963" vertical-offset="3376" max-vertical-offset="3924">
-          <folding>
-            <marker date="1407176217773" expanded="true" signature="1798:2658" placeholder="Select vtige..." />
-            <marker date="1407176217773" expanded="true" signature="3280:3326" placeholder="SELECT * fro..vtiger_users..." />
-            <marker date="1407176217773" expanded="true" signature="3555:3661" placeholder="select r.* f..vtiger_role..." />
-            <marker date="1407176217773" expanded="true" signature="3914:3994" placeholder="select * fro..vtiger_role..." />
-            <marker date="1407176217773" expanded="true" signature="4996:5101" placeholder="select id fr..vtiger_users..." />
-            <marker date="1407176217773" expanded="true" signature="5519:5804" placeholder="Select vtige..vtiger_account..." />
-            <marker date="1407176217773" expanded="true" signature="7348:7402" placeholder="SELECT user_..vtiger_users..." />
-          </folding>
+        <state line="221" column="24" selection-start="7456" selection-end="7456" vertical-scroll-proportion="0.0" vertical-offset="3978" max-vertical-offset="4122">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1165" selection-end="1165" vertical-scroll-proportion="-0.28342247" vertical-offset="717" max-vertical-offset="1278">
-          <folding>
-            <element signature="e#139#182#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1767" selection-end="1767" vertical-scroll-proportion="16.0" vertical-offset="1152" max-vertical-offset="4158">
-          <folding>
-            <element signature="e#6423#6460#1" expanded="true" />
-          </folding>
-        </state>
+        <state line="36" column="0" selection-start="1165" selection-end="1165" vertical-scroll-proportion="-0.28342247" vertical-offset="717" max-vertical-offset="1278" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="673" column="20" selection-start="19284" selection-end="19284" vertical-scroll-proportion="-11.37037" vertical-offset="11339" max-vertical-offset="25038">
+        <state line="673" column="20" selection-start="19284" selection-end="19284" vertical-scroll-proportion="0.0" vertical-offset="12114" max-vertical-offset="25506">
           <folding />
         </state>
       </provider>
@@ -962,10 +892,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="388" column="11" selection-start="14901" selection-end="14901" vertical-scroll-proportion="0.54362416" vertical-offset="6660" max-vertical-offset="7956">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authentication/Token/PreAuthenticatedToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="47" selection-start="614" selection-end="614" vertical-scroll-proportion="0.24742268" vertical-offset="198" max-vertical-offset="1566">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="235" column="20" selection-start="7742" selection-end="7742" vertical-scroll-proportion="0.34879726" vertical-offset="3685" max-vertical-offset="4734">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="79" selection-start="630" selection-end="630" vertical-scroll-proportion="0.6122449" vertical-offset="108" max-vertical-offset="810">
+        <state line="26" column="79" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="201" max-vertical-offset="810">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="45" selection-start="8393" selection-end="8393" vertical-scroll-proportion="0.20913884" vertical-offset="3229" max-vertical-offset="4284">
+          <folding>
+            <element signature="e#602#651#1" expanded="true" />
+            <element signature="e#6677#6714#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
