@@ -271,6 +271,10 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                 total += numeral().unformat(row.Amount);
                                 break;
                             }
+                            if(parent_transaction && ("Tagged Completion" == parent_transaction['Transaction Type'])) {
+                                total -= numeral().unformat(row.Amount);
+                                break;
+                            }
                     }
                 });
                 return numeral(total).format('0,0.00');
