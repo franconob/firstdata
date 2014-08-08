@@ -78,7 +78,8 @@ class Response
      */
     public function getCTR()
     {
-        return $this->responseJSON['ctr'];
+        $ctr = $this->responseJSON['ctr'];
+        return $ctr .= "\n\n\n\n----------------------------"."\n         Signature";
     }
 
     /**
