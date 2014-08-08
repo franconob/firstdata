@@ -79,6 +79,7 @@ class Response
     public function getCTR()
     {
         $ctr = $this->responseJSON['ctr'];
+        $ctr .= "\nPlease be advice, this transaction will\nappear as 911 Booking Corp in your\ncredit card monthly statement.";
         return $ctr .= "\n\n\n\n----------------------------"."\n         Signature";
     }
 

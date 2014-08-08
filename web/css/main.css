@@ -3,6 +3,10 @@
         visibility: hidden;
     }
 
+    div.printable {
+        width: 400px;
+    }
+
     div.printable, div.printable > * {
         visibility: visible;
     }

@@ -70,6 +70,7 @@ app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
     return function (CTR, bank_message) {
         $modal.open({
             templateUrl: 'printCTR.html',
+            size: 'md',
             resolve: {
                 CTR: function () {
                     return CTR;
@@ -286,7 +287,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                 var transaction = Lazy(rows).findWhere({id: id});
                 $modal.open({
                     templateUrl: config.template ? config.template : "tagged.html",
-                    size: 'md',
+                    size: 'sm',
                     resolve: {
                         _config: function () {
                             return scope._config;
