@@ -93,14 +93,28 @@ EOF;
      */
     private $entity_manager;
 
+    /**
+     * @var \Symfony\Component\Security\Core\SecurityContext
+     */
     private $securityContext;
+
+    /**
+     * @var array
+     */
+    private $customHeaders;
+
+    /**
+     * @var array
+     */
+    private $tableHeader = [];
 
     public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext)
     {
         $this->entity_manager  = $entity_manager;
         $this->http_client     = $http_client;
         $this->securityContext = $securityContext;
-        $this->setupHeaders();
+        $this->setupApiHeaders();
+        $this->setupCustomHeaders();
         $this->generateWorkflow();
     }
 
@@ -133,9 +147,9 @@ EOF;
      */
     public function searchInEnabledHeaders($header)
     {
-        foreach ($this->enabledHeaders as $_header) {
+        foreach ($this->enabledHeaders as $k => $_header) {
             if (is_array($_header)) {
-                $enabledHeader = $_header["friendly"];
+                $enabledHeader = isset($_header["friendly"]) ? $_header['friendly'] : $k;
             } else {
                 $enabledHeader = $_header;
             }
@@ -149,16 +163,17 @@ EOF;
 
     /**
      * Limpia el array de datos dejando solo los headers habilitados
+     * @param array $cols
      * @param array $data
      * @return array
      */
-    public function cleanData($data)
+    public function cleanData(array $cols, array $data)
     {
         $cleanData = [];
-        foreach ($data as $key => $row) {
+        foreach ($data as $row) {
             $row['Time']   = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
             $row['Expiry'] = substr($row['Expiry'], 0, 2) . '/' . substr($row['Expiry'], 2);
-            $cleanData[]   = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders())));
+            $cleanData[]   = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
         }
 
         return $cleanData;
@@ -177,8 +192,8 @@ EOF;
         ) {
             return '<div class="text-center">&times</div>';
         }
-        $loader          = new \Twig_Loader_String();
-        $twig            = new \Twig_Environment($loader);
+        $loader = new \Twig_Loader_String();
+        $twig   = new \Twig_Environment($loader);
         if (isset(self::$transactions_workflow_status[$transaction['Status']])) {
             $allowed_actions = self::$transactions_workflow_status[$transaction['Status']]['allows'];
         } else {
@@ -223,6 +238,32 @@ EOF;
     }
 
     /**
+     * @param $api_headers
+     */
+    public function buildHeaders($api_headers)
+    {
+        foreach ($api_headers as $k => $header) {
+            if ($_header = $this->searchInEnabledHeaders($header)) {
+                if (is_array($_header)) {
+                    $this->tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function ($header) {
+                        return $header !== "format";
+                    }));
+                } else {
+                    $this->tableHeader[$_header] = ["index" => $k + 2, "type" => "string"];
+                }
+            }
+        };
+
+        $this->tableHeader = array_merge($this->tableHeader, $this->customHeaders);
+    }
+
+    public function getTableHeader()
+    {
+        return $this->tableHeader;
+    }
+
+
+    /**
      * Construye el workflow de dependencia de acciones
      */
     private function generateWorkflow()
@@ -264,7 +305,7 @@ EOF;
     /**
      *  Headers y formateos
      */
-    private function setupHeaders()
+    private function setupApiHeaders()
     {
         $this->enabledHeaders = [
             0  => ["friendly" => "Tag"],
@@ -295,15 +336,35 @@ EOF;
         ];
     }
 
+    public function setupCustomHeaders()
+    {
+        $this->customHeaders = [
+            "id"      => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
+            "actions" => ["index" => 1, "friendly" => 'actions', "filter" => false, "sorting" => false, "exportable" => false],
+            "usuario" => ["friendly" => "usuario"]
+        ];
+
+        if ($this->securityContext->isGranted('ROLE_USUARIO')) {
+            $this->customHeaders["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
+        }
+    }
+
     /**
+     * @param array $headers
      * @return array
      */
-    private function getFlatHeaders()
+    public function getFlatHeaders(array $headers)
     {
         $flatHeaders = [];
+        foreach ($headers as $k => $header) {
+            if ((isset($header['exportable']) && !$header['exportable']) || (isset($header['hidden']) && true == $header['hidden'])) {
+                continue;
+            }
+            $enabledHeader = isset($header["friendly"]) ? $header['friendly'] : $k;
 
-        foreach ($this->enabledHeaders as $header) {
-            $flatHeaders[] = is_array($header) ? $header['friendly'] : $header;
+            $flatHeaders[] = $enabledHeader;
+
+
         }
 
         return $flatHeaders;

@@ -31,26 +31,8 @@ class DefaultController extends Controller
         $reader_body   = Reader::createFromString($response_string);
         $reader_header = $reader_body->fetchOne();
 
-        $tableHeader = [];
 
-        foreach ($reader_header as $k => $header) {
-            if ($_header = $grid->searchInEnabledHeaders($header)) {
-                if (is_array($_header)) {
-                    $tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function ($header) {
-                        return $header !== "format";
-                    }));
-                } else {
-                    $tableHeader[$_header] = ["index" => $k + 2, "type" => "string"];
-                }
-            }
-        };
-
-        $tableHeader["id"]      = ["hidden" => true, "unique" => true];
-        $tableHeader["actions"] = ["index" => 1, "friendly" => ' ', "filter" => false, "sorting" => false];
-        if ($securityContext->isGranted('ROLE_USUARIO')) {
-            $tableHeader["conciliado"] = ["friendly" => "Conciliada", "type" => "date"];
-        }
-        $tableHeader["usuario"] = ["friendly" => "Usuario"];
+        $grid->buildHeaders($reader_header);
 
         $data  = $reader_body->setOffset(1)->fetchAll();
         $data  = array_values($grid->filterResults($data));
@@ -153,7 +135,7 @@ class DefaultController extends Controller
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [
-            "cols" => $tableHeader,
+            "cols" => $grid->getTableHeader(),
             "rows" => $cleanData,
         ];
 
@@ -217,8 +199,9 @@ class DefaultController extends Controller
             $data          = $body['transactions'];
             $cols          = $body['cols'];
             $writer        = new Writer(new SplTempFileObject());
-            $writer->insertOne(array_filter(array_keys($cols), array($reportHandler, "searchInEnabledHeaders")));
-            $rows = $reportHandler->cleanData($data);
+            $reportHandler->buildHeaders(array_keys($cols));
+            $writer->insertOne($reportHandler->getFlatHeaders($cols));
+            $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
             $this->get('session')->set('csv_data', $writer->__toString());
 

@@ -390,7 +390,7 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
     };
 
     $scope.exportCSV = function () {
-        var transactions = $scope.grid.getData(false, true).rows || $scope.gird.getData().rows;
+        var transactions = $scope.grid.getData(false, true).rows || $scope.grid.getData().rows;
         $http.post('/transactions-export', {transactions: transactions, cols: $scope.grid.getData().cols}).success(function (data) {
             $window.location.assign('/transactions-export');
         });
