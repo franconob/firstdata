@@ -298,7 +298,8 @@ EOF;
         ];
 
         self::$transactions_workflow_status = [
-            'Voided Transaction' => ["allows" => []]
+            'Voided Transaction' => ["allows" => []],
+            'Completed Transaction' => ['allows' => []]
         ];
     }
 
