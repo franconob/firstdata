@@ -71,6 +71,9 @@ class UserProvider implements UserProviderInterface
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
             $user = $this->connection->fetchAssoc(
                 "Select vtiger_contactdetails.contactid as contactid , vtiger_account.accountname as HOTEL ,
+                vtiger_accountbillads.bill_street as dir_calle, vtiger_accountbillads.bill_pobox as dir_pobox,
+                vtiger_accountbillads.bill_city as dir_ciudad, vtiger_accountbillads.bill_state as dir_provincia,
+                vtiger_accountbillads.bill_country as dir_pais, vtiger_accountbillads.bill_code as dir_code,
                 CONCAT_WS(' ',vtiger_contactdetails.firstname, vtiger_contactdetails.lastname) as nombre,
 cf_1217 as 'NEW_TRANSACTION',
 cf_1219 as 'REFUND',
@@ -84,8 +87,9 @@ cf_851 as password
 from vtiger_contactdetails
 inner join vtiger_crmentity
 on vtiger_crmentity.crmid=vtiger_contactdetails.contactid
-Inner join vtiger_contactscf on  vtiger_contactdetails.contactid= vtiger_contactscf.contactid
-inner join vtiger_account on vtiger_contactdetails.accountid=vtiger_account.accountid
+inner join vtiger_contactscf on  (vtiger_contactdetails.contactid= vtiger_contactscf.contactid)
+inner join vtiger_account on (vtiger_contactdetails.accountid=vtiger_account.accountid)
+INNER JOIN vtiger_accountbillads ON (vtiger_accountbillads.accountaddressid = vtiger_account.accountid)
 INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
 where vtiger_crmentity.deleted<>1 and email= ?
                 "
@@ -101,7 +105,16 @@ where vtiger_crmentity.deleted<>1 and email= ?
                     $roles[] = 'ROLE_' . $role;
             }
 
-            return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles);
+            $extra_data = [
+                'dir_calle'     => $user['dir_calle'],
+                'dir_pobox'     => $user['dir_pobox'],
+                'dir_ciudad'    => $user['dir_ciudad'],
+                'dir_provincia' => $user['dir_provincia'],
+                'dir_pais'      => $user['dir_pais'],
+                'dir_code'      => $user['dir_code']
+            ];
+
+            return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles, $extra_data);
 
         } else {
             $user = $this->connection->fetchAssoc(

@@ -9,6 +9,7 @@
 namespace FData\TransactionsBundle\Transaction;
 
 
+use FData\SecurityBundle\User\User;
 use GuzzleHttp\Message\ResponseInterface;
 
 class Response
@@ -24,12 +25,19 @@ class Response
     private $responseJSON;
 
     /**
-     * @param ResponseInterface $response
+     * @var User
      */
-    public function __construct($response)
+    private $user;
+
+    /**
+     * @param ResponseInterface $response
+     * @param \FData\SecurityBundle\User\User $user
+     */
+    public function __construct($response, User $user)
     {
-        $this->response = $response;
+        $this->response     = $response;
         $this->responseJSON = json_decode((string)$this->response->getBody(), true);
+        $this->user         = $user;
     }
 
     /**
@@ -78,9 +86,20 @@ class Response
      */
     public function getCTR()
     {
-        $ctr = $this->responseJSON['ctr'];
+        $format = function ($value) {
+            return ucwords(strtolower(trim($value)));
+        };
+
+        $ctr        = $this->responseJSON['ctr'];
+        $ctr_arr    = explode("\n", $ctr);
+        $ctr_arr[1] = $format($this->user->getExtraData('dir_calle'));
+        $ctr_arr[2] = $format($this->user->getExtraData('dir_ciudad')) . ', ' . $format($this->user->getExtraData('dir_provincia')) . ', ' . $format($this->user->getExtraData('dir_code'));
+        $ctr_arr[3] = $format($this->user->getExtraData('dir_pais'));
+        unset($ctr_arr[4]);
+        $ctr = implode("\n", $ctr_arr);
         $ctr .= "\nPlease be advice, this transaction will\nappear as 911 Booking Corp in your\ncredit card monthly statement.";
-        return $ctr .= "\n\n\n\n----------------------------"."\n         Signature";
+
+        return $ctr .= "\n\n\n\n----------------------------" . "\n         Signature";
     }
 
     /**

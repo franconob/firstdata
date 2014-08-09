@@ -47,6 +47,11 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     private $roles;
 
     /**
+     * @var array
+     */
+    private $extra_data;
+
+    /**
      * @param int $id
      * @param string $username
      * @param string $password
@@ -54,15 +59,17 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      * @param string $name
      * @param string|array $hotel
      * @param array $roles
+     * @param array $extra_data
      */
-    public function __construct($id, $username, $password, $salt, $name, $hotel, array $roles)
+    public function __construct($id, $username, $password, $salt, $name, $hotel, array $roles, $extra_data = [])
     {
-        $this->id       = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->name     = $name;
-        $this->hotel = $hotel;
-        $this->roles    = $roles;
+        $this->id         = $id;
+        $this->username   = $username;
+        $this->password   = $password;
+        $this->name       = $name;
+        $this->hotel      = $hotel;
+        $this->roles      = $roles;
+        $this->extra_data = $extra_data;
     }
 
     /**
@@ -70,10 +77,10 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
      */
     public function __toString()
     {
-        if($this->hasRole('ROLE_USUARIO')) {
+        if ($this->hasRole('ROLE_USUARIO')) {
             return $this->name;
         } else {
-            return $this->name . ' - '. $this->hotel;
+            return $this->name . ' - ' . $this->hotel;
         }
     }
 
@@ -220,5 +227,22 @@ class User implements UserInterface, \Serializable, EncoderAwareInterface
     public function getSearchString()
     {
         return $this->hasRole('ROLE_USUARIO') ? "" : $this->hotel;
+    }
+
+    /**
+     * @param null|string $key
+     * @return array|null|mixed
+     */
+    public function getExtraData($key = null)
+    {
+        if ($key) {
+            if (isset($this->extra_data[$key])) {
+                return $this->extra_data[$key];
+            } else {
+                return null;
+            }
+        }
+
+        return $this->extra_data;
     }
 }

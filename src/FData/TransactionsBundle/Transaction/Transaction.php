@@ -245,7 +245,7 @@ class Transaction
      */
     private function setResponse(ResponseInterface $response)
     {
-        $this->response = new Response($response);
+        $this->response = new Response($response, $this->user);
     }
 
 } 
