@@ -92,7 +92,7 @@ class Transaction
 
         } catch (ClientException $e) {
             $ex = new Exception();
-            $ex->setResponse(new Response($e->getResponse()));
+            $ex->setResponse(new Response($e->getResponse(), $this->user));
             $ex->setHttpException($e);
             throw $ex;
         }
