@@ -6,6 +6,7 @@ use FData\TransactionsBundle\Grid\Grid;
 use FData\TransactionsBundle\Transaction\Exception;
 use League\Csv\Reader;
 use League\Csv\Writer;
+use PHPExcel;
 use SplTempFileObject;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -198,26 +199,36 @@ class DefaultController extends Controller
             $body          = json_decode($request->getContent(), true);
             $data          = $body['transactions'];
             $cols          = $body['cols'];
+
             $writer        = new Writer(new SplTempFileObject());
             $reportHandler->buildHeaders(array_keys($cols));
             $writer->insertOne($reportHandler->getFlatHeaders($cols));
             $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
-            $this->get('session')->set('csv_data', $writer->__toString());
+
+            $tmpfile = tempnam(sys_get_temp_dir(), 'csv');
+            $tmpfileR = fopen($tmpfile, "w");
+
+            fwrite($tmpfileR, $writer->__toString());
+            fclose($tmpfileR);
+
+            $this->get('session')->set('csv_data', $tmpfile);
 
             return new Response();
 
         } else {
-            $response = new Response();
-            $data     = $this->get('session')->get('csv_data');
-            $response->setContent($data);
-            $response->headers->add([
-                'Content-Disposition' => 'attachment; filename="transactions.csv"',
-                'Content-Length'      => mb_strlen($data),
-                'Content-Type'        => 'text/csv; charsert="utf-8"'
-            ]);
+            $tmpfile = $this->get('session')->get('csv_data');
 
-            return $response->send();
+            $phpExcelReader = \PHPExcel_IOFactory::createReader('CSV');
+            /** @var PhpExcel $phpExcelObj */
+            $phpExcelObj = $phpExcelReader->load($tmpfile);
+
+            $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel5');
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="transactions.xlsx"');
+
+            $phpWriter->save('php://output');
         }
 
     }

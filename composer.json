@@ -19,7 +19,8 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "league/csv": "5.4.0",
-        "guzzlehttp/guzzle": "~4.0"
+        "guzzlehttp/guzzle": "~4.0",
+        "liuggio/excelbundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

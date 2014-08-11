@@ -18,7 +18,9 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
     mailer_encryption: tls
-    mailer_port: 25    locale:            en
+    mailer_port: 25
+    mailer_from: info@911booking.com
+    locale:            en
 
     secret:            ThisTokenIsNotSoSecretChangeIt
 
