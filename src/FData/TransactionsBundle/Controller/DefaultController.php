@@ -206,7 +206,7 @@ class DefaultController extends Controller
             $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
 
-            $tmpfile = tempnam(sys_get_temp_dir(), 'csv');
+            $tmpfile = tempnam(ini_get('upload_tmp_dir'), 'csv');
             $tmpfileR = fopen($tmpfile, "w");
 
             fwrite($tmpfileR, $writer->__toString());
