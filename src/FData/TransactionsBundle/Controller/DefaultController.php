@@ -219,16 +219,17 @@ class DefaultController extends Controller
         } else {
             $tmpfile = $this->get('session')->get('csv_data');
 
-            \PHPExcel_Shared_File::setUseUploadTempDirectory(true);
+            //\PHPExcel_Shared_File::setUseUploadTempDirectory(true);
 
             $phpExcelReader = \PHPExcel_IOFactory::createReader('CSV');
             /** @var PhpExcel $phpExcelObj */
             $phpExcelObj = $phpExcelReader->load($tmpfile);
 
-            $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel2007');
+            $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel5');
 
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="transactions.xlsx"');
+            //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="transactions.xls"');
 
             $phpWriter->save('php://output');
         }
