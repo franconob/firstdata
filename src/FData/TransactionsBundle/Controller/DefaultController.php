@@ -219,6 +219,8 @@ class DefaultController extends Controller
         } else {
             $tmpfile = $this->get('session')->get('csv_data');
 
+            \PHPExcel_Shared_File::setUseUploadTempDirectory(true);
+
             $phpExcelReader = \PHPExcel_IOFactory::createReader('CSV');
             /** @var PhpExcel $phpExcelObj */
             $phpExcelObj = $phpExcelReader->load($tmpfile);
