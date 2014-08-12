@@ -223,7 +223,7 @@ class DefaultController extends Controller
             /** @var PhpExcel $phpExcelObj */
             $phpExcelObj = $phpExcelReader->load($tmpfile);
 
-            $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel5');
+            $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel2007');
 
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment;filename="transactions.xlsx"');
