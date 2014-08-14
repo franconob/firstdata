@@ -98,8 +98,9 @@ class Response
         unset($ctr_arr[4]);
         $ctr = implode("\n", $ctr_arr);
         $ctr .= "\nPlease be advice, this transaction will\nappear as 911 Booking Corp in your\ncredit card monthly statement.";
+        $ctr .= "\n\n\n\n----------------------------" . "\n         Signature";
 
-        return $ctr .= "\n\n\n\n----------------------------" . "\n         Signature";
+        return $ctr;
     }
 
     /**
