@@ -86,7 +86,7 @@ class NotificationMailer
             if (count($errors) > 1) {
                 continue;
             } else {
-                $message->addBcc($copy);
+                $message->addCc($copy);
             }
         }
 
