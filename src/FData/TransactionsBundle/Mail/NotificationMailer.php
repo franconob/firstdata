@@ -78,17 +78,20 @@ class NotificationMailer
         ]);
         $message = new \Swift_Message($this->subject, $body, 'text/html', 'utf-8');
         $message->setFrom($this->from);
-        $message->setTo($user->getUsername());
+        //$message->setTo($user->getUsername());
 
         $copies = $this->user_repository->getComunicaciones();
+        $tos = [$user->getUsername()];
         foreach ($copies as $copy) {
             $errors = $this->validator->validateValue($copy, new Email());
             if (count($errors) > 1) {
                 continue;
             } else {
-                $message->addCc($copy);
+                //$message->addCc($copy);
+                $tos[] = $copy;
             }
         }
+        $message->setTo($tos);
 
         try {
             return $this->mailer->send($message);
