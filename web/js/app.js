@@ -308,16 +308,50 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, pri
                         transactions: function () {
                             return rows;
                         },
-                        grid: function() {
+                        grid: function () {
                             return scope.grid;
                         }
                     },
-                    controller: 'TaggedFormModalCtrl'
+                    controller: config.controller || 'TaggedFormModalCtrl'
                 })
             }
         }
     }
 });
+
+app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transaction", "grid", "$http", "notify", "printCTR", "_config", function ($scope, $modalInstance, transaction, grid, $http, notify, printCTR, _config) {
+    $scope.title = _config.label;
+    $scope.transaction = transaction;
+    $scope.submit = function () {
+
+        var amount = numeral().unformat($scope.transaction['Amount']);
+
+        var data = {
+            transaction_tag: $scope.transaction['Tag'],
+            amount: amount,
+            authorization_num: $scope.transaction['Auth No'],
+            reference_no: $scope.transaction['Ref Num']
+        };
+
+        $http.post(_config.url, { transactions: data }).success(function (data, status) {
+            if (data.success) {
+                notify({
+                    title: "Operación realizada con éxito",
+                    type: 'success',
+                    hide: true,
+                    icon: 'fa fa-check'
+                });
+                printCTR(data.CTR, data.bank_message);
+            }
+            $modalInstance.dismiss('ok');
+            grid.update();
+        })
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+}]);
 
 app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_config", "transaction", "transactions", "$filter", "grid", function ($scope, $modal, $modalInstance, _config, transaction, transactions, $filter, grid) {
     $scope.editable = true;
@@ -349,37 +383,25 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
     /** @namespace $scope.transaction.Amount */
     $scope.amount = numeral().unformat($scope.transaction.Amount);
 
-    $scope.checkLimitAmount = function (value, max, form) {
-        var max = numeral().unformat(max);
-        var value = numeral().unformat(value);
-        form.amount.$error.max = false;
-        if (value > max) {
-            form.amount.$error.max = true;
-            form.amount.$invalid = true;
-            form.$invalid = true;
-        }
-    };
-
     // Se usa cuando se concilia
     $scope.maxDate = new Date();
 
-
-    $scope.submit = function() {
+    $scope.submit = function () {
         $modalInstance.dismiss('cancel');
         $modal.open({
             templateUrl: _config.template ? _config.template : "tagged.html",
             size: 'md',
             resolve: {
-                _config: function() {
+                _config: function () {
                     return _config;
                 },
-                transaction: function() {
+                transaction: function () {
                     return transaction;
                 },
-                maxAmount: function() {
+                maxAmount: function () {
                     return $scope.maxAmount;
                 },
-                grid: function() {
+                grid: function () {
                     return grid;
                 }
             },

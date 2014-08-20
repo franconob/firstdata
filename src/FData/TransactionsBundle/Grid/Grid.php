@@ -35,12 +35,13 @@ class Grid
             "url"       => "/transactions/taggedPreAuthComp"
         ],
         'Tagged Void'                         => [
-            "role"      => "TAGGED_VOID",
-            "label"     => "Tagged Void",
-            "action"    => "taggedVoid",
-            "template"  => "confirm.html",
-            "openModal" => true,
-            "url"       => "/transactions/taggedVoid"
+            "role"       => "TAGGED_VOID",
+            "label"      => "Tagged Void",
+            "action"     => "taggedVoid",
+            "template"   => "confirm.html",
+            "openModal"  => true,
+            "url"        => "/transactions/taggedVoid",
+            "controller" => "TaggedVoidFormModalCtrl"
         ],
         'Tagged Refund'                       => [
             "role"      => "TAGGED_REFUND",
@@ -298,7 +299,7 @@ EOF;
         ];
 
         self::$transactions_workflow_status = [
-            'Voided Transaction' => ["allows" => []],
+            'Voided Transaction'    => ["allows" => []],
             'Completed Transaction' => ['allows' => []]
         ];
     }
