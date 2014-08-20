@@ -133,7 +133,7 @@ app.directive('expiryDate', function (moment) {
     }
 });
 
-app.directive('checkLimit', function(numeral) {
+app.directive('checkLimit', function (numeral) {
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -141,10 +141,10 @@ app.directive('checkLimit', function(numeral) {
             limit: '@'
         },
         link: function checkLimitCtrl(scope, elm, attr, ctrl) {
-            ctrl.$parsers.push(function(viewValue) {
+            ctrl.$parsers.push(function (viewValue) {
                 var limit = numeral().unformat(scope.limit);
                 var value = numeral(viewValue).format('0.00');
-                if(value > limit) {
+                if (value > limit) {
                     ctrl.$setValidity('limit_reached', false);
                     return undefined;
                 }
@@ -196,7 +196,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                 scope.grid = args.gridObj;
                 var td_conciliada = angular.element('.conciliada').parent();
                 td_conciliada.addClass('text-center');
-                if(td_conciliada.hasClass('fa-check')) {
+                if (td_conciliada.hasClass('fa-check')) {
                     td_conciliada.addClass('success');
                 } else {
                     td_conciliada.addClass('danger');
@@ -250,7 +250,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
             var _calculateTotalAmount = function (transactions) {
                 var total = 0;
                 angular.forEach(transactions, function (row) {
-                    if('Error' == row['Status']) {
+                    if ('Error' == row['Status']) {
                         return;
                     }
                     switch (row['Transaction Type']) {
@@ -272,7 +272,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                 total += numeral().unformat(row.Amount);
                                 break;
                             }
-                            if(parent_transaction && ("Tagged Completion" == parent_transaction['Transaction Type'])) {
+                            if (parent_transaction && ("Tagged Completion" == parent_transaction['Transaction Type'])) {
                                 total -= numeral().unformat(row.Amount);
                                 break;
                             }
@@ -343,7 +343,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                                 reference_no: $scope.transaction['Ref Num']
                             };
 
-                            if($scope.transaction['fecha']) {
+                            if ($scope.transaction['fecha']) {
                                 data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
                             }
 
@@ -374,8 +374,8 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
 
 app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', function ($scope, $modal, $window, $http) {
     $scope.nbTransactions = 0;
-    $scope.openForm = function (transaction_type) {
-        var modalInstance = $modal.open({
+    $scope.openForm = function (transaction_type, form_title) {
+        $modal.open({
             templateUrl: transaction_type + '.html',
             controller: 'FormModalCtrl',
             resolve: {
@@ -384,6 +384,9 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
                 },
                 grid: function () {
                     return $scope.grid;
+                },
+                form_title: function () {
+                    return form_title;
                 }
             }
         });
@@ -398,9 +401,40 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
     }
 }]);
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transaction_type', 'notify', 'grid', 'printCTR', function ($scope, $modalInstance, $http, transaction_type, notify, grid, printCTR) {
-    $scope.transaction = {};
 
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', function ($scope, $modalInstance, transaction_type, form_title, $modal) {
+    $scope.title = form_title;
+    $scope.transaction = {};
+    $scope.submit = function () {
+        $modalInstance.dismiss('cancel');
+        $scope.editable = false;
+        $modal.open({
+            templateUrl: transaction_type + '.html',
+            controller: 'ConfirmModalCtrl',
+            resolve: {
+                transaction_type: function () {
+                    return transaction_type;
+                },
+                grid: function () {
+                    return $scope.grid;
+                },
+                transaction: function () {
+                    return $scope.transaction;
+                }
+            }
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+}]);
+
+
+app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', 'grid', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, grid, printCTR, $http, transaction) {
+    $scope.transaction = transaction;
+    $scope.title = "Confirmar datos de la operación";
+    $scope.noeditable = true;
     $scope.submit = function () {
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
         promise.success(function (data, status) {
@@ -438,4 +472,3 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', '$http', 'transacti
         $modalInstance.dismiss('cancel');
     }
 }]);
-

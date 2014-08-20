@@ -39,17 +39,17 @@
                     <div class="btn-toolbar" role="toolbar">
                         <div class="btn-group">
                             {% if is_granted('ROLE_NEW_TRANSACTION') %}
-                                <button class="btn btn-default" ng-click="openForm('newTransaction')"><i
+                                <button class="btn btn-default" ng-click="openForm('newTransaction', 'New Transaction')"><i
                                             class="fa fa-plus-square"></i> New transaction
                                 </button>
                             {% endif %}
                             {% if is_granted('ROLE_PRE_AUTH') %}
-                                <button class="btn btn-default" ng-click="openForm('preAuth')"><i class="fa fa-key"></i>
+                                <button class="btn btn-default" ng-click="openForm('preAuth', 'Pre-Authorization')"><i class="fa fa-key"></i>
                                     Pre-Auth
                                 </button>
                             {% endif %}
                             {% if is_granted('ROLE_REFUND') %}
-                                <button class="btn btn-default" ng-click="openForm('refund')"><i
+                                <button class="btn btn-default" ng-click="openForm('refund', 'Refund')"><i
                                             class="fa fa-mail-reply"></i>
                                     Refund
                                 </button>
