@@ -402,7 +402,7 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
 }]);
 
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', function ($scope, $modalInstance, transaction_type, form_title, $modal) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', 'grid', function ($scope, $modalInstance, transaction_type, form_title, $modal, grid) {
     $scope.title = form_title;
     $scope.transaction = {};
     $scope.submit = function () {
@@ -416,7 +416,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
                     return transaction_type;
                 },
                 grid: function () {
-                    return $scope.grid;
+                    return grid;
                 },
                 transaction: function () {
                     return $scope.transaction;
@@ -432,6 +432,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 
 
 app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', 'grid', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, grid, printCTR, $http, transaction) {
+    console.log(grid);
     $scope.transaction = transaction;
     $scope.title = "Confirmar datos de la operación";
     $scope.noeditable = true;
