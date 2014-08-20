@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -30,17 +30,26 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="191" column="0" selection-start="5545" selection-end="5545" vertical-scroll-proportion="0.0" vertical-offset="2736" max-vertical-offset="9288">
+            <state line="299" column="28" selection-start="10217" selection-end="10217" vertical-scroll-proportion="0.0" vertical-offset="5202" max-vertical-offset="9936">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rootTransaction.html.twig" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig">
+      <file leaf-file-name="_tagged.html.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="74" selection-start="5193" selection-end="5193" vertical-scroll-proportion="0.4753521" vertical-offset="1170" max-vertical-offset="1818">
-              <folding />
+            <state line="4" column="8" selection-start="161" selection-end="161" vertical-scroll-proportion="0.12676056" vertical-offset="0" max-vertical-offset="666">
+              <folding>
+                <marker date="1408559170827" expanded="true" signature="94:263" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="292:1362" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="351:1351" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="388:1335" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="565:1082" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="770:954" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="1393:1742" placeholder="..." />
+                <marker date="1408559170827" expanded="true" signature="1482:1657" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,7 +86,6 @@
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserRepository.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Events/TransactionEvents.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Events/TransactionCompleteEvent.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
@@ -107,8 +115,9 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" />
-        <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
+        <option value="$PROJECT_DIR$/web/js/app.js" />
       </list>
     </option>
   </component>
@@ -761,7 +770,11 @@
       <created>1408548817830</created>
       <updated>1408548817830</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline">
+      <created>1408556952030</created>
+      <updated>1408556952030</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -824,7 +837,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Correccion templates de login" />
     <MESSAGE value="Tarea #1577. Se envia el correo al propietario del hotel tambien" />
     <MESSAGE value="Tarea #1604. Cambio en el campo que almacena el nombre del hotel" />
     <MESSAGE value="Tarea #1577. Corregido el asunto del mensaje" />
@@ -849,17 +861,13 @@
     <MESSAGE value="Correccion cuando se devuelve el CTR para enviar por correo" />
     <MESSAGE value="Problema de mails, intento de solucion" />
     <MESSAGE value="Tarea #1633. Correccion cuando se envian los datos. No se refrescaba la grilla" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1633. Correccion cuando se envian los datos. No se refrescaba la grilla" />
+    <MESSAGE value="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/FDataSecurityBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="610" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="0" selection-start="1165" selection-end="1165" vertical-scroll-proportion="-0.28342247" vertical-offset="717" max-vertical-offset="1278" />
@@ -1143,15 +1151,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="0" selection-start="5545" selection-end="5545" vertical-scroll-proportion="0.0" vertical-offset="2736" max-vertical-offset="9288">
+        <state line="299" column="28" selection-start="10217" selection-end="10217" vertical-scroll-proportion="0.0" vertical-offset="5202" max-vertical-offset="9936">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="74" selection-start="5193" selection-end="5193" vertical-scroll-proportion="0.4753521" vertical-offset="1170" max-vertical-offset="1818">
+        <state line="4" column="31" selection-start="119" selection-end="119" vertical-scroll-proportion="0.12392427" vertical-offset="0" max-vertical-offset="1818">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="8" selection-start="161" selection-end="161" vertical-scroll-proportion="0.12676056" vertical-offset="0" max-vertical-offset="666">
+          <folding>
+            <marker date="1408559170827" expanded="true" signature="94:263" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="292:1362" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="351:1351" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="388:1335" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="565:1082" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="770:954" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="1393:1742" placeholder="..." />
+            <marker date="1408559170827" expanded="true" signature="1482:1657" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

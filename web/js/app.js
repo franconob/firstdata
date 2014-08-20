@@ -137,12 +137,9 @@ app.directive('checkLimit', function (numeral) {
     return {
         restrict: 'A',
         require: 'ngModel',
-        scope: {
-            limit: '@'
-        },
         link: function checkLimitCtrl(scope, elm, attr, ctrl) {
             ctrl.$parsers.push(function (viewValue) {
-                var limit = numeral().unformat(scope.limit);
+                var limit = numeral().unformat(attr.limit);
                 var value = numeral(viewValue).format('0.00');
                 if (value > limit) {
                     ctrl.$setValidity('limit_reached', false);
@@ -190,7 +187,7 @@ app.directive('fdataInput', function () {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter, printCTR) {
+app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, printCTR) {
     return {
         restrict: 'E',
         scope: {
@@ -259,27 +256,6 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                 });
             };
 
-            var _calculateLimitAmount = function (current_transaction, transactions) {
-                var limit = numeral().unformat(current_transaction['Amount']);
-                if ("Purchase" == current_transaction['Transaction Type']) {
-                    var tagged_transactions = $filter('filter')(transactions, function (transaction) {
-                        return transaction['Reference 3'] == current_transaction['Tag']
-                            && 'Error' !== transaction['Status']
-                    });
-                    if (tagged_transactions) {
-                        angular.forEach(tagged_transactions, function (t_t) {
-                            if ("Tagged Refund" == t_t['Transaction Type']) {
-                                var void_transaction = $filter('findWhere')(transactions, {'Reference 3': t_t['Tag']});
-                                if (!void_transaction || (void_transaction && "Tagged Void" !== void_transaction['Transaction Type'])) {
-                                    limit -= numeral().unformat(t_t['Amount']);
-                                }
-                            }
-                        })
-                    }
-                }
-                return limit;
-
-            };
 
             var _calculateTotalAmount = function (transactions) {
                 var total = 0;
@@ -321,7 +297,7 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                 var transaction = Lazy(rows).findWhere({id: id});
                 $modal.open({
                     templateUrl: config.template ? config.template : "tagged.html",
-                    size: 'sm',
+                    size: 'md',
                     resolve: {
                         _config: function () {
                             return scope._config;
@@ -329,82 +305,142 @@ app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $fil
                         transaction: function () {
                             return transaction;
                         },
-                        printCTR: function () {
-                            return printCTR;
-                        },
                         transactions: function () {
                             return rows;
+                        },
+                        grid: function() {
+                            return scope.grid;
                         }
                     },
-                    controller: function ($scope, $modalInstance, _config, transaction, $http, printCTR, transactions, moment) {
-                        $scope._config = _config;
-                        $scope.transaction = transaction;
-                        $scope.maxAmount = numeral(_calculateLimitAmount($scope.transaction, transactions)).format('$0,0.00');
-                        /** @namespace $scope.transaction.Amount */
-                        $scope.amount = numeral().unformat($scope.transaction.Amount);
-
-                        $scope.checkLimitAmount = function (value, max, form) {
-                            var max = numeral().unformat(max);
-                            var value = numeral().unformat(value);
-                            form.amount.$error.max = false;
-                            if (value > max) {
-                                form.amount.$error.max = true;
-                                form.amount.$invalid = true;
-                                form.$invalid = true;
-                            }
-                        };
-
-                        // Se usa cuando se concilia
-                        $scope.maxDate = new Date();
-
-
-                        $scope.submit = function () {
-
-                            // Chequel el amonut para saber si fue ingresado o si debo usar el original (para una transaccion
-                            // sin formulario
-
-                            var amount = 0;
-                            if (!$scope.transaction['amount']) {
-                                amount = numeral().unformat($scope.transaction['Amount']);
-                            } else {
-                                amount = $scope.transaction['amount'];
-                            }
-
-                            var data = {
-                                transaction_tag: $scope.transaction['Tag'],
-                                amount: amount,
-                                authorization_num: $scope.transaction['Auth No'],
-                                reference_no: $scope.transaction['Ref Num']
-                            };
-
-                            if ($scope.transaction['fecha']) {
-                                data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
-                            }
-
-                            $http.post(_config.url, { transactions: data }).success(function (data, status) {
-                                if (data.success) {
-                                    notify({
-                                        title: "Operación realizada con éxito",
-                                        type: 'success',
-                                        hide: true,
-                                        icon: 'fa fa-check'
-                                    });
-                                    printCTR(data.CTR, data.bank_message);
-                                }
-                                $modalInstance.dismiss('ok');
-                                scope.grid.update();
-                            })
-                        };
-
-                        $scope.cancel = function () {
-                            $modalInstance.dismiss('cancel');
-                        }
-                    }
+                    controller: 'TaggedFormModalCtrl'
                 })
             }
         }
     }
 });
+
+app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_config", "transaction", "transactions", "$filter", "grid", function ($scope, $modal, $modalInstance, _config, transaction, transactions, $filter, grid) {
+    $scope.editable = true;
+    var _calculateLimitAmount = function (current_transaction, transactions) {
+        var limit = numeral().unformat(current_transaction['Amount']);
+        if ("Purchase" == current_transaction['Transaction Type']) {
+            var tagged_transactions = $filter('filter')(transactions, function (transaction) {
+                return transaction['Reference 3'] == current_transaction['Tag']
+                    && 'Error' !== transaction['Status']
+            });
+            if (tagged_transactions) {
+                angular.forEach(tagged_transactions, function (t_t) {
+                    if ("Tagged Refund" == t_t['Transaction Type']) {
+                        var void_transaction = $filter('findWhere')(transactions, {'Reference 3': t_t['Tag']});
+                        if (!void_transaction || (void_transaction && "Tagged Void" !== void_transaction['Transaction Type'])) {
+                            limit -= numeral().unformat(t_t['Amount']);
+                        }
+                    }
+                })
+            }
+        }
+        return limit;
+
+    };
+
+    $scope._config = _config;
+    $scope.transaction = transaction;
+    $scope.maxAmount = numeral(_calculateLimitAmount($scope.transaction, transactions)).format('$0,0.00');
+    /** @namespace $scope.transaction.Amount */
+    $scope.amount = numeral().unformat($scope.transaction.Amount);
+
+    $scope.checkLimitAmount = function (value, max, form) {
+        var max = numeral().unformat(max);
+        var value = numeral().unformat(value);
+        form.amount.$error.max = false;
+        if (value > max) {
+            form.amount.$error.max = true;
+            form.amount.$invalid = true;
+            form.$invalid = true;
+        }
+    };
+
+    // Se usa cuando se concilia
+    $scope.maxDate = new Date();
+
+
+    $scope.submit = function() {
+        $modalInstance.dismiss('cancel');
+        $modal.open({
+            templateUrl: _config.template ? _config.template : "tagged.html",
+            size: 'md',
+            resolve: {
+                _config: function() {
+                    return _config;
+                },
+                transaction: function() {
+                    return transaction;
+                },
+                maxAmount: function() {
+                    return $scope.maxAmount;
+                },
+                grid: function() {
+                    return grid;
+                }
+            },
+            controller: 'ConfirmTaggedFormModalCtrl'
+        })
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+}]);
+
+app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_config", "transaction", "$http", "printCTR", "moment", "maxAmount", "notify", "grid", function ($scope, $modalInstance, _config, transaction, $http, printCTR, moment, maxAmount, notify, grid) {
+    $scope.editable = false;
+    $scope.maxAmount = maxAmount;
+    $scope.transaction = transaction;
+    $scope.subtitle = "Click en el campo para poder editarlo";
+    _config.label = "Confirmar datos de la operación";
+    $scope._config = _config;
+    $scope.submit = function () {
+
+        // Chequel el amonut para saber si fue ingresado o si debo usar el original (para una transaccion
+        // sin formulario
+
+        var amount = 0;
+        if (!$scope.transaction['amount']) {
+            amount = numeral().unformat($scope.transaction['Amount']);
+        } else {
+            amount = $scope.transaction['amount'];
+        }
+
+        var data = {
+            transaction_tag: $scope.transaction['Tag'],
+            amount: amount,
+            authorization_num: $scope.transaction['Auth No'],
+            reference_no: $scope.transaction['Ref Num']
+        };
+
+        if ($scope.transaction['fecha']) {
+            data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
+        }
+
+        $http.post(_config.url, { transactions: data }).success(function (data, status) {
+            if (data.success) {
+                notify({
+                    title: "Operación realizada con éxito",
+                    type: 'success',
+                    hide: true,
+                    icon: 'fa fa-check'
+                });
+                printCTR(data.CTR, data.bank_message);
+            }
+            $modalInstance.dismiss('ok');
+            grid.update();
+        })
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+}]);
 
 app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', function ($scope, $modal, $window, $http) {
     $scope.nbTransactions = 0;
