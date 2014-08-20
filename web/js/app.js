@@ -156,6 +156,40 @@ app.directive('checkLimit', function (numeral) {
     }
 });
 
+
+app.directive('fdataInput', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            editable: '@'
+        },
+        transclude: true,
+        replace: true,
+        link: function (scope, elm) {
+            scope.thisEditable = true;
+
+            elm.on('blur', function () {
+                if ("false" === scope.editable) {
+                    scope.thisEditable = false;
+                }
+            })
+        },
+        controller: function ($scope) {
+            $scope.$watch($scope.editable, function (val) {
+                    $scope.thisEditable = val;
+                }
+            );
+            $scope.enableField = function () {
+                if ("true" === $scope.editable) {
+                    return;
+                }
+                $scope.thisEditable = true;
+            };
+        },
+        template: '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" />'
+    }
+});
+
 app.directive('firstdataGrid', function ($compile, numeral, notify, $modal, $filter, printCTR) {
     return {
         restrict: 'E',
@@ -405,9 +439,9 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
 app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', 'grid', function ($scope, $modalInstance, transaction_type, form_title, $modal, grid) {
     $scope.title = form_title;
     $scope.transaction = {};
+    $scope.editable = true;
     $scope.submit = function () {
         $modalInstance.dismiss('cancel');
-        $scope.editable = false;
         $modal.open({
             templateUrl: transaction_type + '.html',
             controller: 'ConfirmModalCtrl',
@@ -432,10 +466,11 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 
 
 app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', 'grid', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, grid, printCTR, $http, transaction) {
-    console.log(grid);
     $scope.transaction = transaction;
     $scope.title = "Confirmar datos de la operación";
-    $scope.noeditable = true;
+    $scope.subtitle = "Click en el campo para poder editarlo";
+    $scope.editable = false;
+
     $scope.submit = function () {
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
         promise.success(function (data, status) {
