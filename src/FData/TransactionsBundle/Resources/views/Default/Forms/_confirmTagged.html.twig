@@ -1,0 +1,63 @@
+{% verbatim %}
+<script type="text/ng-template" id="confirmTagged.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{ _config.label }}</h3>
+
+        <p class="text-info" ng-show="subtitle"><i class="fa fa-info-circle"></i> {{ subtitle }}</p>
+    </div>
+    <div class="modal-body">
+        <form class="form-inline" name="form" role="form">
+            <table class="table table-condensed">
+                <caption>Confirmación de datos</caption>
+                <tbody>
+                <tr>
+                    <th>CardHolder Name</td>
+                        <td>{{ transaction['Cardholder Name'] }}</td>
+                </tr>
+                <tr>
+                    <th>Card Number</td>
+                        <td>{{ transaction['Card Number'] }}</td>
+                </tr>
+                <tr>
+                    <th>Card Type</td>
+                        <td>{{ transaction['Card Type'] }}</td>
+                </tr>
+                <tr>
+                    <th>Expiry Date</td>
+                        <td>{{ transaction['Expiry'] }}</td>
+                </tr>
+                <tr>
+                    <th>Amount</td>
+                        <td>
+                            <div class="form-group"
+                                 ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid, 'has-feedback': form.amount.$valid}">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <fdata-input ng-model="transaction.amount" check-limit limit="{{ maxAmount }}"
+                                                 name="amount"
+                                                 id="dollaramount" type="text"
+                                                 class="form-control" placeholder="Formato: 10,000.00"
+                                                 ng-pattern="/^[0-9]+([,]?[0-9]{3})?([.]?[0-9]{2})?$/" required
+                                                 editable="{{ editable }}"></fdata-input>
+                                    <span class="fa fa-check form-control-feedback" ng-show="form.amount.$valid"></span>
+                                </div>
+                                <span class="help-block">El importe no puede superar los {{ maxAmount }}</span>
+                                <span class="help-block" ng-show="form.amount.$error.limit_reached">El importe ingresado supera a {{ maxAmount }}</span>
+
+                            </div>
+                        </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid || isLoading">
+            <i class="fa fa-spinner fa-spin" ng-show="isLoading"></i>
+            <i class="fa fa-check" ng-show="form.$valid"></i>
+            Enviar datos
+        </button>
+        <button class="btn btn-danger" ng-click="cancel()">Salir</button>
+    </div>
+</script>
+{% endverbatim %}

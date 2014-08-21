@@ -389,7 +389,7 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
     $scope.submit = function () {
         $modalInstance.dismiss('cancel');
         $modal.open({
-            templateUrl: _config.template ? _config.template : "tagged.html",
+            templateUrl: "confirmTagged.html",
             size: 'md',
             resolve: {
                 _config: function () {
