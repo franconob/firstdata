@@ -46,13 +46,15 @@ class Exception extends \Exception
             return [
                 "success" => false,
                 "reason"  => $this->clientException->getResponse()->getReasonPhrase(),
-                "debug"   => (string)$this->clientException->getResponse()->getBody()
+                "debug"   => (string)$this->clientException->getResponse()->getBody(),
+                "code"    => 500
             ];
         } else {
             return [
                 "success" => false,
                 "reason"  => $this->response->get('exact_message'),
-                "debug"   => ""
+                "debug"   => "",
+                "code"    => $this->response->getClientResponse()->getStatusCode()
             ];
         }
 

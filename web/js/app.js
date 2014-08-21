@@ -430,7 +430,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
         if (!$scope.transaction['amount']) {
             amount = numeral().unformat($scope.transaction['Amount']);
         } else {
-            amount = $scope.transaction['amount'];
+            amount = numeral().unformat($scope.transaction['amount']);
         }
 
         var data = {
@@ -529,7 +529,9 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
     $scope.subtitle = "Click en el campo para poder editarlo";
     $scope.editable = false;
 
+
     $scope.submit = function () {
+        $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
         var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
         promise.success(function (data, status) {
             if (true == data.success) {
