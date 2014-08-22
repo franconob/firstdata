@@ -109,7 +109,7 @@ class DefaultController extends Controller
                         }
 
                         //si es void el estado del padre, tengo que ignorar este estado en el proximo hijo
-                        $debo_aplicar = ($data[$k_row2][6] == "Tagged Void");
+                        $debo_aplicar = ($data[$k_row2][6] !== "Tagged Void");
                     }
                 }
             }
