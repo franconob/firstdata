@@ -98,6 +98,9 @@ class DefaultController extends Controller
                                         case "Tagged Void":
                                             $estado_padre = "Voided Transaction";
                                             break;
+                                        case "Tagged Refund":
+                                            $estado_padre = "Refunded Transaction";
+                                            break;
                                     };
                                     break;
                             }
