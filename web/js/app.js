@@ -357,7 +357,7 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
     $scope.editable = true;
     var _calculateLimitAmount = function (current_transaction, transactions) {
         var limit = numeral().unformat(current_transaction['Amount']);
-        if ("Purchase" == current_transaction['Transaction Type']) {
+        if ("Purchase" == current_transaction['Transaction Type'] || "Tagged Completion" == current_transaction['Transaction Type']) {
             var tagged_transactions = $filter('filter')(transactions, function (transaction) {
                 return transaction['Reference 3'] == current_transaction['Tag']
                     && 'Error' !== transaction['Status']
