@@ -9,6 +9,7 @@
 namespace FData\TransactionsBundle\Grid;
 
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use FData\TransactionsBundle\Entity\Transaction;
 use FData\TransactionsBundle\HttpClient\Clients\GridClient;
@@ -202,17 +203,32 @@ EOF;
         }
 
         foreach ($allowed_actions as $k => $action) {
+            // si es array es porque [$action, $funcionDeChequeo]
+            if (isset($action[0])) {
+                $callback = $action[1];
+                if (!$callback($transaction)) {
+                    unset($allowed_actions[$k]);
+                    continue;
+                } else {
+                    $allowed_actions[$k] = $action[0];
+                    $action              = $action[0];
+                }
+            }
+
             if ($action['label'] == 'Conciliar' && isset($transaction['conciliado'])) {
                 unset($allowed_actions[$k]);
             }
             if (!$this->securityContext->isGranted('ROLE_' . $action['role'])) {
                 unset($allowed_actions[$k]);
             }
+
         }
+
 
         if (empty($allowed_actions)) {
             return '<div class="text-center">&times</div>';
         }
+
 
         $template = $twig->render(self::$btn_group_html, ["actions" => $allowed_actions]);
 
@@ -270,7 +286,9 @@ EOF;
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
-            'Purchase'          => ["allows" => [self::$tagged_transactions['Tagged Refund'], self::$tagged_transactions['Conciliar']]
+            'Purchase'          => ["allows" => [
+                self::$tagged_transactions['Tagged Refund'],
+                self::$tagged_transactions['Conciliar']]
             ],
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
@@ -279,12 +297,22 @@ EOF;
             ]
             ],
             'Refund'            => ["allows" => [
-                self::$tagged_transactions['Tagged Void'],
-                self::$tagged_transactions['Conciliar']
+                self::$tagged_transactions['Tagged Void'], self::$tagged_transactions['Conciliar']
             ]
             ],
             'Tagged Completion' => ["allows" => [
-                self::$tagged_transactions['Tagged Void'],
+                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                    $transactionDate = Carbon::instance($transactionDate);
+                    $nowStart        = Carbon::today();
+                    $nowEnd          = Carbon::now()->endOfDay();
+
+                    if ($transactionDate->between($nowStart, $nowEnd)) {
+                        return true;
+                    }
+
+                    return false;
+                }],
                 self::$tagged_transactions['Tagged Refund'],
                 self::$tagged_transactions['Conciliar']
             ]
