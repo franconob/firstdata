@@ -292,12 +292,34 @@ EOF;
             ],
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
-                self::$tagged_transactions['Tagged Void'],
+                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                    $transactionDate = Carbon::instance($transactionDate);
+                    $nowStart        = Carbon::today();
+                    $nowEnd          = Carbon::now()->endOfDay();
+
+                    if ($transactionDate->between($nowStart, $nowEnd)) {
+                        return true;
+                    }
+
+                    return false;
+                }],
                 self::$tagged_transactions['Conciliar']
             ]
             ],
             'Refund'            => ["allows" => [
-                self::$tagged_transactions['Tagged Void'], self::$tagged_transactions['Conciliar']
+                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                    $transactionDate = Carbon::instance($transactionDate);
+                    $nowStart        = Carbon::today();
+                    $nowEnd          = Carbon::now()->endOfDay();
+
+                    if ($transactionDate->between($nowStart, $nowEnd)) {
+                        return true;
+                    }
+
+                    return false;
+                }], self::$tagged_transactions['Conciliar']
             ]
             ],
             'Tagged Completion' => ["allows" => [
@@ -319,7 +341,18 @@ EOF;
             ],
             'Tagged Void'       => ["allows" => []],
             'Tagged Refund'     => ["allows" => [
-                self::$tagged_transactions['Tagged Void'],
+                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                    $transactionDate = Carbon::instance($transactionDate);
+                    $nowStart        = Carbon::today();
+                    $nowEnd          = Carbon::now()->endOfDay();
+
+                    if ($transactionDate->between($nowStart, $nowEnd)) {
+                        return true;
+                    }
+
+                    return false;
+                }],
                 self::$tagged_transactions['Conciliar']
             ]
             ],
