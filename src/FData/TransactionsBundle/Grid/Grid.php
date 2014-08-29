@@ -287,6 +287,18 @@ EOF;
     {
         self::$transactions_workflow = [
             'Purchase'          => ["allows" => [
+                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                    $transactionDate = Carbon::instance($transactionDate);
+                    $nowStart        = Carbon::today();
+                    $nowEnd          = Carbon::now()->endOfDay();
+
+                    if ($transactionDate->between($nowStart, $nowEnd)) {
+                        return true;
+                    }
+
+                    return false;
+                }],
                 self::$tagged_transactions['Tagged Refund'],
                 self::$tagged_transactions['Conciliar']]
             ],
