@@ -11,9 +11,8 @@ namespace FData\TransactionsBundle\Mail;
 
 use FData\SecurityBundle\User\User;
 use FData\SecurityBundle\User\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
-use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\Validator\ValidatorInterface;
 
 class NotificationMailer
@@ -32,7 +31,7 @@ class NotificationMailer
     private $mailer;
 
     /**
-     * @var TimedTwigEngine
+     * @var TwigEngine
      */
     private $templating;
 
@@ -48,12 +47,12 @@ class NotificationMailer
 
     /**
      * @param \Swift_Mailer $mailer
-     * @param \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine $templating
+     * @param \Symfony\Bridge\Twig\TwigEngine| $templating
      * @param \FData\SecurityBundle\User\UserRepository $userRepository
      * @param string $from
      * @param \Symfony\Component\Validator\ValidatorInterface $validator
      */
-    public function __construct(\Swift_Mailer $mailer, TimedTwigEngine $templating, UserRepository $userRepository, $from, ValidatorInterface $validator)
+    public function __construct(\Swift_Mailer $mailer, TwigEngine $templating, UserRepository $userRepository, $from, ValidatorInterface $validator)
     {
         $this->mailer          = $mailer;
         $this->templating      = $templating;
