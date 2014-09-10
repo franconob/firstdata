@@ -11,6 +11,7 @@ namespace FData\TransactionsBundle\Mail;
 
 use FData\SecurityBundle\User\User;
 use FData\SecurityBundle\User\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\Validator\ValidatorInterface;
