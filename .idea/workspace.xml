@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config_prod.yml" afterPath="$PROJECT_DIR$/app/config/config_prod.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing_prod.yml" afterPath="$PROJECT_DIR$/app/config/routing_prod.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -39,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing_dev.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routing_dev.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.43150684" vertical-offset="0" max-vertical-offset="584">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,17 +62,17 @@
       <file leaf-file-name="routing_prod.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+              <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27739727" vertical-offset="0" max-vertical-offset="1638">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638">
               <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
               <folding />
             </state>
@@ -112,8 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login_extranet.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/views/Default/login.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" />
         <option value="$PROJECT_DIR$/web/js/vendor/jquery.watable.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/routing.xml" />
@@ -163,6 +161,8 @@
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
         <option value="$PROJECT_DIR$/app/config/config_prod.yml" />
         <option value="$PROJECT_DIR$/app/config/routing_prod.yml" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml" />
       </list>
     </option>
   </component>
@@ -950,7 +950,13 @@
       <option name="project" value="LOCAL" />
       <updated>1410963488522</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Correccion cuando se hacen 2 operaciones sobre el mismo padre">
+      <created>1410963970163</created>
+      <option name="number" value="00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1410963970163</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1338,14 +1344,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
@@ -1366,14 +1364,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1412,8 +1402,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27739727" vertical-offset="0" max-vertical-offset="1638">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1638">
           <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_prod.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+          <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43150684" vertical-offset="0" max-vertical-offset="584">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
