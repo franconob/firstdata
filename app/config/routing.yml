@@ -1,7 +1,3 @@
-f_data_security:
-    resource: "@FDataSecurityBundle/Resources/config/routing.xml"
-    prefix:   /
-
 f_data_transactions:
     resource: "@FDataTransactionsBundle/Resources/config/routing.xml"
     prefix:   /
