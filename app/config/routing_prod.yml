@@ -1,3 +1,6 @@
 f_data_security:
     resource: "@FDataSecurityBundle/Resources/config/routing_prod.xml"
     prefix:   /
+
+_main:
+  resource: routing.yml
