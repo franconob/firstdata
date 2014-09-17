@@ -6,9 +6,6 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/crm_winpax_finderit_local</jdbc-url>
-      <user-name>root</user-name>
-      <user-password>dfcfdfc9dfc2dfcfdfd9dfc5dfd8dfdedfdfdfccdfc9</user-password>
-      <schema-pattern>*</schema-pattern>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />

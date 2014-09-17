@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirmTagged.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/routing_prod.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,122 +31,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="168" column="31" selection-start="7252" selection-end="7252" vertical-scroll-proportion="-13.333333" vertical-offset="2484" max-vertical-offset="4230">
+            <state vertical-scroll-proportion="-10.666667" vertical-offset="1512" max-vertical-offset="4338">
+              <caret line="110" column="58" selection-start-line="110" selection-start-column="58" selection-end-line="110" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Exception.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php">
+      <file leaf-file-name="routing_dev.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="31" selection-start="1136" selection-end="1136" vertical-scroll-proportion="-6.851852" vertical-offset="607" max-vertical-offset="1260">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rootTransaction.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig">
+      <file leaf-file-name="routing.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="43" selection-start="3253" selection-end="3253" vertical-scroll-proportion="-6.0" vertical-offset="810" max-vertical-offset="1818">
+            <state vertical-scroll-proportion="0.1773399" vertical-offset="0" max-vertical-offset="609">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig">
+      <file leaf-file-name="routing_prod.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/routing_prod.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="12" selection-start="531" selection-end="531" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="252">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_tagged.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="666">
-              <folding>
-                <marker date="1408640085624" expanded="true" signature="94:263" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="292:1362" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="351:1351" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="388:1335" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="565:1082" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="770:954" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="1393:1755" placeholder="..." />
-                <marker date="1408640085624" expanded="true" signature="1495:1670" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="417" column="0" selection-start="14836" selection-end="14836" vertical-scroll-proportion="0.31926605" vertical-offset="7332" max-vertical-offset="10368">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_confirmTagged.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirmTagged.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="49" selection-start="1057" selection-end="1057" vertical-scroll-proportion="-12.0" vertical-offset="144" max-vertical-offset="1224">
-              <folding>
-                <marker date="1408645657986" expanded="true" signature="101:271" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="300:2662" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="359:2651" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="409:2635" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="490:2614" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="511:648" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="536:643" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="669:798" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="694:793" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="819:944" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="844:939" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="965:1089" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="990:1084" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1110:2589" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1135:2584" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1175:2567" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1228:2537" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1437:2236" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="1630:2076" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="2693:3055" placeholder="..." />
-                <marker date="1408645657986" expanded="true" signature="2795:2970" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Response.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Response.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="6" selection-start="227" selection-end="227" vertical-scroll-proportion="16.666666" vertical-offset="594" max-vertical-offset="2016">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Transaction.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="0" selection-start="2633" selection-end="2633" vertical-scroll-proportion="-10.666667" vertical-offset="1152" max-vertical-offset="4374">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Grid.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="293" column="25" selection-start="9015" selection-end="9015" vertical-scroll-proportion="-13.703704" vertical-offset="4760" max-vertical-offset="6678">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -162,9 +84,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/app_staging.php" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_staging.xml" />
         <option value="$PROJECT_DIR$/bin/doctrine.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/Clients/GridClient.php" />
         <option value="db-console:/d9b5cc1f/d26aafd0-b772-47eb-a2b7-1ff928760b6f/" />
@@ -183,7 +102,6 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/EventSubscriber/TransactionSubscriber.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/TransactionRepository.php" />
         <option value="$PROJECT_DIR$/app/config/config_staging.yml" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
@@ -196,31 +114,36 @@
         <option value="$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/OLE/PPS/Root.php" />
         <option value="$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel5.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Response.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirm.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig" />
-        <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirmTagged.html.twig" />
+        <option value="$PROJECT_DIR$/web/js/app.js" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/HttpClient.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/routing_prod.xml" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5" />
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
     <option name="y" value="27" />
-    <option name="width" value="1366" />
-    <option name="height" value="741" />
+    <option name="width" value="1368" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -252,7 +175,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -292,38 +215,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -345,8 +236,26 @@
               <option name="myItemId" value="FData" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SecurityBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -368,135 +277,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Transaction" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemId" value="SecurityBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -519,6 +300,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FData" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SecurityBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -579,340 +372,529 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <method />
     </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="" />
       <created>1400534159182</created>
+      <option name="number" value="Default" />
       <updated>1400534159182</updated>
     </task>
     <task id="LOCAL-00001" summary="Grilla en ancho 100% para resoluciones altas">
       <created>1400762502307</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
       <updated>1400762502307</updated>
     </task>
     <task id="LOCAL-00002" summary="Grilla en ancho 100% para resoluciones altas">
       <created>1400762650916</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
       <updated>1400762650916</updated>
     </task>
     <task id="LOCAL-00003" summary="Agregadas animaciones">
       <created>1401230768801</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
       <updated>1401230768801</updated>
     </task>
     <task id="LOCAL-00004" summary="Mejor manejo de errores cuando falla una transaccion">
       <created>1401283385133</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
       <updated>1401283385133</updated>
     </task>
     <task id="LOCAL-00005" summary="Mejoras visuales. Cuadros informativos.">
       <created>1401300121877</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
       <updated>1401300121877</updated>
     </task>
     <task id="LOCAL-00006" summary="Correccion ancho de tabla">
       <created>1401300228282</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
       <updated>1401300228282</updated>
     </task>
     <task id="LOCAL-00007" summary="Se quita la columna &quot;Ref Num&quot; porque contiene siempre el mismo dato">
       <created>1401301700018</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
       <updated>1401301700018</updated>
     </task>
     <task id="LOCAL-00008" summary="Exportacion a CSV de la grilla">
       <created>1401396866084</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
       <updated>1401396866084</updated>
     </task>
     <task id="LOCAL-00009" summary="Angularjs min">
       <created>1401915275084</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
       <updated>1401915275084</updated>
     </task>
     <task id="LOCAL-00010" summary="Faltaba enviar el customer_ref = &quot;Awwa Suite Hotel&quot;">
       <created>1401916075298</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
       <updated>1401916075298</updated>
     </task>
     <task id="LOCAL-00011" summary="Correccion cuando se filtra o se refresca la grilla. Se vuelve a compilar para angular">
       <created>1401916302430</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
       <updated>1401916302430</updated>
     </task>
     <task id="LOCAL-00012" summary="Finalizado el workflow de estados de las transaccions cuando se hacen operaciones tagged">
       <created>1402318194959</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
       <updated>1402318194959</updated>
     </task>
     <task id="LOCAL-00013" summary="Formulario de login. Barra de navegacion.">
       <created>1402354757684</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
       <updated>1402354757684</updated>
     </task>
     <task id="LOCAL-00014" summary="Correccion de dependencias">
       <created>1402416232075</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
       <updated>1402416232075</updated>
     </task>
     <task id="LOCAL-00015" summary="Se trae el nombre del hotel desde el crm">
       <created>1402417190561</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
       <updated>1402417190561</updated>
     </task>
     <task id="LOCAL-00016" summary="Si no hay acciones en una columna, no se pone el dropdown">
       <created>1402418051763</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
       <updated>1402418051763</updated>
     </task>
     <task id="LOCAL-00017" summary="Tarea #1534. No se permite hacer Tagged Refund a una operacion &quot;Pre-Authorization&quot;">
       <created>1403096487204</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
       <updated>1403096487204</updated>
     </task>
     <task id="LOCAL-00018" summary="Tarea #1534. Se agrega link &quot;click here&quot; a informacion de firstdata sobre el monto maximo permitido">
       <created>1403096523484</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
       <updated>1403096523484</updated>
     </task>
     <task id="LOCAL-00019" summary="Cambio de usuario para la API de busqueda">
       <created>1403114019753</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
       <updated>1403114019753</updated>
     </task>
     <task id="LOCAL-00020" summary="Cuando no hay acciones para mostrar se muestra &quot;x&quot;">
       <created>1403114543764</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
       <updated>1403114543764</updated>
     </task>
     <task id="LOCAL-00021" summary="Tarea #1534. Se valida que la fecha de vencimiento de la tarjeta sea mayor a la actual">
       <created>1403116346588</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
       <updated>1403116346588</updated>
     </task>
     <task id="LOCAL-00022" summary="Tarea #1534. Se valida que la fecha de vencimiento de la tarjeta sea mayor a la actual">
       <created>1403116413292</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
       <updated>1403116413292</updated>
     </task>
     <task id="LOCAL-00023" summary="Tarea #1534. Se valida que el campo cardholders_name sea solo alfabetico">
       <created>1403116878967</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
       <updated>1403116878967</updated>
     </task>
     <task id="LOCAL-00024" summary="Tarea #1534. Se guarda &quot;Ref Num&quot; en las transacciones tagged para poder rastrear">
       <created>1403117149830</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
       <updated>1403117149830</updated>
     </task>
     <task id="LOCAL-00025" summary="Tarea #1534. Correccion cuando se hace una operacion no tagged con respecto al formato de la fecha de vencimiento">
       <created>1403627275897</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
       <updated>1403627275897</updated>
     </task>
     <task id="LOCAL-00026" summary="Tarea #1534. Se filtra la consulta a FirstData solamente por el campo &quot;custom ref. num&quot; cuando se llama a la API">
       <created>1403636392715</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
       <updated>1403636392715</updated>
     </task>
     <task id="LOCAL-00027" summary="Correccion template para Tagged Void">
       <created>1404516323412</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
       <updated>1404516323412</updated>
     </task>
     <task id="LOCAL-00028" summary="Correccion accion Exportar">
       <created>1405078405148</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
       <updated>1405078405148</updated>
     </task>
     <task id="LOCAL-00029" summary="Tarea #1577. Envio de correos cuando se realiza una transacccion">
       <created>1405099992997</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
       <updated>1405099992997</updated>
     </task>
     <task id="LOCAL-00030" summary="Correccion orden de rutas">
       <created>1405103104040</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
       <updated>1405103104040</updated>
     </task>
     <task id="LOCAL-00031" summary="Correccion templates de login">
       <created>1405103646112</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
       <updated>1405103646112</updated>
     </task>
     <task id="LOCAL-00032" summary="Tarea #1577. Se envia el correo al propietario del hotel tambien">
       <created>1405103909063</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
       <updated>1405103909063</updated>
     </task>
     <task id="LOCAL-00033" summary="Tarea #1604. Cambio en el campo que almacena el nombre del hotel">
       <created>1405718482934</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
       <updated>1405718482934</updated>
     </task>
     <task id="LOCAL-00034" summary="Tarea #1577. Corregido el asunto del mensaje">
       <created>1405981116831</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
       <updated>1405981116831</updated>
     </task>
     <task id="LOCAL-00035" summary="Tarea #1577. Correccion parametros del smtp">
       <created>1405982497175</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
       <updated>1405982497175</updated>
     </task>
     <task id="LOCAL-00036" summary="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia">
       <created>1406735114846</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
       <updated>1406735114846</updated>
     </task>
     <task id="LOCAL-00037" summary="Tarea #1611. Corregido el problema cuando el amount supera el limite">
       <created>1406744414686</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
       <updated>1406744414686</updated>
     </task>
     <task id="LOCAL-00038" summary="Tarea #1615. Se formatea el total amount a 2 decimales">
       <created>1406747273682</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
       <updated>1406747273682</updated>
     </task>
     <task id="LOCAL-00039" summary="Tarea #1608. Correcciones varias">
       <created>1406753122884</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
       <updated>1406753122884</updated>
     </task>
     <task id="LOCAL-00040" summary="Tarea #1616. Corregido el modelo de datos con clave primaria autoincrement">
       <created>1406825622831</created>
+      <option name="number" value="00040" />
+      <option name="project" value="LOCAL" />
       <updated>1406825622831</updated>
     </task>
     <task id="LOCAL-00041" summary="Se quita el envio de correos a una sola direccion">
       <created>1406827710351</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
       <updated>1406827710351</updated>
     </task>
     <task id="LOCAL-00042" summary="Correccion variable $user">
       <created>1406919661794</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
       <updated>1406919661794</updated>
     </task>
     <task id="LOCAL-00043" summary="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url">
       <created>1407176701636</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
       <updated>1407176701636</updated>
     </task>
     <task id="LOCAL-00044" summary="Tarea #1621. Se oculta la columna &quot;Conciliada&quot; para la extranet">
       <created>1407439391223</created>
+      <option name="number" value="00044" />
+      <option name="project" value="LOCAL" />
       <updated>1407439391223</updated>
     </task>
     <task id="LOCAL-00045" summary="Tarea #1623. Se resta el total amount cuando se hace un Tagged Void sobre un Tagged Completion">
       <created>1407446045484</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
       <updated>1407446045484</updated>
     </task>
     <task id="LOCAL-00046" summary="Tarea #1624. Se agrega un espacio al final del CTR para poder ingresar firma y aclaracion">
       <created>1407517232179</created>
+      <option name="number" value="00046" />
+      <option name="project" value="LOCAL" />
       <updated>1407517232179</updated>
     </task>
     <task id="LOCAL-00047" summary="Tarea #1626. Se agrega la leyenda correspondiente y se ajusta el tamaño del ticket cuando se imprime (no cuando se muestra)">
       <created>1407518047119</created>
+      <option name="number" value="00047" />
+      <option name="project" value="LOCAL" />
       <updated>1407518047119</updated>
     </task>
     <task id="LOCAL-00048" summary="Tarea #1627. Se exportan solamente las columnas visibles">
       <created>1407531835367</created>
+      <option name="number" value="00048" />
+      <option name="project" value="LOCAL" />
       <updated>1407531835367</updated>
     </task>
     <task id="LOCAL-00049" summary="Tarea #1625. Se agregan los datos de facturacion de la cuenta del contacto al ticket de transaccion">
       <created>1407595007539</created>
+      <option name="number" value="00049" />
+      <option name="project" value="LOCAL" />
       <updated>1407595007539</updated>
     </task>
     <task id="LOCAL-00050" summary="Tarea #1625. Se agregan los datos de facturacion de la cuenta del contacto al ticket de transaccion">
       <created>1407595059934</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
       <updated>1407595059935</updated>
     </task>
     <task id="LOCAL-00051" summary="Tarea #1622. Se imposibilita realizar accion alguna sobre un Pre-Authorization si ya se hizo un Tagged sobre esa operacion">
       <created>1407597218799</created>
+      <option name="number" value="00051" />
+      <option name="project" value="LOCAL" />
       <updated>1407597218799</updated>
     </task>
     <task id="LOCAL-00052" summary="Tarea #1629. Se instala libreria de terceros para exportar de CSV a Excel">
       <created>1407781679831</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
       <updated>1407781679831</updated>
     </task>
     <task id="LOCAL-00053" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407864651959</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
       <updated>1407864651959</updated>
     </task>
     <task id="LOCAL-00054" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407865711968</created>
+      <option name="number" value="00054" />
+      <option name="project" value="LOCAL" />
       <updated>1407865711968</updated>
     </task>
     <task id="LOCAL-00055" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407867175851</created>
+      <option name="number" value="00055" />
+      <option name="project" value="LOCAL" />
       <updated>1407867175851</updated>
     </task>
     <task id="LOCAL-00056" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407867406691</created>
+      <option name="number" value="00056" />
+      <option name="project" value="LOCAL" />
       <updated>1407867406691</updated>
     </task>
     <task id="LOCAL-00057" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407868515282</created>
+      <option name="number" value="00057" />
+      <option name="project" value="LOCAL" />
       <updated>1407868515282</updated>
     </task>
     <task id="LOCAL-00058" summary="Cambiada la version de Excel para exportacion a 2007">
       <created>1407868794846</created>
+      <option name="number" value="00058" />
+      <option name="project" value="LOCAL" />
       <updated>1407868794846</updated>
     </task>
     <task id="LOCAL-00059" summary="Correccion cuando se devuelve el CTR para enviar por correo">
       <created>1408029875231</created>
+      <option name="number" value="00059" />
+      <option name="project" value="LOCAL" />
       <updated>1408029875231</updated>
     </task>
     <task id="LOCAL-00060" summary="Problema de mails, intento de solucion">
       <created>1408125264502</created>
+      <option name="number" value="00060" />
+      <option name="project" value="LOCAL" />
       <updated>1408125264502</updated>
     </task>
     <task id="LOCAL-00061" summary="Problema de mails, intento de solucion">
       <created>1408126320129</created>
+      <option name="number" value="00061" />
+      <option name="project" value="LOCAL" />
       <updated>1408126320129</updated>
     </task>
     <task id="LOCAL-00062" summary="Tarea #1633. Correccion cuando se envian los datos. No se refrescaba la grilla">
       <created>1408548817830</created>
+      <option name="number" value="00062" />
+      <option name="project" value="LOCAL" />
       <updated>1408548817830</updated>
     </task>
     <task id="LOCAL-00063" summary="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline">
       <created>1408556952030</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
       <updated>1408556952030</updated>
     </task>
     <task id="LOCAL-00064" summary="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline. Funcionalidad hecha para las operaciones Tagged Refund">
       <created>1408559590436</created>
+      <option name="number" value="00064" />
+      <option name="project" value="LOCAL" />
       <updated>1408559590436</updated>
     </task>
     <task id="LOCAL-00065" summary="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline. Funcionalidad hecha para las operaciones tagged void">
       <created>1408561868724</created>
+      <option name="number" value="00065" />
+      <option name="project" value="LOCAL" />
       <updated>1408561868724</updated>
     </task>
     <task id="LOCAL-00066" summary="Nada importante">
       <created>1408626182521</created>
+      <option name="number" value="00066" />
+      <option name="project" value="LOCAL" />
       <updated>1408626182521</updated>
     </task>
     <task id="LOCAL-00067" summary="Correccion en formateo de amount cuando se envia en un tagged o en root transaction">
       <created>1408640425590</created>
+      <option name="number" value="00067" />
+      <option name="project" value="LOCAL" />
       <updated>1408640425590</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Informacion de confirmacion cuando se hace una operacion Tagged Refund">
+      <created>1408645719011</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1408645719011</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Correccion en workflow">
+      <created>1408723439536</created>
+      <option name="number" value="00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1408723439536</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Correccion en workflow">
+      <created>1408724156285</created>
+      <option name="number" value="00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1408724156285</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Correccion en el caluclo del Max Amount cuando se hace una operacion tagged refund sobre una Tagged Completion">
+      <created>1408736000035</created>
+      <option name="number" value="00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1408736000035</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Se impeide hacer un Tagged Void sobre un Tagged Pre Auth si no es el mismo dia">
+      <created>1409075634365</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1409075634365</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Se cambia el password de la cuenta porque habia caducado">
+      <created>1409075650562</created>
+      <option name="number" value="00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1409075650562</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Solo se permite Tagged Void (sin importar la operacion padre) si es en la misma fecha que la op padre">
+      <created>1409324525876</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1409324525876</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Cuando la operacion es Purchase, ahora tambien se puede hacer Tagged Void">
+      <created>1409346036278</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1409346036278</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Corregidos los rougins para prod">
+      <created>1410281146399</created>
+      <option name="number" value="00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1410281146399</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Correccion en clase TwigEngine">
+      <created>1410372070784</created>
+      <option name="number" value="00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1410372070784</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Correccion en clase TwigEngine">
+      <created>1410372172904</created>
+      <option name="number" value="00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1410372172904</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1366" height="741" extended-state="0" />
+    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32707354" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2910557" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29062957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32707354" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -931,13 +913,16 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
   </component>
@@ -948,15 +933,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Tarea #1610. Se impide seleccionar fechas futuras cuando se concilia" />
-    <MESSAGE value="Tarea #1611. Corregido el problema cuando el amount supera el limite" />
-    <MESSAGE value="Tarea #1615. Se formatea el total amount a 2 decimales" />
-    <MESSAGE value="Tarea #1608. Correcciones varias" />
-    <MESSAGE value="Tarea #1616. Corregido el modelo de datos con clave primaria autoincrement" />
-    <MESSAGE value="Se quita el envio de correos a una sola direccion" />
-    <MESSAGE value="Correccion variable $user" />
-    <MESSAGE value="Tarea #1607. Se permite autenticar al usuario mediante su &quot;accesskey&quot; por url" />
-    <MESSAGE value="Tarea #1621. Se oculta la columna &quot;Conciliada&quot; para la extranet" />
     <MESSAGE value="Tarea #1623. Se resta el total amount cuando se hace un Tagged Void sobre un Tagged Completion" />
     <MESSAGE value="Tarea #1624. Se agrega un espacio al final del CTR para poder ingresar firma y aclaracion" />
     <MESSAGE value="Tarea #1626. Se agrega la leyenda correspondiente y se ajusta el tamaño del ticket cuando se imprime (no cuando se muestra)" />
@@ -973,373 +949,380 @@
     <MESSAGE value="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline. Funcionalidad hecha para las operaciones tagged void" />
     <MESSAGE value="Nada importante" />
     <MESSAGE value="Correccion en formateo de amount cuando se envia en un tagged o en root transaction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correccion en formateo de amount cuando se envia en un tagged o en root transaction" />
+    <MESSAGE value="Informacion de confirmacion cuando se hace una operacion Tagged Refund" />
+    <MESSAGE value="Correccion en workflow" />
+    <MESSAGE value="Correccion en el caluclo del Max Amount cuando se hace una operacion tagged refund sobre una Tagged Completion" />
+    <MESSAGE value="Se impeide hacer un Tagged Void sobre un Tagged Pre Auth si no es el mismo dia" />
+    <MESSAGE value="Se cambia el password de la cuenta porque habia caducado" />
+    <MESSAGE value="Solo se permite Tagged Void (sin importar la operacion padre) si es en la misma fecha que la op padre" />
+    <MESSAGE value="Cuando la operacion es Purchase, ahora tambien se puede hacer Tagged Void" />
+    <MESSAGE value="Corregidos los rougins para prod" />
+    <MESSAGE value="Correccion en clase TwigEngine" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correccion en clase TwigEngine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="93" selection-start="2770" selection-end="2770" vertical-scroll-proportion="-0.34797892" vertical-offset="1602" max-vertical-offset="4158" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="30" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="1638" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="511" column="43" selection-start="15246" selection-end="15246" vertical-scroll-proportion="0.20402299" vertical-offset="9127" max-vertical-offset="20106" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Reader/IReader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="23" selection-start="1268" selection-end="1268" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="630" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SPL_c1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="549" column="6" selection-start="18709" selection-end="18709" vertical-scroll-proportion="-11.579044" vertical-offset="16181" max-vertical-offset="40662" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="370" column="20" selection-start="12829" selection-end="12829" vertical-scroll-proportion="0.3492647" vertical-offset="6344" max-vertical-offset="22842" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/liuggio/ExcelBundle/Liuggio/ExcelBundle/Factory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="6" selection-start="224" selection-end="224" vertical-scroll-proportion="-0.4226804" vertical-offset="444" max-vertical-offset="1404" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Reader/Abstract.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="20" selection-start="5433" selection-end="5433" vertical-scroll-proportion="0.30756015" vertical-offset="2881" max-vertical-offset="3762" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Reader/CSV.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="247" column="20" selection-start="5929" selection-end="5929" vertical-scroll-proportion="0.30927834" vertical-offset="3834" max-vertical-offset="7146" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="4" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="23" selection-start="582" selection-end="582" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="4" selection-start="11" selection-end="11" vertical-scroll-proportion="-0.26804122" vertical-offset="192" max-vertical-offset="774" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/IOFactory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="25" selection-start="3348" selection-end="3348" vertical-scroll-proportion="-5.5185184" vertical-offset="1723" max-vertical-offset="4860" />
+        <state vertical-scroll-proportion="-5.5185184" vertical-offset="1723" max-vertical-offset="4860">
+          <caret line="128" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Settings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="30" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.33213645" vertical-offset="139" max-vertical-offset="6642" />
+        <state vertical-scroll-proportion="0.33213645" vertical-offset="139" max-vertical-offset="6642">
+          <caret line="42" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/File.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="27" selection-start="3853" selection-end="3853" vertical-scroll-proportion="-73.333336" vertical-offset="0" max-vertical-offset="2880" />
+        <state vertical-scroll-proportion="-73.333336" vertical-offset="0" max-vertical-offset="2880">
+          <caret line="134" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/Excel5.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-8.893382" vertical-offset="4838" max-vertical-offset="5382" />
+        <state vertical-scroll-proportion="-8.893382" vertical-offset="4838" max-vertical-offset="5382">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/OLE/PPS/Root.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="30" selection-start="2258" selection-end="2258" vertical-scroll-proportion="-16.0" vertical-offset="684" max-vertical-offset="8514" />
+        <state vertical-scroll-proportion="-16.0" vertical-offset="684" max-vertical-offset="8514">
+          <caret line="62" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel5.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="20" selection-start="7101" selection-end="7101" vertical-scroll-proportion="-3.3333333" vertical-offset="3510" max-vertical-offset="16506" />
+        <state vertical-scroll-proportion="-3.3333333" vertical-offset="3510" max-vertical-offset="16506">
+          <caret line="224" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/IWriter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="20" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.6140036" vertical-offset="0" max-vertical-offset="557" />
+        <state vertical-scroll-proportion="0.6140036" vertical-offset="0" max-vertical-offset="557">
+          <caret line="43" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="48" selection-start="7305" selection-end="7305" vertical-scroll-proportion="-0.037037037" vertical-offset="3617" max-vertical-offset="9252" />
+        <state vertical-scroll-proportion="-0.037037037" vertical-offset="3617" max-vertical-offset="9252">
+          <caret line="225" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/ZipArchive.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="55" selection-start="1944" selection-end="1944" vertical-scroll-proportion="-9.333333" vertical-offset="594" max-vertical-offset="2826" />
+        <state vertical-scroll-proportion="-9.333333" vertical-offset="594" max-vertical-offset="2826">
+          <caret line="71" column="55" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="51" selection-start="939" selection-end="939" vertical-scroll-proportion="-0.42728904" vertical-offset="922" max-vertical-offset="4914" />
+        <state vertical-scroll-proportion="-0.42728904" vertical-offset="922" max-vertical-offset="4914">
+          <caret line="44" column="51" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="4" selection-start="881" selection-end="881" vertical-scroll-proportion="0.7055921" vertical-offset="201" max-vertical-offset="810" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="22" selection-start="891" selection-end="891" vertical-scroll-proportion="0.7927632" vertical-offset="148" max-vertical-offset="756" />
+        <state vertical-scroll-proportion="0.7055921" vertical-offset="201" max-vertical-offset="810">
+          <caret line="35" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/EventSubscriber/TransactionSubscriber.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1854" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="29" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.37384897" vertical-offset="1165" max-vertical-offset="1746">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1854">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="59" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.38037866" vertical-offset="211" max-vertical-offset="792">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/HttpClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.624785" vertical-offset="1525" max-vertical-offset="2106">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/Clients/GridClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.1232394" vertical-offset="638" max-vertical-offset="1206">
-          <folding />
+        <state vertical-scroll-proportion="0.38037866" vertical-offset="211" max-vertical-offset="792">
+          <caret line="24" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/Clients/TransactionClient.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="608">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="608">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/vendor/jquery.watable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1339" column="13" selection-start="67609" selection-end="67609" vertical-scroll-proportion="0.33277312" vertical-offset="23490" max-vertical-offset="25092">
-          <folding />
+        <state vertical-scroll-proportion="0.33277312" vertical-offset="23490" max-vertical-offset="25092">
+          <caret line="1339" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/vendor/angular.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2810" column="2" selection-start="84256" selection-end="84256" vertical-scroll-proportion="0.0" vertical-offset="50382" max-vertical-offset="386442">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="50382" max-vertical-offset="386442">
+          <caret line="2810" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="3919" selection-end="3919" vertical-scroll-proportion="-16.037037" vertical-offset="881" max-vertical-offset="1476">
-          <folding />
+        <state vertical-scroll-proportion="-16.037037" vertical-offset="881" max-vertical-offset="1476">
+          <caret line="73" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/streams/src/StreamInterface.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="20" selection-start="3732" selection-end="3732" vertical-scroll-proportion="0.7986231" vertical-offset="1768" max-vertical-offset="2376">
-          <folding />
+        <state vertical-scroll-proportion="0.7986231" vertical-offset="1768" max-vertical-offset="2376">
+          <caret line="124" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_refund.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
-          <folding />
+        <state vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
+          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="583">
-          <folding>
-            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1405534887341" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="583">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_preAuth.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="51" selection-end="51" vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
-          <folding />
+        <state vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
+          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_newTransaction.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="12" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
-          <folding />
+        <state vertical-scroll-proportion="0.0323741" vertical-offset="0" max-vertical-offset="556">
+          <caret line="1" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_conciliar.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="98" selection-start="866" selection-end="866" vertical-scroll-proportion="0.5907336" vertical-offset="0" max-vertical-offset="558">
-          <folding>
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408640109734" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.5907336" vertical-offset="0" max-vertical-offset="558">
+          <caret line="17" column="98" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirm.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="194" selection-end="194" vertical-scroll-proportion="-2.0" vertical-offset="54" max-vertical-offset="774">
-          <folding>
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1408561850104" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-2.0" vertical-offset="54" max-vertical-offset="774">
+          <caret line="6" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_tagged.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="666">
-          <folding>
-            <marker date="1408640085624" expanded="true" signature="94:263" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="292:1362" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="351:1351" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="388:1335" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="565:1082" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="770:954" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="1393:1755" placeholder="..." />
-            <marker date="1408640085624" expanded="true" signature="1495:1670" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="31" selection-start="1136" selection-end="1136" vertical-scroll-proportion="-6.851852" vertical-offset="607" max-vertical-offset="1260">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="31" selection-start="7252" selection-end="7252" vertical-scroll-proportion="-13.333333" vertical-offset="2484" max-vertical-offset="4230">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="293" column="25" selection-start="9015" selection-end="9015" vertical-scroll-proportion="-13.703704" vertical-offset="4760" max-vertical-offset="6678">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="0" selection-start="2633" selection-end="2633" vertical-scroll-proportion="-10.666667" vertical-offset="1152" max-vertical-offset="4374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="6" selection-start="227" selection-end="227" vertical-scroll-proportion="16.666666" vertical-offset="594" max-vertical-offset="2016">
-          <folding />
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="43" selection-start="3253" selection-end="3253" vertical-scroll-proportion="-6.0" vertical-offset="810" max-vertical-offset="1818">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1818">
+          <caret line="54" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="531" selection-end="531" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="252">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="252">
+          <caret line="7" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirmTagged.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="49" selection-start="1057" selection-end="1057" vertical-scroll-proportion="-12.0" vertical-offset="144" max-vertical-offset="1224">
-          <folding>
-            <marker date="1408645657986" expanded="true" signature="101:271" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="300:2662" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="359:2651" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="409:2635" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="490:2614" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="511:648" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="536:643" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="669:798" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="694:793" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="819:944" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="844:939" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="965:1089" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="990:1084" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1110:2589" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1135:2584" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1175:2567" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1228:2537" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1437:2236" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="1630:2076" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="2693:3055" placeholder="..." />
-            <marker date="1408645657986" expanded="true" signature="2795:2970" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="1224">
+          <caret line="26" column="49" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47332186" vertical-offset="517" max-vertical-offset="1260">
+          <caret line="49" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Response.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.19014084" vertical-offset="252" max-vertical-offset="2016">
+          <caret line="14" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.41197184" vertical-offset="1674" max-vertical-offset="4374">
+          <caret line="93" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="417" column="0" selection-start="14836" selection-end="14836" vertical-scroll-proportion="0.31926605" vertical-offset="7332" max-vertical-offset="10368">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6281" max-vertical-offset="10368">
+          <caret line="359" column="128" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/nesbot/carbon/src/Carbon/Carbon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4814816" vertical-offset="3668" max-vertical-offset="38304">
+          <caret line="224" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.753521" vertical-offset="2700" max-vertical-offset="4158">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Templating/TemplateReference.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49723756" vertical-offset="0" max-vertical-offset="1008">
+          <caret line="22" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3028169" vertical-offset="1268" max-vertical-offset="1836">
+          <caret line="85" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Debug/TimedTwigEngine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41197184" vertical-offset="0" max-vertical-offset="936">
+          <caret line="23" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="1800">
+          <caret line="20" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16179001" vertical-offset="2930" max-vertical-offset="6426">
+          <caret line="181" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/HttpClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34892085" vertical-offset="1084" max-vertical-offset="2106">
+          <caret line="76" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3499079" vertical-offset="3752" max-vertical-offset="4428">
+          <caret line="226" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/Clients/GridClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38908452" vertical-offset="625" max-vertical-offset="1206">
+          <caret line="53" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22183098" vertical-offset="2160" max-vertical-offset="8136">
+          <caret line="127" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="608">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7927632" vertical-offset="148" max-vertical-offset="756">
+          <caret line="35" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.666667" vertical-offset="1512" max-vertical-offset="4338">
+          <caret line="110" column="58" selection-start-line="110" selection-start-column="58" selection-end-line="110" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/routing_prod.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1773399" vertical-offset="0" max-vertical-offset="609">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>

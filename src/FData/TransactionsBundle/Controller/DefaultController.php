@@ -43,8 +43,9 @@ class DefaultController extends Controller
         unset($data2[count($data2) - 1]);
 
 
-        $cleanData    = [];
-        $debo_aplicar = true;
+        $cleanData       = [];
+        $debo_aplicar    = true;
+        $padre_ya_tocado = "-";
 
         foreach ($data as $k_row => &$row) {
             $formattedRow = ["id" => $k_row];
@@ -56,7 +57,8 @@ class DefaultController extends Controller
                 foreach ($data2 as $k_row2 => $row2) {
                     // indice 0 => "Transaction Tag"
                     if ($reference_tag == $row2[0]) {
-                        if ($debo_aplicar) {
+                        $he_tocado = strpos($padre_ya_tocado, "-" . $row2[0] . "-");
+                        if ($debo_aplicar && $he_tocado === false) {
                             $estado_padre = "";
                             switch ($row2[6]) {
                                 case "Purchase":
@@ -106,6 +108,7 @@ class DefaultController extends Controller
                             }
 
                             $data[$k_row2][7] = $estado_padre;
+                            $padre_ya_tocado.=$row2[0]."-";
                         }
 
                         //si es void el estado del padre, tengo que ignorar este estado en el proximo hijo
@@ -132,7 +135,7 @@ class DefaultController extends Controller
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
             }
             if ($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
-                $formattedRow['usuario'] = $transaction->getUsuario() ? : "";
+                $formattedRow['usuario'] = $transaction->getUsuario() ?: "";
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
@@ -178,7 +181,7 @@ class DefaultController extends Controller
 
     public function conciliarAction(Request $request)
     {
-        if(false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
+        if (false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
             throw new AccessDeniedException();
         }
         $data        = json_decode($request->getContent(), true)['transactions'];
@@ -203,13 +206,13 @@ class DefaultController extends Controller
             $data          = $body['transactions'];
             $cols          = $body['cols'];
 
-            $writer        = new Writer(new SplTempFileObject());
+            $writer = new Writer(new SplTempFileObject());
             $reportHandler->buildHeaders(array_keys($cols));
             $writer->insertOne($reportHandler->getFlatHeaders($cols));
             $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
 
-            $tmpfile = tempnam(ini_get('upload_tmp_dir'), 'csv');
+            $tmpfile  = tempnam(ini_get('upload_tmp_dir'), 'csv');
             $tmpfileR = fopen($tmpfile, "w");
 
             fwrite($tmpfileR, $writer->__toString());
