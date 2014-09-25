@@ -232,28 +232,26 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, pri
                 } else {
                     td_conciliada.addClass('danger');
                 }
-                updateTotalRecords(args.initial);
-                updateTotalAmount(args.initial);
+                scope.$evalAsync(function () {
+                    updateTotalRecords(args.initial);
+                    updateTotalAmount(args.initial);
+                });
             });
 
             var updateTotalRecords = function (initial) {
-                scope.$apply(function () {
-                    if (initial) {
-                        scope.totalRecords = scope.grid.getData().rows.length;
-                    } else {
-                        scope.totalRecords = scope.grid.getData(false, true).rows.length;
-                    }
-                });
+                if (initial) {
+                    scope.totalRecords = scope.grid.getData().rows.length;
+                } else {
+                    scope.totalRecords = scope.grid.getData(false, true).rows.length;
+                }
             };
 
             var updateTotalAmount = function (initial) {
-                scope.$apply(function () {
-                    if (initial) {
-                        scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
-                    } else {
-                        scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
-                    }
-                });
+                if (initial) {
+                    scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
+                } else {
+                    scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
+                }
             };
 
 
@@ -333,7 +331,7 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
             reference_no: $scope.transaction['Ref Num']
         };
 
-        $http.post(_config.url, { transactions: data }).success(function (data, status) {
+        $http.post(_config.url, {transactions: data}).success(function (data, status) {
             if (data.success) {
                 notify({
                     title: "Operación realizada con éxito",
@@ -360,7 +358,7 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
         if ("Purchase" == current_transaction['Transaction Type'] || "Tagged Completion" == current_transaction['Transaction Type']) {
             var tagged_transactions = $filter('filter')(transactions, function (transaction) {
                 return transaction['Reference 3'] == current_transaction['Tag']
-                    && 'Error' !== transaction['Status']
+                && 'Error' !== transaction['Status']
             });
             if (tagged_transactions) {
                 angular.forEach(tagged_transactions, function (t_t) {
@@ -444,7 +442,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
             data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
         }
 
-        $http.post(_config.url, { transactions: data }).success(function (data, status) {
+        $http.post(_config.url, {transactions: data}).success(function (data, status) {
             if (data.success) {
                 notify({
                     title: "Operación realizada con éxito",
@@ -464,7 +462,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
     }
 }]);
 
-app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', function ($scope, $modal, $window, $http) {
+app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', function ($scope, $modal, $window, $http, moment) {
     $scope.nbTransactions = 0;
     $scope.openForm = function (transaction_type, form_title) {
         $modal.open({
@@ -484,9 +482,48 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', funct
         });
     };
 
+    $scope.search = {};
+    $scope.maxDateTo = new Date();
+
+    $scope.search.from = null;
+    $scope.search.to = $scope.minDateTo = null;
+
+    $scope.openDatepickerFrom = function ($event) {
+        $scope.datepickerFromOpened = true;
+    };
+
+    $scope.openDatepickerTo = function ($event) {
+        $scope.datepickerToOpened = true;
+    };
+
+    $scope.changeMin = function () {
+        $scope.minDateTo = $scope.search.from;
+    };
+
+    $scope.changeMax = function () {
+        $scope.maxDateFrom = $scope.search.to;
+    };
+
+    $scope.search = function (form) {
+        var from, to = null;
+        if (form.from) {
+            from = moment(form.from).format('YYYY-MM-DD');
+        }
+
+        if (form.to) {
+            to = moment(form.to).format('YYYY-MM-DD');
+        }
+        $http.get('/transactions', {params: {from: from, to: to}}).success(function (data) {
+            $scope.grid.setData(data, true);
+        })
+    };
+
     $scope.exportCSV = function () {
         var transactions = $scope.grid.getData(false, true).rows || $scope.grid.getData().rows;
-        $http.post('/transactions-export', {transactions: transactions, cols: $scope.grid.getData().cols}).success(function (data) {
+        $http.post('/transactions-export', {
+            transactions: transactions,
+            cols: $scope.grid.getData().cols
+        }).success(function (data) {
             $window.location.assign('/transactions-export');
         });
         return false;
@@ -532,7 +569,7 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
 
     $scope.submit = function () {
         $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
-        var promise = $http.post('/transactions/' + transaction_type, { transactions: $scope.transaction });
+        var promise = $http.post('/transactions/' + transaction_type, {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {
                 $modalInstance.dismiss('cancel');

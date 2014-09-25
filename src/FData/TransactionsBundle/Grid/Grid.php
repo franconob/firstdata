@@ -444,4 +444,12 @@ EOF;
 
         return $flatHeaders;
     }
+
+    /**
+     * @return GridClient
+     */
+    public function getHttpClient()
+    {
+        return $this->http_client;
+    }
 }

@@ -21,11 +21,23 @@ class DefaultController extends Controller
         return $this->render('FDataTransactionsBundle:Default:index.html.twig');
     }
 
-    public function transactionsAction()
+    public function transactionsAction(Request $request)
     {
         /** @var Grid $grid */
         $grid            = $this->get('f_data_transactions.api.search.grid');
         $securityContext = $this->get('security.context');
+
+        $from = $request->query->get('from');
+        $to   = $request->query->get('to');
+
+        $httpClient = $grid->getHttpClient();
+        if ($from) {
+            $httpClient->setStartDate(\DateTime::createFromFormat('Y-m-d', $from));
+        }
+
+        if ($to) {
+            $httpClient->setEndDate(\DateTime::createFromFormat('Y-m-d', $to));
+        }
 
         $response_string = (string)$grid->query()->getBody();
 
@@ -108,7 +120,7 @@ class DefaultController extends Controller
                             }
 
                             $data[$k_row2][7] = $estado_padre;
-                            $padre_ya_tocado.=$row2[0]."-";
+                            $padre_ya_tocado .= $row2[0] . "-";
                         }
 
                         //si es void el estado del padre, tengo que ignorar este estado en el proximo hijo

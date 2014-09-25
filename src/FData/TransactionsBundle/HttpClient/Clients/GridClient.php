@@ -20,6 +20,16 @@ class GridClient extends HttpClient
     private $user;
 
     /**
+     * @var \DateTime
+     */
+    private $startDate = null;
+
+    /**
+     * @var \DateTime
+     */
+    private $endDate = null;
+
+    /**
      * @var string
      */
     public $username;
@@ -45,6 +55,28 @@ class GridClient extends HttpClient
     }
 
     /**
+     * @param \DateTime $startDate
+     * @return $this
+     */
+    public function setStartDate(\DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $endDate
+     * @return $this
+     */
+    public function setEndDate(\DateTime $endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
      * @param string $body
      * @param array $options
      * @return $this|\GuzzleHttp\Message\RequestInterface
@@ -58,10 +90,23 @@ class GridClient extends HttpClient
             "Acecpt", "text/search-v3+csv"
         ];
 
-        $now         = new \DateTime();
-        $last6Months = $now->sub(new \DateInterval('P6M'));
+        if (!$this->startDate) {
+            $now             = new \DateTime();
+            $this->startDate = $now->sub(new \DateInterval('P6M'));
+        }
 
-        $this->request->setQuery(["search_field" => "custref", "search" => $this->user->getSearchString(), "start_date" => $last6Months->format('Y-m-d')]);
+        $queryFields = [
+            "search_field" => "custref",
+            "search"       => $this->user->getSearchString(),
+            "start_date"   => $this->startDate->format('Y-m-d')
+        ];
+
+        if ($this->endDate) {
+            $queryFields["end_date"] = $this->endDate->format('Y-m-d');
+        }
+
+
+        $this->request->setQuery($queryFields);
 
         return $this;
     }
