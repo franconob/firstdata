@@ -3,49 +3,40 @@
  */
 PNotify.prototype.options.styling = "fontawesome";
 
-
-function __notify(options) {
-    return new PNotify({
-        title: options.title || "Ejecutando...",
-        text: options.message || "",
-        icon: options.icon || "",
-        type: options.type || "info",
-        hide: options.hide || false
-    });
-}
-
-$(document).ajaxStart(function () {
-    globalNotify = __notify({
-        title: "Ejecutando..",
-        message: "Cargando transacciones",
-        icon: "fa fa-refresh fa-spin"
-    });
-});
-
-$(document).ajaxStop(function () {
-    globalNotify.remove();
-});
-var waT;
 var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters']);
 
 app.value('numeral', numeral);
 
-app.factory('firstDataInterceptor', ["$q", "$rootScope", function ($q, $rootScope) {
+app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", function ($q, $rootScope, notify) {
+    var currentNotify = null;
+    var REGEXURL = /[.]html$/;
     return {
         request: function (config) {
             var deferred = $q.defer();
-            $rootScope.isLoading = true;
+            if (!REGEXURL.test(config.url)) {
+                $rootScope.isLoading = true;
+                currentNotify = notify({
+                    title: "Ejecutando..",
+                    message: "Cargando transacciones",
+                    icon: "fa fa-refresh fa-spin"
+                });
+            }
+
             deferred.resolve(config);
 
             return deferred.promise;
         },
         response: function (response) {
+            if (!REGEXURL.test(response.config.url)) {
+                currentNotify.remove();
+                $rootScope.isLoading = false;
+            }
             var deferred = $q.defer();
-            $rootScope.isLoading = false;
 
             deferred.resolve(response);
 
             return deferred.promise;
+            //return response;
         }
     };
 }]);
@@ -187,7 +178,7 @@ app.directive('fdataInput', function () {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, printCTR) {
+app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $http) {
     return {
         restrict: 'E',
         scope: {
@@ -195,12 +186,11 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, pri
             totalAmount: '=',
             grid: '='
         },
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
             scope.totalRecords = 0;
             var initial = true;
 
             var grid = element.WATable({
-                url: '/transactions',
                 filter: true,
                 pageSize: [10],
                 columnPicker: true,
@@ -219,6 +209,18 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, pri
                 tableCreated: function () {
                     scope.$emit('gridCreated', {grid: grid, gridObj: grid.data('WATable'), initial: initial});
                 }
+            });
+
+            var updateGrid = function () {
+                $http.get('/transactions').success(function (data) {
+                    grid.data('WATable').setData(data);
+                });
+            };
+
+            updateGrid();
+
+            scope.$on('grid.update', function () {
+                updateGrid();
             });
 
             scope.$on('gridCreated', function (event, args) {
@@ -317,7 +319,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, pri
     }
 });
 
-app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transaction", "grid", "$http", "notify", "printCTR", "_config", function ($scope, $modalInstance, transaction, grid, $http, notify, printCTR, _config) {
+app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transaction", "grid", "$http", "notify", "printCTR", "_config", "$rootScope", function ($scope, $modalInstance, transaction, grid, $http, notify, printCTR, _config, $rootScope) {
     $scope.title = _config.label;
     $scope.transaction = transaction;
     $scope.submit = function () {
@@ -339,10 +341,11 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
                     hide: true,
                     icon: 'fa fa-check'
                 });
-                printCTR(data.CTR, data.bank_message);
             }
             $modalInstance.dismiss('ok');
-            grid.update();
+            //grid.update();
+            console.log('emitiendo')
+            $rootScope.$broadcast('grid.update');
         })
     };
 
@@ -385,7 +388,7 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
     $scope.maxDate = new Date();
 
     $scope.submit = function () {
-        $modalInstance.dismiss('cancel');
+        $modalInstance.dismiss('ok');
         $modal.open({
             templateUrl: "confirmTagged.html",
             size: 'md',
@@ -412,7 +415,8 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
     }
 }]);
 
-app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_config", "transaction", "$http", "printCTR", "moment", "maxAmount", "notify", "grid", function ($scope, $modalInstance, _config, transaction, $http, printCTR, moment, maxAmount, notify, grid) {
+app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_config", "transaction", "$http", "printCTR", "moment", "maxAmount", "notify", "$rootScope", function ($scope, $modalInstance, _config, transaction, $http, printCTR, moment, maxAmount, notify, $rootScope) {
+    console.log('ConfirmTaggedFormModal');
     $scope.editable = false;
     $scope.maxAmount = maxAmount;
     $scope.transaction = transaction;
@@ -442,7 +446,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
             data['fecha'] = moment($scope.transaction['fecha']).format('YYYY-MM-DD') + ' ' + moment().format('H:mm:ss');
         }
 
-        $http.post(_config.url, {transactions: data}).success(function (data, status) {
+        $http.post(_config.url, {transactions: data}).success(function (data) {
             if (data.success) {
                 notify({
                     title: "Operación realizada con éxito",
@@ -453,8 +457,9 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
                 printCTR(data.CTR, data.bank_message);
             }
             $modalInstance.dismiss('ok');
-            grid.update();
-        })
+            console.log('se tiene q cerrar');
+            $rootScope.$broadcast('grid.update');
+        });
     };
 
     $scope.cancel = function () {
@@ -560,7 +565,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 }]);
 
 
-app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', 'grid', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, grid, printCTR, $http, transaction) {
+app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', '$rootScope', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, $rootScope, printCTR, $http, transaction) {
     $scope.transaction = transaction;
     $scope.title = "Confirmar datos de la operación";
     $scope.subtitle = "Click en el campo para poder editarlo";
@@ -572,14 +577,15 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
         var promise = $http.post('/transactions/' + transaction_type, {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {
-                $modalInstance.dismiss('cancel');
+                console.log('cerrando primer modal');
+                $modalInstance.dismiss('ok');
                 notify({
                     title: "Operación realizada con éxito",
                     type: 'success',
                     hide: true,
                     icon: 'fa fa-check'
                 });
-                grid.update();
+                $rootScope.$broadcast('grid.update');
                 printCTR(data.CTR, data.bank_message);
             } else {
                 notify({

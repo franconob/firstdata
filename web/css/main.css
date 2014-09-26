@@ -30,6 +30,10 @@
     padding: 10px;
 }
 
+#table-info {
+    margin-top: -19px;
+}
+
 .table-header-info > .row > .information {
     min-height: 60px;
     border-right: 1px solid;
