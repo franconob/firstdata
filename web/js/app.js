@@ -343,8 +343,6 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
                 });
             }
             $modalInstance.dismiss('ok');
-            //grid.update();
-            console.log('emitiendo')
             $rootScope.$broadcast('grid.update');
         })
     };
@@ -416,7 +414,6 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
 }]);
 
 app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_config", "transaction", "$http", "printCTR", "moment", "maxAmount", "notify", "$rootScope", function ($scope, $modalInstance, _config, transaction, $http, printCTR, moment, maxAmount, notify, $rootScope) {
-    console.log('ConfirmTaggedFormModal');
     $scope.editable = false;
     $scope.maxAmount = maxAmount;
     $scope.transaction = transaction;
@@ -457,7 +454,6 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
                 printCTR(data.CTR, data.bank_message);
             }
             $modalInstance.dismiss('ok');
-            console.log('se tiene q cerrar');
             $rootScope.$broadcast('grid.update');
         });
     };
@@ -577,7 +573,6 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
         var promise = $http.post('/transactions/' + transaction_type, {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {
-                console.log('cerrando primer modal');
                 $modalInstance.dismiss('ok');
                 notify({
                     title: "Operación realizada con éxito",
