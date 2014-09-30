@@ -490,10 +490,14 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
     $scope.search.to = $scope.minDateTo = null;
 
     $scope.openDatepickerFrom = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.datepickerFromOpened = true;
     };
 
     $scope.openDatepickerTo = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation()
         $scope.datepickerToOpened = true;
     };
 
