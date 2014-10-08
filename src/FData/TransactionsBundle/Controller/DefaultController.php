@@ -55,10 +55,13 @@ class DefaultController extends Controller
         unset($data2[count($data2) - 1]);
 
 
-        $cleanData         = [];
-        $debo_aplicar      = true;
-        $padre_ya_tocado   = "-";
-        $no_permiten_voids = [];
+        $cleanData              = [];
+        $debo_aplicar           = true;
+        $padre_ya_tocado        = "-";
+        $no_permiten_voids      = [];
+        $no_permite_void        = 0;
+        $no_permite_void2       = 0;
+        $reference_tag_purchase = null;
 
         foreach ($data as $k_row => &$row) {
             $formattedRow = ["id" => $k_row];
@@ -67,9 +70,7 @@ class DefaultController extends Controller
             if ("" !== $row[12]) {
                 $reference_tag = $row[12];
 
-                $no_permite_void  = 0;
-                $no_permite_void2 = 0;
-                $reference_tag_purchase = null;
+
                 foreach ($data2 as $k_row2 => $row2) {
                     // indice 0 => "Transaction Tag"
                     if ($reference_tag == $row2[0]) {
@@ -149,11 +150,9 @@ class DefaultController extends Controller
                         $debo_aplicar = ($data[$k_row2][6] !== "Tagged Void");
                     }
                 }
-                var_dump($no_permite_void, $no_permite_void2);die;
-                if ($no_permite_void !== $no_permite_void2) {
-                    $no_permiten_voids[] = $reference_tag_purchase;
-                }
+
             }
+
 
             $cleanRow       = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
             $enabledHeaders = $grid->getEnabledHeaders();
@@ -174,6 +173,10 @@ class DefaultController extends Controller
             }
             if ($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
                 $formattedRow['usuario'] = $transaction->getUsuario() ?: "";
+            }
+
+            if ($formattedRow['Transaction Type'] == 'Purchase' && $no_permite_void !== $no_permite_void2) {
+                $no_permiten_voids[] = $formattedRow['Tag'];
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $no_permiten_voids]);
