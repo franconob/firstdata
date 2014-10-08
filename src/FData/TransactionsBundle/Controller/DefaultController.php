@@ -55,9 +55,10 @@ class DefaultController extends Controller
         unset($data2[count($data2) - 1]);
 
 
-        $cleanData       = [];
-        $debo_aplicar    = true;
-        $padre_ya_tocado = "-";
+        $cleanData         = [];
+        $debo_aplicar      = true;
+        $padre_ya_tocado   = "-";
+        $no_permiten_voids = [];
 
         foreach ($data as $k_row => &$row) {
             $formattedRow = ["id" => $k_row];
@@ -66,6 +67,8 @@ class DefaultController extends Controller
             if ("" !== $row[12]) {
                 $reference_tag = $row[12];
 
+                $no_permite_void = 0;
+                $no_permite_void2 = 0;
                 foreach ($data2 as $k_row2 => $row2) {
                     // indice 0 => "Transaction Tag"
                     if ($reference_tag == $row2[0]) {
@@ -76,6 +79,7 @@ class DefaultController extends Controller
                                 case "Purchase":
                                     switch ($row[6]) {
                                         case "Tagged Refund":
+                                            $no_permite_void++;
                                             $estado_padre = "Refunded Transaction";
                                             break;
                                         case "Tagged Void":
@@ -103,6 +107,7 @@ class DefaultController extends Controller
                                 case "Tagged Refund":
                                     switch ($row[6]) {
                                         case "Tagged Void":
+                                            $no_permite_void2++;
                                             $estado_padre = "Voided Transaction";
                                             break;
                                     };
@@ -127,6 +132,9 @@ class DefaultController extends Controller
                         $debo_aplicar = ($data[$k_row2][6] !== "Tagged Void");
                     }
                 }
+                if ($no_permite_void !== $no_permite_void2) {
+                    $no_permiten_voids[] = $reference_tag;
+                }
             }
 
             $cleanRow       = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
@@ -150,7 +158,7 @@ class DefaultController extends Controller
                 $formattedRow['usuario'] = $transaction->getUsuario() ?: "";
             }
 
-            $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow);
+            $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $no_permiten_voids]);
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [

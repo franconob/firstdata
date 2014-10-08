@@ -183,9 +183,10 @@ EOF;
 
     /**
      * @param string $transaction
+     * @param array $restrictions
      * @return string
      */
-    public function getActionFor($transaction)
+    public function getActionFor($transaction, array $restrictions)
     {
         if (
             !isset(self::$transactions_workflow[$transaction['Transaction Type']])
@@ -206,7 +207,7 @@ EOF;
             // si es array es porque [$action, $funcionDeChequeo]
             if (isset($action[0])) {
                 $callback = $action[1];
-                if (!$callback($transaction)) {
+                if (!$callback($transaction, $restrictions)) {
                     unset($allowed_actions[$k]);
                     continue;
                 } else {
@@ -287,11 +288,17 @@ EOF;
     {
         self::$transactions_workflow = [
             'Purchase'          => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
+
+                    if(isset($restrictions['taggedVoidRestrictions'])) {
+                        if(in_array($transaction['Tag'], $restrictions['taggedVoidRestrictions'])) {
+                            return false;
+                        }
+                    }
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
@@ -304,7 +311,7 @@ EOF;
             ],
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
-                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();
@@ -320,7 +327,7 @@ EOF;
             ]
             ],
             'Refund'            => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();
@@ -335,7 +342,7 @@ EOF;
             ]
             ],
             'Tagged Completion' => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();
@@ -353,7 +360,7 @@ EOF;
             ],
             'Tagged Void'       => ["allows" => []],
             'Tagged Refund'     => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction) {
+                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();

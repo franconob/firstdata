@@ -3,7 +3,22 @@
  */
 PNotify.prototype.options.styling = "fontawesome";
 
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters']);
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters', 'ui.router']);
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/app');
+
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            controller: 'TransactionCtrl',
+            templateUrl: 'app.html'
+        })
+        .state('app.history', {
+            url: '/app/:id/history',
+            controller: 'TransactionCtrl',
+            templateUrl: 'app.html'
+        })
+}]);
 
 app.value('numeral', numeral);
 
@@ -463,7 +478,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
     }
 }]);
 
-app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', function ($scope, $modal, $window, $http, moment) {
+app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', '$state', function ($scope, $modal, $window, $http, moment, $state) {
     $scope.nbTransactions = 0;
     $scope.openForm = function (transaction_type, form_title) {
         $modal.open({
