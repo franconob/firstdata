@@ -69,12 +69,14 @@ class DefaultController extends Controller
 
                 $no_permite_void  = 0;
                 $no_permite_void2 = 0;
+                $reference_tag_purchase = null;
                 foreach ($data2 as $k_row2 => $row2) {
                     // indice 0 => "Transaction Tag"
                     if ($reference_tag == $row2[0]) {
                         $he_tocado = strpos($padre_ya_tocado, "-" . $row2[0] . "-");
                         switch ($row2[6]) {
                             case "Purchase":
+                                $reference_tag_purchase = $row2[0];
                                 switch ($row[6]) {
                                     case "Tagged Refund":
                                         $no_permite_void++;
@@ -147,8 +149,9 @@ class DefaultController extends Controller
                         $debo_aplicar = ($data[$k_row2][6] !== "Tagged Void");
                     }
                 }
+                var_dump($no_permite_void, $no_permite_void2);die;
                 if ($no_permite_void !== $no_permite_void2) {
-                    $no_permiten_voids[] = $reference_tag;
+                    $no_permiten_voids[] = $reference_tag_purchase;
                 }
             }
 
