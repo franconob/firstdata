@@ -85,7 +85,15 @@ class DefaultController extends Controller
                             case "Tagged Refund":
                                 switch ($row[6]) {
                                     case "Tagged Void":
-                                        $no_permiten_voids = str_replace("-" . $row2[12] . "-", "-", $no_permiten_voids);
+                                        $aux_cant = 0;
+
+                                        $no_permiten_voids = str_replace("-" . $row2[12] . "-", "-", $no_permiten_voids, $aux_cant);
+
+                                        if ($aux_cant > 1) {
+                                            for ($i = 1; $i < $aux_cant; $i++) {
+                                                $no_permiten_voids .= $row2[12] . "-";
+                                            }
+                                        }
                                         break;
                                 };
                                 break;
@@ -173,7 +181,7 @@ class DefaultController extends Controller
             }
 
             $quitarVoid = false;
-            if ($formattedRow['Transaction Type'] == 'Purchase' && (strpos($no_permiten_voids, "-" . $formattedRow['Tag'] . "-"))) {
+            if ($formattedRow['Transaction Type'] == 'Purchase' && (strpos($no_permiten_voids, "-" . $formattedRow['Tag'] . "-") !== false)) {
                 $quitarVoid = true;
             }
 
