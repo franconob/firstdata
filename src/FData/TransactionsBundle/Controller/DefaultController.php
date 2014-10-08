@@ -67,19 +67,35 @@ class DefaultController extends Controller
             if ("" !== $row[12]) {
                 $reference_tag = $row[12];
 
-                $no_permite_void = 0;
+                $no_permite_void  = 0;
                 $no_permite_void2 = 0;
                 foreach ($data2 as $k_row2 => $row2) {
                     // indice 0 => "Transaction Tag"
                     if ($reference_tag == $row2[0]) {
                         $he_tocado = strpos($padre_ya_tocado, "-" . $row2[0] . "-");
+                        switch ($row2[6]) {
+                            case "Purchase":
+                                switch ($row[6]) {
+                                    case "Tagged Refund":
+                                        $no_permite_void++;
+                                        break;
+
+                                };
+                                break;
+                            case "Tagged Refund":
+                                switch ($row[6]) {
+                                    case "Tagged Void":
+                                        $no_permite_void2++;
+                                        break;
+                                };
+                                break;
+                        }
                         if ($debo_aplicar && $he_tocado === false) {
                             $estado_padre = "";
                             switch ($row2[6]) {
                                 case "Purchase":
                                     switch ($row[6]) {
                                         case "Tagged Refund":
-                                            $no_permite_void++;
                                             $estado_padre = "Refunded Transaction";
                                             break;
                                         case "Tagged Void":
@@ -107,7 +123,6 @@ class DefaultController extends Controller
                                 case "Tagged Refund":
                                     switch ($row[6]) {
                                         case "Tagged Void":
-                                            $no_permite_void2++;
                                             $estado_padre = "Voided Transaction";
                                             break;
                                     };
