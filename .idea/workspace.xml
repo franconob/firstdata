@@ -4,9 +4,6 @@
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -35,8 +32,8 @@
       <file leaf-file-name="Grid.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.0" vertical-offset="4860" max-vertical-offset="8244">
-              <caret line="297" column="0" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+            <state vertical-scroll-proportion="-12.666667" vertical-offset="4860" max-vertical-offset="8208">
+              <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -45,10 +42,10 @@
       <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37961337" vertical-offset="918" max-vertical-offset="4698">
-              <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.44288224" vertical-offset="2736" max-vertical-offset="5040">
+              <caret line="176" column="34" selection-start-line="176" selection-start-column="34" selection-end-line="176" selection-end-column="34" />
               <folding>
-                <element signature="e#6956#6993#1#PHP" expanded="true" />
+                <element signature="e#7507#7544#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +113,8 @@
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/web/js/app.js" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
       </list>
     </option>
   </component>
@@ -890,13 +887,38 @@
       <option name="project" value="LOCAL" />
       <updated>1412089895855</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
+      <created>1412782915826</created>
+      <option name="number" value="00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1412782915826</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
+      <created>1412783289422</created>
+      <option name="number" value="00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1412783289422</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
+      <created>1412784134886</created>
+      <option name="number" value="00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1412784134886</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
+      <created>1412785842117</created>
+      <option name="number" value="00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1412785842118</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -914,7 +936,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32707354" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -957,7 +978,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Tarea #1629. Se instala libreria de terceros para exportar de CSV a Excel" />
     <MESSAGE value="Cambiada la version de Excel para exportacion a 2007" />
     <MESSAGE value="Correccion cuando se devuelve el CTR para enviar por correo" />
     <MESSAGE value="Problema de mails, intento de solucion" />
@@ -982,7 +1002,8 @@
     <MESSAGE value="Mejoras en el codigo. Integracion de WATAble con angular $http" />
     <MESSAGE value="Quitados console.log" />
     <MESSAGE value="Correcciones de diseño" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correcciones de diseño" />
+    <MESSAGE value="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1337,18 +1358,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.0" vertical-offset="4860" max-vertical-offset="8244">
-          <caret line="297" column="0" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.666667" vertical-offset="4860" max-vertical-offset="8208">
+          <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37961337" vertical-offset="918" max-vertical-offset="4698">
-          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.44288224" vertical-offset="2736" max-vertical-offset="5040">
+          <caret line="176" column="34" selection-start-line="176" selection-start-column="34" selection-end-line="176" selection-end-column="34" />
           <folding>
-            <element signature="e#6956#6993#1#PHP" expanded="true" />
+            <element signature="e#7507#7544#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

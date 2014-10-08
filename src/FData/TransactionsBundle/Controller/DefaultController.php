@@ -55,13 +55,10 @@ class DefaultController extends Controller
         unset($data2[count($data2) - 1]);
 
 
-        $cleanData              = [];
-        $debo_aplicar           = true;
-        $padre_ya_tocado        = "-";
-        $no_permiten_voids      = [];
-        $no_permite_void        = 0;
-        $no_permite_void2       = 0;
-        $reference_tag_purchase = null;
+        $cleanData         = [];
+        $debo_aplicar      = true;
+        $padre_ya_tocado   = "-";
+        $no_permiten_voids = "-";
 
         foreach ($data as $k_row => &$row) {
             $formattedRow = ["id" => $k_row];
@@ -80,7 +77,7 @@ class DefaultController extends Controller
                                 $reference_tag_purchase = $row2[0];
                                 switch ($row[6]) {
                                     case "Tagged Refund":
-                                        $no_permite_void++;
+                                        $no_permiten_voids .= $row2[0] . "-";
                                         break;
 
                                 };
@@ -88,7 +85,7 @@ class DefaultController extends Controller
                             case "Tagged Refund":
                                 switch ($row[6]) {
                                     case "Tagged Void":
-                                        $no_permite_void2++;
+                                        $no_permiten_voids = str_replace("-" . $row2[12] . "-", "-", $no_permiten_voids);
                                         break;
                                 };
                                 break;
@@ -175,11 +172,12 @@ class DefaultController extends Controller
                 $formattedRow['usuario'] = $transaction->getUsuario() ?: "";
             }
 
-            if ($formattedRow['Transaction Type'] == 'Purchase' && $no_permite_void !== $no_permite_void2) {
-                $no_permiten_voids[] = $formattedRow['Tag'];
+            $quitarVoid = false;
+            if ($formattedRow['Transaction Type'] == 'Purchase' && (strpos($no_permiten_voids, "-" . $formattedRow['Tag'] . "-"))) {
+                $quitarVoid = true;
             }
 
-            $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $no_permiten_voids]);
+            $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $quitarVoid]);
             $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [

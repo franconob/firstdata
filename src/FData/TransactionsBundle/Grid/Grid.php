@@ -294,10 +294,8 @@ EOF;
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
 
-                    if(isset($restrictions['taggedVoidRestrictions'])) {
-                        if(in_array($transaction['Tag'], $restrictions['taggedVoidRestrictions'])) {
-                            return false;
-                        }
+                    if (isset($restrictions['taggedVoidRestrictions'])) {
+                        return $restrictions['taggedVoidRestrictions'];
                     }
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
@@ -398,19 +396,19 @@ EOF;
             3  => "Expiry",
             6  => "Transaction Type",
             7  => ["friendly" => "Status", "format" => function ($value) {
-                    if ($value == "Approved") {
-                        return '<div class="bg-success">{0}</div>';
-                    } else if ($value == "Error") {
-                        return '<div class="bg-danger">{0}</div>';
-                    } else {
-                        return '<div>{0}</div>';
-                    }
-                }],
+                if ($value == "Approved") {
+                    return '<div class="bg-success">{0}</div>';
+                } else if ($value == "Error") {
+                    return '<div class="bg-danger">{0}</div>';
+                } else {
+                    return '<div>{0}</div>';
+                }
+            }],
             9  => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
-                    $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
+                $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
 
-                    return $dt->getTimestamp() * 1000;
-                }],
+                return $dt->getTimestamp() * 1000;
+            }],
             8  => "Auth No",
             10 => ["friendly" => "Ref Num", "hidden" => true],
             11 => ["friendly" => "Cust. Ref Num", "hidden" => true],
