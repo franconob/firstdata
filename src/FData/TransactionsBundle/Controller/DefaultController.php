@@ -74,7 +74,6 @@ class DefaultController extends Controller
                         $he_tocado = strpos($padre_ya_tocado, "-" . $row2[0] . "-");
                         switch ($row2[6]) {
                             case "Purchase":
-                                $reference_tag_purchase = $row2[0];
                                 switch ($row[6]) {
                                     case "Tagged Refund":
 
