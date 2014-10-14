@@ -12,7 +12,6 @@
     }
 }
 
-
 /*
 .table-header-info span.information {
     padding: 20px;
@@ -51,4 +50,11 @@
 
 .form-panel-body {
     margin-top: -6px;
+}
+
+#back-button {
+    right: 0;
+    position: absolute;
+    margin-bottom: 10px;
+    top: 72px
 }

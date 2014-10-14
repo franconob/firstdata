@@ -3,8 +3,8 @@
  */
 PNotify.prototype.options.styling = "fontawesome";
 
-var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters', 'ui.router']);
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters', 'ui.router', 'ngSanitize']);
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/app');
 
     $stateProvider
@@ -193,13 +193,16 @@ app.directive('fdataInput', function () {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $http) {
+app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $http, $sce) {
     return {
         restrict: 'E',
         scope: {
             totalRecords: '=total',
             totalAmount: '=',
-            grid: '='
+            grid: '=',
+            subtitle: '=',
+            insideLog: '=',
+            rows: '='
         },
         link: function (scope, element) {
             scope.totalRecords = 0;
@@ -329,7 +332,33 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                     },
                     controller: config.controller || 'TaggedFormModalCtrl'
                 })
-            }
+            };
+
+            scope.showLog = function (tag) {
+                if(scope.insideLog) {
+                    return false;
+                }
+                scope.insideLog = true;
+                var rows = scope.grid.getData().rows;
+                var transactions = _.where(rows, {'Reference 3': tag});
+                var parent_transaction = _.findWhere(rows, {Tag: tag});
+
+                var data = [
+                    parent_transaction['Tag'],
+                    parent_transaction['Cardholder Name'],
+                    parent_transaction['Transaction Type'],
+                    parent_transaction['Status'],
+                    parent_transaction['Time'],
+                    parent_transaction['Amount']
+                ];
+
+                scope.grid.setData({rows: transactions}, true);
+                scope.rows = rows;
+
+                scope.subtitle = $sce.trustAsHtml(' | <i class="fa fa-history"></i> <strong>Mostrando historial de transacción:</strong> ' + data.join(' - '));
+
+            };
+
         }
     }
 });
@@ -480,6 +509,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
 
 app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', '$state', function ($scope, $modal, $window, $http, moment, $state) {
     $scope.nbTransactions = 0;
+    $scope.insideLog = false;
     $scope.openForm = function (transaction_type, form_title) {
         $modal.open({
             templateUrl: transaction_type + '.html',
@@ -496,6 +526,12 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
                 }
             }
         });
+    };
+
+    $scope.back = function() {
+        $scope.grid.setData({rows: $scope.rows}, true);
+        $scope.subtitle = '';
+        $scope.insideLog = false;
     };
 
     $scope.search = {};

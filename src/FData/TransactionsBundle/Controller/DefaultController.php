@@ -160,6 +160,8 @@ class DefaultController extends Controller
 
 
             $cleanRow       = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+            // $cleanRow[0] es el Tag
+            $tag = $cleanRow[0];
             $enabledHeaders = $grid->getEnabledHeaders();
 
             foreach ($cleanRow as $k => $col) {
@@ -168,7 +170,7 @@ class DefaultController extends Controller
                 }
                 if (isset($enabledHeaders[$k]["format"])) {
                     $colName                = $enabledHeaders[$k]["friendly"] . "Format";
-                    $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col);
+                    $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col, $tag);
                 }
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
                 $formattedRow['actions']                                                                             = $k_row;

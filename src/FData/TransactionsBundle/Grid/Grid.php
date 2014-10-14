@@ -294,7 +294,7 @@ EOF;
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
 
-                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions']==true ) {
+                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
                         return false;
                     }
 
@@ -389,13 +389,15 @@ EOF;
     {
         $this->enabledHeaders = [
             0  => ["friendly" => "Tag"],
-            1  => "Cardholder Name",
+            1  => ["friendly" => "Cardholder Name", "format" => function ($value, $tag) {
+                return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\'' . $tag. '\')">{0}</a>';
+            }],
             4  => "Card Type",
             5  => "Amount",
             2  => "Card Number",
             3  => "Expiry",
             6  => "Transaction Type",
-            7  => ["friendly" => "Status", "format" => function ($value) {
+            7  => ["friendly" => "Status", "format" => function ($value, $tag) {
                 if ($value == "Approved") {
                     return '<div class="bg-success">{0}</div>';
                 } else if ($value == "Error") {
@@ -420,7 +422,7 @@ EOF;
     {
         $this->customHeaders = [
             "id"      => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
-            "actions" => ["index" => 1, "friendly" => 'actions', "filter" => false, "sorting" => false, "exportable" => false],
+            "actions" => ["index" => -1, "friendly" => 'actions', "filter" => false, "sorting" => false, "exportable" => false],
             "usuario" => ["friendly" => "usuario"]
         ];
 
