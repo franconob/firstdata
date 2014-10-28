@@ -19,7 +19,7 @@
         <parameter key="f_data_transactions.http_client.search.class">FData\TransactionsBundle\HttpClient\Clients\GridClient</parameter>
         <parameter key="f_data_transactions.api.search.endpoint">/transaction/search</parameter>
         <parameter key="f_data_transactions.api.search.username" type="string">vherrero</parameter>
-        <parameter key="f_data_transactions.api.search.password" type="string">victor1234</parameter>
+        <parameter key="f_data_transactions.api.search.password" type="string">claudita123</parameter>
         <!-- end Grid parameters -->
 
     </parameters>
