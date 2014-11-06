@@ -101,6 +101,25 @@ app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
     }
 }]);
 
+app.directive('checkCountry', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elm, attr, ctrl) {
+            var countryNotAllowed = attr['checkCountry'];
+            ctrl.$parsers.push(function (viewValue) {
+                if (viewValue === countryNotAllowed) {
+                    ctrl.$setValidity('country_not_allowed', false);
+                    return undefined;
+                } else {
+                    ctrl.$setValidity('country_not_allowed', true);
+                    return viewValue;
+                }
+            });
+        }
+    }
+});
+
 app.directive('expiryDate', function (moment) {
     return {
         restrict: 'A',
@@ -164,11 +183,12 @@ app.directive('fdataInput', function () {
     return {
         restrict: 'E',
         scope: {
-            editable: '@'
+            editable: '@',
+            choices: '='
         },
         transclude: true,
         replace: true,
-        link: function (scope, elm) {
+        link: function (scope, elm, attrs) {
             scope.thisEditable = true;
 
             elm.on('blur', function () {
@@ -189,7 +209,28 @@ app.directive('fdataInput', function () {
                 $scope.thisEditable = true;
             };
         },
-        template: '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" />'
+        template: function (tElm, tAttrs) {
+            var inputElm = '';
+            switch (tAttrs['type']) {
+                case 'text':
+                {
+                    inputElm = '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" />';
+                    break;
+                }
+                case 'select':
+                {
+                    inputElm = '<select ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" ng-options="value as value for (key,value) in choices"></select>'
+                    break;
+                }
+                default :
+                {
+                    inputElm = '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" />';
+                    break;
+                }
+            }
+
+            return inputElm;
+        }
     }
 });
 
@@ -335,7 +376,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             };
 
             scope.showLog = function (tag) {
-                if(scope.insideLog) {
+                if (scope.insideLog) {
                     return false;
                 }
                 scope.insideLog = true;
@@ -510,25 +551,36 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
 app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', '$state', function ($scope, $modal, $window, $http, moment, $state) {
     $scope.nbTransactions = 0;
     $scope.insideLog = false;
+    $scope.countries = {};
+
     $scope.openForm = function (transaction_type, form_title) {
-        $modal.open({
-            templateUrl: transaction_type + '.html',
-            controller: 'FormModalCtrl',
-            resolve: {
-                transaction_type: function () {
-                    return transaction_type;
-                },
-                grid: function () {
-                    return $scope.grid;
-                },
-                form_title: function () {
-                    return form_title;
+        $http.get('/transactions/countries').success(function (data) {
+            $modal.open({
+                templateUrl: transaction_type + '.html',
+                controller: 'FormModalCtrl',
+                resolve: {
+                    transaction_type: function () {
+                        return transaction_type;
+                    },
+                    grid: function () {
+                        return $scope.grid;
+                    },
+                    form_title: function () {
+                        return form_title;
+                    },
+                    countries: function () {
+                        return data.countries;
+                    },
+                    filtroPais: function () {
+                        return data.filter;
+                    }
                 }
-            }
+            });
         });
+
     };
 
-    $scope.back = function() {
+    $scope.back = function () {
         $scope.grid.setData({rows: $scope.rows}, true);
         $scope.subtitle = '';
         $scope.insideLog = false;
@@ -587,10 +639,12 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
 }]);
 
 
-app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', 'grid', function ($scope, $modalInstance, transaction_type, form_title, $modal, grid) {
+app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', 'grid', 'countries', 'filtroPais', function ($scope, $modalInstance, transaction_type, form_title, $modal, grid, countries, filtroPais) {
     $scope.title = form_title;
     $scope.transaction = {};
+    $scope.countries = countries;
     $scope.editable = true;
+    $scope.filtroPais = filtroPais;
     $scope.submit = function () {
         $modalInstance.dismiss('cancel');
         $modal.open({
@@ -605,6 +659,12 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
                 },
                 transaction: function () {
                     return $scope.transaction;
+                },
+                countries: function() {
+                    return $scope.countries;
+                },
+                filtroPais: function() {
+                    return $scope.filtroPais;
                 }
             }
         });
@@ -616,15 +676,18 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 }]);
 
 
-app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', '$rootScope', 'printCTR', '$http', 'transaction', function ($scope, $modalInstance, transaction_type, notify, $rootScope, printCTR, $http, transaction) {
+app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', '$rootScope', 'printCTR', '$http', 'transaction', 'countries', 'filtroPais', function ($scope, $modalInstance, transaction_type, notify, $rootScope, printCTR, $http, transaction, countries, filtroPais) {
     $scope.transaction = transaction;
     $scope.title = "Confirmar datos de la operación";
     $scope.subtitle = "Click en el campo para poder editarlo";
     $scope.editable = false;
+    $scope.countries = countries;
+    $scope.filtroPais = filtroPais;
 
 
     $scope.submit = function () {
         $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
+        delete $scope.transaction['country'];
         var promise = $http.post('/transactions/' + transaction_type, {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {

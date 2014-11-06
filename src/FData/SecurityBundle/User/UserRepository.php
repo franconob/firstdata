@@ -47,7 +47,7 @@ class UserRepository
             $addresses = explode(',', $mails['0']['mails']);
             $addresses = array_map('trim', $addresses);
             $addresses = array_map('strtolower', $addresses);
-            $addresses = array_filter($addresses, function($address) {
+            $addresses = array_filter($addresses, function ($address) {
                 return $address !== "";
             });
 
@@ -55,5 +55,26 @@ class UserRepository
         } else {
             return null;
         }
+    }
+
+    /**
+     * @return array|bool
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getFiltroPorPais()
+    {
+        $filtro = $this->conn->executeQuery("SELECT cf_1236 as filtro_habilitado, cf_1237 as pais FROM vtiger_accountscf vac
+                            INNER JOIN vtiger_account va ON (vac.accountid = va.accountid) WHERE va.accountname = ?", [
+            $this->security_context->getToken()->getUser()->getHotel()
+        ], [\PDO::PARAM_STR])->fetchAll();
+
+        if (isset($filtro[0])) {
+            return [
+                'activo' => (bool)$filtro[0]['filtro_habilitado'],
+                'pais'   => $filtro[0]['pais']
+            ];
+        }
+
+        return false;
     }
 } 

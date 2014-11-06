@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
@@ -159,9 +160,9 @@ class DefaultController extends Controller
             }
 
 
-            $cleanRow       = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+            $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
             // $cleanRow[0] es el Tag
-            $tag = $cleanRow[0];
+            $tag            = $cleanRow[0];
             $enabledHeaders = $grid->getEnabledHeaders();
 
             foreach ($cleanRow as $k => $col) {
@@ -291,5 +292,20 @@ class DefaultController extends Controller
             return new Response();
         }
 
+    }
+
+    /**
+     * @return Response|static
+     */
+    public function getCountriesAction()
+    {
+
+        $filter = $this->get('f_data_transactions.repository.user')->getFiltroPorPais();
+        $paises = Intl::getRegionBundle()->getCountryNames();
+
+        return JsonResponse::create([
+            "countries" => array_combine($paises, $paises),
+            "filter"    => $filter
+        ]);
     }
 }

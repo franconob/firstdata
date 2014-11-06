@@ -46,6 +46,18 @@
                             target="_blank">aquí</a> </span>
             </div>
         </div>
+
+        <div class="form-group" ng-show="filtroPais.activo"
+             ng-class="{'has-success': form.country.$valid, 'has-error': form.country.$invalid, 'has-feedback': form.country.$valid}">
+            <label for="country" class="control-label col-sm-4">Country</label>
+
+            <div class="col-sm-7">
+                <fdata-input ng-model="transaction.country" name="country" id="country" type="select"
+                       class="form-control" required editable="{{ editable }}" choices="countries" check-country="{{ filtroPais.pais }}"></fdata-input>
+                <span class="fa fa-check form-control-feedback" ng-show="form.country.$valid"></span>
+                <span class="help-block" ng-show="form.country.$error.country_not_allowed">El pais {{ filtroPais.pais }} no permite transacciones.</span>
+            </div>
+        </div>
         <div class="form-group"
              ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid, 'has-feedback': form.amount.$valid}">
             <label for="dollaramount" class="control-label col-sm-4">Dollar Amount</label>
