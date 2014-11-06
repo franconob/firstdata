@@ -70,7 +70,7 @@ class UserRepository
 
         if (isset($filtro[0])) {
             return [
-                'activo' => (bool)$filtro[0]['filtro_habilitado'],
+                'activo' => (bool)$filtro[0]['filtro_habilitado'] && !empty($filtro[0]['pais']),
                 'pais'   => $filtro[0]['pais']
             ];
         }
