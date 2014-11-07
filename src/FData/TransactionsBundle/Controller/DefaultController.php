@@ -98,6 +98,18 @@ class DefaultController extends Controller
                                         break;
                                 };
                                 break;
+
+                            case "Pre-Authorization": {
+                                switch ($row[6]) {
+                                    case "Tagged Refund":
+
+                                        if (!array_key_exists($row2[0], $quitarVoids))
+                                            $quitarVoids[$row2[0]] = 0;
+
+                                        $quitarVoids[$row2[0]]++;
+                                        break;
+                                }
+                            }
                         }
                         if ($debo_aplicar && $he_tocado === false) {
                             $estado_padre = "";
