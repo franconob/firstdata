@@ -202,6 +202,10 @@ class DefaultController extends Controller
                 if ($quitarVoids[$formattedRow['Tag']] > 0) $quitarVoid = true;
             }
 
+            if ($formattedRow['Transaction Type'] == 'Tagged Completion' && array_key_exists($formattedRow['Tag'], $quitarVoids)) {
+                if ($quitarVoids[$formattedRow['Tag']] > 0) $quitarVoid = true;
+            }
+
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $quitarVoid]);
             $cleanData[$k_row]             = $formattedRow;
         }
