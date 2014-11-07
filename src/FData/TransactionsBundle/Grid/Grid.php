@@ -315,6 +315,10 @@ EOF;
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
 
+                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
+                        return false;
+                    }
+
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
                     }
