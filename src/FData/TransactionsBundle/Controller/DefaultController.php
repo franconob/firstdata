@@ -99,7 +99,7 @@ class DefaultController extends Controller
                                 };
                                 break;
 
-                            case "Pre-Authorization": {
+                            case "Tagged Completion":
                                 switch ($row[6]) {
                                     case "Tagged Refund":
 
@@ -108,8 +108,9 @@ class DefaultController extends Controller
 
                                         $quitarVoids[$row2[0]]++;
                                         break;
-                                }
-                            }
+
+                                };
+                                break;
                         }
                         if ($debo_aplicar && $he_tocado === false) {
                             $estado_padre = "";

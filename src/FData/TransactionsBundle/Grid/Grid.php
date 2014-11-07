@@ -315,10 +315,6 @@ EOF;
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
 
-                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
-                        return false;
-                    }
-
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
                     }
@@ -349,6 +345,10 @@ EOF;
                     $transactionDate = Carbon::instance($transactionDate);
                     $nowStart        = Carbon::today();
                     $nowEnd          = Carbon::now()->endOfDay();
+
+                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
+                        return false;
+                    }
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
@@ -394,7 +394,7 @@ EOF;
         $this->enabledHeaders = [
             0  => ["friendly" => "Tag"],
             1  => ["friendly" => "Cardholder Name", "format" => function ($value, $tag) {
-                return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\'' . $tag. '\')">{0}</a>';
+                return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\'' . $tag . '\')">{0}</a>';
             }],
             4  => "Card Type",
             5  => "Amount",
