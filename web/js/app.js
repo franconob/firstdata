@@ -345,6 +345,9 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                                 total -= numeral().unformat(row.Amount);
                                 break;
                             }
+                            if(parent_transaction && ("Purchase" == parent_transaction['Transaction Type'])) {
+                                total -= numeral().unformat(row.Amount);
+                            }
                     }
                 });
                 return numeral(total).format('0,0.00');
