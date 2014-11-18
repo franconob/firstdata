@@ -61,7 +61,7 @@ abstract class HttpClient
                 "config" => [
                     "curl" => [
                         CURLOPT_SSLVERSION      => 1,
-                        CURLOPT_SSL_CIPHER_LIST => 'TLSv1.2'
+                        //CURLOPT_SSL_CIPHER_LIST => 'TLSv1.2'
                     ]
                 ]
             ]
