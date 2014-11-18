@@ -1,3 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 f_data_transactions:
     resource: "@FDataTransactionsBundle/Resources/config/routing.xml"
     prefix:   /

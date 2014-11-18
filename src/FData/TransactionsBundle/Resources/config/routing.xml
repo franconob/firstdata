@@ -6,20 +6,26 @@
 
     <route id="f_data_transactions_homepage" path="/">
         <default key="_controller">FDataTransactionsBundle:Default:index</default>
+        <option key="expose">true</option>
     </route>
     <route id="f_data_transactions_grid" path="/transactions" methods="GET">
         <default key="_controller">FDataTransactionsBundle:Default:transactions</default>
+        <option key="expose">true</option>
     </route>
     <route id="f_data_transactions_execute" path="/transactions/{transactionType}" methods="POST">
         <default key="_controller">FDataTransactionsBundle:Default:execute</default>
+        <option key="expose">true</option>
     </route>
     <route id="f_data_transactions_export" path="/transactions-export" methods="POST GET">
         <default key="_controller">FDataTransactionsBundle:Default:export</default>
+        <option key="expose">true</option>
     </route>
     <route id="f_data_transactions_conciliar" path="/transactions-conciliar" methods="POST">
         <default key="_controller">FDataTransactionsBundle:Default:conciliar</default>
+        <option key="expose">true</option>
     </route>
     <route id="f_data_transactions_countries" path="/transactions/countries" methods="GET">
         <default key="_controller">FDataTransactionsBundle:Default:getCountries</default>
+        <option key="expose">true</option>
     </route>
 </routes>

@@ -271,7 +271,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             });
 
             var updateGrid = function () {
-                $http.get('/transactions').success(function (data) {
+                $http.get(Routing.generate('f_data_transactions_grid')).success(function (data) {
                     grid.data('WATable').setData(data);
                 });
             };
@@ -557,7 +557,7 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
     $scope.countries = {};
 
     $scope.openForm = function (transaction_type, form_title) {
-        $http.get('/transactions/countries').success(function (data) {
+        $http.get(Routing.generate('f_data_transactions_countries')).success(function (data) {
             $modal.open({
                 templateUrl: transaction_type + '.html',
                 controller: 'FormModalCtrl',
@@ -624,18 +624,18 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
         if (form.to) {
             to = moment(form.to).format('YYYY-MM-DD');
         }
-        $http.get('/transactions', {params: {from: from, to: to}}).success(function (data) {
+        $http.get(Routing.generate('f_data_transactions_grid'), {params: {from: from, to: to}}).success(function (data) {
             $scope.grid.setData(data, true);
         })
     };
 
     $scope.exportCSV = function () {
         var transactions = $scope.grid.getData(false, true).rows || $scope.grid.getData().rows;
-        $http.post('/transactions-export', {
+        $http.post(Routing.generate('f_data_transactions_export'), {
             transactions: transactions,
             cols: $scope.grid.getData().cols
         }).success(function (data) {
-            $window.location.assign('/transactions-export');
+            $window.location.assign(Routing.generate('f_data_transactions_export'));
         });
         return false;
     }
@@ -691,7 +691,7 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
     $scope.submit = function () {
         $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
         delete $scope.transaction['country'];
-        var promise = $http.post('/transactions/' + transaction_type, {transactions: $scope.transaction});
+        var promise = $http.post(Routing.generate('f_data_transactions_execute', {transactionType: transaction_type}), {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {
                 $modalInstance.dismiss('ok');

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FData\TransactionsBundle\FDataTransactionsBundle(),
             new FData\SecurityBundle\FDataSecurityBundle(),
             new \Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
