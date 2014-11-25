@@ -12,7 +12,7 @@ security:
             algorithm: plaintext
 
     role_hierarchy:
-        ROLE_USUARIO:       ROLE_CONCILIAR
+        ROLE_USUARIO:       [ROLE_CONCILIAR, ROLE_EXPORT_CSV]
 
     firewalls:
         dev:
