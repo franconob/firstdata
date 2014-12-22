@@ -21,6 +21,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 }]);
 
 app.value('numeral', numeral);
+app.value('permissions', {totalAmount: false});
 
 app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", function ($q, $rootScope, notify) {
     var currentNotify = null;
@@ -234,7 +235,7 @@ app.directive('fdataInput', function () {
     }
 });
 
-app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $http, $sce) {
+app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $http, $sce, permissions) {
     return {
         restrict: 'E',
         scope: {
@@ -247,7 +248,9 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
         },
         link: function (scope, element) {
             scope.totalRecords = 0;
+            scope.totalAmount = "no disponible";
             var initial = true;
+            var initialTotalAmount = 0;
 
             var grid = element.WATable({
                 filter: true,
@@ -309,9 +312,15 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
 
             var updateTotalAmount = function (initial) {
                 if (initial) {
-                    scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
+                    initialTotalAmount = scope.grid.getData(false, false).rows.length;
+                    //scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
                 } else {
-                    scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
+                    var nbFilteredTransactions = scope.grid.getData(false, true).rows.length;
+                    if (nbFilteredTransactions !== initialTotalAmount || permissions.totalAmount) {
+                        scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
+                    } else {
+                        scope.totalAmount = 'no disponible';
+                    }
                 }
             };
 
@@ -345,7 +354,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                                 total -= numeral().unformat(row.Amount);
                                 break;
                             }
-                            if(parent_transaction && ("Purchase" == parent_transaction['Transaction Type'])) {
+                            if (parent_transaction && ("Purchase" == parent_transaction['Transaction Type'])) {
                                 total -= numeral().unformat(row.Amount);
                             }
                     }
@@ -447,7 +456,7 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
         if ("Purchase" == current_transaction['Transaction Type'] || "Tagged Completion" == current_transaction['Transaction Type']) {
             var tagged_transactions = $filter('filter')(transactions, function (transaction) {
                 return transaction['Reference 3'] == current_transaction['Tag']
-                && 'Error' !== transaction['Status']
+                    && 'Error' !== transaction['Status']
             });
             if (tagged_transactions) {
                 angular.forEach(tagged_transactions, function (t_t) {
@@ -551,7 +560,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
     }
 }]);
 
-app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', '$state', function ($scope, $modal, $window, $http, moment, $state) {
+app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', 'permissions', function ($scope, $modal, $window, $http, moment, permissons) {
     $scope.nbTransactions = 0;
     $scope.insideLog = false;
     $scope.countries = {};
@@ -624,8 +633,19 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
         if (form.to) {
             to = moment(form.to).format('YYYY-MM-DD');
         }
-        $http.get(Routing.generate('f_data_transactions_grid'), {params: {from: from, to: to}}).success(function (data) {
+        $http.get(Routing.generate('f_data_transactions_grid'), {
+            params: {
+                from: from,
+                to: to
+            }
+        }).success(function (data) {
+            if (from || to) {
+                permissons.totalAmount = true;
+            } else {
+                permissons.totalAmount = false;
+            }
             $scope.grid.setData(data, true);
+
         })
     };
 
@@ -663,10 +683,10 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
                 transaction: function () {
                     return $scope.transaction;
                 },
-                countries: function() {
+                countries: function () {
                     return $scope.countries;
                 },
-                filtroPais: function() {
+                filtroPais: function () {
                     return $scope.filtroPais;
                 }
             }
