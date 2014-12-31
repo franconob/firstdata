@@ -2,6 +2,7 @@
 
 namespace FData\TransactionsBundle\Controller;
 
+use Carbon\Carbon;
 use FData\TransactionsBundle\Grid\Grid;
 use FData\TransactionsBundle\Transaction\Exception;
 use League\Csv\Reader;
@@ -19,47 +20,55 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+
         return $this->render('FDataTransactionsBundle:Default:index.html.twig');
     }
 
     public function transactionsAction(Request $request)
     {
         /** @var Grid $grid */
-        $grid            = $this->get('f_data_transactions.api.search.grid');
+        $grid = $this->get('f_data_transactions.api.search.grid');
         $securityContext = $this->get('security.context');
 
         $from = $request->query->get('from');
-        $to   = $request->query->get('to');
+        $to = $request->query->get('to');
 
         $httpClient = $grid->getHttpClient();
-        if ($from) {
-            $httpClient->setStartDate(\DateTime::createFromFormat('Y-m-d', $from));
+
+        if ($securityContext->isGranted('ROLE_SOLO_OP_DIA')) {
+            $httpClient->setStartDate((new Carbon())->startOfDay());
+            $httpClient->setEndDate((new Carbon())->endOfDay());
+        } else {
+            if ($from) {
+                $httpClient->setStartDate(\DateTime::createFromFormat('Y-m-d', $from));
+            }
+
+            if ($to) {
+                $httpClient->setEndDate(\DateTime::createFromFormat('Y-m-d', $to));
+            }
         }
 
-        if ($to) {
-            $httpClient->setEndDate(\DateTime::createFromFormat('Y-m-d', $to));
-        }
 
         $response_string = (string)$grid->query()->getBody();
 
-        $reader_body   = Reader::createFromString($response_string);
+        $reader_body = Reader::createFromString($response_string);
         $reader_header = $reader_body->fetchOne();
 
 
         $grid->buildHeaders($reader_header);
 
-        $data  = $reader_body->setOffset(1)->fetchAll();
-        $data  = array_values($grid->filterResults($data));
+        $data = $reader_body->setOffset(1)->fetchAll();
+        $data = array_values($grid->filterResults($data));
         $data2 = $data;
 
         unset($data[count($data) - 1]);
         unset($data2[count($data2) - 1]);
 
 
-        $cleanData       = [];
-        $debo_aplicar    = true;
+        $cleanData = [];
+        $debo_aplicar = true;
         $padre_ya_tocado = "-";
-        $quitarVoids     = [];
+        $quitarVoids = [];
 
         foreach ($data as $k_row => &$row) {
             $formattedRow = ["id" => $k_row];
@@ -175,7 +184,7 @@ class DefaultController extends Controller
 
             $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
             // $cleanRow[0] es el Tag
-            $tag            = $cleanRow[0];
+            $tag = $cleanRow[0];
             $enabledHeaders = $grid->getEnabledHeaders();
 
             foreach ($cleanRow as $k => $col) {
@@ -183,11 +192,11 @@ class DefaultController extends Controller
                     $col = $enabledHeaders[$k]["callback"]($col);
                 }
                 if (isset($enabledHeaders[$k]["format"])) {
-                    $colName                = $enabledHeaders[$k]["friendly"] . "Format";
+                    $colName = $enabledHeaders[$k]["friendly"] . "Format";
                     $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col, $tag);
                 }
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
-                $formattedRow['actions']                                                                             = $k_row;
+                $formattedRow['actions'] = $k_row;
             }
             if ($securityContext->isGranted('ROLE_USUARIO') && $fecha = $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
@@ -207,7 +216,7 @@ class DefaultController extends Controller
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $quitarVoid]);
-            $cleanData[$k_row]             = $formattedRow;
+            $cleanData[$k_row] = $formattedRow;
         }
         $vars = [
             "cols" => $grid->getTableHeader(),
@@ -227,15 +236,15 @@ class DefaultController extends Controller
         $data = json_decode($request->getContent(), true)['transactions'];
 
         $transaction = $this->get('f_data_transactions.api.transaction');
-        $vars        = [];
+        $vars = [];
 
         try {
             $data = isset($data[0]) ? $data[0] : $data;
             $transaction->execute($transactionType, $data);
-            $vars['success']      = true;
-            $vars['CTR']          = $transaction->getResponse()->getCTR();
+            $vars['success'] = true;
+            $vars['CTR'] = $transaction->getResponse()->getCTR();
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
-            $vars['response']     = $transaction->getResponse()->getBody();
+            $vars['response'] = $transaction->getResponse()->getBody();
 
             $data['ctr'] = $vars['CTR'];
             $this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
@@ -252,7 +261,7 @@ class DefaultController extends Controller
         if (false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
             throw new AccessDeniedException();
         }
-        $data        = json_decode($request->getContent(), true)['transactions'];
+        $data = json_decode($request->getContent(), true)['transactions'];
         $transaction = $this->get('f_data_transactions.api.transaction');
         $transaction->conciliar($data);
         $vars = [
@@ -270,9 +279,9 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             $reportHandler = $this->get('f_data_transactions.api.search.grid');
-            $body          = json_decode($request->getContent(), true);
-            $data          = $body['transactions'];
-            $cols          = $body['cols'];
+            $body = json_decode($request->getContent(), true);
+            $data = $body['transactions'];
+            $cols = $body['cols'];
 
             $writer = new Writer(new SplTempFileObject());
             $reportHandler->buildHeaders(array_keys($cols));
@@ -280,7 +289,7 @@ class DefaultController extends Controller
             $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
 
-            $tmpfile  = tempnam(ini_get('upload_tmp_dir'), 'csv');
+            $tmpfile = tempnam(ini_get('upload_tmp_dir'), 'csv');
             $tmpfileR = fopen($tmpfile, "w");
 
             fwrite($tmpfileR, $writer->__toString());
@@ -322,7 +331,7 @@ class DefaultController extends Controller
 
         return JsonResponse::create([
             "countries" => array_combine($paises, $paises),
-            "filter"    => $filter
+            "filter" => $filter
         ]);
     }
 }
