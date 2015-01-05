@@ -64,7 +64,9 @@ class UserRepository
     public function getFiltroPorPais()
     {
         $filtro = $this->conn->executeQuery("SELECT cf_1236 as filtro_habilitado, cf_1237 as pais FROM vtiger_accountscf vac
-                            INNER JOIN vtiger_account va ON (vac.accountid = va.accountid) WHERE va.accountname = ?", [
+                            INNER JOIN vtiger_account va ON (vac.accountid = va.accountid) 
+                            INNER JOIN vtiger_crmentity ce ON (va.accountid = ce.crmid) 
+                            WHERE ce.deleted = 0 AND va.accountname = ?", [
             $this->security_context->getToken()->getUser()->getHotel()
         ], [\PDO::PARAM_STR])->fetchAll();
 
