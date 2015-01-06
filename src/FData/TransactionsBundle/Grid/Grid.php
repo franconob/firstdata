@@ -28,37 +28,37 @@ class Grid
      */
     private static $tagged_transactions = [
         'Tagged Pre-Authorization Completion' => [
-            "role"      => "TAGGED_PRE_AUTH_COMP",
-            "label"     => "Tagged Pre-Authorization Completion",
-            "action"    => "taggedPreAuthComp",
+            "role" => "TAGGED_PRE_AUTH_COMP",
+            "label" => "Tagged Pre-Authorization Completion",
+            "action" => "taggedPreAuthComp",
             "openModal" => true,
-            "template"  => false,
-            "url"       => "/transactions/taggedPreAuthComp"
+            "template" => false,
+            "url" => "/transactions/taggedPreAuthComp"
         ],
-        'Tagged Void'                         => [
-            "role"       => "TAGGED_VOID",
-            "label"      => "Tagged Void",
-            "action"     => "taggedVoid",
-            "template"   => "confirm.html",
-            "openModal"  => true,
-            "url"        => "/transactions/taggedVoid",
+        'Tagged Void' => [
+            "role" => "TAGGED_VOID",
+            "label" => "Tagged Void",
+            "action" => "taggedVoid",
+            "template" => "confirm.html",
+            "openModal" => true,
+            "url" => "/transactions/taggedVoid",
             "controller" => "TaggedVoidFormModalCtrl"
         ],
-        'Tagged Refund'                       => [
-            "role"      => "TAGGED_REFUND",
-            "label"     => "Tagged Refund",
-            "action"    => "taggedRefund",
+        'Tagged Refund' => [
+            "role" => "TAGGED_REFUND",
+            "label" => "Tagged Refund",
+            "action" => "taggedRefund",
             "openModal" => true,
-            "template"  => false,
-            "url"       => "/transactions/taggedRefund"
+            "template" => false,
+            "url" => "/transactions/taggedRefund"
         ],
-        'Conciliar'                           => [
-            "role"      => "CONCILIAR",
-            "label"     => "Conciliar",
-            "action"    => "conciliar",
+        'Conciliar' => [
+            "role" => "CONCILIAR",
+            "label" => "Conciliar",
+            "action" => "conciliar",
             "openModal" => true,
-            "template"  => "conciliar.html",
-            "url"       => "/transactions-conciliar"
+            "template" => "conciliar.html",
+            "url" => "/transactions-conciliar"
         ]
     ];
 
@@ -112,8 +112,8 @@ EOF;
 
     public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext)
     {
-        $this->entity_manager  = $entity_manager;
-        $this->http_client     = $http_client;
+        $this->entity_manager = $entity_manager;
+        $this->http_client = $http_client;
         $this->securityContext = $securityContext;
         $this->setupApiHeaders();
         $this->setupCustomHeaders();
@@ -131,7 +131,79 @@ EOF;
     public function filterResults($results)
     {
         if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
-            return $results;
+
+            $now = time();
+            $monthBack = (new \DateTime())->sub(new \DateInterval('P1M'))->getTimestamp();
+            $filterPreAuth = function ($result) use ($now, $monthBack) {
+                if ($result[0]) {
+                    $transactionTime = \DateTime::createFromFormat('m/d/Y H:i:s', $result[9])->getTimestamp();
+                    if ($transactionTime > $monthBack && $transactionTime <= $now && $result[6] == 'Pre-Authorization') {
+                        return $result;
+                    } else {
+                        return null;
+                    }
+
+                } else {
+                    return null;
+                }
+            };
+
+            $sort = function ($a, $b) {
+                if (null === $a || null === $b) {
+                    return -1;
+                }
+                $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
+                $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
+
+                if ($timeA > $timeB) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            };
+
+
+            $filteredResults = [];
+            if (!$this->securityContext->isGranted('ROLE_OPERA_HOTEL')) {
+                $ids = array_column($results, 0);
+                $intersection = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->createQueryBuilder('t')
+                    ->where('t.usuario = ?1')
+                    ->andWhere('t.transactionTag IN (?2)')
+                    ->orderBy('t.id', 'DESC')
+                    ->setParameter(1, $this->securityContext->getToken()->getUsername())
+                    ->setParameter(2, $ids)
+                    ->getQuery()->getArrayResult();
+
+
+                foreach ($intersection as $transaction) {
+                    $pos = array_search($transaction['transactionTag'], $ids);
+                    if ($pos >= 0) {
+                        $filteredResults[] = $results[$pos];
+                    }
+                }
+
+                foreach ($results as $result) {
+                    if ($preAuth = $filterPreAuth($result)) {
+                        $filteredResults[] = $preAuth;
+                    }
+                }
+
+
+                usort($filteredResults, $sort);
+
+                // TODO: Este es un fix para no tocar en DefaultController linea 65.
+                $filteredResults[] = null;
+
+                return $filteredResults;
+            } else {
+                foreach ($results as $result) {
+                    if ($preAuth = $filterPreAuth($result)) {
+                        $filteredResults[] = $preAuth;
+                    }
+                }
+                usort($filteredResults, $sort);
+                return $filteredResults;
+            }
         } else {
             foreach ($results as $k => $result) {
                 if (!isset($result[11]) || !in_array($result[11], $this->securityContext->getToken()->getUser()->getHotel())) {
@@ -173,9 +245,9 @@ EOF;
     {
         $cleanData = [];
         foreach ($data as $row) {
-            $row['Time']   = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
+            $row['Time'] = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
             $row['Expiry'] = substr($row['Expiry'], 0, 2) . '/' . substr($row['Expiry'], 2);
-            $cleanData[]   = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
+            $cleanData[] = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
         }
 
         return $cleanData;
@@ -196,7 +268,7 @@ EOF;
             return '<div class="text-center">&times</div>';
         }
         $loader = new \Twig_Loader_String();
-        $twig   = new \Twig_Environment($loader);
+        $twig = new \Twig_Environment($loader);
         if (isset(self::$transactions_workflow_status[$transaction['Status']])) {
             $allowed_actions = self::$transactions_workflow_status[$transaction['Status']]['allows'];
         } else {
@@ -212,7 +284,7 @@ EOF;
                     continue;
                 } else {
                     $allowed_actions[$k] = $action[0];
-                    $action              = $action[0];
+                    $action = $action[0];
                 }
             }
 
@@ -287,12 +359,12 @@ EOF;
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
-            'Purchase'          => ["allows" => [
+            'Purchase' => ["allows" => [
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart        = Carbon::today();
-                    $nowEnd          = Carbon::now()->endOfDay();
+                    $nowStart = Carbon::today();
+                    $nowEnd = Carbon::now()->endOfDay();
 
                     if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
                         return false;
@@ -312,8 +384,8 @@ EOF;
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart        = Carbon::today();
-                    $nowEnd          = Carbon::now()->endOfDay();
+                    $nowStart = Carbon::today();
+                    $nowEnd = Carbon::now()->endOfDay();
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
@@ -324,12 +396,12 @@ EOF;
                 self::$tagged_transactions['Conciliar']
             ]
             ],
-            'Refund'            => ["allows" => [
+            'Refund' => ["allows" => [
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart        = Carbon::today();
-                    $nowEnd          = Carbon::now()->endOfDay();
+                    $nowStart = Carbon::today();
+                    $nowEnd = Carbon::now()->endOfDay();
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
@@ -343,8 +415,8 @@ EOF;
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart        = Carbon::today();
-                    $nowEnd          = Carbon::now()->endOfDay();
+                    $nowStart = Carbon::today();
+                    $nowEnd = Carbon::now()->endOfDay();
 
                     if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
                         return false;
@@ -360,13 +432,13 @@ EOF;
                 self::$tagged_transactions['Conciliar']
             ]
             ],
-            'Tagged Void'       => ["allows" => []],
-            'Tagged Refund'     => ["allows" => [
+            'Tagged Void' => ["allows" => []],
+            'Tagged Refund' => ["allows" => [
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
                     $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart        = Carbon::today();
-                    $nowEnd          = Carbon::now()->endOfDay();
+                    $nowStart = Carbon::today();
+                    $nowEnd = Carbon::now()->endOfDay();
 
                     if ($transactionDate->between($nowStart, $nowEnd)) {
                         return true;
@@ -377,11 +449,11 @@ EOF;
                 self::$tagged_transactions['Conciliar']
             ]
             ],
-            'Conciliar'         => ["allows" => []],
+            'Conciliar' => ["allows" => []],
         ];
 
         self::$transactions_workflow_status = [
-            'Voided Transaction'    => ["allows" => []],
+            'Voided Transaction' => ["allows" => []],
             'Completed Transaction' => ['allows' => []]
         ];
     }
@@ -392,16 +464,16 @@ EOF;
     private function setupApiHeaders()
     {
         $this->enabledHeaders = [
-            0  => ["friendly" => "Tag"],
-            1  => ["friendly" => "Cardholder Name", "format" => function ($value, $tag) {
+            0 => ["friendly" => "Tag"],
+            1 => ["friendly" => "Cardholder Name", "format" => function ($value, $tag) {
                 return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\'' . $tag . '\')">{0}</a>';
             }],
-            4  => "Card Type",
-            5  => "Amount",
-            2  => "Card Number",
-            3  => "Expiry",
-            6  => "Transaction Type",
-            7  => ["friendly" => "Status", "format" => function ($value, $tag) {
+            4 => "Card Type",
+            5 => "Amount",
+            2 => "Card Number",
+            3 => "Expiry",
+            6 => "Transaction Type",
+            7 => ["friendly" => "Status", "format" => function ($value, $tag) {
                 if ($value == "Approved") {
                     return '<div class="bg-success">{0}</div>';
                 } else if ($value == "Error") {
@@ -410,22 +482,23 @@ EOF;
                     return '<div>{0}</div>';
                 }
             }],
-            9  => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
+            9 => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
                 $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
 
                 return $dt->getTimestamp() * 1000;
             }],
-            8  => "Auth No",
+            8 => "Auth No",
             10 => ["friendly" => "Ref Num", "hidden" => true],
             11 => ["friendly" => "Cust. Ref Num", "hidden" => true],
-            12 => ["friendly" => "Reference 3", "hidden" => true]
+            12 => ["friendly" => "Reference 3", "hidden" => true],
+            "usuario" => ["friendly" => "usuario"]
         ];
     }
 
     public function setupCustomHeaders()
     {
         $this->customHeaders = [
-            "id"      => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
+            "id" => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
             "actions" => ["index" => -1, "friendly" => 'actions', "filter" => false, "sorting" => false, "exportable" => false],
             "usuario" => ["friendly" => "usuario"]
         ];

@@ -38,7 +38,10 @@ class UserProvider implements UserProviderInterface
         "PRE_AUTH",
         "EXPORT_CSV",
         "TAGGED_REFUND",
-        "TAGGED_PRE_AUTH_COMP"
+        "TAGGED_PRE_AUTH_COMP",
+        "SOLO_OP_DIA",
+        "OPERA_HOTEL"
+
     ];
 
     /**
@@ -83,6 +86,8 @@ cf_1218 as 'PRE_AUTH',
 cf_1220 as 'EXPORT_CSV',
 cf_1222 as 'TAGGED_REFUND',
 cf_1232 as 'TAGGED_PRE_AUTH_COMP',
+cf_1238 as 'SOLO_OP_DIA',
+cf_1239 as 'OPERA_HOTEL',
 cf_851 as password
 from vtiger_contactdetails
 inner join vtiger_crmentity

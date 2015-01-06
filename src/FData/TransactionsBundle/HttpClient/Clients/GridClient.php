@@ -77,6 +77,22 @@ class GridClient extends HttpClient
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
      * @param string $body
      * @param array $options
      * @return $this|\GuzzleHttp\Message\RequestInterface
@@ -89,6 +105,7 @@ class GridClient extends HttpClient
         $this->headers = [
             "Acecpt", "text/search-v3+csv"
         ];
+
 
         if (!$this->startDate) {
             $now             = new \DateTime();
@@ -104,7 +121,6 @@ class GridClient extends HttpClient
         if ($this->endDate) {
             $queryFields["end_date"] = $this->endDate->format('Y-m-d');
         }
-
 
         $this->request->setQuery($queryFields);
 
