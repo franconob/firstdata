@@ -34,17 +34,13 @@ class DefaultController extends Controller
         $to = $request->query->get('to');
 
         $httpClient = $grid->getHttpClient();
-        $now = new Carbon();
 
         if ($securityContext->isGranted('ROLE_SOLO_OP_DIA')) {
             $httpClient->setStartDate((new Carbon())->startOfDay()->subMonth());
             $httpClient->setEndDate((new Carbon())->endOfDay());
         } else {
             if ($from) {
-                $fromObject = Carbon::createFromFormat('Y-m-d', $from);
-                if ($now->diffInDays($fromObject) > 6*31) {
-                    $httpClient->setStartDate($fromObject->subMonth());
-                }
+                $httpClient->setStartDate(\DateTime::createFromFormat('Y-m-d', $from));
             }
 
             if ($to) {
@@ -62,11 +58,11 @@ class DefaultController extends Controller
         $grid->buildHeaders($reader_header);
 
         $data = $reader_body->setOffset(1)->fetchAll();
+        unset($data[count($data) - 1]);
         $data = array_values($grid->filterResults($data));
         $data2 = $data;
 
-        unset($data[count($data) - 1]);
-        unset($data2[count($data2) - 1]);
+        //unset($data2[count($data2) - 1]);
 
 
         $cleanData = [];
@@ -187,6 +183,16 @@ class DefaultController extends Controller
 
 
             $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+            $transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($cleanRow[0]); // Empieza el quilombo
+            if(null == $transaction) {
+                continue;
+            }
+            if (!$securityContext->isGranted('ROLE_OPERA_HOTEL')) {
+                $usuario = $transaction->getUsuario();
+                if ($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved' && $usuario !== $securityContext->getToken()->getUsername()) {
+                    continue;
+                }
+            }
 
             // $cleanRow[0] es el Tag
             $tag = $cleanRow[0];
@@ -203,10 +209,10 @@ class DefaultController extends Controller
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
                 $formattedRow['actions'] = $k_row;
             }
-            if ($securityContext->isGranted('ROLE_USUARIO') && $fecha = $grid->isConciliada($formattedRow['Tag'])) {
+            if ($securityContext->isGranted('ROLE_USUARIO') && $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
             }
-            if ($transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($formattedRow['Tag'])) {
+            if ($transaction) {
                 $formattedRow['usuario'] = $transaction->getUsuario() ?: "";
             }
 
@@ -225,7 +231,7 @@ class DefaultController extends Controller
         }
         $vars = [
             "cols" => $grid->getTableHeader(),
-            "rows" => $cleanData,
+            "rows" => array_values($cleanData),
         ];
 
         return JsonResponse::create($vars);

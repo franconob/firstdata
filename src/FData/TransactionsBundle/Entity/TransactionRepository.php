@@ -26,6 +26,10 @@ class TransactionRepository extends EntityRepository
         }
     }
 
+    /**
+     * @param $transactionTag
+     * @return null|Transaction
+     */
     public function findByTransactionTag($transactionTag)
     {
         return $this->findOneBy(array('transactionTag' => $transactionTag));

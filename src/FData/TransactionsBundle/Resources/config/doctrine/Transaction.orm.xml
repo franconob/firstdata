@@ -10,5 +10,7 @@
         <field name="transactionTag" column="transaction_tag" nullable="true" />
         <field name="fecha" type="datetime" column="fecha" nullable="true"/>
         <field name="usuario" type="string" column="usuario" nullable="true"/>
+        <field name="conciliada" type="boolean" column="conciliada" nullable="false"/>
+        <field name="fechaConciliacion" type="datetime" column="fecha_conciliacion" nullable="true" />
     </entity>
 </doctrine-mapping>

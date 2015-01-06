@@ -20,9 +20,25 @@ class Transaction
     private $fecha;
 
     /**
+     * @var string
+     */
+    private $usuario;
+
+    /**
+     * @var bool
+     */
+    private $conciliada;
+
+    public function __construct()
+    {
+        $this->fecha = new \DateTime();
+        $this->conciliada = false;
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,17 +71,17 @@ class Transaction
     /**
      * Is conciliada
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isConciliada()
     {
-        return (bool) $this->fecha;
+        return $this->conciliada;
     }
-    /**
-     * @var string
-     */
-    private $usuario;
 
+    public function setConciliada()
+    {
+        $this->conciliada = true;
+    }
 
     /**
      * Set usuario
@@ -83,12 +99,13 @@ class Transaction
     /**
      * Get usuario
      *
-     * @return string 
+     * @return string
      */
     public function getUsuario()
     {
         return $this->usuario;
     }
+
     /**
      * @var string
      */
@@ -111,10 +128,48 @@ class Transaction
     /**
      * Get transactionTag
      *
-     * @return string 
+     * @return string
      */
     public function getTransactionTag()
     {
         return $this->transactionTag;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $fechaConciliacion;
+
+
+    /**
+     * Get conciliada
+     *
+     * @return boolean 
+     */
+    public function getConciliada()
+    {
+        return $this->conciliada;
+    }
+
+    /**
+     * Set fechaConciliacion
+     *
+     * @param \DateTime $fechaConciliacion
+     * @return Transaction
+     */
+    public function setFechaConciliacion($fechaConciliacion)
+    {
+        $this->fechaConciliacion = $fechaConciliacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaConciliacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaConciliacion()
+    {
+        return $this->fechaConciliacion;
     }
 }

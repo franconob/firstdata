@@ -100,12 +100,11 @@ class Transaction
 
     public function conciliar(array $transaction_data)
     {
-        $fecha = \DateTime::createFromFormat('Y-m-d H:i:s', $transaction_data['fecha']);
-
         /** @var TransactionEntity $transaction */
         $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->getOrCreate($transaction_data['transaction_tag']);
 
-        $transaction->setFecha($fecha);
+        $transaction->setFechaConciliacion(new \DateTime());
+        $transaction->setConciliada();
 
         $this->entity_manager->persist($transaction);
         $this->entity_manager->flush();

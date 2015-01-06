@@ -131,78 +131,45 @@ EOF;
     public function filterResults($results)
     {
         if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
-
-            $now = time();
-            $monthBack = (new \DateTime())->sub(new \DateInterval('P1M'))->getTimestamp();
-            $filterPreAuth = function ($result) use ($now, $monthBack) {
-                if ($result[0]) {
-                    $transactionTime = \DateTime::createFromFormat('m/d/Y H:i:s', $result[9])->getTimestamp();
-                    if ($transactionTime > $monthBack && $transactionTime <= $now && $result[6] == 'Pre-Authorization') {
-                        return $result;
-                    } else {
-                        return null;
-                    }
-
-                } else {
-                    return null;
-                }
-            };
-
-            $sort = function ($a, $b) {
-                if (null === $a || null === $b) {
-                    return -1;
-                }
-                $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
-                $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
-
-                if ($timeA > $timeB) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            };
-
-
             $filteredResults = [];
             if (!$this->securityContext->isGranted('ROLE_OPERA_HOTEL')) {
-                $ids = array_column($results, 0);
+                $tags = array_column($results, 0);
                 $intersection = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->createQueryBuilder('t')
                     ->where('t.usuario = ?1')
                     ->andWhere('t.transactionTag IN (?2)')
                     ->orderBy('t.id', 'DESC')
                     ->setParameter(1, $this->securityContext->getToken()->getUsername())
-                    ->setParameter(2, $ids)
+                    ->setParameter(2, $tags)
                     ->getQuery()->getArrayResult();
 
 
                 foreach ($intersection as $transaction) {
-                    $pos = array_search($transaction['transactionTag'], $ids);
+                    $pos = array_search($transaction['transactionTag'], $tags);
                     if ($pos >= 0) {
                         $filteredResults[] = $results[$pos];
                     }
+                    unset($results[$pos]);
                 }
 
-                foreach ($results as $result) {
-                    if ($preAuth = $filterPreAuth($result)) {
-                        $filteredResults[] = $preAuth;
+                foreach($results as $result) {
+                    if($result[6] == 'Pre-Authorization' || $result[6] == 'Tagged Completion') {
+                        $filteredResults[] = $result;
                     }
                 }
 
-
-                usort($filteredResults, $sort);
-
-                // TODO: Este es un fix para no tocar en DefaultController linea 65.
-                $filteredResults[] = null;
+                usort($filteredResults, function($a, $b) {
+                    $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
+                    $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
+                    if($timeA > $timeB) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                });
 
                 return $filteredResults;
             } else {
-                foreach ($results as $result) {
-                    if ($preAuth = $filterPreAuth($result)) {
-                        $filteredResults[] = $preAuth;
-                    }
-                }
-                usort($filteredResults, $sort);
-                return $filteredResults;
+                return $results;
             }
         } else {
             foreach ($results as $k => $result) {
@@ -312,8 +279,8 @@ EOF;
     {
         /** @var Transaction $transaction */
         $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($transaction_tag);
-        if ($transaction && $transaction->getFecha()) {
-            return $transaction->getFecha()->format('Y-m-d H:i:s');
+        if ($transaction && $transaction->isConciliada()) {
+            return $transaction->getFechaConciliacion()->format('Y-m-d H:i:s');
         }
 
         return null;
