@@ -34,13 +34,17 @@ class DefaultController extends Controller
         $to = $request->query->get('to');
 
         $httpClient = $grid->getHttpClient();
+        $now = new Carbon();
 
         if ($securityContext->isGranted('ROLE_SOLO_OP_DIA')) {
-            $httpClient->setStartDate((new Carbon())->startOfDay());
+            $httpClient->setStartDate((new Carbon())->startOfDay()->subMonth());
             $httpClient->setEndDate((new Carbon())->endOfDay());
         } else {
             if ($from) {
-                $httpClient->setStartDate(\DateTime::createFromFormat('Y-m-d', $from));
+                $fromObject = Carbon::createFromFormat('Y-m-d', $from);
+                if ($now->diffInDays($fromObject) > 6*31) {
+                    $httpClient->setStartDate($fromObject->subMonth());
+                }
             }
 
             if ($to) {
@@ -183,6 +187,7 @@ class DefaultController extends Controller
 
 
             $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+
             // $cleanRow[0] es el Tag
             $tag = $cleanRow[0];
             $enabledHeaders = $grid->getEnabledHeaders();

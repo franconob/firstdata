@@ -131,8 +131,40 @@ EOF;
     public function filterResults($results)
     {
         if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
+
+            $now = time();
+            $monthBack = (new \DateTime())->sub(new \DateInterval('P1M'))->getTimestamp();
+            $filterPreAuth = function ($result) use ($now, $monthBack) {
+                if ($result[0]) {
+                    $transactionTime = \DateTime::createFromFormat('m/d/Y H:i:s', $result[9])->getTimestamp();
+                    if ($transactionTime > $monthBack && $transactionTime <= $now && $result[6] == 'Pre-Authorization') {
+                        return $result;
+                    } else {
+                        return null;
+                    }
+
+                } else {
+                    return null;
+                }
+            };
+
+            $sort = function ($a, $b) {
+                if (null === $a || null === $b) {
+                    return -1;
+                }
+                $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
+                $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
+
+                if ($timeA > $timeB) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            };
+
+
+            $filteredResults = [];
             if (!$this->securityContext->isGranted('ROLE_OPERA_HOTEL')) {
-                $filteredResults = [];
                 $ids = array_column($results, 0);
                 $intersection = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->createQueryBuilder('t')
                     ->where('t.usuario = ?1')
@@ -150,13 +182,27 @@ EOF;
                     }
                 }
 
+                foreach ($results as $result) {
+                    if ($preAuth = $filterPreAuth($result)) {
+                        $filteredResults[] = $preAuth;
+                    }
+                }
+
+
+                usort($filteredResults, $sort);
+
                 // TODO: Este es un fix para no tocar en DefaultController linea 65.
                 $filteredResults[] = null;
 
-
                 return $filteredResults;
             } else {
-                return $results;
+                foreach ($results as $result) {
+                    if ($preAuth = $filterPreAuth($result)) {
+                        $filteredResults[] = $preAuth;
+                    }
+                }
+                usort($filteredResults, $sort);
+                return $filteredResults;
             }
         } else {
             foreach ($results as $k => $result) {
