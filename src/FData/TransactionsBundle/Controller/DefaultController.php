@@ -189,7 +189,8 @@ class DefaultController extends Controller
             }
             if (!$securityContext->isGranted('ROLE_OPERA_HOTEL')) {
                 $usuario = $transaction->getUsuario();
-                if ($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved' && $usuario !== $securityContext->getToken()->getUsername()) {
+                if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved') && $usuario !== $securityContext->getToken()->getUsername()) {
+                    var_dump($cleanRow, $usuario, $securityContext->getToken()->getUsername());die;
                     continue;
                 }
             }
