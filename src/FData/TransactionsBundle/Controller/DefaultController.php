@@ -191,10 +191,13 @@ class DefaultController extends Controller
                 $usuario = $transaction->getUsuario();
                 $transactionDate = Carbon::createFromFormat('m/d/Y H:i:s', $cleanRow[9]);
                 $now = Carbon::now();
-                if ((($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[6] !== 'Approved') &&
-                        $usuario !== $securityContext->getToken()->getUsername()) || ($transactionDate->lt($now->startOfDay()) && $cleanRow[6] !== 'Pre-Authorization')
+                if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[6] !== 'Approved') &&
+                    $usuario !== $securityContext->getToken()->getUsername()
                 ) {
-                    continue;
+                    if ($transactionDate->lt($now->startOfDay()) && (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved'))) {
+                        continue;
+                    }
+
                 }
             }
 
@@ -246,7 +249,8 @@ class DefaultController extends Controller
      * @param string $transactionType
      * @return Response|static
      */
-    public function executeAction(Request $request, $transactionType)
+    public
+    function executeAction(Request $request, $transactionType)
     {
         $data = json_decode($request->getContent(), true)['transactions'];
 
@@ -271,7 +275,8 @@ class DefaultController extends Controller
     }
 
 
-    public function conciliarAction(Request $request)
+    public
+    function conciliarAction(Request $request)
     {
         if (false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
             throw new AccessDeniedException();
@@ -290,7 +295,8 @@ class DefaultController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function exportAction(Request $request)
+    public
+    function exportAction(Request $request)
     {
         if ($request->isMethod('POST')) {
             $reportHandler = $this->get('f_data_transactions.api.search.grid');
@@ -338,7 +344,8 @@ class DefaultController extends Controller
     /**
      * @return Response|static
      */
-    public function getCountriesAction()
+    public
+    function getCountriesAction()
     {
 
         $filter = $this->get('f_data_transactions.repository.user')->getFiltroPorPais();
