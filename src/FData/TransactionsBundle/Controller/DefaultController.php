@@ -184,12 +184,16 @@ class DefaultController extends Controller
 
             $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
             $transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($cleanRow[0]); // Empieza el quilombo
-            if(null == $transaction) {
+            if (null == $transaction) {
                 continue;
             }
             if (!$securityContext->isGranted('ROLE_OPERA_HOTEL')) {
                 $usuario = $transaction->getUsuario();
-                if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved') && $usuario !== $securityContext->getToken()->getUsername()) {
+                $transactionDate = Carbon::createFromFormat('m/d/Y H:i:s', $cleanRow[9]);
+                $now = Carbon::now();
+                if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[6] !== 'Approved') &&
+                    $usuario !== $securityContext->getToken()->getUsername() || ($transactionDate->lt($now->startOfDay()) && ($cleanRow[6] !== 'Pre-Authorization'))
+                ) {
                     continue;
                 }
             }
