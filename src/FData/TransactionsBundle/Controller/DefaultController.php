@@ -192,7 +192,7 @@ class DefaultController extends Controller
                 $transactionDate = Carbon::createFromFormat('m/d/Y H:i:s', $cleanRow[9]);
                 $now = Carbon::now();
                 if ((($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[6] !== 'Approved') &&
-                        $usuario !== $securityContext->getToken()->getUsername()) || ($transactionDate->lt($now->startOfDay()) && ($cleanRow[6] !== 'Pre-Authorization'))
+                        $usuario !== $securityContext->getToken()->getUsername()) || ($transactionDate->gt($now->startOfDay()) && ($cleanRow[6] !== 'Pre-Authorization'))
                 ) {
                     continue;
                 }
