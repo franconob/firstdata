@@ -197,11 +197,9 @@ class DefaultController extends Controller
                     continue;
                 }
 
-                /*
                 if ($transactionDate->lt($now->startOfDay()) && (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved'))) {
                     continue;
                 }
-                */
             }
 
             // $cleanRow[0] es el Tag
