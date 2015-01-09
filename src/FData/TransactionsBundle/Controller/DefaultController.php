@@ -194,10 +194,11 @@ class DefaultController extends Controller
                 if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[6] !== 'Approved') &&
                     $usuario !== $securityContext->getToken()->getUsername()
                 ) {
-                    if ($transactionDate->lt($now->startOfDay()) && (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved'))) {
-                        continue;
-                    }
+                    continue;
+                }
 
+                if ($transactionDate->lt($now->startOfDay()) && (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved'))) {
+                    continue;
                 }
             }
 
