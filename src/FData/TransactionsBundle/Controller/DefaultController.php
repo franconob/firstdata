@@ -62,9 +62,6 @@ class DefaultController extends Controller
         $data = array_values($grid->filterResults($data));
         $data2 = $data;
 
-        //unset($data2[count($data2) - 1]);
-
-
         $cleanData = [];
         $debo_aplicar = true;
         $padre_ya_tocado = "-";

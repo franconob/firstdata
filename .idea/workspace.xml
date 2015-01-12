@@ -5,10 +5,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/GridBk.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/TransactionRepository.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/TransactionRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -54,12 +51,21 @@
       <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5294118" vertical-offset="3168" max-vertical-offset="6372">
-              <caret line="193" column="16" selection-start-line="193" selection-start-column="16" selection-end-line="193" selection-end-column="16" />
+            <state vertical-scroll-proportion="-3.5813148" vertical-offset="3222" max-vertical-offset="6534">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="e#55#73#0#PHP" expanded="true" />
-                <element signature="e#7488#7525#1#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5490" max-vertical-offset="13608">
+              <caret line="540" column="18" selection-start-line="540" selection-start-column="18" selection-end-line="540" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,12 +73,11 @@
       <file leaf-file-name="Grid.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.666666" vertical-offset="2466" max-vertical-offset="9216">
-              <caret line="165" column="31" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
+            <state vertical-scroll-proportion="-11.444445" vertical-offset="2463" max-vertical-offset="9216">
+              <caret line="154" column="123" selection-start-line="154" selection-start-column="123" selection-end-line="154" selection-end-column="123" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
                 <element signature="e#133#151#0#PHP" expanded="true" />
-                <element signature="e#8729#8766#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,7 +96,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
@@ -102,6 +106,7 @@
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/TransactionRepository.php" />
+        <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       </list>
@@ -268,97 +273,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doctrine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EventSubscriber" />
+              <option name="myItemId" value="Transaction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -403,36 +318,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecurityBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firstdata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SecurityBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="User" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -529,84 +414,6 @@
       <created>1400534159182</created>
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Tarea #1633. Pisibilidad de editar un campo si hay que corregir algun dato inline. Funcionalidad hecha para las operaciones tagged void">
-      <created>1408561868724</created>
-      <option name="number" value="00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1408561868724</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Nada importante">
-      <created>1408626182521</created>
-      <option name="number" value="00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1408626182521</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Correccion en formateo de amount cuando se envia en un tagged o en root transaction">
-      <created>1408640425590</created>
-      <option name="number" value="00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1408640425590</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Informacion de confirmacion cuando se hace una operacion Tagged Refund">
-      <created>1408645719011</created>
-      <option name="number" value="00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1408645719011</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Correccion en workflow">
-      <created>1408723439536</created>
-      <option name="number" value="00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1408723439536</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Correccion en workflow">
-      <created>1408724156285</created>
-      <option name="number" value="00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1408724156285</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Correccion en el caluclo del Max Amount cuando se hace una operacion tagged refund sobre una Tagged Completion">
-      <created>1408736000035</created>
-      <option name="number" value="00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1408736000035</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Se impeide hacer un Tagged Void sobre un Tagged Pre Auth si no es el mismo dia">
-      <created>1409075634365</created>
-      <option name="number" value="00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1409075634365</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Se cambia el password de la cuenta porque habia caducado">
-      <created>1409075650562</created>
-      <option name="number" value="00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1409075650562</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Solo se permite Tagged Void (sin importar la operacion padre) si es en la misma fecha que la op padre">
-      <created>1409324525876</created>
-      <option name="number" value="00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1409324525876</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Cuando la operacion es Purchase, ahora tambien se puede hacer Tagged Void">
-      <created>1409346036278</created>
-      <option name="number" value="00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1409346036278</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Corregidos los rougins para prod">
-      <created>1410281146399</created>
-      <option name="number" value="00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1410281146399</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Correccion en clase TwigEngine">
-      <created>1410372070784</created>
-      <option name="number" value="00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1410372070784</updated>
     </task>
     <task id="LOCAL-00078" summary="Correccion en clase TwigEngine">
       <created>1410372172904</created>
@@ -824,7 +631,85 @@
       <option name="project" value="LOCAL" />
       <updated>1420033943741</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="Tarea #1797. Nueva implementacion de visibilidad de pre-auth">
+      <created>1420584603928</created>
+      <option name="number" value="00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1420584603929</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Tarea #1797. Se filtran mas transacciones de las que se deben">
+      <created>1420725440086</created>
+      <option name="number" value="00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1420725440086</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Tarea #1797. Se filtran mas transacciones de las que se deben">
+      <created>1420742131214</created>
+      <option name="number" value="00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1420742131214</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420834312826</created>
+      <option name="number" value="00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1420834312827</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420834577310</created>
+      <option name="number" value="00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1420834577311</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420834754881</created>
+      <option name="number" value="00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1420834754881</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420834871549</created>
+      <option name="number" value="00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1420834871549</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420835379091</created>
+      <option name="number" value="00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1420835379091</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420835624731</created>
+      <option name="number" value="00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1420835624731</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420836283112</created>
+      <option name="number" value="00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1420836283112</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420836428407</created>
+      <option name="number" value="00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1420836428407</updated>
+    </task>
+    <task id="LOCAL-00125" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420836573312</created>
+      <option name="number" value="00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1420836573312</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
+      <created>1420836599960</created>
+      <option name="number" value="00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1420836599960</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -832,7 +717,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28696924" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28550512" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -870,9 +755,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Solo se permite Tagged Void (sin importar la operacion padre) si es en la misma fecha que la op padre" />
-    <MESSAGE value="Cuando la operacion es Purchase, ahora tambien se puede hacer Tagged Void" />
-    <MESSAGE value="Corregidos los rougins para prod" />
     <MESSAGE value="Correccion en clase TwigEngine" />
     <MESSAGE value="Correccion cuando se hacen 2 operaciones sobre el mismo padre" />
     <MESSAGE value="Tarea #1654. Busqueda por rango de fechas con datepicker y validaciones" />
@@ -895,34 +777,16 @@
     <MESSAGE value="Se permite la funcionalidad de exportar a csv para un usuario (intranet)" />
     <MESSAGE value="Tarea #1781. Implementacion de las nuevas condiciones para mostrar el total amount" />
     <MESSAGE value="Tarea #1797. Se aplico el filtro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1797. Se aplico el filtro" />
+    <MESSAGE value="Tarea #1797. Nueva implementacion de visibilidad de pre-auth" />
+    <MESSAGE value="Tarea #1797. Se filtran mas transacciones de las que se deben" />
+    <MESSAGE value="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/routing_staging.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="559">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2898032" vertical-offset="0" max-vertical-offset="1638">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27739727" vertical-offset="0" max-vertical-offset="584">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_staging.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15410958" vertical-offset="0" max-vertical-offset="584">
@@ -1130,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.777778" vertical-offset="5487" max-vertical-offset="11754">
           <caret line="321" column="6" selection-start-line="321" selection-start-column="6" selection-end-line="321" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.604061" vertical-offset="1812" max-vertical-offset="4428">
           <caret line="226" column="20" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1163,14 +1025,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94049585" vertical-offset="619" max-vertical-offset="1800">
-          <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/routing.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
@@ -1179,19 +1033,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20826447" vertical-offset="10080" max-vertical-offset="13590">
-          <caret line="567" column="62" selection-start-line="567" selection-start-column="62" selection-end-line="567" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/HttpClient/Clients/GridClient.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.319797" vertical-offset="1713" max-vertical-offset="2304">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1199,10 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.9307958" vertical-offset="0" max-vertical-offset="1476">
           <caret line="68" column="75" selection-start-line="68" selection-start-column="75" selection-end-line="68" selection-end-column="75" />
-          <folding>
-            <marker date="1420553972181" expanded="true" signature="-1:-1" placeholder="SELECT CONCA..vtiger_contactscf..." />
-            <marker date="1420553972181" expanded="true" signature="-1:-1" placeholder="SELECT cf_12..vtiger_accountscf..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1210,16 +1051,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="17.333334" vertical-offset="1728" max-vertical-offset="4356">
           <caret line="75" column="70" selection-start-line="75" selection-start-column="70" selection-end-line="75" selection-end-column="70" />
-          <folding>
-            <element signature="e#129#158#0#PHP" expanded="true" />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="Select vtige..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="SELECT * fro..vtiger_users..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="select r.* f..vtiger_role..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="select * fro..vtiger_role..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="select id fr..vtiger_users..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="Select vtige..vtiger_account..." />
-            <marker date="1419947119971" expanded="true" signature="-1:-1" placeholder="SELECT user_..vtiger_users..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1227,7 +1058,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
           <caret line="13" column="101" selection-start-line="13" selection-start-column="101" selection-end-line="13" selection-end-column="101" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,7 +1065,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.316609" vertical-offset="1473" max-vertical-offset="4356">
           <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1243,7 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11675127" vertical-offset="1065" max-vertical-offset="1656">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1251,7 +1079,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14720812" vertical-offset="1209" max-vertical-offset="3258">
           <caret line="72" column="6" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,7 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9576">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1267,29 +1093,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7614213" vertical-offset="0" max-vertical-offset="666">
           <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/nesbot/carbon/src/Carbon/Carbon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-30.666666" vertical-offset="0" max-vertical-offset="38304">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="605">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3966942" vertical-offset="1182" max-vertical-offset="1800">
+          <caret line="79" column="19" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5490" max-vertical-offset="13608">
+          <caret line="540" column="18" selection-start-line="540" selection-start-column="18" selection-end-line="540" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.666666" vertical-offset="2466" max-vertical-offset="9216">
-          <caret line="165" column="31" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
+        <state vertical-scroll-proportion="-11.444445" vertical-offset="2463" max-vertical-offset="9216">
+          <caret line="154" column="123" selection-start-line="154" selection-start-column="123" selection-end-line="154" selection-end-column="123" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
             <element signature="e#133#151#0#PHP" expanded="true" />
-            <element signature="e#8729#8766#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5294118" vertical-offset="3168" max-vertical-offset="6372">
-          <caret line="193" column="16" selection-start-line="193" selection-start-column="16" selection-end-line="193" selection-end-column="16" />
+        <state vertical-scroll-proportion="-3.5813148" vertical-offset="3222" max-vertical-offset="6534">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="e#55#73#0#PHP" expanded="true" />
-            <element signature="e#7488#7525#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

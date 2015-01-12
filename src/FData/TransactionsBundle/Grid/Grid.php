@@ -152,7 +152,7 @@ EOF;
                 }
 
                 foreach($results as $result) {
-                    if($result[6] == 'Pre-Authorization' || $result[6] == 'Tagged Completion') {
+                    if($result[6] == 'Pre-Authorization' || $result[6] == 'Tagged Completion' || $result[6] == 'Tagged Void') {
                         $filteredResults[] = $result;
                     }
                 }
