@@ -316,9 +316,12 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                     //scope.totalAmount = _calculateTotalAmount(scope.grid.getData().rows);
                 } else {
                     var nbFilteredTransactions = scope.grid.getData(false, true).rows.length;
-                    if (nbFilteredTransactions !== initialTotalAmount || permissions.totalAmount) {
+                    if (nbFilteredTransactions < initialTotalAmount || permissions.totalAmount) {
                         scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
-                    } else {
+                    } else if(nbFilteredTransactions > initialTotalAmount) {
+                        scope.totalAmount = 'no disponible';
+                    }
+                    else {
                         scope.totalAmount = 'no disponible';
                     }
                 }
