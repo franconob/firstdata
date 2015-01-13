@@ -8,18 +8,17 @@
         <parameter key="f_data_transactions.http_client.class">GuzzleHttp\Client</parameter>
         <parameter key="f_data_transactions.http_client.transaction.class">FData\TransactionsBundle\HttpClient\Clients\TransactionClient</parameter>
         <parameter key="f_data_transactions.api.transaction.class">FData\TransactionsBundle\Transaction\Transaction</parameter>
-        <parameter key="f_data_transactions.api.url" type="string">https://api.demo.globalgatewaye4.firstdata.com</parameter>
+        <parameter key="f_data_transactions.api.url" type="string">https://api.globalgatewaye4.firstdata.com</parameter>
         <parameter key="f_data_transactions.api.endpoint">/transaction/v14</parameter>
-        <parameter key="f_data_transactions.api.key_id">131774</parameter>
-        <parameter key="f_data_transactions.api.hmac_key">FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84</parameter>
-        <parameter key="f_data_transactions.api.gateway_id">AE8689-05</parameter>
-        <parameter key="f_data_transactions.api.password">8h5i7dud</parameter>
-
+        <parameter key="f_data_transactions.api.key_id">189899</parameter>
+        <parameter key="f_data_transactions.api.hmac_key">YDQZheenbli_A0DA9HNEkdj0vrVpXXfn</parameter>
+        <parameter key="f_data_transactions.api.gateway_id">B85063-01</parameter>
+        <parameter key="f_data_transactions.api.password">pbga5qoo7hn4vm20sy90ygoukfpta0bt</parameter>
         <!-- Grid parameters -->
         <parameter key="f_data_transactions.http_client.search.class">FData\TransactionsBundle\HttpClient\Clients\GridClient</parameter>
         <parameter key="f_data_transactions.api.search.endpoint">/transaction/search</parameter>
-        <parameter key="f_data_transactions.api.search.username" type="string">vherrero</parameter>
-        <parameter key="f_data_transactions.api.search.password" type="string">claudita123</parameter>
+        <parameter key="f_data_transactions.api.search.username" type="string">victorweintraub</parameter>
+        <parameter key="f_data_transactions.api.search.password" type="string">gori3576first</parameter>
         <!-- end Grid parameters -->
 
     </parameters>
