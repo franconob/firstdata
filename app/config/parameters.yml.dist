@@ -27,3 +27,14 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    #Parametros para ejecutar transacciones
+    api_url: https://api.demo.globalgatewaye4.firstdata.com
+    key_id: 131774
+    hmac_key: FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84
+    gateway_id: AE8689-05
+    api_password: 8h5i7dud
+
+    #Parametros para la busqueda de transacciones
+    api_search_username: vherrero
+    api_search_password: vherrero123

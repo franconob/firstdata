@@ -8,18 +8,18 @@
         <parameter key="f_data_transactions.http_client.class">GuzzleHttp\Client</parameter>
         <parameter key="f_data_transactions.http_client.transaction.class">FData\TransactionsBundle\HttpClient\Clients\TransactionClient</parameter>
         <parameter key="f_data_transactions.api.transaction.class">FData\TransactionsBundle\Transaction\Transaction</parameter>
-        <parameter key="f_data_transactions.api.url" type="string">https://api.demo.globalgatewaye4.firstdata.com</parameter>
+        <parameter key="f_data_transactions.api.url" type="string">%api_url%</parameter>
         <parameter key="f_data_transactions.api.endpoint">/transaction/v14</parameter>
-        <parameter key="f_data_transactions.api.key_id">131774</parameter>
-        <parameter key="f_data_transactions.api.hmac_key">FSwc7KeT6JFadZKRE1s6Pi6xAYQLVn84</parameter>
-        <parameter key="f_data_transactions.api.gateway_id">AE8689-05</parameter>
-        <parameter key="f_data_transactions.api.password">8h5i7dud</parameter>
+        <parameter key="f_data_transactions.api.key_id">%key_id%</parameter>
+        <parameter key="f_data_transactions.api.hmac_key">%hmac_key%</parameter>
+        <parameter key="f_data_transactions.api.gateway_id">%gateway_id%</parameter>
+        <parameter key="f_data_transactions.api.password">%api_password%</parameter>
 
         <!-- Grid parameters -->
         <parameter key="f_data_transactions.http_client.search.class">FData\TransactionsBundle\HttpClient\Clients\GridClient</parameter>
         <parameter key="f_data_transactions.api.search.endpoint">/transaction/search</parameter>
-        <parameter key="f_data_transactions.api.search.username" type="string">vherrero</parameter>
-        <parameter key="f_data_transactions.api.search.password" type="string">claudita123</parameter>
+        <parameter key="f_data_transactions.api.search.username" type="string">%api_search_username%</parameter>
+        <parameter key="f_data_transactions.api.search.password" type="string">%api_search_password%</parameter>
         <!-- end Grid parameters -->
 
     </parameters>
@@ -35,7 +35,7 @@
             <argument type="string">%f_data_transactions.api.search.endpoint%</argument>
             <argument type="string">GET</argument>
             <call method="setUser">
-               <argument type="expression">service('security.context').getToken().getUser()</argument>
+                <argument type="expression">service('security.context').getToken().getUser()</argument>
             </call>
             <call method="setUsername">
                 <argument type="string">%f_data_transactions.api.search.username%</argument>
@@ -56,39 +56,41 @@
         <!-- end Http Client Classess -->
 
         <service id="f_data_transactions.api.transaction" class="%f_data_transactions.api.transaction.class%">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="f_data_transactions.http_client.transaction"/>
             <argument>%f_data_transactions.api.key_id%</argument>
             <argument>%f_data_transactions.api.hmac_key%</argument>
             <argument>%f_data_transactions.api.gateway_id%</argument>
             <argument>%f_data_transactions.api.password%</argument>
             <argument type="expression">service('security.context').getToken().getUser()</argument>
-            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="f_data_transactions.api.search.grid" class="FData\TransactionsBundle\Grid\Grid">
             <argument type="service" id="f_data_transactions.http_client.search"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="security.context"/>
+            <argument type="service" id="router" />
         </service>
 
         <service id="f_data_transactions.repository.user" class="FData\SecurityBundle\User\UserRepository">
-            <argument type="service" id="doctrine.dbal.crm_connection" />
-            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.dbal.crm_connection"/>
+            <argument type="service" id="security.context"/>
         </service>
 
         <service id="f_data_transactions.mailer" class="FData\TransactionsBundle\Mail\NotificationMailer">
-            <argument type="service" id="swiftmailer.mailer.default" />
-            <argument type="service" id="templating" />
-            <argument type="service" id="f_data_transactions.repository.user" />
+            <argument type="service" id="swiftmailer.mailer.default"/>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="f_data_transactions.repository.user"/>
             <argument>%mailer_from%</argument>
-            <argument type="service" id="validator" />
+            <argument type="service" id="validator"/>
         </service>
 
-        <service id="f_data_transactions.transction_subscriber" class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="security.context" />
-           <tag name="kernel.event_subscriber" />
+        <service id="f_data_transactions.transction_subscriber"
+                 class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="security.context"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>
