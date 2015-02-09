@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FData\SecurityBundle\FDataSecurityBundle(),
             new \Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -86,6 +86,12 @@
             <argument type="service" id="validator"/>
         </service>
 
+        <service id="f_data_transactions.mailer.client" class="FData\TransactionsBundle\Mail\ClientNotification">
+            <argument type="service" id="swiftmailer.mailer.default" />
+            <argument>%mailer_from%</argument>
+            <argument type="service" id="knp_snappy.pdf" />
+        </service>
+
         <service id="f_data_transactions.transction_subscriber"
                  class="FData\TransactionsBundle\EventSubscriber\TransactionSubscriber">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>

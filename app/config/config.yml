@@ -84,3 +84,13 @@ swiftmailer:
     encryption: "%mailer_encryption%"
     logging:   "%kernel.debug%"
     spool:     { type: memory }
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     %kernel.root_dir%/../bin/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     %kernel.root_dir%/../bin/wkhtmltoimage
+        options:    []
