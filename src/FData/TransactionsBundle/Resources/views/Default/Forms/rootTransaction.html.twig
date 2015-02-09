@@ -94,6 +94,16 @@
                 <span class="fa fa-check form-control-feedback" ng-show="form.reference_no.$valid"></span>
             </div>
         </div>
+        <div class="form-group"
+             ng-class="{'has-success': form.email.$valid, 'has-error': form.email.$invalid, 'has-feedback': form.email.$valid}">
+            <label for="email" class="control-label col-sm-4">E-Mail</label>
+
+            <div class="col-sm-7">
+                <fdata-input type="email" class="form-control" ng-model="transaction.email"
+                       name="email" required editable="{{ editable }}"></fdata-input>
+                <span class="fa fa-check form-control-feedback" ng-show="form.email.$valid"></span>
+            </div>
+        </div>
     </form>
 </div>
 <div class="modal-footer">

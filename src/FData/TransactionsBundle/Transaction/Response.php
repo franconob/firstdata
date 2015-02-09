@@ -86,6 +86,7 @@ class Response
      */
     public function getCTR()
     {
+        /*
         $format = function ($value) {
             return ucwords(strtolower(trim($value)));
         };
@@ -101,6 +102,7 @@ class Response
         $ctr .= "\n\n\n\n----------------------------" . "\n         Signature";
 
         return $ctr;
+        */
     }
 
     /**

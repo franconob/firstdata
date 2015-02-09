@@ -29,6 +29,16 @@ class Transaction
      */
     private $conciliada;
 
+    /**
+     * @var string
+     */
+    private $recibo;
+
+    /**
+     * @var string
+     */
+    private $transactionResponse;
+
     public function __construct()
     {
         $this->fecha = new \DateTime();
@@ -171,5 +181,51 @@ class Transaction
     public function getFechaConciliacion()
     {
         return $this->fechaConciliacion;
+    }
+
+    /**
+     * Set recibo
+     *
+     * @param string $recibo
+     * @return Transaction
+     */
+    public function setRecibo($recibo)
+    {
+        $this->recibo = $recibo;
+
+        return $this;
+    }
+
+    /**
+     * Get recibo
+     *
+     * @return string 
+     */
+    public function getRecibo()
+    {
+        return $this->recibo;
+    }
+
+    /**
+     * Set transactionResponse
+     *
+     * @param string $transactionResponse
+     * @return Transaction
+     */
+    public function setTransactionResponse($transactionResponse)
+    {
+        $this->transactionResponse = serialize($transactionResponse);
+
+        return $this;
+    }
+
+    /**
+     * Get transactionResponse
+     *
+     * @return string 
+     */
+    public function getTransactionResponse()
+    {
+        return unserialize($this->transactionResponse);
     }
 }

@@ -17,11 +17,13 @@ if (window.location.pathname !== '/login') {
 
     function CheckIdleTime() {
         _idleSecondsCounter++;
-        console.log(_idleSecondsCounter);
         if (_idleSecondsCounter >= IDLE_TIMEOUT) {
-            alert("La sesion expiró. Por favor ingrese de nuevo.");
-            clearInterval(interval);
-            window.location.href = '/';
+            $.get(Routing.generate('f_data_security_logout'), function () {
+                alert("La sesion expiró. Por favor ingrese de nuevo.");
+                clearInterval(interval);
+                window.location.href = '/';
+            });
+
         }
     }
 

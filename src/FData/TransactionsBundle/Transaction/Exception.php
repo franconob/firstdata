@@ -54,7 +54,8 @@ class Exception extends \Exception
                 "success" => false,
                 "reason"  => $this->response->get('exact_message'),
                 "debug"   => "",
-                "code"    => $this->response->getClientResponse()->getStatusCode()
+                "code"    => $this->response->getClientResponse()->getStatusCode(),
+                "response" => $this->response->getBody()
             ];
         }
 

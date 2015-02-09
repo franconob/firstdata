@@ -12,5 +12,7 @@
         <field name="usuario" type="string" column="usuario" nullable="true"/>
         <field name="conciliada" type="boolean" column="conciliada" nullable="false"/>
         <field name="fechaConciliacion" type="datetime" column="fecha_conciliacion" nullable="true" />
+        <field name="recibo" type="text" column="recibo" nullable="true" />
+        <field name="transactionResponse" type="text" nullable="true" />
     </entity>
 </doctrine-mapping>

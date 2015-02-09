@@ -28,4 +28,9 @@
         <default key="_controller">FDataTransactionsBundle:Default:getCountries</default>
         <option key="expose">true</option>
     </route>
+
+    <route id="f_data_transactions_recibo" path="/transactions/recibo/{tag}" methods="get">
+        <default key="_controller">FDataTransactionsBundle:Default:recibo</default>
+        <option key="expose">true</option>
+    </route>
 </routes>

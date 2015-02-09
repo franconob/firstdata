@@ -74,6 +74,7 @@ class UserProvider implements UserProviderInterface
         if (false !== strpos($this->router->getContext()->getHost(), 'extranet')) {
             $user = $this->connection->fetchAssoc(
                 "Select vtiger_contactdetails.contactid as contactid , vtiger_account.accountname as HOTEL ,
+                vtiger_account.website as web, vtiger_account.phone as telefono,
                 vtiger_accountbillads.bill_street as dir_calle, vtiger_accountbillads.bill_pobox as dir_pobox,
                 vtiger_accountbillads.bill_city as dir_ciudad, vtiger_accountbillads.bill_state as dir_provincia,
                 vtiger_accountbillads.bill_country as dir_pais, vtiger_accountbillads.bill_code as dir_code,
@@ -116,7 +117,9 @@ where vtiger_crmentity.deleted<>1 and email= ?
                 'dir_ciudad'    => $user['dir_ciudad'],
                 'dir_provincia' => $user['dir_provincia'],
                 'dir_pais'      => $user['dir_pais'],
-                'dir_code'      => $user['dir_code']
+                'dir_code'      => $user['dir_code'],
+                'web'           => $user['web'],
+                'telefono'      => $user['telefono']
             ];
 
             return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles, $extra_data);

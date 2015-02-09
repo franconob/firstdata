@@ -80,29 +80,22 @@ app.factory('notify', function () {
 });
 
 app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
-    return function (CTR, bank_message) {
+    return function (data) {
         $modal.open({
             templateUrl: 'printCTR.html',
             size: 'md',
             resolve: {
-                CTR: function () {
-                    return CTR;
-                },
-                bank_message: function () {
-                    return bank_message;
+                data: function () {
+                    return data;
                 }
             },
-            controller: function ($modalInstance, $scope, CTR, bank_message) {
-                $scope.CTR = CTR;
-                $scope.bank_message = bank_message;
+            controller: function ($modalInstance, $scope, data) {
+                $scope.bank_message = data.bank_message;
+                $scope.print_route = Routing.generate('f_data_transactions_recibo', {tag: data.tag});
 
                 $scope.cancel = function () {
                     $modalInstance.dismiss('cancel');
                 };
-
-                $scope.print = function () {
-                    $window.print();
-                }
             }
         })
     }
@@ -447,6 +440,7 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
                     hide: true,
                     icon: 'fa fa-check'
                 });
+                printCTR(data);
             }
             $modalInstance.dismiss('ok');
             $rootScope.$broadcast('grid.update');
@@ -542,7 +536,17 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
             transaction_tag: $scope.transaction['Tag'],
             amount: amount,
             authorization_num: $scope.transaction['Auth No'],
-            reference_no: $scope.transaction['Ref Num']
+            reference_no: $scope.transaction['Ref Num'],
+            extra_data: {
+                cardholder_name: $scope.transaction['Cardholder Name'],
+                cardnumber: $scope.transaction['Card Number'],
+                cardtype: $scope.transaction['Card Type'],
+                expiry: $scope.transaction['Expiry'],
+                tag: $scope.transaction['Tag'],
+                amount: $scope.transaction['amount'],
+                email: 'franconob.pr@gmail.com'
+            }
+
         };
 
         if ($scope.transaction['fecha']) {
@@ -557,7 +561,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
                     hide: true,
                     icon: 'fa fa-check'
                 });
-                printCTR(data.CTR, data.bank_message);
+                printCTR(data);
             }
             $modalInstance.dismiss('ok');
             $rootScope.$broadcast('grid.update');
@@ -731,7 +735,7 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
                     icon: 'fa fa-check'
                 });
                 $rootScope.$broadcast('grid.update');
-                printCTR(data.CTR, data.bank_message);
+                printCTR(data);
             } else {
                 notify({
                     title: "Ocurrió un error procesando la transacción",

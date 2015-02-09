@@ -5,13 +5,12 @@
     </div>
     <div class="modal-body print_ctr printable">
         <h4>{{ bank_message }}</h4>
-        <pre>{{ CTR }}</pre>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="print()">
+        <a class="btn btn-primary" ng-href="{{ print_route }}" target="_blank">
             <i class="fa fa-print"></i>
             Imprimir
-        </button>
+        </a>
         <button class="btn btn-danger" ng-click="cancel()">Salir</button>
     </div>
 </script>

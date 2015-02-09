@@ -69,7 +69,7 @@ class DefaultController extends Controller
 
         foreach ($data as $k_row => &$row) {
 
-            if(null === $row[0]) {
+            if (null === $row[0]) {
                 continue;
             }
 
@@ -258,17 +258,44 @@ class DefaultController extends Controller
         $data = json_decode($request->getContent(), true)['transactions'];
 
         $transaction = $this->get('f_data_transactions.api.transaction');
-        $vars = [];
-
         try {
             $data = isset($data[0]) ? $data[0] : $data;
+            $email = $data['email'];
+            unset($data['email']);
             $transaction->execute($transactionType, $data);
-            $vars['success'] = true;
-            $vars['CTR'] = $transaction->getResponse()->getCTR();
+
+            $template = $this->get('templating');
+
+            $user = $this->getUser();
+            $response = $transaction->getResponse();
+
+            $vars = [
+                'success' => true,
+                'hotel' => $user->getHotel(),
+                'web' => $user->getExtraData('web'),
+                'direccion' => $user->getExtraData('dir_calle'). ' '. $user->getExtraData('dir_pobox'),
+                'telefono' => $user->getExtraData('telefono'),
+                'cardholder' => $response->get('cardholder_name'),
+                'creditcardtype' => $response->get('credit_card_type'),
+                'email' => $email,
+                'creditcardnumber' => $response->get('cc_number'),
+                'expirydate' => substr($response->get('cc_expiry'), 0, 2) . '/' . substr($response->get('cc_expiry'), 2),
+                'amount' => $data['amount']. ' '.$response->get('currency'),
+                'tag' => $response->get('transaction_tag')
+            ];
+
+            $CTR = $template->render('FDataTransactionsBundle:Default:recibo.html.twig', $vars);
+
+            $transaction_entity = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($response->get('transaction_tag'));
+            $transaction_entity->setRecibo($CTR);
+
+            $this->getDoctrine()->getManager()->persist($transaction_entity);
+            $this->getDoctrine()->getManager()->flush();
+
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
             $vars['response'] = $transaction->getResponse()->getBody();
 
-            $data['ctr'] = $vars['CTR'];
+            $data['ctr'] = $CTR;
             $this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
         } catch (Exception $e) {
             $vars = $e->getDebugVars();
@@ -358,5 +385,14 @@ class DefaultController extends Controller
             "countries" => array_combine($paises, $paises),
             "filter" => $filter
         ]);
+    }
+
+    public function reciboAction($tag)
+    {
+        $transaction = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($tag);
+        if(!$transaction->getRecibo()) {
+            throw $this->createNotFoundException('El recibo solicitado no se encuentra disponible en el sistema');
+        }
+        return new Response($transaction->getRecibo());
     }
 }

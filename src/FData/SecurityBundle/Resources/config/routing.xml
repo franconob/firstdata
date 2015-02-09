@@ -6,5 +6,7 @@
 
     <route id="f_data_security_login_check" path="/login_check" methods="POST" />
 
-    <route id="f_data_security_logout" path="/logout" methods="GET" />
+    <route id="f_data_security_logout" path="/logout" methods="GET">
+        <option key="expose">true</option>
+    </route>
 </routes>

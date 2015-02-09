@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use FData\TransactionsBundle\Entity\Transaction;
 use FData\TransactionsBundle\HttpClient\Clients\GridClient;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class Grid
@@ -59,6 +60,14 @@ class Grid
             "openModal" => true,
             "template" => "conciliar.html",
             "url" => "/transactions-conciliar"
+        ],
+        'Recibo' => [
+            "role" => 'CONTACTO',
+            "label" => "Ver recibo",
+            "action" => "recibo",
+            "openModal" => false,
+            "template" => false,
+            "url" => ["f_data_transactions_recibo", ["tag", "Tag"]]
         ]
     ];
 
@@ -74,7 +83,13 @@ class Grid
         </button>
         <ul class="dropdown-menu" role="menu">
             {% for action in actions %}
-                <li><a href="" ng-click="processTransaction({0}, {{ action|json_encode }})">{{ action.label }}</a></li>
+                <li>
+                    {% if action.openModal %}
+                        <a href="" ng-click="processTransaction({0}, {{ action|json_encode }})">{{ action.label }}</a>
+                    {% else %}
+                        <a ng-href="{{ action.route }}" target="_blank">{{ action.label }}</a>
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -100,6 +115,12 @@ EOF;
      */
     private $securityContext;
 
+
+    /**
+     * @var Router
+     */
+    private $router;
+
     /**
      * @var array
      */
@@ -110,11 +131,12 @@ EOF;
      */
     private $tableHeader = [];
 
-    public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext)
+    public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext, Router $router)
     {
         $this->entity_manager = $entity_manager;
         $this->http_client = $http_client;
         $this->securityContext = $securityContext;
+        $this->router = $router;
         $this->setupApiHeaders();
         $this->setupCustomHeaders();
         $this->generateWorkflow();
@@ -151,16 +173,16 @@ EOF;
                     unset($results[$pos]);
                 }
 
-                foreach($results as $result) {
-                    if($result[6] == 'Pre-Authorization' || $result[6] == 'Tagged Completion' || $result[6] == 'Tagged Void') {
+                foreach ($results as $result) {
+                    if ($result[6] == 'Pre-Authorization' || $result[6] == 'Tagged Completion' || $result[6] == 'Tagged Void') {
                         $filteredResults[] = $result;
                     }
                 }
 
-                usort($filteredResults, function($a, $b) {
+                usort($filteredResults, function ($a, $b) {
                     $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
                     $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
-                    if($timeA > $timeB) {
+                    if ($timeA > $timeB) {
                         return -1;
                     } else {
                         return 1;
@@ -262,8 +284,13 @@ EOF;
                 unset($allowed_actions[$k]);
             }
 
-        }
+            if (is_array($action['url'])) {
+                $param = $action['url'][1][0];
+                $value = $action['url'][1][1];
+                $allowed_actions[$k]['route'] = $this->router->generate($action['url'][0], [$param => $transaction[$value]]);
+            }
 
+        }
 
         if (empty($allowed_actions)) {
             return '<div class="text-center">&times</div>';
@@ -344,7 +371,8 @@ EOF;
                     return false;
                 }],
                 self::$tagged_transactions['Tagged Refund'],
-                self::$tagged_transactions['Conciliar']]
+                self::$tagged_transactions['Conciliar'],
+                self::$tagged_transactions['Recibo']]
             ],
             'Pre-Authorization' => ["allows" => [
                 self::$tagged_transactions['Tagged Pre-Authorization Completion'],
@@ -360,7 +388,8 @@ EOF;
 
                     return false;
                 }],
-                self::$tagged_transactions['Conciliar']
+                self::$tagged_transactions['Conciliar'],
+                self::$tagged_transactions['Recibo']
             ]
             ],
             'Refund' => ["allows" => [
@@ -375,7 +404,8 @@ EOF;
                     }
 
                     return false;
-                }], self::$tagged_transactions['Conciliar']
+                }], self::$tagged_transactions['Conciliar'],
+                self::$tagged_transactions['Recibo']
             ]
             ],
             'Tagged Completion' => ["allows" => [
@@ -396,10 +426,11 @@ EOF;
                     return false;
                 }],
                 self::$tagged_transactions['Tagged Refund'],
-                self::$tagged_transactions['Conciliar']
+                self::$tagged_transactions['Conciliar'],
+                self::$tagged_transactions['Recibo']
             ]
             ],
-            'Tagged Void' => ["allows" => []],
+            'Tagged Void' => ["allows" => [self::$tagged_transactions['Recibo']]],
             'Tagged Refund' => ["allows" => [
                 [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
                     $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
@@ -413,10 +444,12 @@ EOF;
 
                     return false;
                 }],
-                self::$tagged_transactions['Conciliar']
+                self::$tagged_transactions['Conciliar'],
+                self::$tagged_transactions['Recibo']
             ]
             ],
             'Conciliar' => ["allows" => []],
+            'Ver recibo' => ['allows' => []]
         ];
 
         self::$transactions_workflow_status = [
