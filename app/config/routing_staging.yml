@@ -1,3 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 f_data_security:
     resource: "@FDataSecurityBundle/Resources/config/routing_staging.xml"
     prefix:   /
