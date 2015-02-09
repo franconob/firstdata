@@ -1,10 +1,10 @@
 {% verbatim %}
-<div class="modal-header">
-    <h3 class="modal-title">{{ title }}</h3>
+<div class="modal-header" ng-class="{'modal-header-confirm': !editable}">
+    <h3 class="modal-title">{{ title }} <i ng-show="!editable" class="pull-right fa fa-exclamation-circle fa-2x"></i></h3>
 
     <p class="text-info" ng-show="subtitle"><i class="fa fa-info-circle"></i> {{ subtitle }}</p>
 </div>
-<div class="modal-body">
+<div class="modal-body" ng-class="{'bg-danger': !editable}">
     <form class="form-horizontal" name="form" role="form">
         <div class="form-group"
              ng-class="{'has-success': form.cardholder_name.$valid, 'has-error': form.cardholder_name.$invalid, 'has-feedback': form.cardholder_name.$valid}">

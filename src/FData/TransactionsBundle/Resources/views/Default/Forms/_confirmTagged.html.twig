@@ -1,11 +1,11 @@
 {% verbatim %}
 <script type="text/ng-template" id="confirmTagged.html">
-    <div class="modal-header">
-        <h3 class="modal-title">{{ _config.label }}</h3>
+    <div class="modal-header" ng-class="{'modal-header-confirm': !editable}">
+        <h3 class="modal-title">{{ _config.label }} <i ng-show="!editable" class="pull-right fa fa-exclamation-circle fa-2x"></i></h3>
 
         <p class="text-info" ng-show="subtitle"><i class="fa fa-info-circle"></i> {{ subtitle }}</p>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" ng-class="{'bg-danger': !editable}">
         <form class="form-inline" name="form" role="form">
             <table class="table table-condensed">
                 <caption>Confirmación de datos</caption>

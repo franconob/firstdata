@@ -4,7 +4,8 @@
 PNotify.prototype.options.styling = "fontawesome";
 
 var app = angular.module('firstdata', ['ui.bootstrap', 'ui.utils', 'angularSpinner', 'angularMoment', 'angular-underscore/filters', 'ui.router', 'ngSanitize']);
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $urlRouterProvider.otherwise('/app');
 
     $stateProvider
@@ -23,7 +24,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 app.value('numeral', numeral);
 app.value('permissions', {totalAmount: false});
 
-app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", function ($q, $rootScope, notify) {
+app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", function ($q, $rootScope, notify, $window) {
     var currentNotify = null;
     var REGEXURL = /[.]html$/;
     return {
@@ -47,6 +48,11 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", function ($q,
                 currentNotify.remove();
                 $rootScope.isLoading = false;
             }
+
+            if(response.status == 403) {
+               $window.location.href = '/';
+            }
+
             var deferred = $q.defer();
 
             deferred.resolve(response);

@@ -1,9 +1,9 @@
 {% verbatim %}
 <script type="text/ng-template" id="confirm.html">
-    <div class="modal-header">
-        <h3 class="modal-title">{{ title }}</h3>
+    <div class="modal-header" ng-class="{'modal-header-confirm': !editable}">
+        <h3 class="modal-title">{{ title }} <i ng-show="!editable" class="pull-right fa fa-exclamation-circle fa-2x"></i></h3>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" ng-class="{'bg-danger': !editable}">
         <table class="table table-condensed">
             <caption>Confirmación de datos</caption>
             <tbody>

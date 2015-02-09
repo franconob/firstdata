@@ -58,3 +58,7 @@
     margin-bottom: 10px;
     top: 72px
 }
+
+.modal-header-confirm {
+    background-color: #ffa940;
+}

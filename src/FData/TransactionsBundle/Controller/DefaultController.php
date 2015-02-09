@@ -68,6 +68,11 @@ class DefaultController extends Controller
         $quitarVoids = [];
 
         foreach ($data as $k_row => &$row) {
+
+            if(null === $row[0]) {
+                continue;
+            }
+
             $formattedRow = ["id" => $k_row];
 
             // indice 12 => "Reference 3"
