@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.yml.dist" afterPath="$PROJECT_DIR$/app/config/parameters.yml.dist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/img/firstdata-logo.png" afterPath="$PROJECT_DIR$/web/img/firstdata-logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -64,7 +64,7 @@
       <file leaf-file-name="services.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8330579" vertical-offset="1188" max-vertical-offset="1836">
+            <state vertical-scroll-proportion="2.6181817" vertical-offset="108" max-vertical-offset="1836">
               <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding />
             </state>
@@ -171,9 +171,9 @@
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
         <option value="$PROJECT_DIR$/web/js/session.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml.dist" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
       </list>
     </option>
   </component>
@@ -664,12 +664,6 @@
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
     </task>
-    <task id="LOCAL-00082" summary="Correccion cuando se hacen 2 operaciones sobre el mismo padre">
-      <created>1410963488522</created>
-      <option name="number" value="00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1410963488522</updated>
-    </task>
     <task id="LOCAL-00083" summary="Correccion cuando se hacen 2 operaciones sobre el mismo padre">
       <created>1410963970163</created>
       <option name="number" value="00083" />
@@ -958,12 +952,18 @@
       <option name="project" value="LOCAL" />
       <updated>1423510876497</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Refactorizacion de parametros de API de Firstdata para poder tener 2 ambientes de trabajo">
+      <created>1423511625469</created>
+      <option name="number" value="00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1423511625469</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-3" width="1370" height="740" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1004,7 +1004,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Correccion de routing" />
     <MESSAGE value="Mejoras en el codigo. Integracion de WATAble con angular $http" />
     <MESSAGE value="Quitados console.log" />
     <MESSAGE value="Correcciones de diseño" />
@@ -1029,7 +1028,8 @@
     <MESSAGE value="Tarea  #1954. Correccion" />
     <MESSAGE value="Cierre de sesion luego de 5 min de inactividad. Modals de confirmacion con colores distintos" />
     <MESSAGE value="Guardado e impresion de recibos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Guardado e impresion de recibos" />
+    <MESSAGE value="Refactorizacion de parametros de API de Firstdata para poder tener 2 ambientes de trabajo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactorizacion de parametros de API de Firstdata para poder tener 2 ambientes de trabajo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1457,7 +1457,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8330579" vertical-offset="1188" max-vertical-offset="1836">
+        <state vertical-scroll-proportion="2.6181817" vertical-offset="108" max-vertical-offset="1836">
           <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding />
         </state>
