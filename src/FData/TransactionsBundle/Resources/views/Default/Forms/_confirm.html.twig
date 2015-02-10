@@ -1,30 +1,43 @@
 {% verbatim %}
 <script type="text/ng-template" id="confirm.html">
     <div class="modal-header" ng-class="{'modal-header-confirm': !editable}">
-        <h3 class="modal-title">{{ title }} <i ng-show="!editable" class="pull-right fa fa-exclamation-circle fa-2x"></i></h3>
+        <h3 class="modal-title">{{ title }} <i ng-show="!editable"
+                                               class="pull-right fa fa-exclamation-circle fa-2x"></i></h3>
     </div>
     <div class="modal-body" ng-class="{'bg-danger': !editable}">
-        <table class="table table-condensed">
-            <caption>Confirmación de datos</caption>
-            <tbody>
+        <form name="form" action="">
+            <table class="table table-condensed">
+                <caption>Confirmación de datos</caption>
+                <tbody>
                 <tr>
-                    <th>CardHolder Name</td>
+                    <th>CardHolder Name</th>
                     <td>{{ transaction['Cardholder Name'] }}</td>
                 </tr>
-            <tr>
-                    <th>Card Number</td>
+                <tr>
+                    <th>Card Number</th>
                     <td>{{ transaction['Card Number'] }}</td>
                 </tr>
-            <tr>
-                    <th>Card Type</td>
+                <tr>
+                    <th>Card Type</th>
                     <td>{{ transaction['Card Type'] }}</td>
                 </tr>
-            <tr>
-                    <th>Amount</td>
+                <tr>
+                    <th>Amount</th>
                     <td>{{ transaction['Amount'] }}</td>
                 </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <div class="form-group"
+                             ng-class="{'has-success': form.email.$valid, 'has-error': form.email.$invalid}">
+                            <input type="email" class="form-control" name="email" ng-model="transaction.email"
+                                   placeholder="Email"/>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid || isLoading">

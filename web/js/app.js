@@ -429,7 +429,8 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
             transaction_tag: $scope.transaction['Tag'],
             amount: amount,
             authorization_num: $scope.transaction['Auth No'],
-            reference_no: $scope.transaction['Ref Num']
+            reference_no: $scope.transaction['Ref Num'],
+            email: $scope.transaction['email'] || null
         };
 
         $http.post(_config.url, {transactions: data}).success(function (data, status) {
