@@ -260,8 +260,16 @@ class DefaultController extends Controller
         $transaction = $this->get('f_data_transactions.api.transaction');
         try {
             $data = isset($data[0]) ? $data[0] : $data;
-            $email = $data['email'];
-            unset($data['email']);
+
+            if(isset($data['email'])) {
+                $email = $data['email'];
+            } else {
+                $email = null;
+            }
+
+            if (isset($data['country'])) {
+                unset($data['country']);
+            }
             $transaction->execute($transactionType, $data);
 
             $template = $this->get('templating');
@@ -273,14 +281,14 @@ class DefaultController extends Controller
                 'success' => true,
                 'hotel' => $user->getHotel(),
                 'web' => $user->getExtraData('web'),
-                'direccion' => $user->getExtraData('dir_calle'). ' '. $user->getExtraData('dir_pobox'),
+                'direccion' => $user->getExtraData('dir_calle') . ' ' . $user->getExtraData('dir_pobox'),
                 'telefono' => $user->getExtraData('telefono'),
                 'cardholder' => $response->get('cardholder_name'),
                 'creditcardtype' => $response->get('credit_card_type'),
-                'email' => $email,
+                'email' => $email ?: 'Sin indicar',
                 'creditcardnumber' => $response->get('cc_number'),
                 'expirydate' => substr($response->get('cc_expiry'), 0, 2) . '/' . substr($response->get('cc_expiry'), 2),
-                'amount' => $data['amount']. ' '.$response->get('currency'),
+                'amount' => $data['amount'] . ' ' . $response->get('currency'),
                 'tag' => $response->get('transaction_tag')
             ];
 
@@ -297,7 +305,7 @@ class DefaultController extends Controller
 
             $data['ctr'] = $CTR;
             $this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
-            $this->get('f_data_transactions.mailer.client')->createAndSend($CTR, $email);
+            $email && $this->get('f_data_transactions.mailer.client')->createAndSend($CTR, $email);
         } catch (Exception $e) {
             $vars = $e->getDebugVars();
         }
@@ -391,7 +399,7 @@ class DefaultController extends Controller
     public function reciboAction($tag)
     {
         $transaction = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($tag);
-        if(!$transaction->getRecibo()) {
+        if (!$transaction->getRecibo()) {
             throw $this->createNotFoundException('El recibo solicitado no se encuentra disponible en el sistema');
         }
         return new Response($transaction->getRecibo());

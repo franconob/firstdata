@@ -723,7 +723,6 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
 
     $scope.submit = function () {
         $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
-        delete $scope.transaction['country'];
         var promise = $http.post(Routing.generate('f_data_transactions_execute', {transactionType: transaction_type}), {transactions: $scope.transaction});
         promise.success(function (data, status) {
             if (true == data.success) {
