@@ -2,21 +2,40 @@
 <script type="text/ng-template" id="tagged.html">
     <div class="modal-header">
         <h3 class="modal-title">{{ _config.label }}</h3>
+
         <p class="text-info" ng-show="subtitle"><i class="fa fa-info-circle"></i> {{ subtitle }}</p>
     </div>
-    <div class="modal-body">
-        <form class="form-inline" name="form" role="form">
-            <div class="form-group"
-                 ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid, 'has-feedback': form.amount.$valid}">
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <fdata-input ng-model="transaction.amount" check-limit limit="{{ maxAmount }}" name="amount" id="dollaramount" type="text"
-                           class="form-control" placeholder="Formato: 10,000.00" ng-pattern="/^[0-9]+([,]?[0-9]{3})?([.]?[0-9]{2})?$/" required editable="{{ editable }}"></fdata-input>
-                    <span class="fa fa-check form-control-feedback" ng-show="form.amount.$valid"></span>
-                </div>
-                <span class="help-block">El importe no puede superar los {{ maxAmount }}</span>
-                <span class="help-block" ng-show="form.amount.$error.limit_reached">El importe ingresado supera a {{ maxAmount }}</span>
+    <div class="modal-body container-fluid">
+        <form name="form" role="form">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group"
+                         ng-class="{'has-success': form.amount.$valid, 'has-error': form.amount.$invalid}">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <fdata-input ng-model="transaction.amount" check-limit limit="{{ maxAmount }}" name="amount"
+                                         id="dollaramount" type="text"
+                                         class="form-control" placeholder="Formato: 10,000.00"
+                                         ng-pattern="/^[0-9]+([,]?[0-9]{3})?([.]?[0-9]{2})?$/" required
+                                         editable="{{ editable }}"></fdata-input>
+                        </div>
+                        <span class="help-block">El importe no puede superar los {{ maxAmount }}</span>
+                <span class="help-block"
+                      ng-show="form.amount.$error.limit_reached">El importe ingresado supera a {{ maxAmount }}</span>
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group"
+                         ng-class="{'has-success': form.email.$valid, 'has-error': form.email.$invalid}">
+                        <fdata-input ng-model="transaction.email" type="email" name="email" class="form-control"
+                                     placeholder="Email" editable="{{ editable }}"></fdata-input>
+                        <span class="help-block">Se enviará un correo con una copia del recibo.</span>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -114,3 +114,13 @@
 .modal-header-confirm {
     background-color: #ffa940;
 }
+
+input[readonly].ng-valid, select[readonly].ng-valid {
+    cursor: pointer;
+}
+
+caption {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
+}
