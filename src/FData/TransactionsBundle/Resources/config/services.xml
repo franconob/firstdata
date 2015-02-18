@@ -89,7 +89,8 @@
         <service id="f_data_transactions.mailer.client" class="FData\TransactionsBundle\Mail\ClientNotification">
             <argument type="service" id="swiftmailer.mailer.default" />
             <argument>%mailer_from%</argument>
-            <argument type="service" id="knp_snappy.pdf" />
+            <argument type="service" id="templating" />
+            <argument type="service" id="security.context" />
         </service>
 
         <service id="f_data_transactions.transction_subscriber"

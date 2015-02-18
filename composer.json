@@ -23,7 +23,8 @@
         "liuggio/excelbundle": "~2.0",
         "nesbot/carbon": "*",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "knplabs/knp-snappy-bundle": "dev-master"
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "openbuildings/swiftmailer-css-inliner": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

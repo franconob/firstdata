@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5a0740e550bdeb3527794847c8e13a3c",
+    "hash": "0a4567c01d4c2b0154733cfa11a7f1cd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1328,6 +1328,47 @@
             "time": "2014-07-18 03:44:47"
         },
         {
+            "name": "openbuildings/swiftmailer-css-inliner",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpenBuildings/swiftmailer-css-inliner.git",
+                "reference": "6c6b7efd3b61b573258f764f7d4ccc5a192ce635"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpenBuildings/swiftmailer-css-inliner/zipball/6c6b7efd3b61b573258f764f7d4ccc5a192ce635",
+                "reference": "6c6b7efd3b61b573258f764f7d4ccc5a192ce635",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "tijsverkoyen/css-to-inline-styles": "~1.5"
+            },
+            "require-dev": {
+                "swiftmailer/swiftmailer": "~5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Openbuildings\\Swiftmailer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Kerin",
+                    "email": "ivan@openbuildings.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "Inline the css of your html emails",
+            "time": "2014-10-27 15:04:44"
+        },
+        {
             "name": "phpoffice/phpexcel",
             "version": "1.8.0",
             "source": {
@@ -1974,6 +2015,53 @@
             "time": "2014-08-06 07:03:01"
         },
         {
+            "name": "tijsverkoyen/css-to-inline-styles",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
+                "reference": "c50e8cd86acb0e528855c59653006e96d094a5b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/c50e8cd86acb0e528855c59653006e96d094a5b1",
+                "reference": "c50e8cd86acb0e528855c59653006e96d094a5b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/css-selector": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TijsVerkoyen\\CssToInlineStyles\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Tijs Verkoyen",
+                    "email": "css_to_inline_styles@verkoyen.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
+            "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
+            "time": "2014-08-01 18:02:04"
+        },
+        {
             "name": "twig/extensions",
             "version": "v1.1.0",
             "source": {
@@ -2174,7 +2262,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "knplabs/knp-snappy-bundle": 20
+        "knplabs/knp-snappy-bundle": 20,
+        "openbuildings/swiftmailer-css-inliner": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -10,12 +10,12 @@ namespace FData\TransactionsBundle\Transaction;
 
 use Doctrine\ORM\EntityManager;
 use FData\SecurityBundle\User\User;
+use FData\TransactionsBundle\Entity\Transaction as TransactionEntity;
 use FData\TransactionsBundle\Events\TransactionCompleteEvent;
 use FData\TransactionsBundle\Events\TransactionEvents;
 use FData\TransactionsBundle\HttpClient\Clients\TransactionClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\ResponseInterface;
-use FData\TransactionsBundle\Entity\Transaction as TransactionEntity;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Transaction
@@ -46,6 +46,20 @@ class Transaction
     private $response;
 
     /**
+     * @var array
+     */
+    public static $typeMap = [
+        00 => 'Purchase',
+        01 => 'Pre-Authorization',
+        02 => 'Pre-Authorization Completion',
+        04 => 'Refund',
+        13 => 'Void',
+        32 => 'Pre-Authorization Completion',
+        33 => 'Tagged Void',
+        34 => 'Tagged Refund'
+    ];
+
+    /**
      * @var EventDispatcherInterface
      */
     private $dispatcher;
@@ -53,13 +67,13 @@ class Transaction
     public function __construct(EntityManager $entity_manager, $http_client, $key_id, $hmac_key, $gatewat_id, $password, User $user, EventDispatcherInterface $dispatcher)
     {
         $this->entity_manager = $entity_manager;
-        $this->http_client    = $http_client;
-        $this->key_id         = $key_id;
-        $this->hmac_key       = $hmac_key;
-        $this->gateway_id     = $gatewat_id;
-        $this->password       = $password;
-        $this->user           = $user;
-        $this->dispatcher     = $dispatcher;
+        $this->http_client = $http_client;
+        $this->key_id = $key_id;
+        $this->hmac_key = $hmac_key;
+        $this->gateway_id = $gatewat_id;
+        $this->password = $password;
+        $this->user = $user;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -132,12 +146,12 @@ class Transaction
     private function taggedRefund(array $transaction)
     {
         $requestBody = array_merge([
-            'gateway_id'       => $this->gateway_id,
-            'password'         => $this->password,
+            'gateway_id' => $this->gateway_id,
+            'password' => $this->password,
             'transaction_type' => '34',
             'cvd_presence_ind' => '0',
-            'reference_3'      => $transaction['transaction_tag'],
-            'customer_ref'     => $this->user->getSearchString()
+            'reference_3' => $transaction['transaction_tag'],
+            'customer_ref' => $this->user->getSearchString()
 
         ], $transaction);
 
@@ -147,12 +161,12 @@ class Transaction
     public function newTransaction(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody              = array_merge([
-            'gateway_id'       => $this->gateway_id,
-            'password'         => $this->password,
+        $requestBody = array_merge([
+            'gateway_id' => $this->gateway_id,
+            'password' => $this->password,
             'transaction_type' => '00',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->user->getSearchString()
+            'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);
@@ -161,12 +175,12 @@ class Transaction
     public function preAuth(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody              = array_merge([
-            'gateway_id'       => $this->gateway_id,
-            'password'         => $this->password,
+        $requestBody = array_merge([
+            'gateway_id' => $this->gateway_id,
+            'password' => $this->password,
             'transaction_type' => '01',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->user->getSearchString()
+            'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);
@@ -180,12 +194,12 @@ class Transaction
     private function refund(array $transaction)
     {
         $transaction['cc_expiry'] = $this->formatExpiryDate($transaction['cc_expiry']);
-        $requestBody              = array_merge([
-            'gateway_id'       => $this->gateway_id,
-            'password'         => $this->password,
+        $requestBody = array_merge([
+            'gateway_id' => $this->gateway_id,
+            'password' => $this->password,
             'transaction_type' => '04',
             'cvd_presence_ind' => '1',
-            'customer_ref'     => $this->user->getSearchString()
+            'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 
         return $this->runTransaction($requestBody);
@@ -207,19 +221,19 @@ class Transaction
 
     private function calcHMAC($requestBody)
     {
-        $gge4_date      = gmdate('Y-m-d\TH:i:s') . 'Z';
-        $method         = 'POST';
+        $gge4_date = gmdate('Y-m-d\TH:i:s') . 'Z';
+        $method = 'POST';
         $content_digest = sha1($requestBody);
-        $content_type   = 'application/json';
+        $content_type = 'application/json';
 
         $hmac_data = $method . "\n" . $content_type . "\n" . $content_digest . "\n" . $gge4_date . "\n" . $this->http_client->getEndpoint();
 
         $headers = [
-            'Accept'              => 'application/json',
-            'Content-Type'        => $content_type,
+            'Accept' => 'application/json',
+            'Content-Type' => $content_type,
             'X-GGe4-Content-SHA1' => $content_digest,
-            'X-GGe4-Date'         => $gge4_date,
-            'Authorization'       => 'GGE4_API ' . $this->key_id . ':' . base64_encode(hash_hmac('sha1', $hmac_data, $this->hmac_key, true))
+            'X-GGe4-Date' => $gge4_date,
+            'Authorization' => 'GGE4_API ' . $this->key_id . ':' . base64_encode(hash_hmac('sha1', $hmac_data, $this->hmac_key, true))
         ];
 
         return $headers;

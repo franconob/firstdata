@@ -261,7 +261,7 @@ class DefaultController extends Controller
         try {
             $data = isset($data[0]) ? $data[0] : $data;
 
-            if(isset($data['email'])) {
+            if (isset($data['email'])) {
                 $email = $data['email'];
             } else {
                 $email = null;
@@ -305,7 +305,9 @@ class DefaultController extends Controller
 
             $data['ctr'] = $CTR;
             //$this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
-            $email && $this->get('f_data_transactions.mailer.client')->createAndSend($CTR, $email);
+            if ($email) {
+                $this->get('f_data_transactions.mailer.client')->createAndSend($response, $email);
+            }
         } catch (Exception $e) {
             $vars = $e->getDebugVars();
         }
@@ -395,6 +397,10 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @param int tag
+     * @return Response
+     */
     public function reciboAction($tag)
     {
         $transaction = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($tag);

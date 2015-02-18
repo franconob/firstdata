@@ -9,7 +9,13 @@
 namespace FData\TransactionsBundle\Mail;
 
 
+use FData\SecurityBundle\User\User;
+use FData\TransactionsBundle\Transaction\Response;
+use FData\TransactionsBundle\Transaction\Transaction;
 use Knp\Bundle\SnappyBundle\Snappy\LoggableGenerator;
+use Openbuildings\Swiftmailer\CssInlinerPlugin;
+use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ClientNotification
 {
@@ -24,32 +30,60 @@ class ClientNotification
     private $from;
 
     /**
-     * @var LoggableGenerator
+     * @var TwigEngine
      */
-    private $pdf;
+    private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, $from, LoggableGenerator $pdf)
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @param \Swift_Mailer $mailer
+     * @param $from
+     * @param TwigEngine $twig
+     * @param SecurityContext $securityContext
+     * @internal param User $user
+     */
+    public function __construct(\Swift_Mailer $mailer, $from, TwigEngine $twig, SecurityContext $securityContext)
     {
         $this->mailer = $mailer;
         $this->from = $from;
-        $this->pdf = $pdf;
+        $this->twig = $twig;
+        $this->user = $securityContext->getToken()->getUser();
     }
 
-    public function createAndSend($recibo, $mail)
+    /**
+     * @param Response $transaction
+     * @param string $mail
+     * @return int
+     * @throws \Exception
+     * @throws \Twig_Error
+     */
+    public function createAndSend(Response $transaction, $mail)
     {
-        $body = <<<EOF
-Aca va el texto de notificacion
-EOF;
+        $vars = [
+            'transactionType' => Transaction::$typeMap[(int)$transaction->get('transaction_type')],
+            'cardholderName' => $transaction->get('cardholder_name'),
+            'transactionTag' => $transaction->get('transaction_tag'),
+            'hotel' => $this->user->getHotel(),
+            'hotelDireccion' => $this->user->getExtraData('dir_calle') . ' ' . $this->user->getExtraData('dir_pobox'),
+            'hotelProvincia' => $this->user->getExtraData('dir_provincia'),
+            'hotelPais' => $this->user->getExtraData('dir_pais'),
+            'amount' => $transaction->get('amount'),
+            'currency' => $transaction->get('currency_code')
+        ];
 
-        $reciboPDF = $this->pdf->getOutputFromHtml($recibo);
+        $body = $this->twig->render('FDataTransactionsBundle:Mails:notification.html.twig', $vars);
 
-        $message = new \Swift_Message('Transaccion realizada', $body);
+        $subject = sprintf("%s - Your order %s has been paid successfully", $this->user->getHotel(), $transaction->get('transaction_tag'));
+        $message = new \Swift_Message($subject, $body, 'text/html');
 
         $message->setFrom($this->from);
         $message->setTo($mail);
 
-        $attach = \Swift_Attachment::newInstance($reciboPDF, '911-transaccion.pdf', 'application/pdf');
-        $message->attach($attach);
+        $this->mailer->registerPlugin(new CssInlinerPlugin());
 
         return $this->mailer->send($message);
     }
