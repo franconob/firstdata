@@ -14,5 +14,6 @@
         <field name="fechaConciliacion" type="datetime" column="fecha_conciliacion" nullable="true" />
         <field name="recibo" type="text" column="recibo" nullable="true" />
         <field name="transactionResponse" type="text" nullable="true" />
+        <field name="templateVars" type="text" nullable="true" />
     </entity>
 </doctrine-mapping>

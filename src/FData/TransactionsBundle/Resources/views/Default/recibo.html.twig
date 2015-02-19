@@ -3,37 +3,43 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <style type="text/css">
-        .col-md-12 {
-            width: 100%;
-            float: left;
-            min-height: 1px;
-            padding-left: 15px;
-            padding-right: 15px;
-            position: relative;
+        @page {
+            size: A4;
+            margin: 0;
         }
 
-        .col-md-3 {
-            width: 25%;
-            float: left;
-            min-height: 1px;
-            padding-left: 15px;
-            padding-right: 15px;
-            position: relative;
+        .page {
+            font-family: Consolas, 'Liberation Mono', Courier, monospace;
+            width: 210mm;
+            max-width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            background: white;
         }
 
-        .col-md-2 {
-            width: 16.6667%;
-            float: left;
-            min-height: 1px;
-            padding-left: 15px;
-            padding-right: 15px;
-            position: relative;
+        .gerencia {
+            min-height: 148.5mm;
+            max-height: 148.5mm;
+            border-bottom: 1px dashed;
+            margin: 0;
+            padding: 0
         }
 
-        .col-md-offset-3 {
-            margin-left: 25%;
+        .head-tag {
+            float: left;
+            width: 50mm;
+        }
+
+        .head-legend {
+            float: left;
+            width: 110mm;
+        }
+
+        .head-date {
+            float: left;
         }
 
         .label {
@@ -61,77 +67,141 @@
             margin: 0 0 10px;
         }
 
+        .info th {
+            text-align: left;
+        }
+
+        .info td {
+            padding-left: 25px;
+        }
+
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            Transaction: {{ tag }}
-        </div>
-        <div class="col-md-4">
-            Formulario de autorización de tarjeta de crédito
-        </div>
-
-    </div>
-    <h1>Credit card authorization</h1>
-    <strong>{{ hotel }} - {{ web }}</strong>
-
-    <p>{{ direccion }} - Tel: {{ telefono }}</p>
-
-    <p class="text-muted">
-        <small>Please print out and complete this authorization and return to us (All information will remain
-            confidential)
-        </small>
-    </p>
-    <hr/>
-    <ul class="list-unstyled">
-        <li><strong>Card holder name: </strong>{{ cardholder }}</li>
-        <li><strong>Email account: </strong>{{ email }}</li>
-        <li><strong>Credit card type: </strong>{{ creditcardtype }}</li>
-        <li><strong>Credit card number #: </strong>{{ creditcardnumber }}</li>
-        <li><strong>Expiration date: </strong>{{ expirydate }}</li>
-        <li><strong>Amount $: </strong>{{ amount }}</li>
-    </ul>
-    <hr/>
-    <p class="text-muted">
-        <small>Please be advice, this transaction will appear as 911 Booking Corp in your credit card monthly statement.
-        </small>
-    </p>
-
-    <div style="margin-top: 80px;">
+<div class="page">
+    <div class="gerencia">
         <div class="row">
-            <div class="col-md-12 col-md-offset-3">
-                <strong>Signed:..............................</strong>
-                <strong>Dated:..............................</strong>
+            <div class="head-tag">
+                <small>Transaction: {{ tag }}</small>
+            </div>
+            <div class="head-legend">
+                <small>Formulario de autorización de tarjeta de crédito</small>
+            </div>
+            <div class="head-date">
+                <small>{{ "now"|date('d/m/Y H:i:s') }}</small>
+            </div>
+
+        </div>
+        <br/>
+
+        <h1>Credit card authorization</h1>
+        <strong>{{ hotel }} - {{ web }}</strong>
+
+        <p>{{ direccion }} - Tel: {{ telefono }}</p>
+
+        <p class="text-muted">
+            <small>Please print out and complete this authorization and return to us (All information will remain
+                confidential)
+            </small>
+        </p>
+        <hr/>
+        <table class="info">
+            <tbody>
+            <tr>
+                <th>Card holder name</th>
+                <td>{{ cardholder }}</td>
+            </tr>
+            <tr>
+                <th>Email account</th>
+                <td>{{ email }}</td>
+            </tr>
+            <tr>
+                <th>Credit card type</th>
+                <td>{{ creditcardtype }}</td>
+            </tr>
+            <tr>
+                <th>Credit card number#</th>
+                <td>{{ creditcardnumber }}</td>
+            </tr>
+            <tr>
+                <th>Expiration date</th>
+                <td>{{ expirydate }}</td>
+            </tr>
+            <tr>
+                <th>Amount $</th>
+                <td>{{ amount }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <hr/>
+        <p class="text-muted">
+            <small>Please be advice, this transaction will appear as 911 Booking Corp in your credit card monthly
+                statement.
+            </small>
+        </p>
+
+        <div style="margin-top: 60px;">
+            <div class="row">
+                <div style="text-align: center">
+                    <strong>Signed:..............................</strong>
+                    <strong>Dated:..............................</strong>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px;">
+            <div class="row">
+                <div style="text-align: center">
+                    <strong>Identity document (number and type):..........................................</strong>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr style="border-top: 1px dashed; margin-bottom: 100px;"/>
-    <h1>Credit card authorization <span class="label label-default">Copy for customer</span></h1>
-    <strong>{{ hotel }} - {{ web }}</strong>
+    <div class="cliente">
+        <h1>Credit card authorization <span class="label label-default">Copy for customer</span></h1>
+        <strong>{{ hotel }} - {{ web }}</strong>
 
-    <p>{{ direccion }} - Tel: {{ telefono }}</p>
+        <p>{{ direccion }} - Tel: {{ telefono }}</p>
 
-    <p class="text-muted">
-        <small>Please print out and complete this authorization and return to us (All information will remain
-            confidential)
-        </small>
-    </p>
-    <hr/>
-    <ul class="list-unstyled">
-        <li><strong>Card holder name: </strong>{{ cardholder }}</li>
-        <li><strong>Credit card type: </strong>{{ creditcardtype }}</li>
-        <li><strong>Credit card number #: </strong>{{ creditcardnumber }}</li>
-        <li><strong>Amount $: </strong>{{ amount }}</li>
-        <li><strong>Dated: </strong>{{ "now"|date('d/m/Y H:i:s') }}</li>
-    </ul>
-    <hr/>
-    <p class="text-muted">
-        <small>Please be advice, this transaction will appear as 911 Booking Corp in your credit card monthly statement.
-        </small>
-    </p>
+        <p class="text-muted">
+            <small>Please print out and complete this authorization and return to us (All information will remain
+                confidential)
+            </small>
+        </p>
+        <hr/>
+        <table class="info">
+            <tbody>
+            <tr>
+                <th>Card holder name</th>
+                <td>{{ cardholder }}</td>
+            </tr>
+            <tr>
+                <th>Credit card type</th>
+                <td>{{ creditcardtype }}</td>
+            </tr>
+            <tr>
+                <th>Credit card number#</th>
+                <td>{{ creditcardnumber }}</td>
+            </tr>
+            <tr>
+                <th>Amount $</th>
+                <td>{{ amount }}</td>
+            </tr>
+            <tr>
+                <th>Dated</th>
+                <td>{{ "now"|date('d/m/Y H:i:s') }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <hr/>
+        <p class="text-muted">
+            <small>Please be advice, this transaction will appear as 911 Booking Corp in your credit card monthly
+                statement.
+            </small>
+        </p>
+    </div>
 </div>
 </body>
 </html>

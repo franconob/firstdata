@@ -39,6 +39,11 @@ class Transaction
      */
     private $transactionResponse;
 
+    /**
+     * @var string
+     */
+    private $templateVars;
+
     public function __construct()
     {
         $this->fecha = new \DateTime();
@@ -209,10 +214,10 @@ class Transaction
     /**
      * Set transactionResponse
      *
-     * @param string $transactionResponse
+     * @param array $transactionResponse
      * @return Transaction
      */
-    public function setTransactionResponse($transactionResponse)
+    public function setTransactionResponse(array $transactionResponse)
     {
         $this->transactionResponse = serialize($transactionResponse);
 
@@ -227,5 +232,28 @@ class Transaction
     public function getTransactionResponse()
     {
         return unserialize($this->transactionResponse);
+    }
+
+    /**
+     * Set templateVars
+     *
+     * @param array $templateVars
+     * @return Transaction
+     */
+    public function setTemplateVars(array $templateVars)
+    {
+        $this->templateVars = serialize($templateVars);
+
+        return $this;
+    }
+
+    /**
+     * Get templateVars
+     *
+     * @return array
+     */
+    public function getTemplateVars()
+    {
+        return unserialize($this->templateVars);
     }
 }

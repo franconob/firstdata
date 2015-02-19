@@ -292,10 +292,10 @@ class DefaultController extends Controller
                 'tag' => $response->get('transaction_tag')
             ];
 
-            $CTR = $template->render('FDataTransactionsBundle:Default:recibo.html.twig', $vars);
 
             $transaction_entity = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($response->get('transaction_tag'));
-            $transaction_entity->setRecibo($CTR);
+            $transaction_entity->setTransactionResponse($response->getBody());
+            $transaction_entity->setTemplateVars($vars);
 
             $this->getDoctrine()->getManager()->persist($transaction_entity);
             $this->getDoctrine()->getManager()->flush();
@@ -303,7 +303,6 @@ class DefaultController extends Controller
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
             $vars['response'] = $transaction->getResponse()->getBody();
 
-            $data['ctr'] = $CTR;
             //$this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
             if ($email) {
                 $this->get('f_data_transactions.mailer.client')->createAndSend($response, $email);
@@ -404,9 +403,12 @@ class DefaultController extends Controller
     public function reciboAction($tag)
     {
         $transaction = $this->getDoctrine()->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($tag);
-        if (!$transaction->getRecibo()) {
+        if (!$transaction) {
             throw $this->createNotFoundException('El recibo solicitado no se encuentra disponible en el sistema');
         }
-        return new Response($transaction->getRecibo());
+
+        $CTR = $this->get('templating')->render('FDataTransactionsBundle:Default:recibo.html.twig', $transaction->getTemplateVars());
+
+        return new Response($CTR);
     }
 }
