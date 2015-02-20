@@ -38,20 +38,28 @@ class ClientNotification
      * @var User
      */
     private $user;
+    /**
+     * @var string
+     */
+    private $crmPath;
+    private $crmDomain;
 
     /**
      * @param \Swift_Mailer $mailer
-     * @param $from
+     * @param string $from
      * @param TwigEngine $twig
      * @param SecurityContext $securityContext
-     * @internal param User $user
+     * @param string $crmPath
+     * @param string $crmDomain
      */
-    public function __construct(\Swift_Mailer $mailer, $from, TwigEngine $twig, SecurityContext $securityContext)
+    public function __construct(\Swift_Mailer $mailer, $from, TwigEngine $twig, SecurityContext $securityContext, $crmPath, $crmDomain)
     {
         $this->mailer = $mailer;
         $this->from = $from;
         $this->twig = $twig;
         $this->user = $securityContext->getToken()->getUser();
+        $this->crmDomain = $crmDomain;
+        $this->crmPath = $crmPath;
     }
 
     /**
@@ -72,8 +80,14 @@ class ClientNotification
             'hotelProvincia' => $this->user->getExtraData('dir_provincia'),
             'hotelPais' => $this->user->getExtraData('dir_pais'),
             'amount' => $transaction->get('amount'),
-            'currency' => $transaction->get('currency_code')
+            'currency' => $transaction->get('currency_code'),
         ];
+
+        if ($logo = $this->user->getExtraData('logo')) {
+            if (file_exists($this->crmPath . DIRECTORY_SEPARATOR . $logo)) {
+                $vars['logo'] = $this->crmDomain.'/'.$logo;
+            }
+        }
 
         $body = $this->twig->render('FDataTransactionsBundle:Mails:notification.html.twig', $vars);
 

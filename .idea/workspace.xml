@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" afterPath="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -48,39 +48,72 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
+      <file leaf-file-name="ClientNotification.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.222222" vertical-offset="6789" max-vertical-offset="7344">
-              <caret line="409" column="46" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
+            <state vertical-scroll-proportion="-26.37037" vertical-offset="656" max-vertical-offset="1764">
+              <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
               <folding>
-                <element signature="e#16049#16099#0#PHP" expanded="true" />
+                <element signature="e#2577#2631#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recibo.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig">
+      <file leaf-file-name="services.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.666667" vertical-offset="270" max-vertical-offset="3816">
-              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="session.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/js/session.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.090756305" vertical-offset="0" max-vertical-offset="702">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.742268" vertical-offset="1242" max-vertical-offset="1998">
+              <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notification.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.0" vertical-offset="0" max-vertical-offset="1314">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.0" vertical-offset="108" max-vertical-offset="4428">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="756">
+              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProvider.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="54.11111" vertical-offset="2145" max-vertical-offset="4410">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <marker date="1424459679798" expanded="true" signature="1845:3751" placeholder="Select vtige..." />
+                <marker date="1424459679798" expanded="true" signature="4915:4961" placeholder="SELECT * fro..vtiger_users..." />
+                <marker date="1424459679798" expanded="true" signature="5190:5296" placeholder="select r.* f..vtiger_role..." />
+                <marker date="1424459679798" expanded="true" signature="5549:5629" placeholder="select * fro..vtiger_role..." />
+                <marker date="1424459679798" expanded="true" signature="6631:6736" placeholder="select id fr..vtiger_users..." />
+                <marker date="1424459679798" expanded="true" signature="7154:7439" placeholder="Select vtige..vtiger_account..." />
+                <marker date="1424459679798" expanded="true" signature="8983:9037" placeholder="SELECT user_..vtiger_users..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,16 +139,13 @@
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/EventListeners/SessionListener.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/EventListeners/SessionIdHandler.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/EventSubscriber/SessionIdHandler.php" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/EventSubscriber/SessionIdleHandler.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Response.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_printCTR.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php" />
-        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml.dist" />
         <option value="$PROJECT_DIR$/app/config/routing_staging.yml" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
@@ -127,16 +157,19 @@
         <option value="$PROJECT_DIR$/web/css/main.css" />
         <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/_confirm.html.twig" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Transaction.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/routing.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/doctrine/Transaction.orm.xml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Entity/Transaction.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig" />
         <option value="$PROJECT_DIR$/web/js/session.js" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml" />
+        <option value="$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml" />
       </list>
     </option>
   </component>
@@ -306,18 +339,6 @@
       <created>1400534159182</created>
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
-    </task>
-    <task id="LOCAL-00090" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
-      <created>1412782915826</created>
-      <option name="number" value="00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1412782915826</updated>
-    </task>
-    <task id="LOCAL-00091" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
-      <created>1412783289422</created>
-      <option name="number" value="00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1412783289422</updated>
     </task>
     <task id="LOCAL-00092" summary="Tarea #1672. No se permite hacer tagged void sobre un purchase que tiene refund abiertos">
       <created>1412784134886</created>
@@ -601,7 +622,19 @@
       <option name="project" value="LOCAL" />
       <updated>1423584005568</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="Se quita una legenda para el recibo al cliente">
+      <created>1424368993487</created>
+      <option name="number" value="00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1424368993487</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Se quita una legenda para el recibo al cliente">
+      <created>1424370072759</created>
+      <option name="number" value="00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1424370072759</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -609,13 +642,12 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29305136" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3021148" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291789" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3255814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24926686" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -628,6 +660,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3255814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -671,7 +704,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Tarea #1678. Implementada la funcionalidad para impedir transaccion para un pais si esta filtrado en el CRM" />
     <MESSAGE value="Tarea #1678. Correccion cuando se muestra/esconde el combo de pais" />
     <MESSAGE value="Tarea #1678. Si el filtro esta habilitado pero no hay pais, es como si no estuviera habilitado" />
     <MESSAGE value="Cambiado el label del combo Country" />
@@ -696,7 +728,8 @@
     <MESSAGE value="Campo email opcional." />
     <MESSAGE value="Correccion de css y html para los tagged refund" />
     <MESSAGE value="Envio de correos para operaciones tagged. Correccion diseño modal de Tagged Void" />
-    <option name="LAST_COMMIT_MESSAGE" value="Envio de correos para operaciones tagged. Correccion diseño modal de Tagged Void" />
+    <MESSAGE value="Se quita una legenda para el recibo al cliente" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se quita una legenda para el recibo al cliente" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -711,27 +744,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26213592" vertical-offset="0" max-vertical-offset="618">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing_prod.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618">
@@ -894,21 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4756756" vertical-offset="2484" max-vertical-offset="4428">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.333333" vertical-offset="1674" max-vertical-offset="4302">
-          <caret line="121" column="49" selection-start-line="121" selection-start-column="49" selection-end-line="121" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/twig/twig/test/Twig/Tests/Fixtures/errors/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
@@ -941,32 +938,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="756">
           <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="1962">
-          <caret line="80" column="47" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="702">
-          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.772973" vertical-offset="1011" max-vertical-offset="1620">
-          <caret line="85" column="47" selection-start-line="85" selection-start-column="47" selection-end-line="85" selection-end-column="47" />
-          <folding>
-            <element signature="e#133#168#0#PHP" expanded="false" />
-            <element signature="e#2145#2199#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -974,7 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42702702" vertical-offset="915" max-vertical-offset="1746">
           <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -982,7 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34859154" vertical-offset="2898" max-vertical-offset="4734">
           <caret line="191" column="20" selection-start-line="191" selection-start-column="20" selection-end-line="191" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -990,7 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49484536" vertical-offset="0" max-vertical-offset="582">
           <caret line="16" column="64" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -998,15 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1170">
-          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1014,7 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34859154" vertical-offset="468" max-vertical-offset="2286">
           <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1022,7 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.37037" vertical-offset="341" max-vertical-offset="936">
           <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5880282" vertical-offset="4202" max-vertical-offset="4770">
           <caret line="252" column="19" selection-start-line="252" selection-start-column="19" selection-end-line="252" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6864865" vertical-offset="1080" max-vertical-offset="2052">
           <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,7 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19014084" vertical-offset="11556" max-vertical-offset="12150">
           <caret line="649" column="0" selection-start-line="649" selection-start-column="0" selection-end-line="649" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,37 +1018,116 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41197184" vertical-offset="846" max-vertical-offset="1746">
           <caret line="72" column="12" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/session.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277312" vertical-offset="0" max-vertical-offset="702">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0054054" vertical-offset="1260" max-vertical-offset="3834">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.222222" vertical-offset="6789" max-vertical-offset="7344">
-          <caret line="409" column="46" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
+        <state vertical-scroll-proportion="-11.222222" vertical-offset="5007" max-vertical-offset="7344">
+          <caret line="307" column="73" selection-start-line="307" selection-start-column="73" selection-end-line="307" selection-end-column="73" />
           <folding>
             <element signature="e#16049#16099#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/recibo.html.twig">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/gd.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.666667" vertical-offset="270" max-vertical-offset="3816">
-          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+        <state vertical-scroll-proportion="1.1279279" vertical-offset="17266" max-vertical-offset="47952">
+          <caret line="994" column="9" selection-start-line="994" selection-start-column="9" selection-end-line="994" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15845071" vertical-offset="11556" max-vertical-offset="25038">
+          <caret line="673" column="20" selection-start-line="673" selection-start-column="20" selection-end-line="673" selection-end-column="20" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1404515555252" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1404515555252" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1404515555252" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/session.js">
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/UserProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.090756305" vertical-offset="0" max-vertical-offset="702">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        <state vertical-scroll-proportion="54.11111" vertical-offset="2145" max-vertical-offset="4410">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <marker date="1424459679798" expanded="true" signature="1845:3751" placeholder="Select vtige..." />
+            <marker date="1424459679798" expanded="true" signature="4915:4961" placeholder="SELECT * fro..vtiger_users..." />
+            <marker date="1424459679798" expanded="true" signature="5190:5296" placeholder="select r.* f..vtiger_role..." />
+            <marker date="1424459679798" expanded="true" signature="5549:5629" placeholder="select * fro..vtiger_role..." />
+            <marker date="1424459679798" expanded="true" signature="6631:6736" placeholder="select id fr..vtiger_users..." />
+            <marker date="1424459679798" expanded="true" signature="7154:7439" placeholder="Select vtige..vtiger_account..." />
+            <marker date="1424459679798" expanded="true" signature="8983:9037" placeholder="SELECT user_..vtiger_users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39327732" vertical-offset="0" max-vertical-offset="595">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="756">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/User/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0" vertical-offset="108" max-vertical-offset="4428">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Mails/notification.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.0" vertical-offset="0" max-vertical-offset="1314">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.37037" vertical-offset="656" max-vertical-offset="1764">
+          <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+          <folding>
+            <element signature="e#2577#2631#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/config/services.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.742268" vertical-offset="1242" max-vertical-offset="1998">
+          <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
           <folding />
         </state>
       </provider>

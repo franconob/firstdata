@@ -75,6 +75,7 @@ class UserProvider implements UserProviderInterface
             $user = $this->connection->fetchAssoc(
                 "Select vtiger_contactdetails.contactid as contactid , vtiger_account.accountname as HOTEL ,
                 vtiger_account.website as web, vtiger_account.phone as telefono,
+                CONCAT(vtiger_attachments.path,vtiger_attachments.attachmentsid,'_',vtiger_attachments.name) as logo,
                 vtiger_accountbillads.bill_street as dir_calle, vtiger_accountbillads.bill_pobox as dir_pobox,
                 vtiger_accountbillads.bill_city as dir_ciudad, vtiger_accountbillads.bill_state as dir_provincia,
                 vtiger_accountbillads.bill_country as dir_pais, vtiger_accountbillads.bill_code as dir_code,
@@ -97,6 +98,10 @@ inner join vtiger_contactscf on  (vtiger_contactdetails.contactid= vtiger_contac
 inner join vtiger_account on (vtiger_contactdetails.accountid=vtiger_account.accountid)
 INNER JOIN vtiger_accountbillads ON (vtiger_accountbillads.accountaddressid = vtiger_account.accountid)
 INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
+INNER JOIN vtiger_crmentity crm_ac ON (crm_ac.crmid = vtiger_account.accountid)
+LEFT JOIN vtiger_senotesrel ON (vtiger_senotesrel.crmid = crm_ac.crmid)
+LEFT JOIN vtiger_notes ON (vtiger_notes.notesid = vtiger_senotesrel.notesid and vtiger_notes.title = 'logo')
+LEFT JOIN vtiger_attachments ON (vtiger_attachments.attachmentsid = vtiger_notes.notesid+1)
 where vtiger_crmentity.deleted<>1 and email= ?
                 "
                 , array($username));
@@ -119,7 +124,8 @@ where vtiger_crmentity.deleted<>1 and email= ?
                 'dir_pais'      => $user['dir_pais'],
                 'dir_code'      => $user['dir_code'],
                 'web'           => $user['web'],
-                'telefono'      => $user['telefono']
+                'telefono'      => $user['telefono'],
+                'logo'          => $user['logo']
             ];
 
             return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles, $extra_data);

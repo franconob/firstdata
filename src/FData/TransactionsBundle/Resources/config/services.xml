@@ -91,6 +91,8 @@
             <argument>%mailer_from%</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="security.context" />
+            <argument>%crm_path%</argument>
+            <argument>%crm_domain%</argument>
         </service>
 
         <service id="f_data_transactions.transction_subscriber"
