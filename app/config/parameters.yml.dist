@@ -38,3 +38,7 @@ parameters:
     #Parametros para la busqueda de transacciones
     api_search_username: vherrero
     api_search_password: vherrero123
+
+    #Parametros de path y dominio del crm
+    crm_path: /home/fherrero/workspace/spiralti/sergio.workspace/crm.winpax.finderit.local/htdocs
+    crm_domain: http://crm.winpax.finderit.local
