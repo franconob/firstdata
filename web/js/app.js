@@ -49,8 +49,8 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
                 $rootScope.isLoading = false;
             }
 
-            if(response.status == 403) {
-               $window.location.href = '/';
+            if (response.status == 403) {
+                $window.location.href = '/';
             }
 
             var deferred = $q.defer();
@@ -100,25 +100,6 @@ app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
         })
     }
 }]);
-
-app.directive('checkCountry', function () {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, elm, attr, ctrl) {
-            var countryNotAllowed = attr['checkCountry'];
-            ctrl.$parsers.push(function (viewValue) {
-                if (viewValue === countryNotAllowed) {
-                    ctrl.$setValidity('country_not_allowed', false);
-                    return undefined;
-                } else {
-                    ctrl.$setValidity('country_not_allowed', true);
-                    return viewValue;
-                }
-            });
-        }
-    }
-});
 
 app.directive('expiryDate', function (moment) {
     return {
@@ -317,7 +298,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                     var nbFilteredTransactions = scope.grid.getData(false, true).rows.length;
                     if (nbFilteredTransactions < initialTotalAmount || permissions.totalAmount) {
                         scope.totalAmount = _calculateTotalAmount(scope.grid.getData(false, true).rows);
-                    } else if(nbFilteredTransactions > initialTotalAmount) {
+                    } else if (nbFilteredTransactions > initialTotalAmount) {
                         scope.totalAmount = 'no disponible';
                     }
                     else {
@@ -714,6 +695,7 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 
 
 app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', '$rootScope', 'printCTR', '$http', 'transaction', 'countries', 'filtroPais', function ($scope, $modalInstance, transaction_type, notify, $rootScope, printCTR, $http, transaction, countries, filtroPais) {
+    console.log('aca modal');
     $scope.transaction = transaction;
     $scope.title = "Confirmar datos de la operación";
     $scope.subtitle = "Click en el campo para poder editarlo";
@@ -721,39 +703,60 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
     $scope.countries = countries;
     $scope.filtroPais = filtroPais;
 
-
-    $scope.submit = function () {
-        $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
-        var promise = $http.post(Routing.generate('f_data_transactions_execute', {transactionType: transaction_type}), {transactions: $scope.transaction});
-        promise.success(function (data, status) {
-            if (true == data.success) {
-                $modalInstance.dismiss('ok');
-                notify({
-                    title: "Operación realizada con éxito",
-                    type: 'success',
-                    hide: true,
-                    icon: 'fa fa-check'
-                });
-                $rootScope.$broadcast('grid.update');
-                printCTR(data);
-            } else {
-                notify({
-                    title: "Ocurrió un error procesando la transacción",
-                    message: "La operación no pudo realizarse. Motivo: " + data.reason + ' ' + data.debug,
-                    type: 'error',
-                    hide: true,
-                    icon: 'fa fa-bomb'
-                });
-            }
-        });
-        promise.error(function (err) {
+    var handleSubmit = function (data, status) {
+        if (true == data.success) {
+            $modalInstance.dismiss('ok');
+            notify({
+                title: "Operación realizada con éxito",
+                type: 'success',
+                hide: true,
+                icon: 'fa fa-check'
+            });
+            $rootScope.$broadcast('grid.update');
+            printCTR(data);
+        } else {
             notify({
                 title: "Ocurrió un error procesando la transacción",
+                message: "La operación no pudo realizarse. Motivo: " + data.reason + ' ' + data.debug,
                 type: 'error',
                 hide: true,
                 icon: 'fa fa-bomb'
             });
+        }
+    };
+
+    var handleError = function (err) {
+        notify({
+            title: "Ocurrió un error procesando la transacción",
+            type: 'error',
+            hide: true,
+            icon: 'fa fa-bomb'
         });
+    };
+
+    $scope.submit = function () {
+        $scope.transaction.amount = numeral().unformat($scope.transaction.amount);
+        if ($scope.filtroPais.activo) {
+            var checkCountry = $http.get('http://www.binlist.net/json/' + $scope.transaction.cc_number.substring(0, 6));
+            checkCountry.success(function (data, status) {
+                if (status == 200 && data.country_code == 'AR') {
+                    notify({
+                        title: "Tarjeta filtrada",
+                        message: "La operación no pudo realizarse. Motivo: el sistema no permite el país de origen de la tarjeta ingresada",
+                        type: 'error',
+                        hide: true,
+                        icon: 'fa fa-bomb'
+                    });
+                } else {
+                    $http.post(Routing.generate('f_data_transactions_execute', {transactionType: transaction_type}), {transactions: $scope.transaction}).success(handleSubmit);
+                }
+            });
+        } else {
+            var promise = $http.post(Routing.generate('f_data_transactions_execute', {transactionType: transaction_type}), {transactions: $scope.transaction}).success(handleSubmit);
+            promise.success(handleSubmit);
+            promise.error(handleError);
+        }
+
     };
 
     $scope.cancel = function () {
