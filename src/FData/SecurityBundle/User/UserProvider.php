@@ -80,6 +80,7 @@ class UserProvider implements UserProviderInterface
                 vtiger_accountbillads.bill_city as dir_ciudad, vtiger_accountbillads.bill_state as dir_provincia,
                 vtiger_accountbillads.bill_country as dir_pais, vtiger_accountbillads.bill_code as dir_code,
                 CONCAT_WS(' ',vtiger_contactdetails.firstname, vtiger_contactdetails.lastname) as nombre,
+                vtiger_accountscf.cf_1240 as leyenda_recibo,
 cf_1217 as 'NEW_TRANSACTION',
 cf_1219 as 'REFUND',
 cf_1221 as 'TAGGED_VOID',
@@ -125,7 +126,8 @@ where vtiger_crmentity.deleted<>1 and email= ?
                 'dir_code'      => $user['dir_code'],
                 'web'           => $user['web'],
                 'telefono'      => $user['telefono'],
-                'logo'          => $user['logo']
+                'logo'          => $user['logo'],
+                'leyenda_recibo' => $user['leyenda_recibo']
             ];
 
             return new User($user['contactid'], $username, $user['password'], "", $user['nombre'], $user['HOTEL'], $roles, $extra_data);

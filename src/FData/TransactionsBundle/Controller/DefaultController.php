@@ -272,8 +272,6 @@ class DefaultController extends Controller
             }
             $transaction->execute($transactionType, $data);
 
-            $template = $this->get('templating');
-
             $user = $this->getUser();
             $response = $transaction->getResponse();
 
@@ -289,7 +287,8 @@ class DefaultController extends Controller
                 'creditcardnumber' => $response->get('cc_number'),
                 'expirydate' => substr($response->get('cc_expiry'), 0, 2) . '/' . substr($response->get('cc_expiry'), 2),
                 'amount' => $data['amount'] . ' ' . $response->get('currency'),
-                'tag' => $response->get('transaction_tag')
+                'tag' => $response->get('transaction_tag'),
+                'leyenda_recibo' => $user->getExtraData('leyenda_recibo')
             ];
 
 
