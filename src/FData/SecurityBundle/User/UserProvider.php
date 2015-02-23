@@ -98,7 +98,7 @@ inner join vtiger_contactscf on  (vtiger_contactdetails.contactid= vtiger_contac
 inner join vtiger_account on (vtiger_contactdetails.accountid=vtiger_account.accountid)
 INNER JOIN vtiger_accountbillads ON (vtiger_accountbillads.accountaddressid = vtiger_account.accountid)
 INNER JOIN vtiger_accountscf ON (vtiger_accountscf.accountid = vtiger_account.accountid)
-INNER JOIN vtiger_crmentity crm_ac ON (crm_ac.crmid = vtiger_account.accountid)
+INNER JOIN vtiger_crmentity crm_ac ON (crm_ac.crmid = vtiger_account.accountid and crm_ac.deleted=0)
 LEFT JOIN vtiger_senotesrel ON (vtiger_senotesrel.crmid = crm_ac.crmid)
 LEFT JOIN vtiger_notes ON (vtiger_notes.notesid = vtiger_senotesrel.notesid and vtiger_notes.title = 'logo')
 LEFT JOIN vtiger_attachments ON (vtiger_attachments.attachmentsid = vtiger_notes.notesid+1)
