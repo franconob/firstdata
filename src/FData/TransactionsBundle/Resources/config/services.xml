@@ -78,12 +78,11 @@
             <argument type="service" id="security.context"/>
         </service>
 
-        <service id="f_data_transactions.mailer" class="FData\TransactionsBundle\Mail\NotificationMailer">
-            <argument type="service" id="swiftmailer.mailer.default"/>
-            <argument type="service" id="templating"/>
-            <argument type="service" id="f_data_transactions.repository.user"/>
-            <argument>%mailer_from%</argument>
-            <argument type="service" id="validator"/>
+        <service id="f_data_transactions.mailer" class="FData\TransactionsBundle\Mail\NotificationMailer" parent="f_data_transactions.mailer.client">
+            <argument type="service" id="f_data_transactions.mailer.client" />
+            <call method="setUserRepository">
+                <argument type="service" id="f_data_transactions.repository.user" />
+            </call>
         </service>
 
         <service id="f_data_transactions.mailer.client" class="FData\TransactionsBundle\Mail\ClientNotification">

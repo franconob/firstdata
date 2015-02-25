@@ -22,12 +22,17 @@ class ClientNotification
     /**
      * @var \Swift_Mailer
      */
-    private $mailer;
+    protected $mailer;
 
     /**
      * @var string
      */
-    private $from;
+    protected $subject;
+
+    /**
+     * @var string
+     */
+    protected $from;
 
     /**
      * @var TwigEngine
@@ -37,12 +42,17 @@ class ClientNotification
     /**
      * @var User
      */
-    private $user;
+    protected $user;
+
     /**
      * @var string
      */
-    private $crmPath;
-    private $crmDomain;
+    protected $crmPath;
+
+    /**
+     * @var string
+     */
+    protected $crmDomain;
 
     /**
      * @param \Swift_Mailer $mailer
@@ -90,9 +100,9 @@ class ClientNotification
             }
         }
 
-        $body = $this->twig->render('FDataTransactionsBundle:Mails:notification.html.twig', $vars);
+        $body = $this->renderBody($vars);
+        $subject = $this->getSubject($transaction);
 
-        $subject = sprintf("%s - Your order %s has been paid successfully", $this->user->getHotel(), $transaction->get('transaction_tag'));
         $message = new \Swift_Message($subject, $body, 'text/html');
 
         $message->setFrom($this->from);
@@ -101,5 +111,33 @@ class ClientNotification
         $this->mailer->registerPlugin(new CssInlinerPlugin());
 
         return $this->mailer->send($message);
+    }
+
+    /**
+     * @param $vars
+     * @return string
+     * @throws \Exception
+     * @throws \Twig_Error
+     */
+    public function renderBody($vars)
+    {
+        return $this->twig->render('FDataTransactionsBundle:Mails:notification.html.twig', $vars);
+    }
+
+    /**
+     * @param Response $transaction
+     * @return string
+     */
+    public function getSubject(Response $transaction)
+    {
+        return sprintf("%s - Your order %s has been paid successfully", $this->user->getHotel(), $transaction->get('transaction_tag'));
+    }
+
+    /**
+     * @return User|mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

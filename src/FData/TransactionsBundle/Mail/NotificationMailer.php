@@ -9,37 +9,21 @@
 namespace FData\TransactionsBundle\Mail;
 
 
-use FData\SecurityBundle\User\User;
 use FData\SecurityBundle\User\UserRepository;
+use FData\TransactionsBundle\Transaction\Response;
+use FData\TransactionsBundle\Transaction\Transaction;
+use Openbuildings\Swiftmailer\CssInlinerPlugin;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Bridge\Twig\TwigEngine;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class NotificationMailer
+class NotificationMailer extends ClientNotification
 {
 
     /**
-     * @var string
+     * @var UserRepository
      */
-    private $from;
-
-    private $subject = "";
-
-    /**
-     * @var \Swift_Mailer
-     */
-    private $mailer;
-
-    /**
-     * @var TwigEngine
-     */
-    private $templating;
-
-    /**
-     * @var \FData\SecurityBundle\User\UserRepository
-     */
-    private $user_repository;
+    private $userRepository;
 
     /**
      * @var ValidatorInterface
@@ -47,43 +31,29 @@ class NotificationMailer
     private $validator;
 
     /**
-     * @param \Swift_Mailer $mailer
-     * @param \Symfony\Bridge\Twig\TwigEngine| $templating
-     * @param \FData\SecurityBundle\User\UserRepository $userRepository
-     * @param string $from
-     * @param \Symfony\Component\Validator\ValidatorInterface $validator
+     * @param UserRepository $userRepository
      */
-    public function __construct(\Swift_Mailer $mailer, TwigEngine $templating, UserRepository $userRepository, $from, ValidatorInterface $validator)
+    public function setUserRepository(UserRepository $userRepository)
     {
-        $this->mailer          = $mailer;
-        $this->templating      = $templating;
-        $this->user_repository = $userRepository;
-        $this->from            = $from;
-        $this->validator       = $validator;
+        $this->userRepository = $userRepository;
+    }
+
+    public function setValidator(ValidatorInterface $validator)
+    {
+        $this->validator = $validator;
     }
 
     /**
-     * @param array $mail_data
-     * @param User $user
+     * @param Response $transaction
+     * @param string $mail_to
      * @return int
      */
-    public function createAndSend($mail_data, User $user)
+    public function createAndSend(Response $transaction, $mail_to)
     {
-        $this->subject = sprintf("Transacción de cliente: %s", $user->getName());
-        $ctr           = $mail_data['ctr'];
-        unset($mail_data['ctr']);
-        $body    = $this->templating->render(new TemplateReference('FDataTransactionsBundle', 'Mails', 'notification', 'html', 'twig'), [
-            'transaction' => $mail_data,
-            'ctr'         => $ctr
-        ]);
-        $message = new \Swift_Message($this->subject, $body, 'text/html', 'utf-8');
-        $message->setFrom($this->from);
-        //$message->setTo($user->getUsername());
-
-        $copies = $this->user_repository->getComunicaciones();
-        $tos = [$user->getUsername()];
+        $copies = $this->userRepository->getComunicaciones();
+        $tos = [$mail_to];
         foreach ($copies as $copy) {
-            $errors = $this->validator->validateValue($copy, new Email());
+            $errors = $this->validator->validate($copy, new Email());
             if (count($errors) > 1) {
                 continue;
             } else {
@@ -91,6 +61,35 @@ class NotificationMailer
                 $tos[] = $copy;
             }
         }
+
+        $message = new \Swift_Message();
+        $message->setContentType('text/html');
+        $message->setFrom($this->from);
+        $message->setSubject($this->getSubject($transaction));
+
+        $vars = [
+            'transactionType' => Transaction::$typeMap[(int)$transaction->get('transaction_type')],
+            'cardholderName' => $transaction->get('cardholder_name'),
+            'transactionTag' => $transaction->get('transaction_tag'),
+            'hotel' => $this->getUser()->getHotel(),
+            'hotelDireccion' => $this->getUser()->getExtraData('dir_calle') . ' ' . $this->getUser()->getExtraData('dir_pobox'),
+            'hotelProvincia' => $this->getUser()->getExtraData('dir_provincia'),
+            'hotelPais' => $this->getUser()->getExtraData('dir_pais'),
+            'amount' => $transaction->get('amount'),
+            'currency' => $transaction->get('currency_code'),
+            'leyenda' => $this->getUser()->getExtraData('leyenda_recibo'),
+        ];
+
+        if ($logo = $this->user->getExtraData('logo')) {
+            if (file_exists($this->crmPath . DIRECTORY_SEPARATOR . $logo)) {
+                $vars['logo'] = $this->crmDomain . '/' . $logo;
+            }
+        }
+
+        $this->mailer->registerPlugin(new CssInlinerPlugin());
+
+        $message->setBody($this->renderBody($vars));
+
         $message->setTo($tos);
 
         try {

@@ -302,7 +302,7 @@ class DefaultController extends Controller
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
             $vars['response'] = $transaction->getResponse()->getBody();
 
-            //$this->get('f_data_transactions.mailer')->createAndSend($data, $this->getUser());
+            $this->get('f_data_transactions.mailer')->createAndSend($response, $this->getUser()->getUsername());
             if ($email) {
                 $this->get('f_data_transactions.mailer.client')->createAndSend($response, $email);
             }
