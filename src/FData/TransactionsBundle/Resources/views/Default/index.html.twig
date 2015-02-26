@@ -12,13 +12,13 @@
                     <li>
                         <p class="navbar-text">
                             {% if  logo %}
-                                <img src="{{ logo }}" width="120" height="40"/>
+                                <img src="{{ logo }}" width="120" height="40" style="margin-right: 20px;"/>
                             {% endif %}
                             {{ app.security.token.user }}
+                            <a style="margin-left: 10px;" href="{{ path('f_data_security_logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
                         </p>
                     </li>
                     <li>
-                        <a href="{{ path('f_data_security_logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
                     </li>
                 </ul>
             </nav>
