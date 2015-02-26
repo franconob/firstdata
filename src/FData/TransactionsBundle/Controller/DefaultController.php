@@ -20,8 +20,14 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $logo = $this->getUser()->getExtraData('logo');
+        if($logo) {
+            $logo = $this->container->getParameter('crm_domain').'/'.$logo;
+        }
 
-        return $this->render('FDataTransactionsBundle:Default:index.html.twig');
+        return $this->render('FDataTransactionsBundle:Default:index.html.twig', [
+            'logo' => $logo
+        ]);
     }
 
     public function transactionsAction(Request $request)
