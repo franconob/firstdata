@@ -53,6 +53,8 @@ class NotificationMailer extends ClientNotification
         $copies = $this->userRepository->getComunicaciones();
         $tos = [$mail_to];
         foreach ($copies as $copy) {
+            /** TODO: $this->validator es null $errors */
+            /*
             $errors = $this->validator->validate($copy, new Email());
             if (count($errors) > 1) {
                 continue;
@@ -60,6 +62,9 @@ class NotificationMailer extends ClientNotification
                 //$message->addCc($copy);
                 $tos[] = $copy;
             }
+            */
+            $tos[] = $copy;
+
         }
 
         $message = new \Swift_Message();
