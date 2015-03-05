@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <style type="text/css" rel="stylesheet">
         .container-fluid {
             padding-right: 15px;
@@ -115,7 +116,7 @@
                 <p>
                     <strong>Tansaction details</strong><br/>
                     Date: {{ "now"|date('d/m/Y') }}<br/>
-                    ID: {{ transactionTag }}<br/>
+                    ID: {{ transactionTag }} - NÚMERO DE RESERVA {{ referenceNo }}<br/>
                 </p>
 
                 <div><strong>Company Details:</strong></div>
@@ -127,7 +128,7 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">TOTAL AMOUNT</div>
-                    <div class="panel-body">${{ amount }} {{ currency|default('USD') }}</div>
+                    <div class="panel-body">${{ amount }} {{ currency|default('USD') }} (TAXES INCLUDED)</div>
                 </div>
 
                 <p class="lead">{{ leyenda|default('Please be advise, this transaction will appear as 911 Booking Corp in your credit card

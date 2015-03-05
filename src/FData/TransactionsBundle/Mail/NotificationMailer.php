@@ -83,6 +83,7 @@ class NotificationMailer extends ClientNotification
             'amount' => $transaction->get('amount'),
             'currency' => $transaction->get('currency_code'),
             'leyenda' => $this->getUser()->getExtraData('leyenda_recibo'),
+            'referenceNo' => $transaction->get('reference_no')
         ];
 
         if ($logo = $this->user->getExtraData('logo')) {
