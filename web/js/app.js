@@ -60,8 +60,8 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
             return deferred.promise;
             //return response;
         },
-        responseError: function(rejection) {
-            if(currentNotify) {
+        responseError: function (rejection) {
+            if (currentNotify) {
                 currentNotify.remove();
                 $rootScope.isLoading = false;
             }
@@ -192,28 +192,31 @@ app.directive('fdataInput', function ($http, $rootScope) {
             });
             if (undefined !== attrs['checkCreditcard']) {
                 ctrl.$parsers.push(function (viewValue) {
-                    if (viewValue && viewValue.length !== 6) {
-                        return viewValue;
+                    if (viewValue && viewValue.length == 6) {
+                        $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
+                        var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
+
+
+                        checkCard.success(function (data, status) {
+                            if (status == 200) {
+                                ctrl.$setValidity('cardFound', true);
+                                scope.creditCardModel = data.brand;
+                                $rootScope.loadingMessage = null;
+                                return viewValue;
+                            }
+                        }).error(function (err, status) {
+                            if (status == 404) {
+                                scope.creditCardModel = '';
+                                ctrl.$setValidity('cardFound', false);
+                                $rootScope.loadingMessage = null;
+                                return viewValue;
+                            }
+                        });
                     }
-                    $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
-                    var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
 
-
-                    checkCard.success(function (data, status) {
-                        if (status == 200) {
-                            ctrl.$setValidity('cardFound', true);
-                            scope.creditCardModel = data.brand;
-                            $rootScope.loadingMessage = null;
-                            return viewValue;
-                        }
-                    }).error(function (err, status) {
-                        if (status == 404) {
-                            scope.creditCardModel = '';
-                            ctrl.$setValidity('cardFound', false);
-                            $rootScope.loadingMessage = null;
-                            return viewValue;
-                        }
-                    });
+                    if(viewValue && viewValue.length < 6) {
+                        scope.creditCardModel = '';
+                    }
 
                 });
             }
