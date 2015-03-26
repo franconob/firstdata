@@ -38,7 +38,7 @@
             <label for="cvd_code" class="control-label col-sm-4">CVD Code</label>
 
             <div class="col-sm-7">
-                <fdata-input ui-mask="999" ng-model="transaction.cvd_code" id="cvd_code" type="text"
+                <fdata-input ng-model="transaction.cvd_code" id="cvd_code" type="text"
                        name="cvd_code"
                        class="form-control" required editable="{{ editable }}"></fdata-input>
                 <span class="fa fa-check form-control-feedback" ng-show="form.cvd_code.$valid"></span>

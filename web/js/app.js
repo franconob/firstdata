@@ -241,6 +241,10 @@ app.directive('fdataInput', function ($http, $rootScope) {
                 }
                 $scope.thisEditable = true;
             };
+
+            $scope.getMaxLength = function() {
+                console.log('aca');
+            }
         },
         template: function (tElm, tAttrs) {
             var inputElm = '';
