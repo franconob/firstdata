@@ -25,12 +25,14 @@
             <label for="cardnumber" class="control-label col-sm-4">Card Number {{ form.cc_number.$error.cardFound|json }}</label>
 
             <div class="col-sm-7">
-                <fdata-input ng-model="transaction.cc_number" id="cardnumber" type="text" ng-maxlength="16" maxlength="16"
+                <fdata-input ng-model="transaction.cc_number" id="cardnumber" type="text"
                              name="cc_number" check-creditcard credit-card-model="creditCardModel" form-field="form.cc_number" class="form-control" required editable="{{ editable }}"></fdata-input>
                 <span class="fa fa-check form-control-feedback" ng-show="form.cc_number.$valid && !form.cc_number.$error.cardFound"></span>
                 <span class="fa fa-exclamation form-control-feedback" ng-show="form.cc_number.$error.cardFound"></span>
                 <span class="help-block">The customer’s credit card number. <span ng-bind="creditCardModel" class="label label-default"></span></span>
                 <span class="help-block" ng-show="form.cc_number.$error.cardFound">Credit card not found.</span>
+                <span class="help-block" ng-show="form.cc_number.$error.cardLength">La longitud del numero de tarjeta es incorrecto.</span>
+                <span class="fa fa-exclamation form-control-feedback" ng-show="form.cc_number.$error.cardLength"></span>
             </div>
         </div>
         <div class="form-group"
@@ -40,7 +42,7 @@
             <div class="col-sm-7">
                 <fdata-input ng-model="transaction.cvd_code" id="cvd_code" type="text"
                        name="cvd_code"
-                       class="form-control" required editable="{{ editable }}"></fdata-input>
+                       class="form-control" editable="{{ editable }}"></fdata-input>
                 <span class="fa fa-check form-control-feedback" ng-show="form.cvd_code.$valid"></span>
                 <span class="help-block">Como testear CVD CODE <a
                             href="https://firstdata.zendesk.com/entries/407655-How-to-test-CVD-CVV-CVV2-functionality"

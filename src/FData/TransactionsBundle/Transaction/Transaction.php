@@ -165,7 +165,7 @@ class Transaction
             'gateway_id' => $this->gateway_id,
             'password' => $this->password,
             'transaction_type' => '00',
-            'cvd_presence_ind' => '1',
+            //'cvd_presence_ind' => '1',
             'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 
@@ -179,7 +179,7 @@ class Transaction
             'gateway_id' => $this->gateway_id,
             'password' => $this->password,
             'transaction_type' => '01',
-            'cvd_presence_ind' => '1',
+            //'cvd_presence_ind' => '1',
             'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 
@@ -198,7 +198,7 @@ class Transaction
             'gateway_id' => $this->gateway_id,
             'password' => $this->password,
             'transaction_type' => '04',
-            'cvd_presence_ind' => '1',
+            //'cvd_presence_ind' => '1',
             'customer_ref' => $this->user->getSearchString()
         ], $transaction);
 

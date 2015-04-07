@@ -134,7 +134,7 @@ app.directive('expiryDate', function (moment) {
 
                 var now = moment(new Date());
 
-                if (!expiry_date.isAfter(now)) {
+                if (!expiry_date.isAfter(now.subtract(1, 'months'), 'month')) {
                     ctrl.$setValidity('expiry_date_before', false);
                     return undefined;
                 }
@@ -195,38 +195,87 @@ app.directive('fdataInput', function ($http, $rootScope) {
                     if (viewValue && viewValue.length < 6) {
                         scope.creditCardModel = '';
                         ctrl.$setValidity('cardFound', true);
-                    }
-                    if (viewValue && viewValue.length < 15) {
 
-                        if (viewValue && viewValue.length == 6) {
-                            $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
-                            var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
-                            checkCard.success(function (data, status) {
-                                if (status == 200) {
-                                    ctrl.$setValidity('cardFound', true);
-                                    scope.creditCardModel = data.brand;
-                                    $rootScope.loadingMessage = null;
-                                    return viewValue;
-                                }
-                            }).error(function (err, status) {
-                                if (status == 404) {
-                                    scope.creditCardModel = '';
-                                    ctrl.$setValidity('cardFound', false);
-                                    $rootScope.loadingMessage = null;
-                                    return viewValue;
-                                }
-                            });
+                        return;
+                    }
+
+                    if(viewValue.length >=6) {
+                        var cardData = checkLengthOfCard(scope.creditCardModel, viewValue);
+                        scope.cardMessage = cardData.message;
+                        if(cardData.valid) {
+                            ctrl.$setValidity('cardLength', true);
+                        } else {
+                            ctrl.$setValidity('cardLength', false);
                         }
-
-                        ctrl.$setValidity('minlength', false);
-                        return viewValue;
-                    } else {
-                        ctrl.$setValidity('minlength', true);
-                        return viewValue;
                     }
 
+                    if (viewValue && viewValue.length == 6) {
+                        $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
+                        var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
+                        checkCard.success(function (data, status) {
+                            if (status == 200) {
+                                scope.creditCardModel = data.brand;
+                                $rootScope.loadingMessage = null;
+                                return viewValue;
+                            }
+                        }).error(function (err, status) {
+                            if (status == 404) {
+                                scope.creditCardModel = '';
+                                ctrl.$setValidity('cardFound', false);
+                                $rootScope.loadingMessage = null;
+                                return viewValue;
+                            }
+                        });
+                    }
 
+                    return viewValue;
                 });
+            }
+
+            function checkLengthOfCard(brand, value) {
+                var valid = false;
+                var message = "";
+                switch (brand) {
+                    case 'VISA':
+                    {
+                        valid = value.length == 13 || value.length == 16;
+                        message = "La tarjeta debe tener exactamente 13 o 16 números";
+                        break;
+                    }
+                    case 'AMEX':
+                    {
+                        valid = value.length == 15;
+                        message = "La tarjeta debe tener exactamente 15 números";
+                        break;
+                    }
+                    case 'MASTERCARD':
+                    {
+                        valid = value.length == 16;
+                        message = "La tarjeta debe tener exactamente 16 números";
+                        break;
+                    }
+                    case 'DINERSCLUB':
+                    {
+                        valid = value.length == 14;
+                        message = "La tarjeta debe tener exactamente 14 números";
+                        break;
+                    }
+                    case 'DISCOVER':
+                    {
+                        valid = value.length == 16;
+                        message = "La tarjeta debe tener exactamente 16 números";
+                        break;
+                    }
+                    case 'MAESTRO':
+                    {
+                        valid = value.length >= 12 && value.length <= 19;
+                        message = "La tarjeta debe tener entre 12 y 19 números";
+                        break;
+                    }
+
+                }
+
+                return {valid: valid, message: message};
             }
         },
         controller: function ($scope) {
@@ -241,10 +290,6 @@ app.directive('fdataInput', function ($http, $rootScope) {
                 }
                 $scope.thisEditable = true;
             };
-
-            $scope.getMaxLength = function() {
-                console.log('aca');
-            }
         },
         template: function (tElm, tAttrs) {
             var inputElm = '';
