@@ -199,7 +199,7 @@ app.directive('fdataInput', function ($http, $rootScope) {
                         return;
                     }
 
-                    if(viewValue.length >=6) {
+                    if(viewValue && viewValue.length >=6) {
                         var cardData = checkLengthOfCard(scope.creditCardModel, viewValue);
                         scope.cardMessage = cardData.message;
                         if(cardData.valid) {
@@ -210,16 +210,19 @@ app.directive('fdataInput', function ($http, $rootScope) {
                     }
 
                     if (viewValue && viewValue.length == 6) {
+                        scope.checkingCard = true;
                         $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
                         var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
                         checkCard.success(function (data, status) {
                             if (status == 200) {
+                                scope.checkingCard = false;
                                 scope.creditCardModel = data.brand;
                                 $rootScope.loadingMessage = null;
                                 return viewValue;
                             }
                         }).error(function (err, status) {
                             if (status == 404) {
+                                scope.checkingCard = false;
                                 scope.creditCardModel = '';
                                 ctrl.$setValidity('cardFound', false);
                                 $rootScope.loadingMessage = null;
@@ -296,7 +299,7 @@ app.directive('fdataInput', function ($http, $rootScope) {
             switch (tAttrs['type']) {
                 case 'text':
                 {
-                    inputElm = '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable" />';
+                    inputElm = '<input ng-transclude ng-click="enableField($event)" ng-readonly="!thisEditable || checkingCard" />';
                     break;
                 }
                 case 'select':
