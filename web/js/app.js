@@ -245,7 +245,7 @@ app.directive('fdataInput', function ($http, $rootScope) {
                         message = "La tarjeta debe tener exactamente 13 o 16 números";
                         break;
                     }
-                    case 'AMEX':
+                    case 'AMERICAN EXPRESS':
                     {
                         valid = value.length == 15;
                         message = "La tarjeta debe tener exactamente 15 números";
