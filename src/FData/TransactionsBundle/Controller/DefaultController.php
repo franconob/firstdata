@@ -366,6 +366,7 @@ class DefaultController extends Controller
 
         } else {
             $tmpfile = $this->get('session')->get('csv_data');
+            \PHPExcel_Settings::setLocale('es_ar');
 
             \PHPExcel_Shared_File::setUseUploadTempDirectory(true);
 
