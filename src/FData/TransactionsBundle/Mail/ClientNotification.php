@@ -92,7 +92,8 @@ class ClientNotification
             'amount' => $transaction->get('amount'),
             'currency' => $transaction->get('currency_code'),
             'leyenda' => $this->user->getExtraData('leyenda_recibo'),
-            'referenceNo' => $transaction->get('reference_no')
+            'referenceNo' => $transaction->get('reference_no'),
+            'bank_message' => $transaction->get('bank_message')
         ];
 
         if ($logo = $this->user->getExtraData('logo')) {
