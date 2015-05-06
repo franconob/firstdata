@@ -66,14 +66,14 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
                 $rootScope.isLoading = false;
             }
 
-            console.log(rejection);
-
-            notify({
-                title: "Ocurrió un error...",
-                message: "Por favor recargue la aplicación e intente de nuevo",
-                icon: "fa fa-bomb",
-                type: 'error'
-            });
+            if (rejection.status == 500) {
+                notify({
+                    title: "Ocurrió un error...",
+                    message: "Por favor recargue la aplicación e intente de nuevo",
+                    icon: "fa fa-bomb",
+                    type: 'error'
+                });
+            }
 
             return $q.reject(rejection);
         }
@@ -191,14 +191,47 @@ app.directive('fdataInput', function ($http, $rootScope) {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
             scope.thisEditable = true;
+            scope.card = null;
+
+            var checkCard = function (viewValue, callback) {
+                var checkCard = $http.get('http://www.binlist.net/json/' + getBinCode(viewValue));
+                scope.checkingCard = true;
+                checkCard.success(function (data, status) {
+                    if (status == 200) {
+                        binCode = getBinCode(viewValue);
+                        scope.checkingCard = false;
+                        scope.creditCardModel = data.brand;
+                        $rootScope.loadingMessage = null;
+                        return callback(true, viewValue);
+                    }
+                }).error(function (err, status) {
+                    if (status == 404) {
+                        scope.checkingCard = false;
+                        scope.creditCardModel = '';
+                        ctrl.$setValidity('cardFound', false);
+                        $rootScope.loadingMessage = null;
+                        return callback(false, viewValue);
+                    }
+                });
+            };
+
+            function getBinCode(value) {
+                if (value.length < 6) {
+                    return false;
+                }
+
+                return value.substring(0, 6);
+            }
 
             elm.on('blur', function () {
                 if ("false" === scope.editable) {
                     scope.thisEditable = false;
                 }
 
-
             });
+
+            var binCode;
+
             if (undefined !== attrs['checkCreditcard']) {
                 ctrl.$parsers.push(function (viewValue) {
                     if (viewValue && viewValue.length < 6) {
@@ -208,36 +241,41 @@ app.directive('fdataInput', function ($http, $rootScope) {
                         return;
                     }
 
-                    if (viewValue && viewValue.length >= 6) {
-                        var cardData = checkLengthOfCard(scope.creditCardModel, viewValue);
-                        scope.cardMessage = cardData.message;
-                        if (cardData.valid) {
-                            ctrl.$setValidity('cardLength', true);
+                    if (viewValue && viewValue.length > 6) {
+                        if (binCode !== getBinCode(viewValue)) {
+                            checkCard(viewValue, function (success, viewValue) {
+                                scope.card = checkLengthOfCard(scope.creditCardModel, viewValue);
+                                if (scope.card.valid) {
+                                    ctrl.$setValidity('cardLength', true);
+                                } else {
+                                    ctrl.$setValidity('cardLength', false);
+                                }
+
+                                return viewValue;
+                            });
                         } else {
-                            ctrl.$setValidity('cardLength', false);
+                            scope.card = checkLengthOfCard(scope.creditCardModel, viewValue);
+                            if (scope.card.valid) {
+                                ctrl.$setValidity('cardLength', true);
+                            } else {
+                                ctrl.$setValidity('cardLength', false);
+                            }
+
+                            return viewValue;
                         }
                     }
 
                     if (viewValue && viewValue.length == 6) {
-                        scope.checkingCard = true;
-                        $rootScope.loadingMessage = 'Comprobando tarjeta de credito...';
-                        var checkCard = $http.get('http://www.binlist.net/json/' + viewValue.substring(0, 6));
-                        checkCard.success(function (data, status) {
-                            if (status == 200) {
-                                scope.checkingCard = false;
-                                scope.creditCardModel = data.brand;
-                                $rootScope.loadingMessage = null;
-                                return viewValue;
-                            }
-                        }).error(function (err, status) {
-                            if (status == 404) {
-                                scope.checkingCard = false;
-                                scope.creditCardModel = '';
-                                ctrl.$setValidity('cardFound', false);
-                                $rootScope.loadingMessage = null;
-                                return viewValue;
-                            }
-                        });
+                        if (binCode != getBinCode(viewValue)) {
+                            checkCard(viewValue, function (success, viewValue) {
+                                if (success) {
+                                    binCode = viewValue;
+                                    return viewValue;
+                                } else {
+                                    return undefined;
+                                }
+                            });
+                        }
                     }
 
                     return viewValue;
@@ -287,7 +325,7 @@ app.directive('fdataInput', function ($http, $rootScope) {
 
                 }
 
-                return {valid: valid, message: message};
+                return {brand: brand, valid: valid, message: message};
             }
         },
         controller: function ($scope) {
