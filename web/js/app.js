@@ -66,6 +66,15 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
                 $rootScope.isLoading = false;
             }
 
+            console.log(rejection);
+
+            notify({
+                title: "Ocurrió un error...",
+                message: "Por favor recargue la aplicación e intente de nuevo",
+                icon: "fa fa-bomb",
+                type: 'error'
+            });
+
             return $q.reject(rejection);
         }
     };
@@ -199,10 +208,10 @@ app.directive('fdataInput', function ($http, $rootScope) {
                         return;
                     }
 
-                    if(viewValue && viewValue.length >=6) {
+                    if (viewValue && viewValue.length >= 6) {
                         var cardData = checkLengthOfCard(scope.creditCardModel, viewValue);
                         scope.cardMessage = cardData.message;
-                        if(cardData.valid) {
+                        if (cardData.valid) {
                             ctrl.$setValidity('cardLength', true);
                         } else {
                             ctrl.$setValidity('cardLength', false);

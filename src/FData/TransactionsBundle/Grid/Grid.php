@@ -236,6 +236,7 @@ EOF;
         foreach ($data as $row) {
             $row['Time'] = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
             $row['Expiry'] = substr($row['Expiry'], 0, 2) . '/' . substr($row['Expiry'], 2);
+            $row['Amount'] = str_replace(',', '', substr($row['Amount'], 1));
             $cleanData[] = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
         }
 

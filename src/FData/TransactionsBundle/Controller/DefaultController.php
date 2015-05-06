@@ -21,8 +21,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $logo = $this->getUser()->getExtraData('logo');
-        if($logo) {
-            $logo = $this->container->getParameter('crm_domain').'/'.$logo;
+        if ($logo) {
+            $logo = $this->container->getParameter('crm_domain') . '/' . $logo;
         }
 
         return $this->render('FDataTransactionsBundle:Default:index.html.twig', [
@@ -33,11 +33,11 @@ class DefaultController extends Controller
     public function transactionsAction(Request $request)
     {
         /** @var Grid $grid */
-        $grid = $this->get('f_data_transactions.api.search.grid');
+        $grid            = $this->get('f_data_transactions.api.search.grid');
         $securityContext = $this->get('security.context');
 
         $from = $request->query->get('from');
-        $to = $request->query->get('to');
+        $to   = $request->query->get('to');
 
         $httpClient = $grid->getHttpClient();
 
@@ -57,7 +57,7 @@ class DefaultController extends Controller
 
         $response_string = (string)$grid->query()->getBody();
 
-        $reader_body = Reader::createFromString($response_string);
+        $reader_body   = Reader::createFromString($response_string);
         $reader_header = $reader_body->fetchOne();
 
 
@@ -65,13 +65,13 @@ class DefaultController extends Controller
 
         $data = $reader_body->setOffset(1)->fetchAll();
         unset($data[count($data) - 1]);
-        $data = array_values($grid->filterResults($data));
+        $data  = array_values($grid->filterResults($data));
         $data2 = $data;
 
-        $cleanData = [];
-        $debo_aplicar = true;
+        $cleanData       = [];
+        $debo_aplicar    = true;
         $padre_ya_tocado = "-";
-        $quitarVoids = [];
+        $quitarVoids     = [];
 
         foreach ($data as $k_row => &$row) {
 
@@ -190,15 +190,15 @@ class DefaultController extends Controller
             }
 
 
-            $cleanRow = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
+            $cleanRow    = array_values(array_intersect_key($row, $grid->getEnabledHeaders()));
             $transaction = $this->get('doctrine.orm.default_entity_manager')->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($cleanRow[0]); // Empieza el quilombo
             if (null == $transaction) {
                 continue;
             }
             if (!$securityContext->isGranted('ROLE_OPERA_HOTEL')) {
-                $usuario = $transaction->getUsuario();
+                $usuario         = $transaction->getUsuario();
                 $transactionDate = Carbon::createFromFormat('m/d/Y H:i:s', $cleanRow[9]);
-                $now = Carbon::now();
+                $now             = Carbon::now();
                 if (($cleanRow[6] !== 'Pre-Authorization' || $cleanRow[7] !== 'Approved') &&
                     ($usuario !== $securityContext->getToken()->getUsername())
                 ) {
@@ -211,7 +211,7 @@ class DefaultController extends Controller
             }
 
             // $cleanRow[0] es el Tag
-            $tag = $cleanRow[0];
+            $tag            = $cleanRow[0];
             $enabledHeaders = $grid->getEnabledHeaders();
 
             foreach ($cleanRow as $k => $col) {
@@ -219,11 +219,11 @@ class DefaultController extends Controller
                     $col = $enabledHeaders[$k]["callback"]($col);
                 }
                 if (isset($enabledHeaders[$k]["format"])) {
-                    $colName = $enabledHeaders[$k]["friendly"] . "Format";
+                    $colName                = $enabledHeaders[$k]["friendly"] . "Format";
                     $formattedRow[$colName] = $enabledHeaders[$k]["format"]($col, $tag);
                 }
                 $formattedRow[is_array($enabledHeaders[$k]) ? $enabledHeaders[$k]["friendly"] : $enabledHeaders[$k]] = $col;
-                $formattedRow['actions'] = $k_row;
+                $formattedRow['actions']                                                                             = $k_row;
             }
             if ($securityContext->isGranted('ROLE_USUARIO') && $grid->isConciliada($formattedRow['Tag'])) {
                 $formattedRow['conciliado'] = $grid->isConciliada($formattedRow['Tag']);
@@ -243,7 +243,7 @@ class DefaultController extends Controller
             }
 
             $formattedRow['actionsFormat'] = $grid->getActionFor($formattedRow, ["taggedVoidRestrictions" => $quitarVoid]);
-            $cleanData[$k_row] = $formattedRow;
+            $cleanData[$k_row]             = $formattedRow;
         }
         $vars = [
             "cols" => $grid->getTableHeader(),
@@ -278,23 +278,23 @@ class DefaultController extends Controller
             }
             $transaction->execute($transactionType, $data);
 
-            $user = $this->getUser();
+            $user     = $this->getUser();
             $response = $transaction->getResponse();
 
             $vars = [
-                'success' => true,
-                'hotel' => $user->getHotel(),
-                'web' => $user->getExtraData('web'),
-                'direccion' => $user->getExtraData('dir_calle') . ' ' . $user->getExtraData('dir_pobox'),
-                'telefono' => $user->getExtraData('telefono'),
-                'cardholder' => $response->get('cardholder_name'),
-                'creditcardtype' => $response->get('credit_card_type'),
-                'email' => $email ?: 'Sin indicar',
+                'success'          => true,
+                'hotel'            => $user->getHotel(),
+                'web'              => $user->getExtraData('web'),
+                'direccion'        => $user->getExtraData('dir_calle') . ' ' . $user->getExtraData('dir_pobox'),
+                'telefono'         => $user->getExtraData('telefono'),
+                'cardholder'       => $response->get('cardholder_name'),
+                'creditcardtype'   => $response->get('credit_card_type'),
+                'email'            => $email ?: 'Sin indicar',
                 'creditcardnumber' => $response->get('cc_number'),
-                'expirydate' => substr($response->get('cc_expiry'), 0, 2) . '/' . substr($response->get('cc_expiry'), 2),
-                'amount' => $data['amount'] . ' ' . $response->get('currency'),
-                'tag' => $response->get('transaction_tag'),
-                'leyenda_recibo' => $user->getExtraData('leyenda_recibo')
+                'expirydate'       => substr($response->get('cc_expiry'), 0, 2) . '/' . substr($response->get('cc_expiry'), 2),
+                'amount'           => $data['amount'] . ' ' . $response->get('currency'),
+                'tag'              => $response->get('transaction_tag'),
+                'leyenda_recibo'   => $user->getExtraData('leyenda_recibo')
             ];
 
 
@@ -306,7 +306,7 @@ class DefaultController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             $vars['bank_message'] = $transaction->getResponse()->getBankMessage();
-            $vars['response'] = $transaction->getResponse()->getBody();
+            $vars['response']     = $transaction->getResponse()->getBody();
 
             $this->get('f_data_transactions.mailer')->createAndSend($response, $this->getUser()->getUsername());
             if ($email) {
@@ -325,7 +325,7 @@ class DefaultController extends Controller
         if (false === $this->get('security.context')->isGranted('ROLE_USUARIO')) {
             throw new AccessDeniedException();
         }
-        $data = json_decode($request->getContent(), true)['transactions'];
+        $data        = json_decode($request->getContent(), true)['transactions'];
         $transaction = $this->get('f_data_transactions.api.transaction');
         $transaction->conciliar($data);
         $vars = [
@@ -344,9 +344,9 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('POST')) {
             $reportHandler = $this->get('f_data_transactions.api.search.grid');
-            $body = json_decode($request->getContent(), true);
-            $data = $body['transactions'];
-            $cols = $body['cols'];
+            $body          = json_decode($request->getContent(), true);
+            $data          = $body['transactions'];
+            $cols          = $body['cols'];
 
             $writer = new Writer(new SplTempFileObject());
             $reportHandler->buildHeaders(array_keys($cols));
@@ -354,7 +354,8 @@ class DefaultController extends Controller
             $rows = $reportHandler->cleanData($cols, $data);
             $writer->insertAll($rows);
 
-            $tmpfile = tempnam(ini_get('upload_tmp_dir'), 'csv');
+
+            $tmpfile  = tempnam(ini_get('upload_tmp_dir'), 'csv');
             $tmpfileR = fopen($tmpfile, "w");
 
             fwrite($tmpfileR, $writer->__toString());
@@ -373,6 +374,40 @@ class DefaultController extends Controller
             $phpExcelReader = \PHPExcel_IOFactory::createReader('CSV');
             /** @var PhpExcel $phpExcelObj */
             $phpExcelObj = $phpExcelReader->load($tmpfile);
+
+
+            $phpExcelObj
+                ->getProperties()
+                ->setCreator('911Booking Corp.')
+                ->setTitle('Exported transactions from 911Booking app.');
+
+            $workSheet = $phpExcelObj->getActiveSheet();
+
+            /** @var \PHPExcel_Worksheet_Row $row */
+            $rowIterator    = $workSheet->getRowIterator();
+            $firstRow       = $rowIterator->current();
+            $colIndexAmount = null;
+            foreach ($firstRow->getCellIterator() as $cell) {
+                if ($cell->getValue() == 'Amount') {
+                    $colIndexAmount = $cell->getColumn();
+                }
+
+            }
+
+            $workSheet->getStyle($colIndexAmount . '2:' . $colIndexAmount . $workSheet->getHighestRow())->getNumberFormat()->setFormatCode(\PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
+
+            $workSheet->getStyle('A1:' . $workSheet->getHighestColumn() . '1')->getFont()->getColor()->setARGB(\PHPExcel_Style_Color::COLOR_WHITE);
+            $workSheet->getStyle('A1:' . $workSheet->getHighestColumn() . '1')->getFill()->setFillType(\PHPExcel_Style_Fill::FILL_SOLID);
+            $workSheet->getStyle('A1:' . $workSheet->getHighestColumn() . '1')->getFill()->getStartColor()->setRGB('338A2E');
+
+            list($highestRow, $highestCol) = array_values($workSheet->getHighestRowAndColumn());
+            $workSheet->setAutoFilter('A1:' . $highestCol . $highestRow);
+
+            for ($col = 'A'; $col <= $highestCol; $col++) {
+                $workSheet->getColumnDimension($col)->setAutoSize(true);
+            }
+
+            //\PHPExcel_Shared_Font::setAutoSizeMethod(\PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
 
             $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel2007');
 
@@ -398,7 +433,7 @@ class DefaultController extends Controller
 
         return JsonResponse::create([
             "countries" => array_combine($paises, $paises),
-            "filter" => $filter
+            "filter"    => $filter
         ]);
     }
 
