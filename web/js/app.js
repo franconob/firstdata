@@ -57,7 +57,6 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
 
             /** @namespace response.data.response.transaction_approved */
             if (response.status == 200
-                && response.data.success === false
                 && response.config.method == 'POST'
                 && response.data.hasOwnProperty('response')
                 && response.data.response.transaction_approved == 0
@@ -68,7 +67,6 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
 
                 return deferred.promise;
             }
-
 
             deferred.resolve(response);
 
@@ -880,35 +878,37 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
                 hide: true,
                 icon: 'fa fa-check'
             });
-            $rootScope.$broadcast('grid.update');
-            printCTR(data);
+            
         } else {
             var message;
             /** @namespace response.data.response.bank_resp_code */
-            switch (response.data.response.bank_resp_code) {
-                case 201:
+            switch (data.response.bank_resp_code) {
+                case '201':
                     message = 'Bad check digit, length, or other credit card problem.'
                     break;
-                case 202:
-                case 205:
+                case '202':
+                case '205':
                     message = 'Amount sent was zero, unreadable, over ceiling limit, or exceeds maximum allowable amount.';
                     break;
-                case 203:
+                case '203':
                     message = 'Amount sent was zero';
                     break;
             }
 
-            data.reason = message;
-            data.debug = '';
+            data.reason = data.response.bank_message;
+            data.debug = message;
 
             notify({
-                title: "Ocurrió un error procesando la transacción",
-                message: "La operación no pudo realizarse. Motivo: " + data.reason + ' ' + data.debug,
+                title: "Ocurrió un error procesando la transacción.",
+                message: "La operación no pudo realizarse. <br />Motivo: <b>" + data.reason + '<br /> ' + data.debug + '</b>',
                 type: 'error',
                 hide: true,
                 icon: 'fa fa-bomb'
             });
         }
+
+        $rootScope.$broadcast('grid.update');
+        printCTR(data);
     };
 
     var handleError = function (err) {

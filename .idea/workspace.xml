@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -47,8 +46,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3809524" vertical-offset="15966" max-vertical-offset="17190">
-              <caret line="899" column="12" selection-start-line="899" selection-start-column="12" selection-end-line="899" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.5873016" vertical-offset="15993" max-vertical-offset="17226">
+              <caret line="907" column="8" selection-start-line="907" selection-start-column="8" selection-end-line="907" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -329,18 +328,6 @@
       <created>1400534159182</created>
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
-    </task>
-    <task id="LOCAL-00126" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
-      <created>1420836599960</created>
-      <option name="number" value="00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1420836599960</updated>
-    </task>
-    <task id="LOCAL-00127" summary="Tarea #1797. Se mostraban transacciones del dia anterior indebidamente">
-      <created>1421075643524</created>
-      <option name="number" value="00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1421075643525</updated>
     </task>
     <task id="LOCAL-00128" summary="Tarea  #1954. Correccion">
       <created>1421087495432</created>
@@ -624,7 +611,19 @@
       <option name="project" value="LOCAL" />
       <updated>1431094669684</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="Mejora en el manejo de errores">
+      <created>1431098384080</created>
+      <option name="number" value="00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1431098384080</updated>
+    </task>
+    <task id="LOCAL-00176" summary="Mejora en el manejo de errores">
+      <created>1431098542016</created>
+      <option name="number" value="00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1431098542016</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1071,14 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/components/angular/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="233343" max-vertical-offset="460602">
-          <caret line="12941" column="4" selection-start-line="12941" selection-start-column="4" selection-end-line="12941" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="13.518518" vertical-offset="509" max-vertical-offset="1278">
@@ -1095,10 +1086,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/components/angular/angular.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="232749" max-vertical-offset="460602">
+          <caret line="12941" column="4" selection-start-line="12941" selection-start-column="4" selection-end-line="12941" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3809524" vertical-offset="15966" max-vertical-offset="17190">
-          <caret line="899" column="12" selection-start-line="899" selection-start-column="12" selection-end-line="899" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.5873016" vertical-offset="15993" max-vertical-offset="17226">
+          <caret line="907" column="8" selection-start-line="907" selection-start-column="8" selection-end-line="907" selection-end-column="8" />
           <folding />
         </state>
       </provider>
