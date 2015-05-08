@@ -64,7 +64,9 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
             ) {
 
                 response.data.success = false;
-                return deferred.resolve(response);
+                deferred.resolve(response);
+
+                return deferred.promise;
             }
 
 
