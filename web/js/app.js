@@ -44,6 +44,7 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
             return deferred.promise;
         },
         response: function (response) {
+            var deferred;
             if (!REGEXURL.test(response.config.url)) {
                 currentNotify.remove();
                 $rootScope.isLoading = false;
@@ -53,12 +54,39 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
                 $window.location.href = '/';
             }
 
-            var deferred = $q.defer();
+            /** @namespace response.data.response.transaction_approved */
+            if (response.status == 200
+                && response.data.success === false
+                && response.config.method == 'POST'
+                && response.data.hasOwnProperty('response')
+                && response.data.response.transaction_approved == 0
+            ) {
+                var message;
+                /** @namespace response.data.response.bank_resp_code */
+                switch (response.data.response.bank_resp_code) {
+                    case 201:
+                        message = 'Bad check digit, length, or other credit card problem.'
+                        break;
+                    case 202:
+                    case 205:
+                        message = 'Amount sent was zero, unreadable, over ceiling limit, or exceeds maximum allowable amount.';
+                        break;
+                    case 203:
+                        message = 'Amount sent was zero';
+                        break;
+                }
+
+                deferred = $q.defer();
+                response.message = message;
+                deferred.reject(response);
+                return deferred.promise;
+            }
+
+            deferred = $q.defer();
 
             deferred.resolve(response);
 
             return deferred.promise;
-            //return response;
         },
         responseError: function (rejection) {
             if (currentNotify) {
@@ -288,8 +316,8 @@ app.directive('fdataInput', function ($http, $rootScope) {
                 switch (brand) {
                     case 'VISA':
                     {
-                        valid = value.length == 13 || value.length == 16;
-                        message = "La tarjeta debe tener exactamente 13 o 16 números";
+                        valid = value.length == 16;
+                        message = "La tarjeta debe tener exactamente 16 números";
                         break;
                     }
                     case 'AMERICAN EXPRESS':
@@ -698,6 +726,8 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
             }
             $modalInstance.dismiss('ok');
             $rootScope.$broadcast('grid.update');
+        }).error(function (data, status) {
+            console.log(data, status);
         });
     };
 
