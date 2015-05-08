@@ -44,7 +44,8 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
             return deferred.promise;
         },
         response: function (response) {
-            var deferred;
+            var deferred = $q.defer();
+
             if (!REGEXURL.test(response.config.url)) {
                 currentNotify.remove();
                 $rootScope.isLoading = false;
@@ -61,28 +62,11 @@ app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", fu
                 && response.data.hasOwnProperty('response')
                 && response.data.response.transaction_approved == 0
             ) {
-                var message;
-                /** @namespace response.data.response.bank_resp_code */
-                switch (response.data.response.bank_resp_code) {
-                    case 201:
-                        message = 'Bad check digit, length, or other credit card problem.'
-                        break;
-                    case 202:
-                    case 205:
-                        message = 'Amount sent was zero, unreadable, over ceiling limit, or exceeds maximum allowable amount.';
-                        break;
-                    case 203:
-                        message = 'Amount sent was zero';
-                        break;
-                }
 
-                deferred = $q.defer();
-                response.message = message;
-                deferred.reject(response);
-                return deferred.promise;
+                response.data.success = false;
+                return deferred.resolve(response);
             }
 
-            deferred = $q.defer();
 
             deferred.resolve(response);
 
@@ -897,6 +881,24 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
             $rootScope.$broadcast('grid.update');
             printCTR(data);
         } else {
+            var message;
+            /** @namespace response.data.response.bank_resp_code */
+            switch (response.data.response.bank_resp_code) {
+                case 201:
+                    message = 'Bad check digit, length, or other credit card problem.'
+                    break;
+                case 202:
+                case 205:
+                    message = 'Amount sent was zero, unreadable, over ceiling limit, or exceeds maximum allowable amount.';
+                    break;
+                case 203:
+                    message = 'Amount sent was zero';
+                    break;
+            }
+
+            data.reason = message;
+            data.debug = '';
+
             notify({
                 title: "Ocurrió un error procesando la transacción",
                 message: "La operación no pudo realizarse. Motivo: " + data.reason + ' ' + data.debug,

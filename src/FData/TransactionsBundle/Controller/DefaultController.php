@@ -407,8 +407,6 @@ class DefaultController extends Controller
                 $workSheet->getColumnDimension($col)->setAutoSize(true);
             }
 
-            //\PHPExcel_Shared_Font::setAutoSizeMethod(\PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
-
             $phpWriter = \PHPExcel_IOFactory::createWriter($phpExcelObj, 'Excel2007');
 
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
