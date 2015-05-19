@@ -402,6 +402,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                 checkboxes: false,
                 checkAllToggle: true,
                 transition: 'fade',
+                debug: true,
                 types: {
                     string: {
                         placeHolder: "Filtro..."
@@ -429,6 +430,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             });
 
             scope.$on('gridCreated', function (event, args) {
+                console.log('creando grilla');
                 $compile(args.grid.contents())(scope);
                 initial = false;
                 scope.grid = args.gridObj;
@@ -538,7 +540,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                     return false;
                 }
                 scope.insideLog = true;
-                var rows = scope.grid.getData().rows;
+                var rows = scope.grid.getData(false, false).rows;
                 var transactions = _.where(rows, {'Reference 3': tag});
                 var parent_transaction = _.findWhere(rows, {Tag: tag});
 
@@ -551,6 +553,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                     parent_transaction['Amount']
                 ];
 
+                scope.grid.option('filter', false);
                 scope.grid.setData({rows: transactions}, true);
                 scope.rows = rows;
 
@@ -754,6 +757,7 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
 
     $scope.back = function () {
         $scope.grid.setData({rows: $scope.rows}, true);
+        $scope.grid.option('filter', true);
         $scope.subtitle = '';
         $scope.insideLog = false;
     };
