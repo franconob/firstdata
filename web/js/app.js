@@ -19,6 +19,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
             controller: 'TransactionCtrl',
             templateUrl: 'app.html'
         })
+        .state('settings', {
+            url: '/app/settings/password',
+            templateUrl: '/templates/password.html'
+        })
 }]);
 
 app.value('numeral', numeral);
@@ -26,13 +30,13 @@ app.value('permissions', {totalAmount: false});
 
 app.factory('firstDataInterceptor', ["$q", "$rootScope", "notify", "$window", function ($q, $rootScope, notify, $window) {
     var currentNotify = null;
-    var REGEXURL = /[.]html$/;
+    var REGEXURL      = /[.]html$/;
     return {
         request: function (config) {
             var deferred = $q.defer();
             if (!REGEXURL.test(config.url)) {
                 $rootScope.isLoading = true;
-                currentNotify = notify({
+                currentNotify        = notify({
                     title: "Ejecutando..",
                     message: $rootScope.loadingMessage || "Cargando transacciones",
                     icon: "fa fa-refresh fa-spin"
@@ -120,7 +124,7 @@ app.factory('printCTR', ['$modal', '$window', function ($modal, $window) {
             },
             controller: function ($modalInstance, $scope, data) {
                 $scope.bank_message = data.bank_message;
-                $scope.print_route = Routing.generate('f_data_transactions_recibo', {tag: data.tag});
+                $scope.print_route  = Routing.generate('f_data_transactions_recibo', {tag: data.tag});
 
                 $scope.cancel = function () {
                     $modalInstance.dismiss('cancel');
@@ -203,23 +207,23 @@ app.directive('fdataInput', function ($http, $rootScope) {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
             scope.thisEditable = true;
-            scope.card = null;
+            scope.card         = null;
 
             var checkCard = function (viewValue, callback) {
-                var checkCard = $http.get('http://www.binlist.net/json/' + getBinCode(viewValue));
+                var checkCard      = $http.get('http://www.binlist.net/json/' + getBinCode(viewValue));
                 scope.checkingCard = true;
                 checkCard.success(function (data, status) {
                     if (status == 200) {
-                        binCode = getBinCode(viewValue);
-                        scope.checkingCard = false;
-                        scope.creditCardModel = data.brand;
+                        binCode                   = getBinCode(viewValue);
+                        scope.checkingCard        = false;
+                        scope.creditCardModel     = data.brand;
                         $rootScope.loadingMessage = null;
                         return callback(true, viewValue);
                     }
                 }).error(function (err, status) {
                     if (status == 404) {
-                        scope.checkingCard = false;
-                        scope.creditCardModel = '';
+                        scope.checkingCard        = false;
+                        scope.creditCardModel     = '';
                         ctrl.$setValidity('cardFound', false);
                         $rootScope.loadingMessage = null;
                         return callback(false, viewValue);
@@ -295,42 +299,42 @@ app.directive('fdataInput', function ($http, $rootScope) {
             }
 
             function checkLengthOfCard(brand, value) {
-                var valid = false;
+                var valid   = false;
                 var message = "";
                 switch (brand) {
                     case 'VISA':
                     {
-                        valid = value.length == 16;
+                        valid   = value.length == 16;
                         message = "La tarjeta debe tener exactamente 16 números";
                         break;
                     }
                     case 'AMERICAN EXPRESS':
                     {
-                        valid = value.length == 15;
+                        valid   = value.length == 15;
                         message = "La tarjeta debe tener exactamente 15 números";
                         break;
                     }
                     case 'MASTERCARD':
                     {
-                        valid = value.length == 16;
+                        valid   = value.length == 16;
                         message = "La tarjeta debe tener exactamente 16 números";
                         break;
                     }
                     case 'DINERSCLUB':
                     {
-                        valid = value.length == 14;
+                        valid   = value.length == 14;
                         message = "La tarjeta debe tener exactamente 14 números";
                         break;
                     }
                     case 'DISCOVER':
                     {
-                        valid = value.length == 16;
+                        valid   = value.length == 16;
                         message = "La tarjeta debe tener exactamente 16 números";
                         break;
                     }
                     case 'MAESTRO':
                     {
-                        valid = value.length >= 12 && value.length <= 19;
+                        valid   = value.length >= 12 && value.length <= 19;
                         message = "La tarjeta debe tener entre 12 y 19 números";
                         break;
                     }
@@ -390,9 +394,9 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             rows: '='
         },
         link: function (scope, element) {
-            scope.totalRecords = 0;
-            scope.totalAmount = "no disponible";
-            var initial = true;
+            scope.totalRecords     = 0;
+            scope.totalAmount      = "no disponible";
+            var initial            = true;
             var initialTotalAmount = 0;
 
             var grid = element.WATable({
@@ -432,8 +436,8 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             scope.$on('gridCreated', function (event, args) {
                 console.log('creando grilla');
                 $compile(args.grid.contents())(scope);
-                initial = false;
-                scope.grid = args.gridObj;
+                initial           = false;
+                scope.grid        = args.gridObj;
                 var td_conciliada = angular.element('.conciliada').parent();
                 td_conciliada.addClass('text-center');
                 if (td_conciliada.hasClass('fa-check')) {
@@ -511,8 +515,8 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
             };
 
             scope.processTransaction = function (id, config) {
-                scope._config = config;
-                var rows = scope.grid.getData().rows;
+                scope._config   = config;
+                var rows        = scope.grid.getData().rows;
                 var transaction = Lazy(rows).findWhere({id: id});
                 $modal.open({
                     templateUrl: config.template ? config.template : "tagged.html",
@@ -539,12 +543,12 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                 if (scope.insideLog) {
                     return false;
                 }
-                scope.insideLog = true;
-                var rows = scope.grid.getData(false, false).rows;
-                var transactions = _.where(rows, {'Reference 3': tag});
+                scope.insideLog        = true;
+                var rows               = scope.grid.getData(false, false).rows;
+                var transactions       = _.where(rows, {'Reference 3': tag});
                 var parent_transaction = _.findWhere(rows, {Tag: tag});
 
-                var data = [
+                var data   = [
                     parent_transaction['Tag'],
                     parent_transaction['Cardholder Name'],
                     parent_transaction['Transaction Type'],
@@ -566,9 +570,9 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
 });
 
 app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transaction", "grid", "$http", "notify", "printCTR", "_config", "$rootScope", function ($scope, $modalInstance, transaction, grid, $http, notify, printCTR, _config, $rootScope) {
-    $scope.title = _config.label;
+    $scope.title       = _config.label;
     $scope.transaction = transaction;
-    $scope.submit = function () {
+    $scope.submit      = function () {
 
         var amount = numeral().unformat($scope.transaction['Amount']);
 
@@ -601,7 +605,7 @@ app.controller('TaggedVoidFormModalCtrl', ["$scope", "$modalInstance", "transact
 }]);
 
 app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_config", "transaction", "transactions", "$filter", "grid", function ($scope, $modal, $modalInstance, _config, transaction, transactions, $filter, grid) {
-    $scope.editable = true;
+    $scope.editable           = true;
     var _calculateLimitAmount = function (current_transaction, transactions) {
         var limit = numeral().unformat(current_transaction['Amount']);
         if ("Purchase" == current_transaction['Transaction Type'] || "Tagged Completion" == current_transaction['Transaction Type']) {
@@ -624,11 +628,11 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
 
     };
 
-    $scope._config = _config;
+    $scope._config     = _config;
     $scope.transaction = transaction;
-    $scope.maxAmount = numeral(_calculateLimitAmount($scope.transaction, transactions)).format('$0,0.00');
+    $scope.maxAmount   = numeral(_calculateLimitAmount($scope.transaction, transactions)).format('$0,0.00');
     /** @namespace $scope.transaction.Amount */
-    $scope.amount = numeral().unformat($scope.transaction.Amount);
+    $scope.amount      = numeral().unformat($scope.transaction.Amount);
 
     // Se usa cuando se concilia
     $scope.maxDate = new Date();
@@ -662,13 +666,13 @@ app.controller('TaggedFormModalCtrl', ["$scope", "$modal", "$modalInstance", "_c
 }]);
 
 app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_config", "transaction", "$http", "printCTR", "moment", "maxAmount", "notify", "$rootScope", function ($scope, $modalInstance, _config, transaction, $http, printCTR, moment, maxAmount, notify, $rootScope) {
-    $scope.editable = false;
-    $scope.maxAmount = maxAmount;
+    $scope.editable    = false;
+    $scope.maxAmount   = maxAmount;
     $scope.transaction = transaction;
-    $scope.subtitle = "Click en el campo para poder editarlo";
-    _config.label = "Confirmar datos de la operación";
-    $scope._config = _config;
-    $scope.submit = function () {
+    $scope.subtitle    = "Click en el campo para poder editarlo";
+    _config.label      = "Confirmar datos de la operación";
+    $scope._config     = _config;
+    $scope.submit      = function () {
 
         // Chequel el amonut para saber si fue ingresado o si debo usar el original (para una transaccion
         // sin formulario
@@ -725,8 +729,8 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
 
 app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'moment', 'permissions', function ($scope, $modal, $window, $http, moment, permissons) {
     $scope.nbTransactions = 0;
-    $scope.insideLog = false;
-    $scope.countries = {};
+    $scope.insideLog      = false;
+    $scope.countries      = {};
 
     $scope.openForm = function (transaction_type, form_title) {
         $http.get(Routing.generate('f_data_transactions_countries')).success(function (data) {
@@ -758,15 +762,15 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
     $scope.back = function () {
         $scope.grid.setData({rows: $scope.rows}, true);
         $scope.grid.option('filter', true);
-        $scope.subtitle = '';
+        $scope.subtitle  = '';
         $scope.insideLog = false;
     };
 
-    $scope.search = {};
+    $scope.search    = {};
     $scope.maxDateTo = new Date();
 
     $scope.search.from = null;
-    $scope.search.to = $scope.minDateTo = null;
+    $scope.search.to   = $scope.minDateTo = null;
 
     $scope.openDatepickerFrom = function ($event) {
         $event.preventDefault();
@@ -827,11 +831,11 @@ app.controller('TransactionCtrl', ['$scope', '$modal', '$window', '$http', 'mome
 
 
 app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'form_title', '$modal', 'grid', 'countries', 'filtroPais', function ($scope, $modalInstance, transaction_type, form_title, $modal, grid, countries, filtroPais) {
-    $scope.title = form_title;
-    $scope.transaction = {};
-    $scope.countries = countries;
-    $scope.editable = true;
-    $scope.filtroPais = filtroPais;
+    $scope.title           = form_title;
+    $scope.transaction     = {};
+    $scope.countries       = countries;
+    $scope.editable        = true;
+    $scope.filtroPais      = filtroPais;
     $scope.creditCardModel = '';
 
     $scope.submit = function () {
@@ -867,11 +871,11 @@ app.controller('FormModalCtrl', ['$scope', '$modalInstance', 'transaction_type',
 
 app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_type', 'notify', '$rootScope', 'printCTR', '$http', 'transaction', 'countries', 'filtroPais', function ($scope, $modalInstance, transaction_type, notify, $rootScope, printCTR, $http, transaction, countries, filtroPais) {
     $scope.transaction = transaction;
-    $scope.title = "Confirmar datos de la operación";
-    $scope.subtitle = "Click en el campo para poder editarlo";
-    $scope.editable = false;
-    $scope.countries = countries;
-    $scope.filtroPais = filtroPais;
+    $scope.title       = "Confirmar datos de la operación";
+    $scope.subtitle    = "Click en el campo para poder editarlo";
+    $scope.editable    = false;
+    $scope.countries   = countries;
+    $scope.filtroPais  = filtroPais;
 
     var handleSubmit = function (data, status) {
         if (true == data.success) {
@@ -882,7 +886,7 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
                 hide: true,
                 icon: 'fa fa-check'
             });
-            
+
         } else {
             var message;
             /** @namespace response.data.response.bank_resp_code */
@@ -900,7 +904,7 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
             }
 
             data.reason = data.response.bank_message;
-            data.debug = message;
+            data.debug  = message;
 
             notify({
                 title: "Ocurrió un error procesando la transacción.",
@@ -951,5 +955,35 @@ app.controller('ConfirmModalCtrl', ['$scope', '$modalInstance', 'transaction_typ
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
+    }
+}]);
+
+app.controller('ChangePasswordController', ['$scope', '$http', 'notify', '$state', function ($scope, $http, notify, $state) {
+    $scope.password = {};
+    $scope.submit   = function () {
+        $http.post(Routing.generate('f_data_security_changepassword'), $scope.password)
+            .success(function (response) {
+                var resp_status = response.status;
+                if ('success' === resp_status) {
+                    notify({
+                        title: 'Cambio de contraseña',
+                        message: 'La contraseña se ha cambiado correctamente',
+                        type: 'success',
+                        icon: 'fa fa-unlock',
+                        hide: true
+                    });
+                    $state.transitionTo('app');
+                } else {
+                    if ('wrong_password' === resp_status) {
+                        notify({
+                            title: 'Cambio de contraseña',
+                            message: 'La contraseña actual ingresada no coincide con su actual contraseña',
+                            hide: true,
+                            type: 'error',
+                            icon: 'fa fa-bomb'
+                        })
+                    }
+                }
+            })
     }
 }]);

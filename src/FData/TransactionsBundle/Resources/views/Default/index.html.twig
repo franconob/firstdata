@@ -1,13 +1,14 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <header class="navbar navbar-fixed-top navbar-grey" role="navigation"
-            style="background-image: -webkit-linear-gradient(top,#FFFFFF 0,#FFF 100%)">
+    <nav class="navbar navbar-fixed-top navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img src="{{ app.request.basepath }}/img/firstdata-logo.png">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ app.request.basepath }}/img/firstdata-logo.png">
+                </a>
             </div>
-            <nav class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <p class="navbar-text">
@@ -15,15 +16,28 @@
                                 <img src="{{ logo }}" width="120" height="40" style="margin-right: 20px;"/>
                             {% endif %}
                             {{ app.security.token.user }}
-                            <a style="margin-left: 10px;" href="{{ path('f_data_security_logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
-                        </p>
                     </li>
-                    <li>
+                    <li uib-dropdown>
+                        <a id="dLabel" href="#" type="button" uib-dropdown-toggle role="button"
+                           style="margin-top: 10px;"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fa fa-cog">
+                            </i>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="uib-dropdown-menu">
+                            <li><a href="#" ui-sref="settings"><i class="fa fa-unlock-alt"></i> Cambiar contraseña</a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            <li><a href="{{ path('f_data_security_logout') }}"><i class="fa fa-sign-out"></i> Salir</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </nav>
+            </div>
         </div>
-    </header>
+    </nav>
     <div ui-view></div>
 
     {% include "FDataTransactionsBundle:Default/Forms:forms.html.twig" %}

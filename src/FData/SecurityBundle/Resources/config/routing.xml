@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <routes xmlns="http://symfony.com/schema/routing"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="f_data_security_login_check" path="/login_check" methods="POST" />
+    <route id="f_data_security_login_check" path="/login_check" methods="POST"/>
 
     <route id="f_data_security_logout" path="/logout" methods="GET">
+        <option key="expose">true</option>
+    </route>
+
+    <route id="f_data_security_changepassword" path="/settings/change_password" methods="POST">
+        <default key="_controller">FDataSecurityBundle:Default:ChangePassword</default>
         <option key="expose">true</option>
     </route>
 </routes>
