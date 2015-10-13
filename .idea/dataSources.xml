@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1506661464">
+  <component name="DataSourceManagerImpl" format="xml" hash="1375511033">
     <data-source source="LOCAL" name="MySQL - crm_911booking@localhost" uuid="a695a5b7-1497-4bbd-a696-35e0eeff3df4">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

@@ -7,6 +7,7 @@
     </database-info>
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <schema name="" catalog="crm_911booking"/>
+    <schema name="" catalog="transactions_911booking"/>
     <table name="com_vtiger_workflow_activatedonce" schema="" catalog="crm_911booking" type="TABLE">
       <column name="workflow_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="entity_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>

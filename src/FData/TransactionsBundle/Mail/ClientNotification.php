@@ -8,7 +8,6 @@
 
 namespace FData\TransactionsBundle\Mail;
 
-
 use FData\SecurityBundle\User\User;
 use FData\TransactionsBundle\Transaction\Response;
 use FData\TransactionsBundle\Transaction\Transaction;
@@ -116,11 +115,11 @@ class ClientNotification
 
         $emails = array_filter($emails);
 
-        $emails = array_map(
+        $emails = array_filter(
+            $emails,
             function ($email) {
-                return preg_match('/.+\@.+\..+/', $email);
-            },
-            $emails
+                return (bool) preg_match('/.+\@.+\..+/', $email);
+            }
         );
 
         $message->setFrom($this->from);

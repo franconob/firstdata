@@ -9,7 +9,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app_dev.php" afterPath="$PROJECT_DIR$/web/app_dev.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/firstdata.iml" afterPath="$PROJECT_DIR$/.idea/firstdata.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -23,6 +23,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ComposerSettings">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <pharPath>/usr/bin/composer</pharPath>
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -38,28 +42,6 @@
       </PATH_ELEMENT>
       <PATH_ELEMENT>
         <option name="myItemId" value="MySQL - crm_911booking@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="crm_911booking" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="MySQL - crm_911booking@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="crm_911booking" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="vtiger_contactdetails" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -114,23 +96,22 @@
       <file leaf-file-name="ClientNotification.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.849741">
-              <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.19170985">
+              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
               <folding>
-                <element signature="e#133#168#0#PHP" expanded="true" />
+                <element signature="e#132#167#0#PHP" expanded="true" />
+                <element signature="e#3751#3805#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmailValidator.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/EmailValidator.php">
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.333333">
-              <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
-              <folding>
-                <element signature="e#290#333#0#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -189,10 +170,10 @@
         <option value="$PROJECT_DIR$/web/js/vendor/jquery.watable.js" />
         <option value="$PROJECT_DIR$/web/js/app.js" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Authentication/ApiKeyAuthenticator.php" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="dbtable:/d9b5cc1f/a695a5b7-1497-4bbd-a696-35e0eeff3df4/crm_911booking..vtiger_contactdetails" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/a695a5b7-1497-4bbd-a696-35e0eeff3df4/console.sql" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/rootTransaction.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
       </list>
     </option>
@@ -204,7 +185,49 @@
   <component name="NamedScopeManager">
     <order />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5" />
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.6">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/twig/extensions" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/streams" />
+      <path value="$PROJECT_DIR$/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/willdurand/jsonp-callback-validator" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/kriswallsmith/assetic" />
+      <path value="$PROJECT_DIR$/vendor/openbuildings/swiftmailer-css-inliner" />
+      <path value="$PROJECT_DIR$/vendor/friendsofsymfony/jsrouting-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/symfony" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpexcel" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/jdorn/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/league/csv" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/sensio/distribution-bundle" />
+      <path value="$PROJECT_DIR$/vendor/sensio/generator-bundle" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy-bundle" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy" />
+      <path value="$PROJECT_DIR$/vendor/liuggio/ExcelBundle" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/symfony/assetic-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+    </include_path>
+  </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="-1" />
     <option name="width" value="1366" />
@@ -538,8 +561,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1014" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/var/cache/dev" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+    <property name="settings.editor.selected.configurable" value="Symfony2.MethodSignatureTypeSettingsForm" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -594,12 +619,6 @@
       <created>1400534159182</created>
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
-    </task>
-    <task id="LOCAL-00130" summary="Guardado e impresion de recibos">
-      <created>1423510876497</created>
-      <option name="number" value="00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1423510876497</updated>
     </task>
     <task id="LOCAL-00131" summary="Refactorizacion de parametros de API de Firstdata para poder tener 2 ambientes de trabajo">
       <created>1423511625469</created>
@@ -889,7 +908,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432044079665</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="se permiten ingresar varias direcciones de correo separadas por coma">
+      <created>1444745322925</created>
+      <option name="number" value="00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1444745322925</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -902,9 +927,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32755905" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30091184" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30091184" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32674772" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2898975" sideWeight="0.5007752" order="3" side_tool="true" content_ui="tabs" />
@@ -956,7 +981,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Wkhtmltopdf para exportar recibo a pdf" />
     <MESSAGE value="Correccion html" />
     <MESSAGE value="Campo email opcional." />
     <MESSAGE value="Correccion de css y html para los tagged refund" />
@@ -981,7 +1005,8 @@
     <MESSAGE value="Se permite ingresar el numero completo de la tarjeta de credito y se verifica la marca" />
     <MESSAGE value="Mejora en el manejo de errores" />
     <MESSAGE value="Correccion cuando se filtran transacciones y se ingresa al historial de una" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correccion cuando se filtran transacciones y se ingresa al historial de una" />
+    <MESSAGE value="se permiten ingresar varias direcciones de correo separadas por coma" />
+    <option name="LAST_COMMIT_MESSAGE" value="se permiten ingresar varias direcciones de correo separadas por coma" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1297,22 +1322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a695a5b7-1497-4bbd-a696-35e0eeff3df4/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="62" selection-start-line="0" selection-start-column="62" selection-end-line="0" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20792079">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.26943">
@@ -1402,12 +1411,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a695a5b7-1497-4bbd-a696-35e0eeff3df4/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="62" selection-start-line="0" selection-start-column="62" selection-end-line="0" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.849741">
-          <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.19170985">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding>
-            <element signature="e#133#168#0#PHP" expanded="true" />
+            <element signature="e#132#167#0#PHP" expanded="true" />
+            <element signature="e#3751#3805#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
