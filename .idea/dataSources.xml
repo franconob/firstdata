@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="411902374">
-    <data-source source="LOCAL" name="MySQL - crm_winpax_finderit_local@localhost" uuid="d26aafd0-b772-47eb-a2b7-1ff928760b6f">
+  <component name="DataSourceManagerImpl" format="xml" hash="1506661464">
+    <data-source source="LOCAL" name="MySQL - crm_911booking@localhost" uuid="a695a5b7-1497-4bbd-a696-35e0eeff3df4">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/crm_winpax_finderit_local</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/crm_911booking</jdbc-url>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
       </driver-properties>
       <libraries />
     </data-source>
   </component>
 </project>
-
