@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70347bed-6d46-4291-8b15-0c223f726f53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/SymfonyRequirements.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/check.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" afterPath="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterPath="$PROJECT_DIR$/var/SymfonyRequirements.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/app.js" afterPath="$PROJECT_DIR$/web/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/config.php" afterPath="$PROJECT_DIR$/web/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/firstdata.iml" afterPath="$PROJECT_DIR$/.idea/firstdata.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/symfony_requirements" afterPath="$PROJECT_DIR$/bin/symfony_requirements" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="firstdata.iws" />
@@ -60,14 +68,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Grid.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
+      <file leaf-file-name="ClientNotification.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7046632">
-              <caret line="523" column="33" selection-start-line="523" selection-start-column="33" selection-end-line="523" selection-end-column="33" />
+            <state vertical-scroll-proportion="-17.222221">
+              <caret line="132" column="11" selection-start-line="132" selection-start-column="11" selection-end-line="132" selection-end-column="11" />
               <folding>
-                <element signature="e#133#151#0#PHP" expanded="true" />
+                <element signature="e#132#167#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_staging.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config_staging.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.333333">
+              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.38613862">
+              <caret line="697" column="51" selection-start-line="697" selection-start-column="51" selection-end-line="697" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,8 +180,9 @@
         <option value="$PROJECT_DIR$/web/templates/password.html" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing.xml" />
         <option value="$PROJECT_DIR$/src/FData/SecurityBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
         <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php" />
+        <option value="$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/web/js/app.js" />
       </list>
     </option>
@@ -190,8 +239,9 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/symfony/assetic-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/icu" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-cache-bundle" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
@@ -339,12 +389,18 @@
               <option name="myItemId" value="FData" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TransactionsBundle" />
+              <option name="myItemId" value="firstdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="firstdata" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,11 +414,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FData" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -457,18 +513,6 @@
       <created>1400534159182</created>
       <option name="number" value="Default" />
       <updated>1400534159182</updated>
-    </task>
-    <task id="LOCAL-00134" summary="Correccion html">
-      <created>1423519787240</created>
-      <option name="number" value="00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1423519787240</updated>
-    </task>
-    <task id="LOCAL-00135" summary="Correccion html">
-      <created>1423520043093</created>
-      <option name="number" value="00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1423520043093</updated>
     </task>
     <task id="LOCAL-00136" summary="Campo email opcional.">
       <created>1423579570260</created>
@@ -752,14 +796,26 @@
       <option name="project" value="LOCAL" />
       <updated>1444929146702</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="Correccion dropdown de acciones por fila, se usa bootstrap-ui para mostrarlo">
+      <created>1444929772510</created>
+      <option name="number" value="00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1444929772510</updated>
+    </task>
+    <task id="LOCAL-00184" summary="Se envian correos por separado, en vez de enviar por cco">
+      <created>1444932018410</created>
+      <option name="number" value="00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1444932018410</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="751" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25455928" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25455928" sideWeight="0.4992248" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329582" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -819,8 +875,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Envio de correos para operaciones tagged. Correccion diseño modal de Tagged Void" />
-    <MESSAGE value="Se quita una legenda para el recibo al cliente" />
     <MESSAGE value="Logo en detalle de recibo al cliente" />
     <MESSAGE value="Ajustado el alto del logo a 800px" />
     <MESSAGE value="Tarea #2015. Se implementa el campo en el CRM" />
@@ -844,7 +898,9 @@
     <MESSAGE value="Correccion validacion de mails" />
     <MESSAGE value="Pantalla de cambio de contraseña" />
     <MESSAGE value="Los destinatarios se agregar como CCO en vez de ponerls en el To" />
-    <option name="LAST_COMMIT_MESSAGE" value="Los destinatarios se agregar como CCO en vez de ponerls en el To" />
+    <MESSAGE value="Correccion dropdown de acciones por fila, se usa bootstrap-ui para mostrarlo" />
+    <MESSAGE value="Se envian correos por separado, en vez de enviar por cco" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se envian correos por separado, en vez de enviar por cco" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -859,102 +915,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18333334">
-          <caret line="506" column="1" selection-start-line="506" selection-start-column="1" selection-end-line="506" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Style/NumberFormat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34900543">
-          <caret line="73" column="10" selection-start-line="73" selection-start-column="10" selection-end-line="73" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Shared/Font.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48824593">
-          <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpoffice/phpexcel/Classes/PHPExcel/Style/Color.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34900543">
-          <caret line="226" column="20" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33275864">
-          <caret line="874" column="17" selection-start-line="874" selection-start-column="17" selection-end-line="874" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Transaction/Exception.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/components/angular/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="12941" column="4" selection-start-line="12941" selection-start-column="4" selection-end-line="12941" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Resources/views/Default/Forms/forms.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/SecurityBundle/Resources/config/routing_dev.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/d9b5cc1f/a695a5b7-1497-4bbd-a696-35e0eeff3df4/crm_911booking..vtiger_contactdetails">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.26943">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/openbuildings/swiftmailer-css-inliner/src/Openbuildings/Swiftmailer/CssInlinerPlugin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22279793">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/EmailValidator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.333333">
@@ -1095,13 +1055,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/Core_c.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24870466">
@@ -1193,45 +1146,161 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6010363">
-          <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+        <state vertical-scroll-proportion="-0.025906736">
+          <caret line="523" column="33" selection-start-line="523" selection-start-column="33" selection-end-line="523" selection-end-column="33" />
+          <folding>
+            <element signature="e#133#151#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0949913">
+          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34887737">
+          <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/NotificationMailer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9585492">
+          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0">
-          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.65284973">
+          <caret line="310" column="64" selection-start-line="310" selection-start-column="64" selection-end-line="310" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.24752475">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_test.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7029703">
+        <state vertical-scroll-proportion="0.95049506">
           <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/app.js">
+    <entry file="file://$PROJECT_DIR$/web/app_dev.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5049505">
-          <caret line="408" column="27" selection-start-line="408" selection-start-column="27" selection-end-line="408" selection-end-column="27" />
+        <state vertical-scroll-proportion="-0.15025906">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Grid/Grid.php">
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Debug/Debug.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7046632">
-          <caret line="523" column="33" selection-start-line="523" selection-start-column="33" selection-end-line="523" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.16062176">
+          <caret line="33" column="27" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.24352331">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.062176164">
+          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/liuggio/ExcelBundle/Liuggio/ExcelBundle/Tests/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12435233">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app_staging.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43523315">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding>
-            <element signature="e#133#151#0#PHP" expanded="true" />
+            <element signature="e#7#52#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_staging.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.333333">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FData/TransactionsBundle/Mail/ClientNotification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.222221">
+          <caret line="132" column="11" selection-start-line="132" selection-start-column="11" selection-end-line="132" selection-end-column="11" />
+          <folding>
+            <element signature="e#132#167#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38613862">
+          <caret line="697" column="51" selection-start-line="697" selection-start-column="51" selection-end-line="697" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

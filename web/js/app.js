@@ -695,8 +695,7 @@ app.controller('ConfirmTaggedFormModalCtrl', ["$scope", "$modalInstance", "_conf
                 cardtype: $scope.transaction['Card Type'],
                 expiry: $scope.transaction['Expiry'],
                 tag: $scope.transaction['Tag'],
-                amount: $scope.transaction['amount'],
-                email: 'franconob.pr@gmail.com'
+                amount: $scope.transaction['amount']
             }
 
         };
