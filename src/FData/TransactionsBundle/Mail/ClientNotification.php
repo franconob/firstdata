@@ -123,7 +123,7 @@ class ClientNotification
         );
 
         $message->setFrom($this->from);
-        $message->setTo($emails);
+        $message->setBcc($emails);
 
         $this->mailer->registerPlugin(new CssInlinerPlugin());
 
