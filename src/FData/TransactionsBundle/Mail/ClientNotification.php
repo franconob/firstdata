@@ -126,11 +126,9 @@ class ClientNotification
         $this->mailer->registerPlugin(new CssInlinerPlugin());
 
         foreach ($emails as $email) {
-            dump($email);
             $message->setTo($email);
-            //$this->mailer->send($message);
+            $this->mailer->send($message);
         }
-        die;
     }
 
     /**
