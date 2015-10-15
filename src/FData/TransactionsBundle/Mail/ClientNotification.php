@@ -109,7 +109,7 @@ class ClientNotification
         $body    = $this->renderBody($vars);
         $subject = $this->getSubject($transaction);
 
-        $message = new \Swift_Message($subject, $body, 'text/html');
+        $message = \Swift_Message::newInstance($subject, $body, 'text/html');
 
         $emails = explode(',', $mail);
 
@@ -123,11 +123,12 @@ class ClientNotification
         );
 
         $message->setFrom($this->from);
-        $message->setBcc($emails);
-
         $this->mailer->registerPlugin(new CssInlinerPlugin());
 
-        return $this->mailer->send($message);
+        foreach ($emails as $email) {
+            $message->setTo($email);
+            $this->mailer->send($message);
+        }
     }
 
     /**
