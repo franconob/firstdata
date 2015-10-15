@@ -406,7 +406,7 @@ app.directive('firstdataGrid', function ($compile, numeral, $modal, $filter, $ht
                 checkboxes: false,
                 checkAllToggle: true,
                 transition: 'fade',
-                debug: true,
+                debug: false,
                 types: {
                     string: {
                         placeHolder: "Filtro..."

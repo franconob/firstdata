@@ -29,46 +29,46 @@ class Grid
      */
     private static $tagged_transactions = [
         'Tagged Pre-Authorization Completion' => [
-            "role" => "TAGGED_PRE_AUTH_COMP",
-            "label" => "Tagged Pre-Authorization Completion",
-            "action" => "taggedPreAuthComp",
+            "role"      => "TAGGED_PRE_AUTH_COMP",
+            "label"     => "Tagged Pre-Authorization Completion",
+            "action"    => "taggedPreAuthComp",
             "openModal" => true,
-            "template" => false,
-            "url" => "/transactions/taggedPreAuthComp"
+            "template"  => false,
+            "url"       => "/transactions/taggedPreAuthComp",
         ],
-        'Tagged Void' => [
-            "role" => "TAGGED_VOID",
-            "label" => "Tagged Void",
-            "action" => "taggedVoid",
-            "template" => "confirm.html",
+        'Tagged Void'                         => [
+            "role"       => "TAGGED_VOID",
+            "label"      => "Tagged Void",
+            "action"     => "taggedVoid",
+            "template"   => "confirm.html",
+            "openModal"  => true,
+            "url"        => "/transactions/taggedVoid",
+            "controller" => "TaggedVoidFormModalCtrl",
+        ],
+        'Tagged Refund'                       => [
+            "role"      => "TAGGED_REFUND",
+            "label"     => "Tagged Refund",
+            "action"    => "taggedRefund",
             "openModal" => true,
-            "url" => "/transactions/taggedVoid",
-            "controller" => "TaggedVoidFormModalCtrl"
+            "template"  => false,
+            "url"       => "/transactions/taggedRefund",
         ],
-        'Tagged Refund' => [
-            "role" => "TAGGED_REFUND",
-            "label" => "Tagged Refund",
-            "action" => "taggedRefund",
+        'Conciliar'                           => [
+            "role"      => "CONCILIAR",
+            "label"     => "Conciliar",
+            "action"    => "conciliar",
             "openModal" => true,
-            "template" => false,
-            "url" => "/transactions/taggedRefund"
+            "template"  => "conciliar.html",
+            "url"       => "/transactions-conciliar",
         ],
-        'Conciliar' => [
-            "role" => "CONCILIAR",
-            "label" => "Conciliar",
-            "action" => "conciliar",
-            "openModal" => true,
-            "template" => "conciliar.html",
-            "url" => "/transactions-conciliar"
-        ],
-        'Recibo' => [
-            "role" => 'CONTACTO',
-            "label" => "Ver recibo",
-            "action" => "recibo",
+        'Recibo'                              => [
+            "role"      => 'CONTACTO',
+            "label"     => "Ver recibo",
+            "action"    => "recibo",
             "openModal" => false,
-            "template" => false,
-            "url" => ["f_data_transactions_recibo", ["tag", "Tag"]]
-        ]
+            "template"  => false,
+            "url"       => ["f_data_transactions_recibo", ["tag", "Tag"]],
+        ],
     ];
 
     //static
@@ -77,11 +77,11 @@ class Grid
      * @var string
      */
     static $btn_group_html = <<<EOF
-    <div class="btn-group">
-        <button type="button" class="btn btn-success dropdown-toggle btn-xs" data-toggle="dropdown">
+    <div uib-dropdown>
+        <a href type="button" class="btn btn-success btn-xs" uib-dropdown-toggle>
             <i class="fa fa-list"></i> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
+        </a>
+        <ul class="uib-dropdown-menu" role="menu">
             {% for action in actions %}
                 <li>
                     {% if action.openModal %}
@@ -131,12 +131,16 @@ EOF;
      */
     private $tableHeader = [];
 
-    public function __construct(GridClient $http_client, EntityManager $entity_manager, SecurityContext $securityContext, Router $router)
-    {
-        $this->entity_manager = $entity_manager;
-        $this->http_client = $http_client;
+    public function __construct(
+        GridClient $http_client,
+        EntityManager $entity_manager,
+        SecurityContext $securityContext,
+        Router $router
+    ) {
+        $this->entity_manager  = $entity_manager;
+        $this->http_client     = $http_client;
         $this->securityContext = $securityContext;
-        $this->router = $router;
+        $this->router          = $router;
         $this->setupApiHeaders();
         $this->setupCustomHeaders();
         $this->generateWorkflow();
@@ -155,8 +159,10 @@ EOF;
         if ($this->securityContext->isGranted('ROLE_CONTACTO')) {
             $filteredResults = [];
             if (!$this->securityContext->isGranted('ROLE_OPERA_HOTEL')) {
-                $tags = array_column($results, 0);
-                $intersection = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->createQueryBuilder('t')
+                $tags         = array_column($results, 0);
+                $intersection = $this->entity_manager->getRepository(
+                    'FDataTransactionsBundle:Transaction'
+                )->createQueryBuilder('t')
                     ->where('t.usuario = ?1')
                     ->andWhere('t.transactionTag IN (?2)')
                     ->orderBy('t.id', 'DESC')
@@ -179,15 +185,18 @@ EOF;
                     }
                 }
 
-                usort($filteredResults, function ($a, $b) {
-                    $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
-                    $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
-                    if ($timeA > $timeB) {
-                        return -1;
-                    } else {
-                        return 1;
+                usort(
+                    $filteredResults,
+                    function ($a, $b) {
+                        $timeA = \DateTime::createFromFormat('m/d/Y H:i:s', $a[9])->getTimestamp();
+                        $timeB = \DateTime::createFromFormat('m/d/Y H:i:s', $b[9])->getTimestamp();
+                        if ($timeA > $timeB) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
                     }
-                });
+                );
 
                 return $filteredResults;
             } else {
@@ -195,7 +204,11 @@ EOF;
             }
         } else {
             foreach ($results as $k => $result) {
-                if (!isset($result[11]) || !in_array($result[11], $this->securityContext->getToken()->getUser()->getHotel())) {
+                if (!isset($result[11]) || !in_array(
+                        $result[11],
+                        $this->securityContext->getToken()->getUser()->getHotel()
+                    )
+                ) {
                     unset($results[$k]);
                 };
             }
@@ -234,10 +247,10 @@ EOF;
     {
         $cleanData = [];
         foreach ($data as $row) {
-            $row['Time'] = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
-            $row['Expiry'] = substr($row['Expiry'], 0, 2) . '/' . substr($row['Expiry'], 2);
+            $row['Time']   = (new \DateTime())->setTimestamp($row['Time'] / 1000)->format('d/m/Y H:i:s');
+            $row['Expiry'] = substr($row['Expiry'], 0, 2).'/'.substr($row['Expiry'], 2);
             $row['Amount'] = str_replace(',', '', substr($row['Amount'], 1));
-            $cleanData[] = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
+            $cleanData[]   = array_values(array_intersect_key($row, array_flip($this->getFlatHeaders($cols))));
         }
 
         return $cleanData;
@@ -245,7 +258,7 @@ EOF;
 
     /**
      * @param string $transaction
-     * @param array $restrictions
+     * @param array  $restrictions
      * @return string
      */
     public function getActionFor($transaction, array $restrictions)
@@ -258,7 +271,7 @@ EOF;
             return '<div class="text-center">&times</div>';
         }
         $loader = new \Twig_Loader_String();
-        $twig = new \Twig_Environment($loader);
+        $twig   = new \Twig_Environment($loader);
         if (isset(self::$transactions_workflow_status[$transaction['Status']])) {
             $allowed_actions = self::$transactions_workflow_status[$transaction['Status']]['allows'];
         } else {
@@ -274,21 +287,24 @@ EOF;
                     continue;
                 } else {
                     $allowed_actions[$k] = $action[0];
-                    $action = $action[0];
+                    $action              = $action[0];
                 }
             }
 
             if ($action['label'] == 'Conciliar' && isset($transaction['conciliado'])) {
                 unset($allowed_actions[$k]);
             }
-            if (!$this->securityContext->isGranted('ROLE_' . $action['role'])) {
+            if (!$this->securityContext->isGranted('ROLE_'.$action['role'])) {
                 unset($allowed_actions[$k]);
             }
 
             if (is_array($action['url'])) {
-                $param = $action['url'][1][0];
-                $value = $action['url'][1][1];
-                $allowed_actions[$k]['route'] = $this->router->generate($action['url'][0], [$param => $transaction[$value]]);
+                $param                        = $action['url'][1][0];
+                $value                        = $action['url'][1][1];
+                $allowed_actions[$k]['route'] = $this->router->generate(
+                    $action['url'][0],
+                    [$param => $transaction[$value]]
+                );
             }
 
         }
@@ -306,7 +322,9 @@ EOF;
     public function isConciliada($transaction_tag)
     {
         /** @var Transaction $transaction */
-        $transaction = $this->entity_manager->getRepository('FDataTransactionsBundle:Transaction')->findByTransactionTag($transaction_tag);
+        $transaction = $this->entity_manager->getRepository(
+            'FDataTransactionsBundle:Transaction'
+        )->findByTransactionTag($transaction_tag);
         if ($transaction && $transaction->isConciliada()) {
             return $transaction->getFechaConciliacion()->format('Y-m-d H:i:s');
         }
@@ -330,9 +348,15 @@ EOF;
         foreach ($api_headers as $k => $header) {
             if ($_header = $this->searchInEnabledHeaders($header)) {
                 if (is_array($_header)) {
-                    $this->tableHeader[$_header["friendly"]] = array_merge(["index" => $k], array_filter($_header, function ($header) {
-                        return $header !== "format";
-                    }));
+                    $this->tableHeader[$_header["friendly"]] = array_merge(
+                        ["index" => $k],
+                        array_filter(
+                            $_header,
+                            function ($header) {
+                                return $header !== "format";
+                            }
+                        )
+                    );
                 } else {
                     $this->tableHeader[$_header] = ["index" => $k + 2, "type" => "string"];
                 }
@@ -354,108 +378,130 @@ EOF;
     private function generateWorkflow()
     {
         self::$transactions_workflow = [
-            'Purchase' => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
-                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
-                    $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart = Carbon::today();
-                    $nowEnd = Carbon::now()->endOfDay();
+            'Purchase'          => [
+                "allows" => [
+                    [
+                        self::$tagged_transactions['Tagged Void'],
+                        function ($transaction, $restrictions) {
+                            $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                            $transactionDate = Carbon::instance($transactionDate);
+                            $nowStart        = Carbon::today();
+                            $nowEnd          = Carbon::now()->endOfDay();
 
-                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
-                        return false;
-                    }
+                            if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
+                                return false;
+                            }
 
-                    if ($transactionDate->between($nowStart, $nowEnd)) {
-                        return true;
-                    }
+                            if ($transactionDate->between($nowStart, $nowEnd)) {
+                                return true;
+                            }
 
-                    return false;
-                }],
-                self::$tagged_transactions['Tagged Refund'],
-                self::$tagged_transactions['Conciliar'],
-                self::$tagged_transactions['Recibo']]
+                            return false;
+                        },
+                    ],
+                    self::$tagged_transactions['Tagged Refund'],
+                    self::$tagged_transactions['Conciliar'],
+                    self::$tagged_transactions['Recibo'],
+                ],
             ],
-            'Pre-Authorization' => ["allows" => [
-                self::$tagged_transactions['Tagged Pre-Authorization Completion'],
-                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
-                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
-                    $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart = Carbon::today();
-                    $nowEnd = Carbon::now()->endOfDay();
+            'Pre-Authorization' => [
+                "allows" => [
+                    self::$tagged_transactions['Tagged Pre-Authorization Completion'],
+                    [
+                        self::$tagged_transactions['Tagged Void'],
+                        function ($transaction, $restrictions) {
+                            $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                            $transactionDate = Carbon::instance($transactionDate);
+                            $nowStart        = Carbon::today();
+                            $nowEnd          = Carbon::now()->endOfDay();
 
-                    if ($transactionDate->between($nowStart, $nowEnd)) {
-                        return true;
-                    }
+                            if ($transactionDate->between($nowStart, $nowEnd)) {
+                                return true;
+                            }
 
-                    return false;
-                }],
-                self::$tagged_transactions['Conciliar'],
-                self::$tagged_transactions['Recibo']
-            ]
+                            return false;
+                        },
+                    ],
+                    self::$tagged_transactions['Conciliar'],
+                    self::$tagged_transactions['Recibo'],
+                ],
             ],
-            'Refund' => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
-                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
-                    $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart = Carbon::today();
-                    $nowEnd = Carbon::now()->endOfDay();
+            'Refund'            => [
+                "allows" => [
+                    [
+                        self::$tagged_transactions['Tagged Void'],
+                        function ($transaction, $restrictions) {
+                            $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                            $transactionDate = Carbon::instance($transactionDate);
+                            $nowStart        = Carbon::today();
+                            $nowEnd          = Carbon::now()->endOfDay();
 
-                    if ($transactionDate->between($nowStart, $nowEnd)) {
-                        return true;
-                    }
+                            if ($transactionDate->between($nowStart, $nowEnd)) {
+                                return true;
+                            }
 
-                    return false;
-                }], self::$tagged_transactions['Conciliar'],
-                self::$tagged_transactions['Recibo']
-            ]
+                            return false;
+                        },
+                    ],
+                    self::$tagged_transactions['Conciliar'],
+                    self::$tagged_transactions['Recibo'],
+                ],
             ],
-            'Tagged Completion' => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
-                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
-                    $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart = Carbon::today();
-                    $nowEnd = Carbon::now()->endOfDay();
+            'Tagged Completion' => [
+                "allows" => [
+                    [
+                        self::$tagged_transactions['Tagged Void'],
+                        function ($transaction, $restrictions) {
+                            $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                            $transactionDate = Carbon::instance($transactionDate);
+                            $nowStart        = Carbon::today();
+                            $nowEnd          = Carbon::now()->endOfDay();
 
-                    if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
-                        return false;
-                    }
+                            if (isset($restrictions['taggedVoidRestrictions']) && $restrictions['taggedVoidRestrictions'] == true) {
+                                return false;
+                            }
 
-                    if ($transactionDate->between($nowStart, $nowEnd)) {
-                        return true;
-                    }
+                            if ($transactionDate->between($nowStart, $nowEnd)) {
+                                return true;
+                            }
 
-                    return false;
-                }],
-                self::$tagged_transactions['Tagged Refund'],
-                self::$tagged_transactions['Conciliar'],
-                self::$tagged_transactions['Recibo']
-            ]
+                            return false;
+                        },
+                    ],
+                    self::$tagged_transactions['Tagged Refund'],
+                    self::$tagged_transactions['Conciliar'],
+                    self::$tagged_transactions['Recibo'],
+                ],
             ],
-            'Tagged Void' => ["allows" => [self::$tagged_transactions['Recibo']]],
-            'Tagged Refund' => ["allows" => [
-                [self::$tagged_transactions['Tagged Void'], function ($transaction, $restrictions) {
-                    $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
-                    $transactionDate = Carbon::instance($transactionDate);
-                    $nowStart = Carbon::today();
-                    $nowEnd = Carbon::now()->endOfDay();
+            'Tagged Void'       => ["allows" => [self::$tagged_transactions['Recibo']]],
+            'Tagged Refund'     => [
+                "allows" => [
+                    [
+                        self::$tagged_transactions['Tagged Void'],
+                        function ($transaction, $restrictions) {
+                            $transactionDate = \DateTime::createFromFormat('U', $transaction['Time'] / 1000);
+                            $transactionDate = Carbon::instance($transactionDate);
+                            $nowStart        = Carbon::today();
+                            $nowEnd          = Carbon::now()->endOfDay();
 
-                    if ($transactionDate->between($nowStart, $nowEnd)) {
-                        return true;
-                    }
+                            if ($transactionDate->between($nowStart, $nowEnd)) {
+                                return true;
+                            }
 
-                    return false;
-                }],
-                self::$tagged_transactions['Conciliar'],
-                self::$tagged_transactions['Recibo']
-            ]
+                            return false;
+                        },
+                    ],
+                    self::$tagged_transactions['Conciliar'],
+                    self::$tagged_transactions['Recibo'],
+                ],
             ],
-            'Conciliar' => ["allows" => []],
-            'Ver recibo' => ['allows' => []]
+            'Conciliar'         => ["allows" => []],
+            'Ver recibo'        => ['allows' => []],
         ];
 
         self::$transactions_workflow_status = [
-            'Voided Transaction' => ["allows" => []],
-            'Completed Transaction' => ['allows' => []]
+            'Voided Transaction'    => ["allows" => []],
+            'Completed Transaction' => ['allows' => []],
         ];
     }
 
@@ -465,43 +511,61 @@ EOF;
     private function setupApiHeaders()
     {
         $this->enabledHeaders = [
-            0 => ["friendly" => "Tag"],
-            1 => ["friendly" => "Cardholder Name", "format" => function ($value, $tag) {
-                return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\'' . $tag . '\')">{0}</a>';
-            }],
-            4 => "Card Type",
-            5 => "Amount",
-            2 => "Card Number",
-            3 => "Expiry",
-            6 => "Transaction Type",
-            7 => ["friendly" => "Status", "format" => function ($value, $tag) {
-                if ($value == "Approved") {
-                    return '<div class="bg-success">{0}</div>';
-                } else if ($value == "Error") {
-                    return '<div class="bg-danger">{0}</div>';
-                } else {
-                    return '<div>{0}</div>';
-                }
-            }],
-            9 => ["friendly" => "Time", "type" => "date", "callback" => function ($value) {
-                $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
+            0         => ["friendly" => "Tag"],
+            1         => [
+                "friendly" => "Cardholder Name",
+                "format"   => function ($value, $tag) {
+                    return '<i class="fa fa-history"></i>&nbsp; <a title="Ver historial" ng-href="#" ng-click="showLog(\''.$tag.'\')">{0}</a>';
+                },
+            ],
+            4         => "Card Type",
+            5         => "Amount",
+            2         => "Card Number",
+            3         => "Expiry",
+            6         => "Transaction Type",
+            7         => [
+                "friendly" => "Status",
+                "format"   => function ($value, $tag) {
+                    if ($value == "Approved") {
+                        return '<div class="bg-success">{0}</div>';
+                    } else {
+                        if ($value == "Error") {
+                            return '<div class="bg-danger">{0}</div>';
+                        } else {
+                            return '<div>{0}</div>';
+                        }
+                    }
+                },
+            ],
+            9         => [
+                "friendly" => "Time",
+                "type"     => "date",
+                "callback" => function ($value) {
+                    $dt = \DateTime::createFromFormat('m/d/Y H:i:s', $value);
 
-                return $dt->getTimestamp() * 1000;
-            }],
-            8 => "Auth No",
-            10 => ["friendly" => "Ref Num", "hidden" => true],
-            11 => ["friendly" => "Cust. Ref Num", "hidden" => true],
-            12 => ["friendly" => "Reference 3", "hidden" => true],
-            "usuario" => ["friendly" => "usuario"]
+                    return $dt->getTimestamp() * 1000;
+                },
+            ],
+            8         => "Auth No",
+            10        => ["friendly" => "Ref Num", "hidden" => true],
+            11        => ["friendly" => "Cust. Ref Num", "hidden" => true],
+            12        => ["friendly" => "Reference 3", "hidden" => true],
+            "usuario" => ["friendly" => "usuario"],
         ];
     }
 
     public function setupCustomHeaders()
     {
         $this->customHeaders = [
-            "id" => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
-            "actions" => ["index" => -1, "friendly" => 'actions', "filter" => false, "sorting" => false, "exportable" => false],
-            "usuario" => ["friendly" => "usuario"]
+            "id"      => ["hidden" => true, "friendly" => "Id", "unique" => true, "exportable" => false],
+            "actions" => [
+                "index"      => -1,
+                "friendly"   => 'actions',
+                "filter"     => false,
+                "sorting"    => false,
+                "exportable" => false,
+            ],
+            "usuario" => ["friendly" => "usuario"],
         ];
 
         if ($this->securityContext->isGranted('ROLE_USUARIO')) {
