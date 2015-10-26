@@ -586,10 +586,10 @@
 
                 //create pagesize dropdown
                 if (priv.options.pageSizes.length) {
-                    var div = $('<div class="btn-group dropup pagesize"></div>').appendTo(footToolbar);
-                    var btn = $('<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">Rows&nbsp;</button>').appendTo(div);
+                    var div = $('<div class="btn-group dropup pagesize" uib-dropdown></div>').appendTo(footToolbar);
+                    var btn = $('<button class="btn btn-default" uib-dropdown-toggle href="#">Rows&nbsp;</button>').appendTo(div);
                     var span = $('<span class="caret"></span>').appendTo(btn);
-                    var ul = $('<ul class="dropdown-menu">').appendTo(div);
+                    var ul = $('<ul class="uib-dropdown-menu">').appendTo(div);
 
                     $.each(priv.options.pageSizes, function (index, val) {
                         var li = $('<li></li>').appendTo(ul);
@@ -600,10 +600,10 @@
 
                 //create columnpicker dropdown
                 if (priv.options.columnPicker) {
-                    var div = $('<div class="btn-group dropup columnpicker"></div>').appendTo(footToolbar);
-                    var btn = $('<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">Columns&nbsp;</button>').appendTo(div);
+                    var div = $('<div class="btn-group dropup columnpicker" data-disabled="true" uib-dropdown></div>').appendTo(footToolbar);
+                    var btn = $('<button class="btn btn-default" uib-dropdown-toggle href="#">Columns&nbsp;</button>').appendTo(div);
                     var span = $('<span class="caret"></span>').appendTo(btn);
-                    var ul = $('<ul class="dropdown-menu">').appendTo(div);
+                    var ul = $('<ul class="uib-dropdown-menu">').appendTo(div);
 
                     for (var i = 0; i < colsSorted.length; i++) {
                         var col = colsSorted[i];
@@ -619,10 +619,10 @@
 
                 //create actions dropdown
                 if (priv.options.actions) {
-                    var div = $('<div class="btn-group dropup actions"></div>').appendTo(footToolbar);
-                    var btn = $('<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list"></span>&nbsp;</button>').appendTo(div);
+                    var div = $('<div class="btn-group dropup actions" uib-dropdown></div>').appendTo(footToolbar);
+                    var btn = $('<button class="btn btn-default" uib-dropdown-toggle href="#"><span class="glyphicon glyphicon-list"></span>&nbsp;</button>').appendTo(div);
                     var span = $('<span class="caret"></span>').appendTo(btn);
-                    var ul = $('<ul class="dropdown-menu">').appendTo(div);
+                    var ul = $('<ul class="uib-dropdown-menu">').appendTo(div);
 
                     if (priv.options.actions.filter) {
                         var li = $('<li></li>').appendTo(ul);
@@ -1197,6 +1197,7 @@
             _data.cols[col].index = _data.cols[col].index || new priv.ext.XDate();
             _head = undefined;
             _body = undefined;
+            _foot = undefined;
             priv.createTable();
         };
 
